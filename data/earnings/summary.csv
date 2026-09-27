@@ -1,0 +1,155 @@
+date,text,source
+2026-09-10,"- 暂无前一日数据可比，以下为当日整体观察。
+- 估值触发：PDD, MCD。
+- 强上修：NVDA, HOOD, TSM, AMZN, GOOGL；强下修：MCD, AAPL, META, QCOM, TME。
+- RSI：低于30 无；高于70 无。
+- **未来7天财报（公司/时间）**：ADOBE INC.(ADBE) 2026-09-10；ORACLE CORP(ORCL) 2026-09-10。
+- 不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-10.md
+2026-09-11,"- 下财年EPS变化：PDD: 下财年EPS 83.32→83.27（-0.05/-0.06%）, 上/下修 11/12→11/12；ORCL: 下财年EPS 10.97→11.02（+0.05/+0.46%）, 上/下修 3/0→3/0；GOOGL: 下财年EPS 14.86→14.88（+0.02/+0.13%）, 上/下修 10/2→10/2；ADBE: 下财年EPS 27.50→27.62（+0.12/+0.44%）, 上/下修 无/无→LOW_SAMPLE/LOW_SAMPLE；AVGO: 下财年EPS 19.39→19.38（-0.01/-0.05%）, 上/下修 6/1→6/1；NKE: 下财年EPS 2.22→2.20（-0.02/-0.90%）, 上/下修 1/5→1/5。
+- 对比 2026-09-10：主要变化为 GOOGL: RSI 41.40→46.91；INTC: Forward PE 59.36→60.91；AMZN: RSI 43.62→48.91；COIN: Forward PE 189.32→192.59, 30日修正 -11.18%→-9.43%
+- 估值触发：PDD, MCD。
+- 强上修：NVDA, HOOD, TSM, GOOGL, INTC；强下修：MCD, AAPL, META, QCOM, TME。
+- RSI：低于30 无；高于70 无。
+- **未来7天财报**：无。
+- 不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-11.md
+2026-09-12,"- 下财年EPS均无变化。
+- 对比 2026-09-11：主要指标无明显变化。
+- 估值触发：PDD, MCD。
+- 强上修：NVDA, HOOD, TSM, GOOGL, INTC；强下修：MCD, AAPL, META, QCOM, TME。
+- RSI：低于30 无；高于70 无。
+- **未来7天财报**：无。
+- 不适用：MARA / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-12.md
+2026-09-13,"- 下财年EPS变化：MCD: 下财年EPS 13.98→13.97（-0.01/-0.07%）, 上/下修 3/26→3/25；NVDA: 下财年EPS 15.52→15.57（+0.05/+0.32%）, 上/下修 39/0→41/0；HOOD: 下财年EPS 2.78→2.79（+0.01/+0.36%）, 上/下修 11/4→6/0；ORCL: 下财年EPS 11.02→10.99（-0.03/-0.27%）, 上/下修 3/0→3/0；ADBE: 下财年EPS 27.62→27.67（+0.05/+0.18%）, 上/下修 无/无→LOW_SAMPLE/LOW_SAMPLE；MU: 下财年EPS 155.03→156.07（+1.04/+0.67%）, 上/下修 2/2→2/2。
+- 对比 2026-09-12：主要变化为 INTC: 信号 强上修→温和上修；AVGO: Forward PE 23.61→20.67, 信号 强上修→强下修
+- 估值触发：PDD, MCD。
+- 强上修：NVDA, HOOD, TSM, GOOGL, AMZN；强下修：MCD, AAPL, QCOM, META, AVGO。
+- RSI：低于30 无；高于70 无。
+- **未来7天财报**：无。
+- 不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-13.md
+2026-09-14,"- 下财年EPS均无变化。
+- 对比 2026-09-13：主要变化为 CRCL: Forward PE 69.69→74.94；INTC: Forward PE 60.91→57.51；NOW: Forward PE 29.13→31.29；COIN: Forward PE 192.59→210.38
+- 估值触发：MCD, AVGO。
+- 强上修：NVDA, HOOD, TSM, GOOGL, AMZN；强下修：MCD, AVGO, AAPL, QCOM, META。
+- RSI：低于30 无；高于70 无。
+- **未来7天财报**：无。
+- 不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-14.md
+2026-09-15,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, GOOGL, TSM, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：
+1）变好：
+- NVDA：下财年EPS 15.57→15.61（上涨0.26%），30日上/下修 41/0→42/0（上调1家，下调无变动），上修显著大于下修。
+- MSFT：下财年EPS 23.57→23.59（上涨0.08%），30日上/下修 19/3→19/3（上调无变动，下调无变动），上修人数大于下修。
+2）变差：
+- QCOM：下财年EPS 10.22→10.20（下跌0.20%），30日上/下修 3/27→3/27（上调无变动，下调无变动），下修显著大于上修，但下修压力未进一步扩大。
+3）不定：
+- MCD：下财年EPS 13.97→13.98（上涨0.07%），30日上/下修 3/25→3/25（上调无变动，下调无变动）；EPS小幅上升，但下修人数显著多于上修。
+- MSTR：下财年EPS 13.83→13.14（下跌4.99%），30日上/下修 4/1→3/0（上调减少1家，下调减少1家）；EPS小幅下跌，但当前无下修。
+- ORCL：下财年EPS 10.99→10.98（下跌0.09%），30日上/下修 3/0→4/0（上调1家，下调无变动）；EPS小幅下跌，但当前无下修。
+- AAPL：下财年EPS 9.57→9.58（上涨0.10%），30日上/下修 2/7→2/7（上调无变动，下调无变动）；EPS小幅上升，但下修人数显著多于上修。
+- NKE：下财年EPS 2.20→2.19（下跌0.45%），30日上/下修 1/5→1/5（上调无变动，下调无变动）；EPS下跌、下修人数更多，但差距未达到显著阈值。
+- COIN：下财年EPS 2.74→2.79（上涨1.82%），30日上/下修 0/20→3/5（上调3家，下调减少15家），修正信号 强下修→温和下修；EPS小幅上升，但下修人数多于上修。
+- MARA：下财年EPS -1.15→-0.21（上涨81.74%），30日上/下修 无/无→LOW_SAMPLE/LOW_SAMPLE；EPS改善但仍为亏损，且样本不足。
+二、RSI信号：低于30 无；高于70 META。
+三、估值触发：MCD（19.36<20）, AVGO（19.38<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-15.md
+2026-09-16,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, GOOGL, TSM, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 无；高于70 QCOM, META。
+三、估值触发：MCD（19.03<20）, AVGO（19.39<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-16.md
+2026-09-17,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, TSM, GOOGL, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：
+1）变好：
+- NVDA：下财年EPS 15.61→15.68（上涨0.45%），30日上/下修 42/0→42/0（上调无变动，下调无变动），上修显著大于下修。
+2）变差：
+- META：下财年EPS 33.94→33.87（下跌0.21%），30日上/下修 7/39→7/39（上调无变动，下调无变动），下修显著大于上修，但下修压力未进一步扩大。
+- 0700.HK：下财年EPS 30.91→30.85（下跌0.19%），30日上/下修 3/26→3/26（上调无变动，下调无变动），下修显著大于上修，但下修压力未进一步扩大。
+3）不定：
+- PDD：下财年EPS 83.27→83.16（下跌0.13%），30日上/下修 11/12→11/12（上调无变动，下调无变动）；EPS下跌、下修人数更多，但差距未达到显著阈值。
+- CRCL：下财年EPS 1.39→1.40（上涨0.72%），30日上/下修 5/8→5/8（上调无变动，下调无变动）；EPS小幅上升，但下修人数多于上修。
+- INTC：下财年EPS 2.04→2.06（上涨0.98%），30日上/下修 4/1→4/1（上调无变动，下调无变动）；EPS上升，但上/下修人数差异不显著。
+- ORCL：下财年EPS 10.98→10.99（上涨0.09%），30日上/下修 4/0→4/0（上调无变动，下调无变动）；EPS上升，但上/下修人数差异不显著。
+- GOOGL：下财年EPS 14.88→14.86（下跌0.13%），30日上/下修 8/1→8/1（上调无变动，下调无变动）；EPS下跌，但当前上修人数多于下修。
+- MU：下财年EPS 156.07→156.53（上涨0.29%），30日上/下修 2/2→2/2（上调无变动，下调无变动）；EPS上升，但上/下修人数差异不显著。
+- AMZN：下财年EPS 10.49→10.47（下跌0.19%），30日上/下修 8/1→8/1（上调无变动，下调无变动）；EPS下跌，但当前上修人数多于下修。
+- COIN：下财年EPS 2.79→2.83（上涨1.43%），30日上/下修 3/5→3/5（上调无变动，下调无变动）；EPS小幅上升，但下修人数多于上修。
+二、RSI信号：低于30 无；高于70 META。
+三、估值触发：PDD（6.97<7）, MCD（19.03<20）, AVGO（19.83<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。
+- 手工 EPS 提醒：Tencent Holdings Ltd. / 0700.HK 的 Yahoo 下财年EPS 30.91→30.85，请检查是否需要更新固定 FQ [8.56, 8.19, 8.93, 8.87]（合计 34.55）。",盈利跟踪_2026-09-17.md
+2026-09-18,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, TSM, GOOGL, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 无；高于70 META。
+三、估值触发：MCD（19.01<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-18.md
+2026-09-19,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, GOOGL, TSM, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：
+1）变好：
+- GOOGL：下财年EPS 14.86→14.91（上涨0.34%），30日上/下修 8/1→8/1（上调无变动，下调无变动），上修人数大于下修。
+2）变差：
+- 无
+3）不定：
+- ORCL：下财年EPS 10.99→11.00（上涨0.09%），30日上/下修 4/0→4/0（上调无变动，下调无变动）；EPS上升，但上/下修人数差异不显著。
+二、RSI信号：低于30 无；高于70 无。
+三、估值触发：MCD（18.99<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-19.md
+2026-09-20,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, GOOGL, TSM, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 无；高于70 无。
+三、估值触发：MCD（18.99<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-20.md
+2026-09-21,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, GOOGL, TSM, MSFT；强下修：MCD, AAPL, QCOM, META, TME。
+2、EPS变化：下财年EPS均无变化。
+非交易日数据：2/26 行（US 2），原因：收盘价与上一条相同且时间戳未更新 2；已保留当日 data_date，仅将 is_trading_day 标记为 false。
+二、RSI信号：低于30 无；高于70 无。
+三、估值触发：MCD（18.99<20）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-21.md
+2026-09-22,"一、EPS：
+1、修正信号：强上修：无；强下修：无。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 无；高于70 MSTR, INTC, META。
+三、估值触发：MCD（18.95<20）, PDD（6.82<7）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-22.md
+2026-09-23,"一、EPS：
+1、修正信号：强上修：无；强下修：无。
+2、EPS变化：下财年EPS均无变化。
+非交易日数据：2/26 行（US 2），原因：收盘价与上一条相同且时间戳未更新 2；已保留当日 data_date，仅将 is_trading_day 标记为 false。
+二、RSI信号：低于30 无；高于70 MSTR, INTC, META。
+三、估值触发：MCD（19.14<20）, PDD（6.82<7）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-23.md
+2026-09-24,"一、EPS：
+1、修正信号：强上修：无；强下修：无。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 MCD；高于70 INTC, META。
+三、估值触发：MCD（18.22<20）, PDD（6.81<7）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-24.md
+2026-09-25,"一、EPS：
+1、修正信号：强上修：无；强下修：无。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 MCD；高于70 INTC, META。
+三、估值触发：MCD（18.12<20）, PDD（6.72<7）。
+四、未来7天财报：无。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-25.md
+2026-09-26,"一、EPS：
+1、修正信号：强上修：NVDA, HOOD, TSM, GOOGL, MSFT；强下修：MCD, AAPL, META, QCOM, TME。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 MCD；高于70 META。
+三、估值触发：PDD（6.69<7）, MCD（18.16<20）。
+四、未来7天财报：MICRON TECHNOLOGY INC(MU) 2026-10-01；NIKE, Inc.(NKE) 2026-10-02。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-26.md

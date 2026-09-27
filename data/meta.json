@@ -579,7 +579,8 @@
     "events": 4,
     "files": {
       "daily": "earnings/daily.csv",
-      "events": "earnings/events.csv"
+      "events": "earnings/events.csv",
+      "summary": "earnings/summary.csv"
     },
     "note": "涨跌幅和 30 日修正都是百分数，不带百分号。triggered=1 表示笔记里的估值触发。"
   },

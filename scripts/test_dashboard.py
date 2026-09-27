@@ -11,10 +11,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ingest"))
 
-from briefing import build_briefing
+from briefing import build_briefing, calendar_lines, earnings_summary_lines, semis_lines
 from build_site import build_site
-from fetch_calendar import dedupe, event, h41_events, load_manual, parse_bea, parse_census
-from parse_notes import parse_filings, parse_press, parse_sentiment, to_beijing
+from fetch_calendar import annotate, dedupe, event, h41_events, load_manual, parse_bea, parse_census
+from parse_notes import parse_earnings, parse_filings, parse_press, parse_sentiment, to_beijing
 
 
 def test_beijing() -> None:
@@ -97,11 +97,20 @@ def test_briefing_and_build() -> None:
             "2026-09-26,cnn_fg,CNN,30,点,,恐慌,,,,,,\n",
             encoding="utf-8",
         )
+        (data / "summary.csv").write_text(
+            "date,text,source\n"
+            "2026-09-26,情绪指标：CNN仍处恐慌区间。 利率指标：10年美债收益率偏高。,\n",
+            encoding="utf-8",
+        )
         (root / "index.html").write_text("<head></head><p>流动性</p>", encoding="utf-8")
         (root / "assets").mkdir()
         (root / "assets" / "site.css").write_text("body{}", encoding="utf-8")
         briefing = build_briefing(root / "data", today=date(2026, 9, 27), calendar_events=[])
-        assert any("恐慌" in line for line in briefing["pages"]["sentiment"])
+        assert briefing["pages"]["sentiment"] == [
+            "情绪指标：CNN仍处恐慌区间。",
+            "利率指标：10年美债收益率偏高。",
+        ]
+        assert not any("变为" in line for line in briefing["pages"]["sentiment"])
         dist = build_site(root, root / "dist")
         text = (dist / "index.html").read_text(encoding="utf-8")
         assert 'name="robots"' in text
@@ -144,7 +153,12 @@ def test_calendar_parsers() -> None:
     assert by_title["台积电9月营收"]["category"] == "半导体"
     assert by_title["台积电9月营收"]["tags"] == []
     assert by_title["韩国9月进出口（产业通商部，全月初值）"]["category"] == "半导体"
-    assert "NVIDIA GTC" in by_title["NVIDIA GTC Washington, D.C.（11月30日-12月3日）"]["title"]
+    gtc = next(row for row in manual if "GTC" in row["title"])
+    assert gtc["title"].startswith("英伟达 GTC")
+    assert "NVIDIA GTC" in gtc["note"]
+    assert gtc["priority"] == "低"
+    assert by_title["台积电9月营收"]["priority"] == "高"
+    assert by_title["联电9月营收"]["priority"] == "中"
     nasdaq = event(
         "2026-09-30", "", "财报", "Micron Technology, Inc.（MU）财报",
         "https://www.nasdaq.com/market-activity/earnings", "Nasdaq earnings calendar",
@@ -184,6 +198,100 @@ def test_calendar_parsers() -> None:
     assert len(minutes) == 1
     assert minutes[0]["title"] == "FOMC 9月会议纪要"
     assert minutes[0]["note"] == "美联储10月日历"
+    gdp = annotate(event(
+        "2026-09-30", "20:30", "宏观",
+        "GDP：GDP (Third Estimate), 2nd Quarter 2026",
+        "https://www.bea.gov/news/schedule", "BEA Release Schedule", "美东 8:30 AM",
+    ))
+    assert gdp["title"] == "2026年二季度 GDP 第三次估计"
+    assert gdp["priority"] == "高"
+    assert gdp["note"].count("原名：") == 1
+    assert "Third Estimate" in gdp["note"]
+    again = annotate(dict(gdp))
+    assert again["title"] == gdp["title"]
+    assert again["note"].count("原名：") == 1
+    speech = event(
+        "2026-09-28", "20:15", "大事",
+        "美联储：Recent Developments in Bank Supervision and Regulation",
+        "https://www.federalreserve.gov/newsevents/2026-september.htm",
+        "Federal Reserve calendar", "美东 8:15 a.m.",
+    )
+    assert speech["title"] == "美联储讲话：银行监管近况"
+    assert speech["priority"] == "低"
+    assert "Recent Developments in Bank Supervision" in speech["note"]
+    retail = parse_census(
+        "<tr><td>Advance Monthly Sales for Retail and Food Services</td><td>October 15, 2026</td><td>8:30 AM</td><td>September 2026</td></tr>",
+        date(2026, 9, 27), date(2026, 10, 20),
+    )
+    assert retail[0]["title"] == "2026年9月零售和餐饮销售"
+    assert "Retail" not in retail[0]["title"]
+    income = parse_bea(
+        """<th>Year 2026</th><tr><td><div class="release-date">September 30</div><small>8:30 AM</small></td>
+        <td class="release-title">Personal Income and Outlays, August 2026</td></tr>""",
+        date(2026, 9, 27), date(2026, 10, 11),
+    )
+    assert income[0]["title"] == "2026年8月个人收入与支出"
+    preview = event(
+        "2026-09-30", "20:30", "宏观",
+        "经济指标预览：Advance Economic Indicators Report (International Trade, Retail, & Wholesale)",
+        "https://www.census.gov/economic-indicators/calendar-listview.html",
+        "Census economic indicators calendar",
+        "美东 8:30 AM August 2026",
+    )
+    assert preview["title"] == "2026年8月经济指标预览"
+    assert preview["priority"] == "中"
+    assert "International Trade" not in preview["title"]
+    lines = calendar_lines([
+        {"date": "2026-09-27", "priority": "低", "title": "美联储讲话：银行监管近况", "time_bj": "20:15"},
+        {"date": "2026-09-28", "priority": "高", "title": "2026年8月个人收入与支出", "time_bj": "20:30"},
+        {"date": "2026-09-30", "priority": "高", "title": "2026年二季度 GDP 第三次估计", "time_bj": "20:30"},
+    ], date(2026, 9, 27))
+    assert lines == ["明天 20:30 2026年8月个人收入与支出"]
+
+
+def test_earnings_and_semis_lines() -> None:
+    text = """一、EPS：
+1、修正信号：强上修：NVDA, HOOD, TSM, GOOGL, MSFT；强下修：MCD, AAPL, META, QCOM, TME。
+2、EPS变化：下财年EPS均无变化。
+二、RSI信号：低于30 MCD；高于70 META。
+三、估值触发：PDD（6.69<7）, MCD（18.16<20）。
+四、未来7天财报：MICRON TECHNOLOGY INC(MU) 2026-10-01；NIKE, Inc.(NKE) 2026-10-02。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。"""
+    lines = earnings_summary_lines(text)
+    assert lines[0].startswith("修正：强上修 NVDA、HOOD、TSM、GOOGL、MSFT")
+    assert "强下修 MCD、AAPL、META、QCOM、TME" in lines[0]
+    assert lines[0].endswith("下财年 EPS 没有变化")
+    assert lines[1] == "RSI：低于 30 的是 MCD，高于 70 的是 META"
+    assert lines[2] == "估值触发：PDD、MCD"
+    assert "美光（MU）2026-10-01" in lines[3] and "耐克（NKE）2026-10-02" in lines[3]
+    assert lines[4].startswith("不适用：MARA、IREN")
+    assert "Forward PE" in lines[4]
+    semis = semis_lines(
+        [
+            {"date": "2026-09-26", "product": "DDR4", "chg_1d_pct": "-0.70"},
+            {"date": "2026-09-26", "product": "DDR5", "chg_1d_pct": "0.29"},
+        ],
+        [
+            {"date": "2026-09-26", "gpu": "B200", "chg_1d_pct": "0.0", "chg_7d_pct": "15.4"},
+            {"date": "2026-09-26", "gpu": "H100 SXM", "chg_1d_pct": "6.7", "chg_7d_pct": "8.7"},
+            {"date": "2026-09-26", "gpu": "H200", "chg_1d_pct": "-4.1", "chg_7d_pct": "-2.8"},
+        ],
+        [{"date": "2026-09-26", "window": "7日", "change_pct": "11.2"}],
+        [{"date": "2026-09-25", "chg_7d_pct": "-3.58"}],
+        [
+            {"period": "2026-08", "asof": "2026-09-26"},
+            {"period": "2026-09", "asof": "2026-09-26"},
+        ],
+    )
+    assert semis[0] == "存储：今天没有明显波动"
+    assert "H100 SXM 一日 +6.7%" in semis[1]
+    assert "B200 一日没动，一周 +15.4%" in semis[1]
+    assert "H200" not in semis[1]
+    assert semis[2] == "用量：OpenRouter 7 日环比 +11.2%"
+    assert semis[3] == "韩国出口今日无新数"
+    brief = parse_earnings(Path("盈利跟踪_2026-09-26.md"), {"data_date": "2026-09-26"}, "## 简要总结\n" + text + "\n", [])
+    assert brief[2]["text"].startswith("一、EPS")
+    assert brief[2]["date"] == "2026-09-26"
 
 
 if __name__ == "__main__":
@@ -192,4 +300,5 @@ if __name__ == "__main__":
     test_filings_and_press()
     test_briefing_and_build()
     test_calendar_parsers()
+    test_earnings_and_semis_lines()
     print("OK")

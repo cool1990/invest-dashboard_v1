@@ -337,6 +337,20 @@ def summary_text(body: str) -> str:
     return ""
 
 
+def earnings_brief(body: str) -> str:
+    for heading, chunk in split_sections(body):
+        if heading != "简要总结":
+            continue
+        lines = []
+        for line in chunk.splitlines():
+            text = clean_cell(line.strip())
+            if not text or text.startswith("|"):
+                continue
+            lines.append(text)
+        return "\n".join(lines)
+    return ""
+
+
 def parse_sentiment(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict[str, str] | None, dict[str, str] | None]:
     day = note_date(meta, path)
     rows: list[dict[str, str]] = []
@@ -430,13 +444,13 @@ EARNINGS_ALIASES = {
 NUMERIC_EARNINGS = {"close", "day_pct", "rsi", "eps_sum", "forward_pe", "target_pe", "next_fy_eps", "revision_30d", "up30", "down30"}
 
 
-def parse_earnings(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+def parse_earnings(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, str] | None]:
     day = note_date(meta, path)
     quotes: list[dict[str, str]] = []
     events: list[dict[str, str]] = []
     if not day:
         skipped.append({"area": "earnings", "date": "", "key": path.name, "field": "date", "raw": "", "reason": "没有日期"})
-        return quotes, events
+        return quotes, events, None
     for table in parse_tables(body):
         headers = {header_key(key): key for key in table[0]}
         if "ticker" not in headers:
@@ -481,7 +495,9 @@ def parse_earnings(path: Path, meta: dict[str, str], body: str, skipped: list[di
                 "earnings_date": when,
                 "source": path.name,
             })
-    return quotes, events
+    brief = earnings_brief(body)
+    summary = {"date": day, "text": brief, "source": path.name} if brief else None
+    return quotes, events, summary
 
 
 def parse_memory(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> list[dict[str, str]]:
@@ -907,6 +923,7 @@ def build_meta(existing: dict, bundles: dict) -> dict:
         "files": {
             "daily": "earnings/daily.csv",
             "events": "earnings/events.csv",
+            "summary": "earnings/summary.csv",
         },
         "note": "涨跌幅和 30 日修正都是百分数，不带百分号。triggered=1 表示笔记里的估值触发。",
     }
@@ -985,6 +1002,7 @@ def main() -> int:
         "filing_days": [],
         "earnings": [],
         "events": [],
+        "earnings_summary": [],
         "memory": [],
         "gpu": [],
         "openrouter": [],
@@ -1016,9 +1034,11 @@ def main() -> int:
             if day_row.get("date"):
                 incoming["filing_days"].append(day_row)
         elif kind == "earnings":
-            quotes, events = parse_earnings(path, meta, body, skipped)
+            quotes, events, earnings_summary = parse_earnings(path, meta, body, skipped)
             incoming["earnings"].extend(quotes)
             incoming["events"].extend(events)
+            if earnings_summary:
+                incoming["earnings_summary"].append(earnings_summary)
         elif kind == "memory":
             incoming["memory"].extend(parse_memory(path, meta, body, skipped))
         elif kind == "gpu":
@@ -1042,6 +1062,7 @@ def main() -> int:
         "filing_days": ("filings/days.csv", ["date", "kind"], ["date", "kind", "item_count", "status", "insider_count", "source"]),
         "earnings": ("earnings/daily.csv", ["date", "ticker"], ["date", "ticker", "company", "market", "close", "day_pct", "rsi", "eps_sum", "forward_pe", "target_pe", "triggered", "next_fy_eps", "revision_30d", "up30", "down30", "revision_signal", "status", "flags", "is_trading_day", "eps_unit", "source"]),
         "events": ("earnings/events.csv", ["note_date", "ticker", "earnings_date"], ["note_date", "ticker", "company", "earnings_date", "source"]),
+        "earnings_summary": ("earnings/summary.csv", ["date"], ["date", "text", "source"]),
         "memory": ("semis/memory.csv", ["date", "product"], ["date", "product", "value", "unit", "chg_1d_pct", "chg_7d_pct", "chg_30d_pct", "source"]),
         "gpu": ("semis/gpu.csv", ["date", "gpu"], ["date", "gpu", "price", "unit", "chg_1d_pct", "chg_7d_pct", "chg_30d_pct", "chg_90d_pct", "source"]),
         "openrouter": ("semis/openrouter.csv", ["date", "window"], ["date", "window", "tokens", "unit", "change_pct", "note", "source"]),

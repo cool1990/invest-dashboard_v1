@@ -23,7 +23,7 @@
     </nav>
     <header>
       <h1>日历</h1>
-      <p class="lede">从今天起 14 天。时间是北京时间。没有核对到的项目不会出现。</p>
+      <p class="lede">从今天起 14 天。时间是北京时间。每条标了高、中或低。没有核对到的项目不会出现。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
     <section id="briefing" class="briefing" hidden></section>
@@ -32,7 +32,8 @@
     <footer id="footer" hidden></footer>
   </div>
   <script>
-    const CATS = ["全部", "宏观", "半导体", "加密", "财报", "大事"];
+    const CATS = ["全部", "高优先级", "宏观", "半导体", "加密", "财报", "大事"];
+    const RANK = { "高": 0, "中": 1, "低": 2 };
     let events = [];
     let sources = [];
     let active = "全部";
@@ -49,7 +50,7 @@
 
     function fillBriefing(today) {
       const tomorrow = addDays(today, 1);
-      const lines = events.filter((item) => item.date === today || item.date === tomorrow).map((item) => {
+      const lines = events.filter((item) => (item.date === today || item.date === tomorrow) && item.priority === "高").map((item) => {
         const prefix = item.date === today ? "今天" : "明天";
         return prefix + (item.time_bj ? " " + item.time_bj : "") + " " + item.title;
       });
@@ -79,7 +80,13 @@
         button.addEventListener("click", () => { active = cat; render(); });
         filters.appendChild(button);
       });
-      const shown = events.filter((item) => item.date >= today && item.date <= end && (active === "全部" || item.category === active || (active === "半导体" && (item.tags || []).includes("半导体"))));
+      const shown = events.filter((item) => {
+        if (item.date < today || item.date > end) return false;
+        if (active === "全部") return true;
+        if (active === "高优先级") return item.priority === "高";
+        if (item.category === active) return true;
+        return active === "半导体" && (item.tags || []).includes("半导体");
+      });
       const days = $("days");
       days.textContent = "";
       if (!shown.length) {
@@ -94,11 +101,14 @@
         const block = el("section", "day-block" + (day === today ? " today" : day === addDays(today, 1) ? " tomorrow" : ""));
         const label = day === today ? day + " · 今天" : day === addDays(today, 1) ? day + " · 明天" : day;
         block.appendChild(el("h2", null, label));
-        byDay.get(day).forEach((item) => {
+        byDay.get(day).sort((a, b) => (RANK[a.priority] ?? 9) - (RANK[b.priority] ?? 9) || (a.time_bj || "").localeCompare(b.time_bj || "")).forEach((item) => {
           const row = el("div", "cal-item");
           row.appendChild(el("p", "label", item.time_bj || item.category));
           const body = el("div");
-          const title = el("p", null, item.title);
+          const title = el("p");
+          const kind = item.priority === "高" ? "high" : item.priority === "中" ? "mid" : "low";
+          if (item.priority) title.appendChild(el("span", "chip pri-" + kind, item.priority));
+          title.appendChild(document.createTextNode((item.priority ? " " : "") + item.title));
           if ((item.tags || []).includes("半导体")) title.appendChild(el("span", "chip", " 半导体"));
           body.appendChild(title);
           const extra = [];

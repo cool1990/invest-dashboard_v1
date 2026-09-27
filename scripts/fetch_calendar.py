@@ -109,8 +109,35 @@ def parse_ampm(text: str) -> tuple[int, int] | None:
     return hour, minute
 
 
+SPEECH_MAP = (
+    ("Recent Developments in Bank Supervision", "银行监管近况"),
+    ("AI and Emerging Tech", "人工智能与新兴技术"),
+    ("Opening Remarks", "开幕致辞"),
+    ("Federal Reserve Economic Data", "FRED 数据"),
+    ("U.S. Economy and Monetary Policy", "美国经济与货币政策"),
+    ("Modernizing Financial Regulation", "金融监管现代化"),
+    ("Global Central Banking", "全球央行"),
+    ("Economic Outlook", "经济展望"),
+    ("Rural Economy", "农村经济"),
+    ("Payments", "支付"),
+)
+EARNINGS_ZH = {
+    "MU": "美光", "NKE": "耐克", "ACN": "埃森哲", "PEP": "百事",
+    "NVDA": "英伟达", "TSM": "台积电", "AMD": "超威", "INTC": "英特尔",
+    "QCOM": "高通", "AMAT": "应用材料", "AVGO": "博通", "ARM": "Arm",
+    "LRCX": "拉姆研究", "KLAC": "科磊", "SMCI": "超微电脑", "SNDK": "闪迪",
+    "ASML": "ASML",
+}
+QUARTER_ZH = {"1st": "一", "2nd": "二", "3rd": "三", "4th": "四"}
+MONTH_LABELS = (
+    "个人收入与支出", "国际贸易（商品和服务）", "零售和餐饮销售", "建筑支出",
+    "耐用品订单", "新屋销售", "新屋开工", "制造业出货、库存和订单", "批发贸易",
+    "经济指标预览",
+)
+
+
 def event(day: str, time_bj: str, category: str, title: str, url: str, source: str, note: str = "", previous: str = "", consensus: str = "", tags: list[str] | None = None) -> dict:
-    return {
+    return annotate({
         "date": day,
         "time_bj": time_bj,
         "category": category,
@@ -121,7 +148,165 @@ def event(day: str, time_bj: str, category: str, title: str, url: str, source: s
         "previous": previous,
         "consensus": consensus,
         "tags": tags or [],
-    }
+    })
+
+
+def append_original(note: str, original: str) -> str:
+    original = re.sub(r"\s+", " ", original or "").strip(" 。")
+    if not original or not re.search(r"[A-Za-z]{3,}", original):
+        return note or ""
+    marker = "原名：" + original
+    note = (note or "").strip()
+    if marker in note:
+        return note
+    return f"{note}。{marker}" if note else marker
+
+
+def month_phrase(text: str) -> str:
+    match = re.search(
+        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})",
+        text or "",
+        re.I,
+    )
+    if not match:
+        return ""
+    month = MONTHS.get(match.group(1).lower())
+    return f"{match.group(2)}年{month}月" if month else ""
+
+
+def macro_title(label: str, english: str) -> str:
+    low = f"{label} {english}".lower()
+    if "gdp" in low or "gross domestic product" in low:
+        quarter = re.search(r"(1st|2nd|3rd|4th)\s+Quarter\s+(20\d{2})", english or "", re.I)
+        estimate = ""
+        if re.search(r"Third Estimate", english or "", re.I):
+            estimate = "第三次估计"
+        elif re.search(r"Second Estimate", english or "", re.I):
+            estimate = "第二次估计"
+        elif re.search(r"Advance Estimate", english or "", re.I):
+            estimate = "首次估计"
+        head = f"{quarter.group(2)}年{QUARTER_ZH[quarter.group(1).lower()]}季度" if quarter else ""
+        return " ".join(part for part in (head, "GDP", estimate) if part) or "GDP"
+    named = (
+        ("advance economic indicators", "经济指标预览"),
+        ("personal income", "个人收入与支出"),
+        ("international trade", "国际贸易（商品和服务）"),
+        ("retail and food", "零售和餐饮销售"),
+        ("construction spending", "建筑支出"),
+        ("construction put in place", "建筑支出"),
+        ("wholesale trade", "批发贸易"),
+        ("business formation", "新企业统计"),
+        ("durable goods", "耐用品订单"),
+        ("new residential sales", "新屋销售"),
+        ("new residential construction", "新屋开工"),
+        ("manufacturers' shipments", "制造业出货、库存和订单"),
+        ("manufacturers’ shipments", "制造业出货、库存和订单"),
+        ("services supplied through affiliates", "附属机构服务供应"),
+        ("manufacturing and trade", "制造业与贸易库存和销售"),
+        ("steel products", "钢材进口初值"),
+        ("housing vacancies", "住房空置与自有住房率"),
+    )
+    chosen = next((text for needle, text in named if needle in low), "")
+    if not chosen:
+        chosen = label
+    if chosen == "附属机构服务供应":
+        year = re.search(r"(20\d{2})", english or "")
+        if year:
+            return f"{year.group(1)}年{chosen}"
+    month = month_phrase(english)
+    if month and chosen in MONTH_LABELS:
+        return month + chosen
+    return chosen
+
+
+def priority_for(item: dict) -> str:
+    title = item.get("title") or ""
+    category = item.get("category") or ""
+    tags = item.get("tags") or []
+    note = item.get("note") or ""
+    source = item.get("source") or ""
+    if category == "财报":
+        if "半导体" in tags or "盈利" in source:
+            return "高"
+        return "中"
+    if any(key in title for key in ("H.4.1", "个人收入与支出", "CPI", "PPI", "非农", "JOLTS")) or "GDP" in title or "FOMC" in title:
+        return "高"
+    if "个税" in title or "再融资" in title:
+        return "高"
+    if "韩国" in title and "出口" in title:
+        return "高"
+    if "台积电" in title and "营收" in title:
+        return "高"
+    if title.startswith("美联储讲话") or title.startswith("美联储："):
+        return "低"
+    if any(key in title for key in ("西部半导体展", "欧洲半导体展", "SEMICON", "英伟达 GTC")):
+        return "低"
+    if any(key in title for key in ("批发贸易", "住房空置", "新企业统计", "钢材进口", "附属机构", "制造业与贸易库存")):
+        return "低"
+    if category == "加密" or "代币解锁" in title:
+        if any(key in title for key in ("SEC", "ETF", "Deribit", "期权")):
+            return "中"
+        share = re.search(r"约占已释放供应\s*([0-9]+(?:\.[0-9]+)?)\s*%", note)
+        if share and float(share.group(1)) >= 2:
+            return "中"
+        return "低"
+    return "中"
+
+
+def annotate(item: dict) -> dict:
+    title = item.get("title") or ""
+    note = item.get("note") or ""
+    if title.startswith("美联储讲话"):
+        pass
+    elif title.startswith("美联储：") or title.startswith("美联储:"):
+        english = re.split(r"[：:]", title, maxsplit=1)[1].strip()
+        label = next((text for needle, text in SPEECH_MAP if needle.lower() in english.lower()), "")
+        title = f"美联储讲话：{label}" if label else "美联储讲话"
+        note = append_original(note, english)
+    elif title.startswith("NVIDIA GTC"):
+        paren = re.search(r"（[^）]+）", title)
+        title = "英伟达 GTC 华盛顿" + (paren.group(0) if paren else "")
+        note = append_original(note, "NVIDIA GTC Washington, D.C.")
+    elif "SEMICON West" in title:
+        paren = re.search(r"（[^）]+）", title)
+        title = "西部半导体展" + (paren.group(0) if paren else "")
+        note = append_original(note, "SEMICON West 2026")
+    elif "SEMICON Europa" in title:
+        paren = re.search(r"（[^）]+）", title)
+        title = "欧洲半导体展" + (paren.group(0) if paren else "")
+        note = append_original(note, "SEMICON Europa 2026")
+    elif "Regulation Crypto Assets" in title:
+        title = title.replace("《Regulation Crypto Assets》", "《加密资产规则》")
+        note = append_original(note, "Regulation Crypto Assets")
+    else:
+        month_name = re.match(r"^([A-Za-z]+)\s+会议纪要$", title)
+        if month_name and month_name.group(1).lower() in MONTHS:
+            title = f"FOMC {MONTHS[month_name.group(1).lower()]}月会议纪要"
+        elif item.get("category") == "财报":
+            found = re.search(r"[（(]([A-Za-z][A-Za-z0-9.]*)[）)]\s*财报\s*$", title)
+            if found:
+                ticker = found.group(1).upper()
+                label = EARNINGS_ZH.get(ticker, "")
+                desired = f"{label}（{ticker}）财报" if label else ""
+                if desired and title != desired:
+                    prefix = re.split(r"[（(]", title, maxsplit=1)[0].strip()
+                    title = desired
+                    if prefix and prefix != label and re.search(r"[A-Za-z]", prefix):
+                        note = append_original(note, prefix)
+        elif "：" in title:
+            left, right = title.split("：", 1)
+            if re.search(r"[A-Za-z]{3,}", right):
+                chosen = macro_title(left.strip(), right.strip())
+                if not re.match(r"20\d{2}年", chosen):
+                    month = month_phrase(note)
+                    if month and chosen in MONTH_LABELS:
+                        chosen = month + chosen
+                title = chosen
+                note = append_original(note, right.strip())
+    item["title"] = title
+    item["note"] = note
+    item["priority"] = priority_for(item)
+    return item
 
 
 def in_window(day: str, start: date, end: date) -> bool:
@@ -670,8 +855,16 @@ def collect(root: Path, today: date | None = None) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description="抓公开日历")
     parser.add_argument("--root", default=str(ROOT))
+    parser.add_argument("--annotate", action="store_true", help="只给现有 events.json 补中文标题和优先级，不重新抓取")
     args = parser.parse_args()
     root = Path(args.root)
+    if args.annotate:
+        path = root / "data" / "calendar" / "events.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload["events"] = [annotate(item) for item in payload.get("events", [])]
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        log(f"ANNOTATED data/calendar/events.json events={len(payload['events'])}")
+        return 0
     payload = collect(root)
     dest = root / "data" / "calendar"
     dest.mkdir(parents=True, exist_ok=True)
