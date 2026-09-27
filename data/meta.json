@@ -561,11 +561,12 @@
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
     "history_start": "2026-09-10",
     "history_end": "2026-09-26",
-    "observations": 233,
+    "observations": 224,
     "composite_end": "2026-09-26",
     "files": {
       "series": "sentiment/series.csv",
-      "composite": "sentiment/composite.csv"
+      "composite": "sentiment/composite.csv",
+      "summary": "sentiment/summary.csv"
     },
     "note": "日期是笔记的 data_date。obs_date 是该指标自己的观测日，可能更早。carried=1 表示笔记写明这是沿用的最近可得值。"
   },
@@ -622,5 +623,19 @@
   "derived_refresh": {
     "ok": true,
     "fetched_at": "2026-09-27T10:04:02Z"
+  },
+  "filings": {
+    "name": "公告和新闻稿",
+    "source": "inbox/notes/每日/美港股公告 与 美港股新闻稿",
+    "history_end": "2026-09-26",
+    "announcements": 32,
+    "press": 18,
+    "files": {
+      "announcements": "filings/announcements.csv",
+      "press": "filings/press.csv",
+      "insiders": "filings/insiders.csv",
+      "days": "filings/days.csv"
+    },
+    "note": "日期用笔记 data_date 或文件名，不用正文标题。SEC 的 UTC 时间已换成北京时间，港交所 HKT 与北京时间相同。"
   }
 }

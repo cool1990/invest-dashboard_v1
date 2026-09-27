@@ -147,6 +147,27 @@ function addChart(parent, spec) {
   });
 }
 
+function renderBriefing(page) {
+  const box = document.getElementById("briefing");
+  if (!box) return Promise.resolve();
+  return loadText("data/briefing.json").then((text) => {
+    const data = JSON.parse(text);
+    const lines = (data.pages && data.pages[page]) || ["今日无变动"];
+    box.hidden = false;
+    box.textContent = "";
+    box.appendChild(el("p", "label", "今日小结"));
+    const list = el("ul", "brief-list");
+    lines.forEach((line) => {
+      const item = document.createElement("li");
+      item.textContent = line;
+      list.appendChild(item);
+    });
+    box.appendChild(list);
+  }).catch(() => {
+    box.hidden = true;
+  });
+}
+
 if (window.Chart) {
   Chart.defaults.font.family = '"Noto Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif';
   Chart.defaults.color = "#6d655c";

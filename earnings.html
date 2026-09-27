@@ -20,13 +20,23 @@
       <a href="sentiment.html">市场情绪</a>
       <a href="semis.html">半导体景气</a>
       <a href="earnings.html" aria-current="page">盈利跟踪</a>
-      <a href="reports/index.html">研报</a>
+      <a href="calendar.html">日历</a>
     </nav>
     <header>
       <h1>盈利跟踪</h1>
       <p class="lede">观察名单上的收盘价、RSI、远期市盈率和盈利修正。点一个代码，下面画出它这几天的历史。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
+    <section id="briefing" class="briefing" hidden></section>
+    <h2>公告</h2>
+    <section id="filings" class="filing-list"></section>
+    <h2>公司新闻</h2>
+    <section id="press" class="filing-list"></section>
+    <section id="insiders" hidden></section>
+    <details id="history">
+      <summary>近 7 天</summary>
+      <div id="history-body"></div>
+    </details>
     <section id="summary" class="summary" hidden></section>
     <h2 id="table-title" hidden>观察名单</h2>
     <section id="table-panel" class="panel" hidden>
@@ -241,6 +251,77 @@
       summary.appendChild(upcomingBox);
     }
 
+    function oneLine(text) {
+      const clean = (text || "").replace(/\s+/g, " ").trim();
+      return clean.length > 120 ? clean.slice(0, 120) + "…" : clean;
+    }
+
+    function filingCard(row, kind) {
+      const box = el("article", "filing");
+      const title = el("h3", null, (row.ticker ? row.ticker + " · " : "") + (row.title || "无标题"));
+      box.appendChild(title);
+      const bits = [];
+      if (row.company) bits.push(row.company);
+      if (kind === "announcement" && row.filed_bj) bits.push(row.filed_bj + " 北京时间");
+      if (kind === "press" && row.time_bj) bits.push(row.time_bj);
+      if (bits.length) box.appendChild(el("p", "unit", bits.join(" · ")));
+      if (row.summary) box.appendChild(el("p", null, oneLine(row.summary)));
+      if (row.url) {
+        const link = el("a", null, "链接");
+        link.href = row.url;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        box.appendChild(link);
+      }
+      return box;
+    }
+
+    function renderFeed(id, rows, emptyText, kind) {
+      const box = $(id);
+      box.textContent = "";
+      if (!rows.length) {
+        box.appendChild(el("p", "lede", emptyText));
+        return;
+      }
+      rows.forEach((row) => box.appendChild(filingCard(row, kind)));
+    }
+
+    function renderFilings(ann, press, insiders, days) {
+      const annDays = days.filter((row) => row.kind === "announcement").map((row) => row.date);
+      const pressDays = days.filter((row) => row.kind === "press").map((row) => row.date);
+      const latestAnn = annDays.sort().slice(-1)[0] || "";
+      const latestPress = pressDays.sort().slice(-1)[0] || "";
+      renderFeed("filings", ann.filter((row) => row.date === latestAnn), latestAnn ? latestAnn + " 无" : "无", "announcement");
+      renderFeed("press", press.filter((row) => row.date === latestPress), latestPress ? latestPress + " 无" : "无", "press");
+      const insider = insiders.filter((row) => row.date === latestAnn);
+      const insiderBox = $("insiders");
+      if (insider.length) {
+        insiderBox.hidden = false;
+        insiderBox.appendChild(el("h2", null, "内部人买入"));
+        insider.forEach((row) => insiderBox.appendChild(el("p", null, row.text)));
+      }
+      const end = latestAnn > latestPress ? latestAnn : latestPress;
+      const history = $("history-body");
+      history.textContent = "";
+      if (!end) return;
+      const start = end;
+      const dates = [];
+      for (let i = 0; i < 7; i += 1) {
+        const [y, m, d] = end.split("-").map(Number);
+        const dt = new Date(Date.UTC(y, m - 1, d - i));
+        dates.push(dt.toISOString().slice(0, 10));
+      }
+      dates.forEach((day) => {
+        const a = ann.filter((row) => row.date === day);
+        const p = press.filter((row) => row.date === day);
+        if (!a.length && !p.length) return;
+        history.appendChild(el("h3", null, day));
+        a.forEach((row) => history.appendChild(filingCard(row, "announcement")));
+        p.forEach((row) => history.appendChild(filingCard(row, "press")));
+      });
+      if (!history.childElementCount) history.appendChild(el("p", "lede", "近 7 天没有公告或新闻稿。"));
+    }
+
     function render(meta, dailyRows, eventRows) {
       daily = dailyRows;
       events = eventRows;
@@ -261,13 +342,25 @@
 
     async function main() {
       try {
+        await renderBriefing("earnings");
         const meta = JSON.parse(await loadText("data/meta.json"));
         const files = (meta.earnings || {}).files || {};
-        const [dailyText, eventText] = await Promise.all([
+        const filingFiles = (meta.filings || {}).files || {};
+        const [dailyText, eventText, annText, pressText, insiderText, dayText] = await Promise.all([
           loadText("data/" + (files.daily || "earnings/daily.csv")),
           loadText("data/" + (files.events || "earnings/events.csv")),
+          loadText("data/" + (filingFiles.announcements || "filings/announcements.csv")).catch(() => ""),
+          loadText("data/" + (filingFiles.press || "filings/press.csv")).catch(() => ""),
+          loadText("data/" + (filingFiles.insiders || "filings/insiders.csv")).catch(() => ""),
+          loadText("data/" + (filingFiles.days || "filings/days.csv")).catch(() => ""),
         ]);
         render(meta, parseCSV(dailyText), parseCSV(eventText));
+        renderFilings(
+          annText ? parseCSV(annText) : [],
+          pressText ? parseCSV(pressText) : [],
+          insiderText ? parseCSV(insiderText) : [],
+          dayText ? parseCSV(dayText) : []
+        );
       } catch (err) {
         const status = $("status");
         status.className = "status error";

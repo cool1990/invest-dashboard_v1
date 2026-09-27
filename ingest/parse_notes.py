@@ -14,6 +14,7 @@ import csv
 import json
 import re
 import sys
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
@@ -40,20 +41,33 @@ SERIES_RULES: list[tuple[str, str, str, str]] = [
     ("AAII", "aaii", "AAII 牛熊差", "百分点"),
     ("标普500 RSI", "spx_rsi", "标普500 RSI(14)", "点"),
     ("纳斯达克 RSI", "nasdaq_rsi", "纳斯达克 RSI(14)", "点"),
+    ("10年期通胀预期", "t10yie", "10年期通胀预期", "百分比"),
     ("10Y-2Y", "t10y2y", "10年减2年美债利差", "百分点"),
-    ("高收益债", "hy_oas", "高收益债信用利差", "百分点"),
     ("10年期实际利率", "tips_10y", "10年期实际利率", "百分比"),
+    ("10年期美债", "us_10y", "10年期美债", "百分比"),
+    ("高收益率利差", "hy_oas", "高收益率利差", "百分点"),
+    ("高收益债", "hy_oas", "高收益债信用利差", "百分点"),
+    ("明年底EFFR", "effr_ny", "明年底 EFFR", "百分比"),
+    ("下月EFFR", "effr_next", "下月 EFFR", "百分比"),
+    ("年底EFFR", "effr_year", "年底 EFFR", "百分比"),
+    ("2年期美债", "us_2y", "2年期美债", "百分比"),
     ("US_10y", "us_10y", "美国10年期国债收益率", "百分比"),
     ("US_2y", "us_2y", "美国2年期国债收益率", "百分比"),
     ("VIX", "vix", "VIX", "点"),
     ("博时标普500", "etf_spx", "博时标普500ETF溢价率", "百分比"),
     ("广发纳指", "etf_ndx", "广发纳指ETF溢价率", "百分比"),
-    ("标普参与度>20", "spx_breadth_20", "标普成分高于20日均线的比例", "百分比"),
-    ("标普参与度>50", "spx_breadth_50", "标普成分高于50日均线的比例", "百分比"),
+    ("标普500参与度>200", "spx_breadth_200", "标普500参与度>200日", "百分比"),
+    ("标普500参与度>50", "spx_breadth_50", "标普500参与度>50日", "百分比"),
+    ("标普500参与度>20", "spx_breadth_20", "标普500参与度>20日", "百分比"),
     ("标普参与度>200", "spx_breadth_200", "标普成分高于200日均线的比例", "百分比"),
-    ("纳指100参与度>20", "ndx_breadth_20", "纳指100高于20日均线的比例", "百分比"),
-    ("纳指100参与度>50", "ndx_breadth_50", "纳指100高于50日均线的比例", "百分比"),
+    ("标普参与度>50", "spx_breadth_50", "标普成分高于50日均线的比例", "百分比"),
+    ("标普参与度>20", "spx_breadth_20", "标普成分高于20日均线的比例", "百分比"),
+    ("纳斯达克100参与度>200", "ndx_breadth_200", "纳斯达克100参与度>200日", "百分比"),
+    ("纳斯达克100参与度>50", "ndx_breadth_50", "纳斯达克100参与度>50日", "百分比"),
+    ("纳斯达克100参与度>20", "ndx_breadth_20", "纳斯达克100参与度>20日", "百分比"),
     ("纳指100参与度>200", "ndx_breadth_200", "纳指100高于200日均线的比例", "百分比"),
+    ("纳指100参与度>50", "ndx_breadth_50", "纳指100高于50日均线的比例", "百分比"),
+    ("纳指100参与度>20", "ndx_breadth_20", "纳指100高于20日均线的比例", "百分比"),
     ("WTI", "wti", "WTI 原油期货", "美元"),
     ("COMEX黄金", "gold", "COMEX 黄金", "美元"),
     ("黄金", "gold", "COMEX 黄金", "美元"),
@@ -198,6 +212,10 @@ def classify(path: Path) -> str:
     name = path.name
     if "宏观指标" in name:
         return "sentiment"
+    if "美港股公告" in name:
+        return "filings"
+    if "美港股新闻稿" in name:
+        return "press"
     if "盈利跟踪" in name:
         return "earnings"
     if "存储价格" in name:
@@ -280,43 +298,92 @@ def write_csv(path: Path, rows: list[dict[str, str]], columns: list[str]) -> Non
     tmp.replace(path)
 
 
-def parse_sentiment(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict[str, str] | None]:
+def split_sections(body: str) -> list[tuple[str, str]]:
+    sections: list[tuple[str, str]] = []
+    heading = ""
+    buf: list[str] = []
+    for line in body.splitlines():
+        if line.startswith("## "):
+            sections.append((heading, "\n".join(buf)))
+            heading = line[3:].strip()
+            buf = []
+        else:
+            buf.append(line)
+    sections.append((heading, "\n".join(buf)))
+    return sections
+
+
+def section_bucket(heading: str) -> str:
+    if "情绪" in heading and "综合" not in heading and "小结" not in heading:
+        return "情绪"
+    if "利率" in heading:
+        return "利率"
+    if "其他" in heading or "价格" in heading:
+        return "其他"
+    return ""
+
+
+def hike_count(remark: str) -> str:
+    match = re.search(r"隐含加息\s*([0-9]+(?:\.[0-9]+)?)\s*次", remark or "")
+    return match.group(1) if match else ""
+
+
+def summary_text(body: str) -> str:
+    for heading, chunk in split_sections(body):
+        if heading == "小结":
+            lines = [clean_cell(line.lstrip("-").strip()) for line in chunk.splitlines()]
+            lines = [line for line in lines if line]
+            return " ".join(lines)
+    return ""
+
+
+def parse_sentiment(path: Path, meta: dict[str, str], body: str, skipped: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict[str, str] | None, dict[str, str] | None]:
     day = note_date(meta, path)
     rows: list[dict[str, str]] = []
     if not day:
         skipped.append({"area": "sentiment", "date": "", "key": path.name, "field": "date", "raw": "", "reason": "没有 data_date，文件名里也没有日期"})
-        return rows, None
-    for table in parse_tables(body):
-        if "指标" not in table[0] or "数值" not in table[0]:
-            continue
-        for item in table:
-            name = item.get("指标", "")
-            raw_value = item.get("数值", "")
-            if is_fail_text(raw_value):
-                skipped.append({"area": "sentiment", "date": day, "key": name, "field": "数值", "raw": raw_value, "reason": "单元格标明未更新或抓取失败"})
+        return rows, None, None
+    for heading, chunk in split_sections(body):
+        bucket = section_bucket(heading)
+        for table in parse_tables(chunk):
+            if "指标" not in table[0] or "数值" not in table[0]:
                 continue
-            value = parse_decimal(raw_value)
-            if value is None:
-                if raw_value:
-                    skipped.append({"area": "sentiment", "date": day, "key": name, "field": "数值", "raw": raw_value, "reason": "没有可解析的数字"})
-                continue
-            series_id, series_name, unit = series_info(name)
-            label_raw = item.get("情绪") or item.get("机会or风险or中性") or ""
-            obs = item.get("日期", "")
-            if not re.fullmatch(r"20\d{2}-\d{2}-\d{2}", obs):
-                obs = ""
-            rows.append({
-                "date": day,
-                "series_id": series_id,
-                "name": series_name,
-                "value": value,
-                "unit": unit,
-                "change_text": item.get("涨跌幅", ""),
-                "label": sentiment_label(label_raw),
-                "obs_date": obs,
-                "carried": carried_flag(item.get("备注", "")),
-                "source": path.name,
-            })
+            for item in table:
+                name = item.get("指标", "")
+                raw_value = item.get("数值", "")
+                if is_fail_text(raw_value):
+                    skipped.append({"area": "sentiment", "date": day, "key": name, "field": "数值", "raw": raw_value, "reason": "单元格标明未更新或抓取失败"})
+                    continue
+                value = parse_decimal(raw_value)
+                if value is None:
+                    if raw_value:
+                        skipped.append({"area": "sentiment", "date": day, "key": name, "field": "数值", "raw": raw_value, "reason": "没有可解析的数字"})
+                    continue
+                series_id, _series_name, unit = series_info(name)
+                label_raw = item.get("情绪") or item.get("机会or风险or中性") or ""
+                obs = item.get("日期", "")
+                if not re.fullmatch(r"20\d{2}-\d{2}-\d{2}", obs):
+                    obs = ""
+                remark = item.get("备注", "")
+                rows.append({
+                    "date": day,
+                    "series_id": series_id,
+                    "name": name or series_id,
+                    "value": value,
+                    "unit": unit,
+                    "change_text": item.get("涨跌幅", ""),
+                    "label": sentiment_label(label_raw),
+                    "obs_date": obs,
+                    "carried": carried_flag(remark),
+                    "section": bucket,
+                    "remark": remark,
+                    "hike_count": hike_count(remark),
+                    "source": path.name,
+                })
+    summary = None
+    text = summary_text(body)
+    if text:
+        summary = {"date": day, "text": text, "source": path.name}
     composite = None
     for line in body.splitlines():
         if "综合：" not in line and "综合:" not in line:
@@ -334,7 +401,7 @@ def parse_sentiment(path: Path, meta: dict[str, str], body: str, skipped: list[d
             "source": path.name,
         }
         break
-    return rows, composite
+    return rows, composite, summary
 
 
 EARNINGS_ALIASES = {
@@ -580,6 +647,209 @@ def parse_korea(path: Path, meta: dict[str, str], body: str, skipped: list[dict[
     return rows
 
 
+BJ = timezone(timedelta(hours=8))
+COMPANY_RE = re.compile(r"^##\s+(.+?)\s*[（(]\s*([^）)]+?)\s*[）)]\s*$")
+FIELD_RE = re.compile(r"^(公司|标题|核心内容|链接|时间|摘要)\s*[:：]\s*(.*)$")
+
+
+def to_beijing(raw: str) -> str:
+    text = (raw or "").strip()
+    if not text:
+        return ""
+    if re.match(r"\d{4}-\d{2}-\d{2}T", text):
+        stamp = text.replace("Z", "+00:00")
+        try:
+            moment = datetime.fromisoformat(stamp)
+        except ValueError:
+            return text
+        if moment.tzinfo is None:
+            moment = moment.replace(tzinfo=timezone.utc)
+        return moment.astimezone(BJ).strftime("%Y-%m-%d %H:%M")
+    match = re.match(r"(\d{2})/(\d{2})/(\d{4})\s+(\d{2}:\d{2})", text)
+    if match:
+        day, month, year, clock = match.groups()
+        return f"{year}-{month}-{day} {clock}"
+    return text
+
+
+def extract_url(text: str) -> str:
+    match = re.search(r"\((https?://[^)\s]+)\)", text or "")
+    if match:
+        return match.group(1)
+    match = re.search(r"https?://\S+", text or "")
+    if not match:
+        return ""
+    return match.group(0).rstrip(").,，。")
+
+
+def _consume_fields(lines: list[str]) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    current = ""
+    buf: list[str] = []
+
+    def flush() -> None:
+        if current:
+            fields[current] = clean_cell(" ".join(part.strip() for part in buf if part.strip()))
+
+    for line in lines:
+        match = FIELD_RE.match(line.strip())
+        if match:
+            flush()
+            current = match.group(1)
+            buf = [match.group(2)]
+            continue
+        if current and line.strip():
+            buf.append(line.strip().lstrip("-").strip())
+    flush()
+    return fields
+
+
+def parse_filings(path: Path, meta: dict[str, str], body: str) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, str]]:
+    day = note_date(meta, path)
+    items: list[dict[str, str]] = []
+    insiders: list[dict[str, str]] = []
+    company = ""
+    ticker = ""
+    block: list[str] = []
+    insider_buf: list[str] = []
+    in_insider = False
+
+    def flush_block() -> None:
+        if not block or not company:
+            return
+        heading = block[0]
+        match = re.match(r"^###\s+(.+?)\s+[—–-]\s+(.+)$", heading.strip())
+        filed_raw = match.group(1).strip() if match else ""
+        accession = match.group(2).strip() if match else ""
+        fields = _consume_fields(block[1:])
+        title = fields.get("标题", "")
+        summary = fields.get("核心内容", "")
+        if not title and not summary:
+            return
+        items.append({
+            "date": day,
+            "company": fields.get("公司", "") or company,
+            "ticker": ticker,
+            "filed_raw": filed_raw,
+            "filed_bj": to_beijing(filed_raw),
+            "accession": accession,
+            "title": title,
+            "summary": summary,
+            "url": extract_url(fields.get("链接", "")),
+            "source": path.name,
+        })
+
+    for line in body.splitlines():
+        if line.startswith("## "):
+            if in_insider:
+                insider_buf.append(line)
+                continue
+            flush_block()
+            block = []
+            heading = line[3:].strip()
+            if "内部人" in heading:
+                in_insider = True
+                insider_buf = []
+                company = ""
+                ticker = ""
+                continue
+            found = COMPANY_RE.match(line)
+            if found:
+                company = found.group(1).strip()
+                ticker = found.group(2).strip().upper()
+            else:
+                company = ""
+                ticker = ""
+            continue
+        if in_insider:
+            insider_buf.append(line)
+            continue
+        if line.startswith("### "):
+            flush_block()
+            block = [line]
+            continue
+        if block and line.strip() != "---":
+            block.append(line)
+    flush_block()
+    insider_text = clean_cell(" ".join(insider_buf))
+    if insider_text and "今日无" not in insider_text:
+        insiders.append({"date": day, "text": insider_text, "source": path.name})
+    day_row = {
+        "date": day,
+        "kind": "announcement",
+        "item_count": str(len(items)),
+        "status": meta.get("fetch_status", ""),
+        "insider_count": meta.get("insider_count", "0"),
+        "source": path.name,
+    }
+    return items, insiders, day_row
+
+
+def parse_press(path: Path, meta: dict[str, str], body: str) -> tuple[list[dict[str, str]], dict[str, str]]:
+    day = note_date(meta, path)
+    items: list[dict[str, str]] = []
+    company = ""
+    ticker = ""
+    current: dict[str, str] | None = None
+
+    def flush() -> None:
+        nonlocal current
+        if current and (current.get("title") or current.get("summary")):
+            items.append(current)
+        current = None
+
+    for line in body.splitlines():
+        if line.startswith("## "):
+            flush()
+            found = COMPANY_RE.match(line)
+            if found:
+                company = found.group(1).strip()
+                ticker = found.group(2).strip().upper()
+            else:
+                company = ""
+                ticker = ""
+            continue
+        bullet = re.match(r"^-\s+\[(.+?)[（(]([^）)]+)[）)]\]\s*(.+)$", line.strip())
+        if bullet and not line.startswith("  "):
+            flush()
+            current = {
+                "date": day,
+                "company": company or bullet.group(1).strip(),
+                "ticker": (ticker or bullet.group(2)).strip().upper(),
+                "title": bullet.group(3).strip(),
+                "time_bj": "",
+                "url": "",
+                "summary": "",
+                "source": path.name,
+            }
+            continue
+        if current is None:
+            continue
+        stripped = line.strip().lstrip("-").strip()
+        match = FIELD_RE.match(stripped)
+        if not match:
+            continue
+        key, value = match.group(1), match.group(2).strip()
+        if key == "时间":
+            current["time_bj"] = value
+        elif key == "链接":
+            current["url"] = extract_url(value) or value
+        elif key == "摘要":
+            current["summary"] = value
+    flush()
+    day_row = {
+        "date": day,
+        "kind": "press",
+        "item_count": str(len(items) if items else (0 if "今日无" in body else len(items))),
+        "status": meta.get("fetch_status", ""),
+        "insider_count": "",
+        "source": path.name,
+    }
+    if "今日无" in body and not items:
+        day_row["item_count"] = "0"
+    return items, day_row
+
+
 def latest_date(rows: list[dict[str, str]], field: str) -> str:
     dates = [row.get(field, "") for row in rows if row.get(field)]
     return max(dates) if dates else ""
@@ -623,6 +893,7 @@ def build_meta(existing: dict, bundles: dict) -> dict:
         "files": {
             "series": "sentiment/series.csv",
             "composite": "sentiment/composite.csv",
+            "summary": "sentiment/summary.csv",
         },
         "note": "日期是笔记的 data_date。obs_date 是该指标自己的观测日，可能更早。carried=1 表示笔记写明这是沿用的最近可得值。",
     }
@@ -638,6 +909,23 @@ def build_meta(existing: dict, bundles: dict) -> dict:
             "events": "earnings/events.csv",
         },
         "note": "涨跌幅和 30 日修正都是百分数，不带百分号。triggered=1 表示笔记里的估值触发。",
+    }
+    filings = bundles.get("filings", [])
+    press = bundles.get("press", [])
+    filing_days = bundles.get("filing_days", [])
+    existing["filings"] = {
+        "name": "公告和新闻稿",
+        "source": "inbox/notes/每日/美港股公告 与 美港股新闻稿",
+        "history_end": latest_date(filing_days, "date"),
+        "announcements": len(filings),
+        "press": len(press),
+        "files": {
+            "announcements": "filings/announcements.csv",
+            "press": "filings/press.csv",
+            "insiders": "filings/insiders.csv",
+            "days": "filings/days.csv",
+        },
+        "note": "日期用笔记 data_date 或文件名，不用正文标题。SEC 的 UTC 时间已换成北京时间，港交所 HKT 与北京时间相同。",
     }
     existing["semis"] = {
         "name": "半导体景气",
@@ -690,6 +978,11 @@ def main() -> int:
     incoming = {
         "sentiment": [],
         "composite": [],
+        "summary": [],
+        "filings": [],
+        "insiders": [],
+        "press": [],
+        "filing_days": [],
         "earnings": [],
         "events": [],
         "memory": [],
@@ -705,10 +998,23 @@ def main() -> int:
         meta, body = split_frontmatter(text)
         kind = classify(path)
         if kind == "sentiment":
-            rows, composite = parse_sentiment(path, meta, body, skipped)
+            rows, composite, summary = parse_sentiment(path, meta, body, skipped)
             incoming["sentiment"].extend(rows)
             if composite:
                 incoming["composite"].append(composite)
+            if summary:
+                incoming["summary"].append(summary)
+        elif kind == "filings":
+            rows, insiders, day_row = parse_filings(path, meta, body)
+            incoming["filings"].extend(rows)
+            incoming["insiders"].extend(insiders)
+            if day_row.get("date"):
+                incoming["filing_days"].append(day_row)
+        elif kind == "press":
+            rows, day_row = parse_press(path, meta, body)
+            incoming["press"].extend(rows)
+            if day_row.get("date"):
+                incoming["filing_days"].append(day_row)
         elif kind == "earnings":
             quotes, events = parse_earnings(path, meta, body, skipped)
             incoming["earnings"].extend(quotes)
@@ -727,8 +1033,13 @@ def main() -> int:
         log(f"PARSED {kind} {path.name}")
 
     specs = {
-        "sentiment": ("sentiment/series.csv", ["date", "series_id"], ["date", "series_id", "name", "value", "unit", "change_text", "label", "obs_date", "carried", "source"]),
+        "sentiment": ("sentiment/series.csv", ["date", "series_id"], ["date", "series_id", "name", "value", "unit", "change_text", "label", "obs_date", "carried", "section", "remark", "hike_count", "source"]),
         "composite": ("sentiment/composite.csv", ["date"], ["date", "label", "score", "cnn_official", "text", "source"]),
+        "summary": ("sentiment/summary.csv", ["date"], ["date", "text", "source"]),
+        "filings": ("filings/announcements.csv", ["date", "ticker", "accession", "title"], ["date", "company", "ticker", "filed_raw", "filed_bj", "accession", "title", "summary", "url", "source"]),
+        "insiders": ("filings/insiders.csv", ["date", "text"], ["date", "text", "source"]),
+        "press": ("filings/press.csv", ["date", "ticker", "title"], ["date", "company", "ticker", "title", "time_bj", "url", "summary", "source"]),
+        "filing_days": ("filings/days.csv", ["date", "kind"], ["date", "kind", "item_count", "status", "insider_count", "source"]),
         "earnings": ("earnings/daily.csv", ["date", "ticker"], ["date", "ticker", "company", "market", "close", "day_pct", "rsi", "eps_sum", "forward_pe", "target_pe", "triggered", "next_fy_eps", "revision_30d", "up30", "down30", "revision_signal", "status", "flags", "is_trading_day", "eps_unit", "source"]),
         "events": ("earnings/events.csv", ["note_date", "ticker", "earnings_date"], ["note_date", "ticker", "company", "earnings_date", "source"]),
         "memory": ("semis/memory.csv", ["date", "product"], ["date", "product", "value", "unit", "chg_1d_pct", "chg_7d_pct", "chg_30d_pct", "source"]),

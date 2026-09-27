@@ -1,0 +1,5 @@
+# 手工补充。只写核对过官方页面、而自动抓取没有覆盖的条目。
+# 自动来源已经写入 data/calendar/events.json 的，不要在这里再写一遍。
+# 字段：date（YYYY-MM-DD）、time_bj（北京时间 HH:MM，可空）、category（宏观/半导体/加密/财报/大事）、
+# title、url、note。previous 和 consensus 只有来源真的给出时才填。
+[]

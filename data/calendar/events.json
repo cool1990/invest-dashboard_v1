@@ -1,0 +1,649 @@
+{
+  "generated_at": "2026-09-27T19:08:33+08:00",
+  "today_bj": "2026-09-27",
+  "horizon_end": "2026-11-11",
+  "events": [
+    {
+      "date": "2026-09-28",
+      "time_bj": "20:15",
+      "category": "大事",
+      "title": "美联储：Recent Developments in Bank Supervision and Regulation",
+      "url": "https://teams.microsoft.com/meet/212992571985590?p=yY3nvqkkrbQw6RMUL6",
+      "source": "Federal Reserve calendar",
+      "note": "Discussion - Vice Chair for Supervision Michelle W. Bowman At the Military Banking Summit 2026 (Virtual) 美东 8:15 a.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-29",
+      "time_bj": "01:25",
+      "category": "大事",
+      "title": "美联储：AI and Emerging Tech",
+      "url": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Lisa D. Cook At Oakland Tech Week 2026, Oakland, Calif. 美东 1:25 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-29",
+      "time_bj": "23:00",
+      "category": "大事",
+      "title": "美联储：Opening Remarks (via pre-recorded video)",
+      "url": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Federal Reserve System Community Bank Cyber Workshop (Virtual) 美东 11:00 a.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Micron Technology, Inc.（MU）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$2.86",
+      "consensus": "$31.24",
+      "tags": [
+        "半导体"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "00:40",
+      "category": "大事",
+      "title": "美联储：Economic Outlook",
+      "url": "https://youtube.com/live/ZcKwcEHku7w",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Michael S. Barr At A Conversation with Michael S. Barr on the State of the Economy, Detroit, Mich. 美东 12:40 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "03:00",
+      "category": "大事",
+      "title": "美联储：Payments",
+      "url": "https://vimeo.com/event/6186977/6099e85d01",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Christopher J. Waller At the Sibos 2026 Conference, Miami Beach, Fla. 美东 3:00 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "GDP：GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 2nd Quarter 2026; State PCE, 2025",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "个人收入与支出：Personal Income and Outlays, August 2026",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "经济指标预览：Advance Economic Indicators Report (International Trade, Retail, & Wholesale)",
+      "url": "https://www.census.gov/econ/indicators/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Accenture plc（ACN）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$3.03",
+      "consensus": "$3.19",
+      "tags": []
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "",
+      "category": "财报",
+      "title": "MICRON TECHNOLOGY INC（MU）财报",
+      "url": "",
+      "source": "盈利跟踪笔记",
+      "note": "笔记 盈利跟踪_2026-09-26.md 的未来 7 天财报",
+      "previous": "",
+      "consensus": "",
+      "tags": [
+        "半导体"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "03:25",
+      "category": "大事",
+      "title": "美联储：Rural Economy",
+      "url": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Lisa D. Cook At the 2026 Investing in Rural America Conference, Asheville, N.C. 美东 3:25 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "22:00",
+      "category": "大事",
+      "title": "美联储：Federal Reserve Economic Data",
+      "url": "https://www.youtube.com/live/1fK5omRbOvM?si=9mToIa7-cn6iDC9F",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Christopher J. Waller At FRED Con: Navigating Trust, AI & Storytelling in a World of Data, St. Louis, Mo. 美东 10:00 a.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "建筑支出：Construction Spending (Construction Put in Place)",
+      "url": "https://www.census.gov/construction/c30/c30index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "NIKE, Inc.（NKE）财报",
+      "url": "",
+      "source": "盈利跟踪笔记",
+      "note": "笔记 盈利跟踪_2026-09-26.md 的未来 7 天财报",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "01:30",
+      "category": "大事",
+      "title": "美联储：U.S. Economy and Monetary Policy",
+      "url": "https://darden-virginia.zoom.us/j/92232791521",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Vice Chair Philip N. Jefferson At a Talk and Q&A with Federal Reserve Board Vice Chair Philip N. Jefferson, Charlottesville, Va. 美东 1:30 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "03:00",
+      "category": "大事",
+      "title": "美联储：Modernizing Financial Regulation: Initial Observations from eSLR",
+      "url": "https://www.youtube.com/watch?v=UosIN7C-ZCE",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Atlantic Council’s Conversation with Michelle W. Bowman, Washington, D.C. 美东 3:00 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "03:30",
+      "category": "大事",
+      "title": "美联储：Global Central Banking",
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "source": "Federal Reserve calendar",
+      "note": "Discussion - Governor Lisa D. Cook At the Central Banking Seminar (Virtual) 美东 3:30 p.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "04:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "制造业出货、库存和订单：Full Report - Manufacturers' Shipments, Inventories and Orders",
+      "url": "https://www.census.gov/manufacturing/m3/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-06",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services",
+      "url": "https://www.census.gov/foreign-trade/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-06",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services, August 2026",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-06",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "Services Supplied Through Affiliates, 2024：Services Supplied Through Affiliates, 2024",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 10:00 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-08",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Pepsico, Inc.（PEP）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.29",
+      "consensus": "$2.30",
+      "tags": []
+    },
+    {
+      "date": "2026-10-08",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "批发贸易：Monthly Wholesale Trade: Sales and Inventories",
+      "url": "https://www.census.gov/wholesale/index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-09",
+      "time_bj": "04:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "新企业统计：Business Formation Statistics",
+      "url": "https://www.census.gov/econ/bfs/index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "零售和餐饮销售：Advance Monthly Sales for Retail and Food Services",
+      "url": "https://www.census.gov/retail",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "Manufacturing and Trade: Inventories and Sales：Manufacturing and Trade: Inventories and Sales",
+      "url": "https://www.census.gov/mtis/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM August 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-16",
+      "time_bj": "04:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "新屋开工：New Residential Construction (Building Permits, Housing Starts, and Housing Completions)",
+      "url": "https://www.census.gov/construction/nrc",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-23",
+      "time_bj": "04:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "耐用品订单：Advance Report on Durable Goods--Manufacturers' Shipments, Inventories, and Orders",
+      "url": "https://www.census.gov/manufacturing/m3/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "Preliminary U.S. Imports for Consumption of Steel Products：Preliminary U.S. Imports for Consumption of Steel Products",
+      "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "新屋销售：New Residential Sales",
+      "url": "https://www.census.gov/construction/nrs/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "大事",
+      "title": "FOMC 会议",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "source": "Federal Reserve FOMC calendars",
+      "note": "会议日落在北京时间同一天；声明通常在美东下午，具体钟点以当天新闻稿为准",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "经济指标预览：Advance Economic Indicators Report (International Trade, Retail, & Wholesale)",
+      "url": "https://www.census.gov/econ/indicators/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "Housing Vacancies and Homeownership：Housing Vacancies and Homeownership",
+      "url": "https://www.census.gov/housing/hvs/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM Third Quarter 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-29",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "GDP：GDP (Advance Estimate), 3rd Quarter 2026",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-29",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "个人收入与支出：Personal Income and Outlays, September 2026",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "04:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-02",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "建筑支出：Construction Spending (Construction Put in Place)",
+      "url": "https://www.census.gov/construction/c30/c30index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-03",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "制造业出货、库存和订单：Full Report - Manufacturers' Shipments, Inventories and Orders",
+      "url": "https://www.census.gov/manufacturing/m3/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-04",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services",
+      "url": "https://www.census.gov/foreign-trade/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-04",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services, September 2026",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-06",
+      "time_bj": "05:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    },
+    {
+      "date": "2026-11-09",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "批发贸易：Monthly Wholesale Trade: Sales and Inventories",
+      "url": "https://www.census.gov/wholesale/index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": []
+    }
+  ],
+  "sources": [
+    {
+      "name": "BEA",
+      "url": "https://www.bea.gov/news/schedule",
+      "status": "ok",
+      "detail": "7 条"
+    },
+    {
+      "name": "Census",
+      "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
+      "status": "ok",
+      "detail": "18 条"
+    },
+    {
+      "name": "FOMC",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "status": "ok",
+      "detail": "1 条"
+    },
+    {
+      "name": "H.4.1",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "status": "ok",
+      "detail": "6 条"
+    },
+    {
+      "name": "美联储讲话",
+      "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
+      "status": "ok",
+      "detail": "10 条"
+    },
+    {
+      "name": "Nasdaq 财报",
+      "url": "https://api.nasdaq.com/api/calendar/earnings",
+      "status": "ok",
+      "detail": "3 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+    },
+    {
+      "name": "盈利笔记财报日",
+      "url": "",
+      "status": "ok",
+      "detail": "2 条"
+    },
+    {
+      "name": "手工日历",
+      "url": "calendar/manual.yaml",
+      "status": "ok",
+      "detail": "0 条"
+    },
+    {
+      "name": "FRED 发布日",
+      "url": "https://fred.stlouisfed.org/docs/api/fred/",
+      "status": "skipped",
+      "detail": "未设置 FRED_API_KEY，CPI、PPI、非农、JOLTS 的发布日没有抓"
+    },
+    {
+      "name": "初请失业金",
+      "url": "https://oui.doleta.gov/unemploy/claims.asp",
+      "status": "failed",
+      "detail": "页面没有写每周几、几点发布，所以没有按周四生成"
+    },
+    {
+      "name": "加密",
+      "url": "https://api.llama.fi/emissions",
+      "status": "failed",
+      "detail": "DefiLlama emissions 返回 402，没有改用别的未核对清单"
+    },
+    {
+      "name": "韩国出口与 TSMC 月营收",
+      "url": "",
+      "status": "failed",
+      "detail": "这次没有抓到写明发布日的官方页面，manual.yaml 里也没有补"
+    }
+  ]
+}

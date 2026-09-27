@@ -6,11 +6,11 @@
 - [市场情绪](https://cool1990.github.io/macro-dashboard/sentiment.html)
 - [半导体景气](https://cool1990.github.io/macro-dashboard/semis.html)
 - [盈利跟踪](https://cool1990.github.io/macro-dashboard/earnings.html)
-- [研报](https://cool1990.github.io/macro-dashboard/reports/)
+- [日历](https://cool1990.github.io/macro-dashboard/calendar.html)
 
 网页地址：https://cool1990.github.io/macro-dashboard/
 
-流动性来自圣路易斯联储 FRED 的公开 CSV，不需要密钥。情绪、半导体、盈利来自每天早晨的笔记，笔记由自己的服务器推到 `inbox/notes/`。研报是自己的 Obsidian 笔记，推到 `inbox/reports/`。当前公开的是预览，只渲染 `reports/publish.json` 里列出的几篇。
+流动性来自圣路易斯联储 FRED 的公开 CSV，不需要密钥。情绪、半导体、盈利、公告和新闻稿来自每天早晨的笔记，笔记由自己的服务器推到 `inbox/notes/`。日历来自公开网页，外加 `calendar/manual.yaml`。
 
 站点用一条命令构建到 `dist/`，页面之间用相对路径，不写死 `/macro-dashboard/`。每页都有 `<meta name="robots" content="noindex">`，`dist/robots.txt` 禁止抓取。现在由 GitHub Pages 发布 `dist/`。迁到 Cloudflare Pages 的安排先放下，构建命令仍是下面这一条。
 
@@ -18,20 +18,23 @@
 
 - `data/series/`：流动性原始序列，从 2022-01-01 起，列是 `date,value`，数值是 FRED 原文。百万美元和十亿美元看 `meta.json` 里的 `unit`。
 - `data/derived/`：周三派生表。金额单位是十亿美元。
-- `data/sentiment/`：市场情绪时间序列和综合评价。
+- `data/sentiment/`：市场情绪时间序列。`summary.csv` 是笔记里的「小结」。
 - `data/earnings/`：观察名单每日一行，以及笔记里写明的未来财报。
+- `data/filings/`：美港股公告、新闻稿、内部人买入，以及每天有没有条目。
 - `data/semis/`：存储价格、GPU 租金、OpenRouter 用量、SiliconData 指数、韩国芯片出口。
+- `data/calendar/events.json`：日历条目和每个来源这次是成功还是失败。
 - `data/meta.json`：名称、单位、来源、各块数据的起止日期。
 - `data/notes_skipped.csv`：单元格写了「未更新」或「抓取失败」、因而没有当成数字的记录。
 - `inbox/notes/`：服务器推上来的原始 Markdown。网页不直接读这里。
-- `inbox/reports/`：研报原文。构建时只把 `reports/publish.json` 里列出的文件渲染进 `dist/reports/`，不另存一份 HTML 进 git。
+- `calendar/manual.yaml`：自动来源没覆盖时，手工补上已核对的日程。
 - `ingest/parse_notes.py`：把指标笔记整理进 `data/`。只用 Python 标准库。
 - `scripts/fetch_liquidity.py`：拉取 FRED。
-- `scripts/build_site.py`：构建整个站点到 `dist/`。
-- `reports/publish.json`：当前要公开的研报路径。多公开一篇，就在这里加一行。
-- `index.html`、`sentiment.html`、`semis.html`、`earnings.html`：四个数据页的源文件。研报页由构建生成。
+- `scripts/fetch_calendar.py`：抓公开日历。
+- `scripts/build_site.py`：构建整个站点到 `dist/`，并写出 `data/briefing.json`。
+- `index.html`、`sentiment.html`、`semis.html`、`earnings.html`、`calendar.html`：五个页面。
 - `.github/workflows/fetch-data.yml`：每天 22:00 UTC 更新流动性，有变化时提交 `data/` 并发布网页。
-- `.github/workflows/ingest-notes.yml`：`inbox/notes/` 或 `inbox/reports/` 有推送时整理数据、在需要时提交，并发布网页。
+- `.github/workflows/fetch-calendar.yml`：同一时间更新日历。可选密钥 `FRED_API_KEY`。
+- `.github/workflows/ingest-notes.yml`：`inbox/notes/` 有推送时整理数据、在需要时提交，并发布网页。
 - `.github/workflows/pages.yml`：发布 GitHub Pages。源文件或数据有变动时构建 `dist/` 再发布。
 
 用 `GITHUB_TOKEN` 推上去的提交不会再触发别的工作流。所以「更新数据」和「收录笔记」在提交之后，会检出这个新提交，自己再跑一遍发布，而不是干等「发布网页」被触发。直接改网页或合并到 `main` 时，仍由「发布网页」发布。
@@ -64,6 +67,8 @@ pip install -r requirements.txt && python scripts/build_site.py
 inbox/notes/每日/宏观指标_YYYY-MM-DD.md
 inbox/notes/每日/盈利跟踪_YYYY-MM-DD.md
 inbox/notes/每日/美港股盈利跟踪_YYYY-MM-DD.md
+inbox/notes/每日/美港股公告 YYYY-MM-DD.md
+inbox/notes/每日/美港股新闻稿 YYYY-MM-DD.md
 inbox/notes/半导体/YYYY-MM-DD_半导体-存储价格.md
 inbox/notes/半导体/YYYY-MM-DD_半导体-GPU租赁价格.md
 inbox/notes/半导体/YYYY-MM-DD_半导体-OpenRouter平台token.md
@@ -84,24 +89,39 @@ inbox/notes/半导体/YYYY-MM-DD_半导体-韩国出口.md
 
 推上去之后，「收录笔记」工作流会跑。也可以在 Actions 里手动运行它。
 
-## 研报怎么推进来
+## 市场情绪、公告和今日小结
 
-服务器把 Obsidian 笔记推到 `main` 的 `inbox/reports/`。文件可以先放进来，网页只发布 `reports/publish.json` 的 `include` 里写明的路径。路径相对仓库根目录，写成 `inbox/reports/...`。名单里没有的笔记不会生成页面，侧栏也不列出；别的笔记用 `[[ ]]` 指向它们时，只留下文字。
+宏观指标按最新笔记的 `src_schema: 2` 读。日期用文首 `data_date`，不用正文大标题。分块是「情绪指标」「利率指标」「其他指标」，表头是指标、数值、涨跌幅、日期、情绪、备注。旧笔记里没有的指标就只留下它们自己有的历史。
 
-日报的主文档是 `inbox/reports/日报/YYYY-MM-DD_日报.md`。同一天如果以后也放进 `YYYY-MM-DD_市场观点汇总.md` 和 `YYYY-MM-DD_主题跟踪.md`，它们排在这篇日报后面。日期用文首的 `date`，标题用 `title`，没有就从文件名取。打开「研报」先看到最新一篇日报。
+页面上每项一张卡片：名称、最新值、涨跌、情绪标签、数据日期、一条历史细线。参与度收成一组，EFFR 路径是三张小卡片。备注里的阈值，或「休市 / 未更新」，放在卡片上，鼠标悬停或点一下能看见。
 
-```
-inbox/reports/日报/YYYY-MM-DD_日报.md
-inbox/reports/日报/YYYY-MM-DD_市场观点汇总.md
-inbox/reports/日报/YYYY-MM-DD_主题跟踪.md
-inbox/reports/宏观周报/2026-W39 宏观周报.md
-inbox/reports/宏观周报/YYYY-MM-DD 美国宏观流动性周报.md
-inbox/reports/产业周报/2026-W39 产业周报.md
-```
+公告和新闻稿在盈利页最上面。日期同样用 `data_date` 或文件名。SEC 的 UTC 时间换成北京时间，港交所的 HKT 与北京时间相同。当天没有条目就写「无」。近 7 天收在可展开的一栏里。
 
-每篇已发布的笔记有自己的地址，在 `dist/reports/` 下，文件名来自笔记文件名。`[[笔记名]]` 如果对得上已发布的一篇，就变成站内链接。`![[...]]` 只留下文字。带颜色的 `<span>` 会去掉，留下里面的字。
+每页顶部有「今日小结」，构建时由 `scripts/briefing.py` 从数据算出来，规则写在那个文件开头。没有达到规则的变动就写「今日无变动」。情绪页在它下面再放笔记自己的「小结」。
 
-推送用同一把可以写仓库的 Deploy key，服务器只提交 `inbox/reports/` 里的文件。「收录笔记」看到 `inbox/reports/**` 有变化就会重新构建并发布，即使指标数据没有改动。只改 `reports/publish.json` 时，由「发布网页」重新构建。
+## 日历
+
+页面显示北京时间的今天起 14 天，可按宏观、半导体、加密、财报、大事筛选。今天和明天会标出来。每条有来源链接。上次值和一致预期只有来源真的给了才填，财报用 Nasdaq 的上年 EPS 和一致预期 EPS。
+
+`scripts/fetch_calendar.py` 每天 22:00 UTC 跑，也可以手动运行。结果在 `data/calendar/events.json`，里面的 `sources` 写明每个来源这次成功还是失败。
+
+| 来源 | 地址 | 可靠程度 |
+| --- | --- | --- |
+| BEA 发布日程 | https://www.bea.gov/news/schedule | 官方页面，能解析出日期和美东时刻 |
+| Census 经济指标日历 | https://www.census.gov/economic-indicators/calendar-listview.html | 官方页面，含零售销售等 |
+| FOMC | https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm | 官方会议日；声明钟点页面没写死 |
+| 美联储讲话 | https://www.federalreserve.gov/newsevents/calendar.htm | 官方月历，时刻按美东换算 |
+| H.4.1 | https://www.federalreserve.gov/releases/h41/ | 页面写明每周四、通常美东 16:30。按周四生成，假日顺延没有另核 |
+| Nasdaq 财报 | https://api.nasdaq.com/api/calendar/earnings | 公开接口，每次大约 20 家。保留市值不低于 1000 亿美元的，以及半导体/AI 代码 |
+| 盈利笔记 | `data/earnings/events.csv` | 观察名单「未来 7 天财报」，和 Nasdaq 分开列 |
+| FRED 发布日 | 需 `FRED_API_KEY` | 可选。用来补 CPI、PPI、非农、JOLTS。不设密钥就跳过 |
+| 初请失业金 | https://oui.doleta.gov/unemploy/claims.asp | 这次的页面没有写每周几发布，所以没有按周四生成 |
+| 加密解锁 | https://api.llama.fi/emissions | 返回 402，没有改用未核对的清单 |
+| 韩国出口、TSMC 月营收 | | 这次没有抓到写明日期的官方页 |
+
+手工补充放在 `calendar/manual.yaml`。只写核对过官方页面的条目。这次自动来源已经覆盖核对过的项目，这个文件是空的。
+
+可选密钥：仓库 **Settings → Secrets and variables → Actions**，新建 `FRED_API_KEY`（在 https://fred.stlouisfed.org/docs/api/api_key.html 免费申请）。不设也能发布日历，只是没有 BLS 那几项的发布日。流动性序列本身仍然不需要这把密钥。
 
 ## 流动性
 
@@ -113,7 +133,7 @@ FRED 里 WALCL、WDTGAL、准备金（WRBWFRBL）的单位是百万美元，写�
 
 周变动是与上一条周三观测相比的差额。SOFR−IORB 和 EFFR−IORB 的单位是基点。准备金分位是 2022-01-01 起、到该周三为止的周三观测中，准备金不高于当前值的占比，不是准备金短缺的度量。
 
-「更新数据」每天 22:00 UTC 跑一次，也可以手动运行。每条序列单独下载。成功就覆盖 `data/series/<id>.csv`；失败就把原来的文件放进这一次的暂存目录，一起留下。`publish()` 只替换 `data/series` 和 `data/derived`，再合并 `data/meta.json` 里的流动性字段。情绪、盈利、半导体和 `notes_skipped.csv` 不会被这次发布删掉。每条写下 `last_fetch_ok`、`last_obs_date`（文件里最后一个日期，没有旧文件则为 null）和 `fetched_at`。失败时 `last_fetch_ok` 为 false，成功为 true。周报读 CSV 时看这三项，就能判断这条是不是刚拉到的。整理笔记时反过来：只更新情绪、盈利、半导体和 `notes_asof`，流动性字段原样保留。工作流仍会把这次的 `data/` 提交上去，所以新鲜度标记不会丢。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
+「更新数据」每天 22:00 UTC 跑一次，也可以手动运行。每条序列单独下载。成功就覆盖 `data/series/<id>.csv`；失败就把原来的文件放进这一次的暂存目录，一起留下。`publish()` 只替换 `data/series` 和 `data/derived`，再合并 `data/meta.json` 里的流动性字段。情绪、盈利、半导体、公告和 `notes_skipped.csv` 不会被这次发布删掉。每条写下 `last_fetch_ok`、`last_obs_date`（文件里最后一个日期，没有旧文件则为 null）和 `fetched_at`。失败时 `last_fetch_ok` 为 false，成功为 true。周报读 CSV 时看这三项，就能判断这条是不是刚拉到的。整理笔记时反过来：只更新情绪、盈利、半导体、公告和 `notes_asof`，流动性字段原样保留。工作流仍会把这次的 `data/` 提交上去，所以新鲜度标记不会丢。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
 
 周三表和每日利差只在 WALCL、WDTGAL、RRPONTSYD、WRBWFRBL、SOFR、IORB、EFFR 这次都成功时重算。否则 `data/derived/` 保持原文件，`derived_refresh.ok` 为 false，并写明是哪几条没刷新。
 
