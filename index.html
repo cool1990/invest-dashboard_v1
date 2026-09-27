@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>美国流动性</title>
+  <meta name="description" content="美国流动性周度记录：净流动性、财政部账户、准备金、隔夜逆回购和融资利差。数据来自 FRED。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #efeae2;
+      --paper: #fffcf8;
+      --ink: #1c1916;
+      --muted: #6d655c;
+      --line: #e3dbcf;
+      --teal: #1a4d45;
+      --teal-soft: #e6f2ef;
+      --up: #1a6b45;
+      --down: #9d2c2c;
+      --shadow: 0 1px 2px rgba(40, 30, 16, 0.04);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Noto Sans CJK SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "Droid Sans Fallback", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    a { color: var(--teal); }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 20px 16px 48px; overflow-x: clip; }
+    header.top { margin-bottom: 18px; }
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .mark i {
+      width: 10px; height: 10px; border-radius: 2px;
+      background: var(--teal); display: inline-block;
+    }
+    h1 { font-size: 32px; line-height: 1.25; margin: 6px 0 4px; font-weight: 700; }
+    .lede { margin: 0; color: var(--muted); max-width: 40em; }
+    .status { color: var(--muted); }
+    .status.error { color: var(--down); }
+    .summary {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 18px 18px 8px;
+      margin: 18px 0 12px;
+    }
+    .summary-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+    .kicker { margin: 0; color: var(--muted); font-size: 13px; }
+    .date-lg { margin: 0; font-size: 15px; font-weight: 700; }
+    .lead-row {
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      align-items: flex-end; padding: 8px 0 14px; border-bottom: 1px solid var(--line);
+    }
+    .label { margin: 0; font-size: 14px; color: var(--muted); }
+    .big {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+    }
+    .delta-num { font-size: 32px; }
+    .unit { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 16px;
+      padding: 14px 0 10px;
+    }
+    .metric .v {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .metric .s { margin: 2px 0 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .up { color: var(--up); }
+    .down { color: var(--down); }
+    .metric .v.up { color: var(--up); }
+    .metric .v.down { color: var(--down); }
+    .notes {
+      background: var(--teal-soft);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #23443e;
+      font-size: 14px;
+      margin: 0 0 18px;
+    }
+    .notes p { margin: 0 0 8px; }
+    .notes p:last-child { margin: 0; }
+    h2 { font-size: 20px; margin: 28px 0 10px; }
+    .charts { display: grid; gap: 12px; }
+    .chart-card, .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 14px 14px 10px;
+    }
+    .chart-card h3, .panel h3 { margin: 0; font-size: 16px; }
+    .chart-card .sub, .panel .sub { margin: 2px 0 8px; color: var(--muted); font-size: 13px; }
+    .chart-box { position: relative; height: 230px; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+    th, td { padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; text-align: right; }
+    th:first-child, td:first-child { text-align: left; position: sticky; left: 0; }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; background: var(--paper); }
+    td:first-child, th:first-child { background: var(--paper); }
+    tbody tr:first-child td { background: #f3f7f5; }
+    caption { caption-side: bottom; text-align: left; color: var(--muted); font-size: 12px; padding-top: 8px; white-space: normal; }
+    .extra { display: grid; gap: 12px; }
+    footer { margin-top: 28px; color: var(--muted); font-size: 13px; }
+    footer ul { padding-left: 1.1em; margin: 8px 0; }
+    footer li { margin: 4px 0; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 8px; }
+    @media (min-width: 720px) {
+      .metrics { grid-template-columns: repeat(4, 1fr); }
+      .chart-box { height: 260px; }
+    }
+    @media (min-width: 900px) {
+      h1 { font-size: 36px; }
+      .charts { grid-template-columns: 1fr 1fr; }
+      .chart-card.full { grid-column: 1 / -1; }
+      .extra { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .big { font-size: 34px; }
+      .metric .v { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="mark"><i></i>个人查阅</div>
+      <h1>美国流动性</h1>
+      <p class="lede">美联储资产、财政部账户、准备金和隔夜逆回购。数字来自圣路易斯联储 FRED，方便每周自己看一眼。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="summary" class="summary" hidden></section>
+    <div id="notes" class="notes" hidden></div>
+    <h2 id="chart-title" hidden>走势</h2>
+    <section id="charts" class="charts" hidden></section>
+    <h2 id="table-title" hidden>最近 8 周</h2>
+    <section id="table-panel" class="panel" hidden>
+      <div class="table-scroll">
+        <table>
+          <caption>单位是十亿美元。利差是基点，表里的利差是该周三的数，页顶卡片用的是最新交易日。分位是 2022 年以来、截至该周三的周三观测里，准备金不高于该周水平的比例。</caption>
+          <thead>
+            <tr>
+              <th>周三</th>
+              <th>净流动性</th>
+              <th>周变动</th>
+              <th>总资产</th>
+              <th>TGA</th>
+              <th>准备金</th>
+              <th>分位</th>
+              <th>隔夜逆回购</th>
+              <th>SOFR−IORB</th>
+            </tr>
+          </thead>
+          <tbody id="weeks"></tbody>
+        </table>
+      </div>
+    </section>
+    <h2 id="extra-title" hidden>其他市场指标</h2>
+    <section id="extra" class="extra" hidden></section>
+    <footer id="footer" hidden></footer>
+  </div>
+  <noscript>需要打开 JavaScript，页面才能读取 data 文件夹里的数据。</noscript>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function sitePrefix() {
+      let path = window.location.pathname;
+      if (path.endsWith("index.html")) path = path.slice(0, -"index.html".length);
+      if (!path.endsWith("/")) path += "/";
+      return path;
+    }
+
+    async function loadText(rel) {
+      const res = await fetch(sitePrefix() + rel);
+      if (!res.ok) throw new Error("读不到 " + rel + "（" + res.status + "）");
+      return res.text();
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const header = lines[0].split(",");
+      return lines.slice(1).filter(Boolean).map((line) => {
+        const cells = line.split(",");
+        const row = {};
+        header.forEach((key, i) => { row[key] = cells[i] ?? ""; });
+        return row;
+      });
+    }
+
+    function num(value) {
+      if (value == null || value === "") return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function fmt(n, digits) {
+      if (n == null) return "—";
+      return n.toLocaleString("en-US", {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits,
+      });
+    }
+
+    function fmtSigned(n, digits) {
+      if (n == null) return "—";
+      const body = fmt(Math.abs(n), digits);
+      if (n > 0) return "+" + body;
+      if (n < 0) return "−" + body;
+      return body;
+    }
+
+    function signClass(n) {
+      if (n > 0) return "up";
+      if (n < 0) return "down";
+      return "";
+    }
+
+    function el(tag, cls, text) {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
+    function fmtBj(iso) {
+      const date = new Date(iso);
+      if (Number.isNaN(date.getTime())) return iso;
+      return new Intl.DateTimeFormat("zh-CN", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(date);
+    }
+
+    function addChart(parent, { title, sub, labels, datasets, digits, full }) {
+      const card = el("article", "chart-card" + (full ? " full" : ""));
+      card.appendChild(el("h3", null, title));
+      card.appendChild(el("p", "sub", sub));
+      const box = el("div", "chart-box");
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", title);
+      box.appendChild(canvas);
+      card.appendChild(box);
+      parent.appendChild(card);
+      if (!window.Chart) return;
+      const format = (v) => fmt(Number(v), digits);
+      new Chart(canvas, {
+        type: "line",
+        data: {
+          labels,
+          datasets: datasets.map((ds) => ({
+            label: ds.label,
+            data: ds.data,
+            borderColor: ds.color,
+            backgroundColor: ds.fill || "transparent",
+            borderWidth: 1.8,
+            pointRadius: 0,
+            pointHitRadius: 10,
+            tension: 0,
+            spanGaps: false,
+            fill: Boolean(ds.fill),
+          })),
+        },
+        options: {
+          animation: false,
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: {
+              display: datasets.length > 1,
+              labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true },
+            },
+            tooltip: {
+              callbacks: {
+                label(ctx) {
+                  const value = ctx.parsed.y;
+                  if (value == null) return ctx.dataset.label;
+                  return ctx.dataset.label + "  " + format(value);
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: { maxTicksLimit: 6, maxRotation: 0, autoSkip: true },
+              grid: { display: false },
+            },
+            y: {
+              ticks: { maxTicksLimit: 5, callback: (value) => format(value) },
+              grid: { color: "rgba(28, 25, 22, 0.08)" },
+            },
+          },
+        },
+      });
+    }
+
+    function wowText(prefix, value, digits) {
+      const line = document.createElement("span");
+      line.appendChild(document.createTextNode(prefix));
+      line.appendChild(el("span", signClass(value), fmtSigned(value, digits)));
+      return line;
+    }
+
+    function metric(parent, label, value, detail, valueClass) {
+      const box = el("div", "metric");
+      box.appendChild(el("p", "label", label));
+      box.appendChild(el("p", "v" + (valueClass ? " " + valueClass : ""), value));
+      const line = el("p", "s");
+      if (typeof detail === "string") line.textContent = detail;
+      else line.appendChild(detail);
+      box.appendChild(line);
+      parent.appendChild(box);
+    }
+
+    function render(meta, weekly, spreads, extras) {
+      const latest = weekly[weekly.length - 1];
+      const spread = [...spreads].reverse().find((row) => row.sofr_iorb_bp !== "");
+      const net = num(latest.net_liq_bn);
+      const netWow = num(latest.net_liq_wow_bn);
+      const summary = $("summary");
+      summary.hidden = false;
+
+      const head = el("div", "summary-head");
+      head.appendChild(el("p", "kicker", "最新周三"));
+      head.appendChild(el("p", "date-lg", latest.date));
+      summary.appendChild(head);
+
+      const lead = el("div", "lead-row");
+      const leadMain = el("div");
+      leadMain.appendChild(el("p", "label", "市场常用净流动性代理（非官方）"));
+      leadMain.appendChild(el("p", "big", fmt(net, 1)));
+      leadMain.appendChild(el("p", "unit", "十亿美元"));
+      const leadDelta = el("div");
+      leadDelta.appendChild(el("p", "label", "较上一周三"));
+      leadDelta.appendChild(el("p", "big delta-num " + signClass(netWow), fmtSigned(netWow, 1)));
+      lead.appendChild(leadMain);
+      lead.appendChild(leadDelta);
+      summary.appendChild(lead);
+
+      const metrics = el("div", "metrics");
+      metric(
+        metrics,
+        "财政部账户 TGA",
+        fmt(num(latest.tga_bn), 1),
+        wowText("周变动 ", num(latest.tga_wow_bn), 1)
+      );
+      metric(
+        metrics,
+        "准备金",
+        fmt(num(latest.reserves_bn), 1),
+        "2022 年以来分位 " + fmt(num(latest.reserves_percentile), 1) + "%。不是短缺指标"
+      );
+      metric(
+        metrics,
+        "隔夜逆回购",
+        fmt(num(latest.on_rrp_bn), 2),
+        wowText("周变动 ", num(latest.on_rrp_wow_bn), 2)
+      );
+      const sofrBp = spread ? num(spread.sofr_iorb_bp) : null;
+      const effrBp = spread ? num(spread.effr_iorb_bp) : null;
+      const spreadDetail = document.createElement("span");
+      if (spread) {
+        spreadDetail.appendChild(document.createTextNode("截至 " + spread.date + " · EFFR−IORB "));
+        spreadDetail.appendChild(el("span", signClass(effrBp), fmtSigned(effrBp, 1) + " bp"));
+      } else {
+        spreadDetail.textContent = "暂无";
+      }
+      metric(
+        metrics,
+        "SOFR − IORB",
+        sofrBp == null ? "—" : fmtSigned(sofrBp, 1) + " bp",
+        spreadDetail,
+        signClass(sofrBp)
+      );
+      summary.appendChild(metrics);
+
+      const notes = $("notes");
+      notes.hidden = false;
+      notes.appendChild(el("p", null, "净流动性 = 美联储总资产（WALCL）− 财政部在美联储的账户（WDTGAL，周三水平）− 隔夜逆回购（RRPONTSYD）。这是市场上常用的算法，不是美联储发布的官方指标。"));
+      notes.appendChild(el("p", null, "准备金分位是 2022 年以来、到这个周三为止的周三观测里，准备金不高于当前水平的比例。它只说明当前位置，不是准备金短缺的度量。"));
+      notes.appendChild(el("p", null, "总资产、财政部账户、准备金在 FRED 里的单位是百万美元，这里除以 1000，改成十亿美元。隔夜逆回购本来就是十亿美元。利差单位是基点，1 个百分点等于 100 个基点。"));
+
+      const charts = $("charts");
+      charts.hidden = false;
+      $("chart-title").hidden = false;
+      const dates = weekly.map((row) => row.date);
+      addChart(charts, {
+        title: "净流动性",
+        sub: "十亿美元 · 市场常用代理（非官方）· 截至 " + latest.date,
+        labels: dates,
+        digits: 0,
+        full: true,
+        datasets: [{
+          label: "净流动性",
+          data: weekly.map((row) => num(row.net_liq_bn)),
+          color: "#1a4d45",
+          fill: "rgba(26, 77, 69, 0.08)",
+        }],
+      });
+      addChart(charts, {
+        title: "财政部账户",
+        sub: "十亿美元 · TGA 周三水平 · 截至 " + latest.tga_asof,
+        labels: dates,
+        digits: 0,
+        datasets: [{ label: "TGA", data: weekly.map((row) => num(row.tga_bn)), color: "#8a5a12" }],
+      });
+      addChart(charts, {
+        title: "准备金余额",
+        sub: "十亿美元 · 周三水平 · 截至 " + latest.reserves_asof,
+        labels: dates,
+        digits: 0,
+        datasets: [{ label: "准备金", data: weekly.map((row) => num(row.reserves_bn)), color: "#1f4e79" }],
+      });
+      addChart(charts, {
+        title: "隔夜逆回购",
+        sub: "十亿美元 · 截至 " + latest.on_rrp_asof,
+        labels: dates,
+        digits: 1,
+        datasets: [{ label: "隔夜逆回购", data: weekly.map((row) => num(row.on_rrp_bn)), color: "#5c4d7a" }],
+      });
+      addChart(charts, {
+        title: "融资利差",
+        sub: "相对 IORB，单位是基点 · 截至 " + (spread ? spread.date : "—"),
+        labels: spreads.map((row) => row.date),
+        digits: 0,
+        full: true,
+        datasets: [
+          { label: "SOFR−IORB", data: spreads.map((row) => num(row.sofr_iorb_bp)), color: "#9d2c2c" },
+          { label: "EFFR−IORB", data: spreads.map((row) => num(row.effr_iorb_bp)), color: "#1f4e79" },
+        ],
+      });
+
+      const body = $("weeks");
+      weekly.slice(-8).reverse().forEach((row) => {
+        const tr = document.createElement("tr");
+        const cells = [
+          row.date,
+          fmt(num(row.net_liq_bn), 1),
+          fmtSigned(num(row.net_liq_wow_bn), 1),
+          fmt(num(row.walcl_bn), 1),
+          fmt(num(row.tga_bn), 1),
+          fmt(num(row.reserves_bn), 1),
+          fmt(num(row.reserves_percentile), 1) + "%",
+          fmt(num(row.on_rrp_bn), 2),
+          row.sofr_iorb_bp === "" ? "—" : fmtSigned(num(row.sofr_iorb_bp), 1),
+        ];
+        cells.forEach((text, index) => {
+          const td = el("td", null, text);
+          if (index === 2) td.className = signClass(num(row.net_liq_wow_bn));
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+      $("table-panel").hidden = false;
+      $("table-title").hidden = false;
+
+      const extra = $("extra");
+      extra.hidden = false;
+      $("extra-title").hidden = false;
+      const extraSpecs = [
+        { id: "NFCI", title: "金融状况 NFCI", digits: 2, color: "#1a4d45", note: "低于 0 表示比长期平均更松" },
+        { id: "BAMLH0A0HYM2", title: "高收益债利差", digits: 2, color: "#8a5a12", note: "单位是百分点，不是基点" },
+        { id: "VIXCLS", title: "VIX", digits: 1, color: "#5c4d7a", note: "指数点位" },
+      ];
+      extraSpecs.forEach((spec) => {
+        const rows = extras[spec.id];
+        const last = rows[rows.length - 1];
+        const seriesMeta = meta.series.find((item) => item.id === spec.id);
+        addChart(extra, {
+          title: spec.title,
+          sub: fmt(num(last.value), spec.digits) + " · 截至 " + last.date + " · " + spec.note,
+          labels: rows.map((row) => row.date),
+          digits: spec.digits === 2 ? 1 : spec.digits,
+          datasets: [{
+            label: seriesMeta ? seriesMeta.name : spec.title,
+            data: rows.map((row) => num(row.value)),
+            color: spec.color,
+          }],
+        });
+      });
+
+      const footer = $("footer");
+      footer.hidden = false;
+      footer.appendChild(el("p", null, "本库更新时间：" + fmtBj(meta.updated_at) + "（北京时间）。历史从 " + meta.history_start + " 起。"));
+      const list = document.createElement("ul");
+      meta.series.forEach((item) => {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(item.name + "（" + item.id + "），观测至 " + item.last_date + "，原始单位：" + item.unit + "。"));
+        const link = document.createElement("a");
+        link.href = item.source_url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "FRED 来源";
+        li.appendChild(document.createTextNode(" "));
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+      footer.appendChild(list);
+      const links = el("div", "links");
+      [
+        ["data/meta.json", "序列说明"],
+        ["data/derived/weekly.csv", "周三数据"],
+        ["data/derived/spreads.csv", "每日利差"],
+      ].forEach(([href, text]) => {
+        const link = document.createElement("a");
+        link.href = sitePrefix() + href;
+        link.textContent = text;
+        links.appendChild(link);
+      });
+      footer.appendChild(links);
+      footer.appendChild(el("p", null, "只供个人查看，不是投资建议。"));
+      $("status").hidden = true;
+    }
+
+    async function main() {
+      try {
+        const meta = JSON.parse(await loadText("data/meta.json"));
+        const [weeklyText, spreadsText, nfci, hy, vix] = await Promise.all([
+          loadText("data/" + meta.files.weekly),
+          loadText("data/" + meta.files.spreads),
+          loadText("data/series/NFCI.csv"),
+          loadText("data/series/BAMLH0A0HYM2.csv"),
+          loadText("data/series/VIXCLS.csv"),
+        ]);
+        render(meta, parseCSV(weeklyText), parseCSV(spreadsText), {
+          NFCI: parseCSV(nfci),
+          BAMLH0A0HYM2: parseCSV(hy),
+          VIXCLS: parseCSV(vix),
+        });
+        if (!window.Chart) {
+          const status = $("status");
+          status.hidden = false;
+          status.textContent = "图表库没有加载出来。上面的数字和下面的表仍然可以看。";
+        }
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "数据没有读出来。请用本地服务器打开这个页面（python3 -m http.server），不要直接双击 html 文件。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+
+    if (window.Chart) {
+      Chart.defaults.font.family = '"Noto Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif';
+      Chart.defaults.color = "#6d655c";
+      Chart.defaults.font.size = 12;
+    }
+    main();
+  </script>
+</body>
+</html>
