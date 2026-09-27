@@ -17,7 +17,7 @@
     <nav class="nav" id="nav" aria-label="页面"></nav>
     <header>
       <h1>利率与情绪</h1>
-      <p class="lede">情绪、利率，以及大宗、汇率与加密。涨跌按序列自己算。灰卡片是沿用，观测日没变。</p>
+      <p class="lede">情绪、利率，以及大宗、汇率与加密。涨跌按序列自己算。利率有 FRED 当天收盘时用收盘价画历史、算变动；FRED 还没出的最新一天标「笔记实时价」。灰卡片是沿用。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
     <section id="briefing" class="briefing" hidden></section>
@@ -40,6 +40,14 @@
     const RATES = ["us_10y", "tips_10y", "t10yie", "us_2y", "t10y2y", "hy_oas"];
     const EFFR = ["effr_next", "effr_year", "effr_ny"];
     const OTHER = ["wti", "gold", "copper", "usdcny", "btc"];
+    const FRED_FILE = {
+      us_10y: "DGS10",
+      us_2y: "DGS2",
+      tips_10y: "DFII10",
+      t10yie: "T10YIE",
+      t10y2y: "T10Y2Y",
+      hy_oas: "BAMLH0A0HYM2"
+    };
 
     function chipClass(label) {
       if (label === "恐慌") return "chip panic";
@@ -65,6 +73,21 @@
         if (obs) map.set(obs, row);
       });
       return [...map.values()].sort((a, b) => (a.obs_date || a.date).localeCompare(b.obs_date || b.date));
+    }
+
+    function rateHistory(rows, id, fredMap) {
+      return history(rows, id).map((row) => {
+        const obs = (row.obs_date || row.date || "").slice(0, 10);
+        const fred = fredMap ? num(fredMap[obs]) : null;
+        if (fred == null) return row;
+        return Object.assign({}, row, { value: String(fred), fred: "1" });
+      });
+    }
+
+    function unitText(row) {
+      if (row.series_id === "aaii") return " 个百分点";
+      if (row.unit === "百分比" || row.unit === "百分点") return "%";
+      return row.unit ? " " + row.unit : "";
     }
 
     function spark(points) {
@@ -158,31 +181,35 @@
       box.tabIndex = 0;
       box.appendChild(el("p", "label", displayName(row)));
       const digits = DIGITS[row.series_id] == null ? 2 : DIGITS[row.series_id];
-      const value = el("p", "v", fmt(num(row.value), digits));
-      if (row.unit) value.appendChild(el("span", "unit", " " + row.unit));
+      const shown = points.length ? points[points.length - 1] : row;
+      const value = el("p", "v", fmt(num(shown.value), digits));
+      const suffix = unitText(row);
+      if (suffix) value.appendChild(el("span", "unit", suffix));
       box.appendChild(value);
       const meta = el("p", "chg");
       if (row.label) meta.appendChild(el("span", chipClass(row.label), row.label));
       const bits = [];
       const when = row.obs_date || row.date;
+      const live = Boolean(FRED_FILE[row.series_id]) && shown.fred !== "1" && row.carried !== "1";
       if (row.carried === "1") {
         bits.push("沿用");
         if (when) bits.push(when);
       } else {
-        const prev = priorRow(rows, row.series_id, row);
+        const prev = points.length >= 2 ? points[points.length - 2] : priorRow(rows, row.series_id, row);
         if (prev) {
           const kind = kindOf(row.series_id);
           const left = num(prev.value);
-          const right = num(row.value);
+          const right = num(shown.value);
           let change = null;
           if (left != null && right != null) {
-            if (kind === "bp") change = (right - left) * 100;
+            if (kind === "bp") change = Math.round((right - left) * 10000) / 100;
             else if (kind === "pct") change = left === 0 ? null : (right - left) / Math.abs(left) * 100;
             else change = right - left;
           }
           const text = formatKind(kind, change);
           if (text) bits.push(text);
         }
+        if (live) bits.push("笔记实时价");
         if (row.hike_count) bits.push("隐含加息 " + row.hike_count + " 次");
         if (when) bits.push(when);
       }
@@ -195,41 +222,42 @@
       return box;
     }
 
-    function paint(parent, ids, map, rows) {
+    function paint(parent, ids, map, rows, fredMaps) {
       const grid = el("div", "card-grid");
       ids.forEach((id) => {
         const row = map.get(id);
         if (!row) return;
-        grid.appendChild(card(row, history(rows, id), rows));
+        const points = FRED_FILE[id] ? rateHistory(rows, id, fredMaps[id]) : history(rows, id);
+        grid.appendChild(card(row, points, rows));
       });
       if (grid.childElementCount) parent.appendChild(grid);
     }
 
-    function render(meta, rows) {
+    function render(meta, rows, fredMaps) {
       const info = meta.sentiment || {};
       const latestDate = info.history_end || "";
       const map = latestMap(rows);
       const root = $("groups");
       const mood = el("section", "group-block");
       mood.appendChild(el("h2", null, "情绪"));
-      paint(mood, MOOD, map, rows);
+      paint(mood, MOOD, map, rows, fredMaps);
       mood.appendChild(el("h3", "subhead", "参与度"));
       BREADTH.forEach((pair) => {
         mood.appendChild(el("p", "label", pair[0]));
-        paint(mood, pair[1], map, rows);
+        paint(mood, pair[1], map, rows, fredMaps);
       });
       root.appendChild(mood);
 
       const rates = el("section", "group-block");
       rates.appendChild(el("h2", null, "利率"));
-      paint(rates, RATES, map, rows);
+      paint(rates, RATES, map, rows, fredMaps);
       rates.appendChild(el("h3", "subhead", "EFFR 路径"));
-      paint(rates, EFFR, map, rows);
+      paint(rates, EFFR, map, rows, fredMaps);
       root.appendChild(rates);
 
       const other = el("section", "group-block");
       other.appendChild(el("h2", null, "大宗、汇率与加密"));
-      paint(other, OTHER, map, rows);
+      paint(other, OTHER, map, rows, fredMaps);
       root.appendChild(other);
 
       const footer = $("footer");
@@ -245,7 +273,20 @@
         const meta = JSON.parse(await loadText("data/meta.json"));
         const files = (meta.sentiment || {}).files || {};
         const seriesText = await loadText("data/" + (files.series || "sentiment/series.csv"));
-        render(meta, parseCSV(seriesText));
+        const fredMaps = {};
+        await Promise.all(Object.keys(FRED_FILE).map(async (id) => {
+          try {
+            const text = await loadText("data/series/" + FRED_FILE[id] + ".csv");
+            const map = {};
+            parseCSV(text).forEach((item) => {
+              if (item.date) map[item.date.slice(0, 10)] = item.value;
+            });
+            fredMaps[id] = map;
+          } catch (err) {
+            fredMaps[id] = null;
+          }
+        }));
+        render(meta, parseCSV(seriesText), fredMaps);
       } catch (err) {
         const status = $("status");
         status.className = "status error";

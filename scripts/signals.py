@@ -13,7 +13,6 @@ from pathlib import Path
 
 from common import (
     day_move,
-    diff,
     fnum,
     format_change,
     fresh_pair,
@@ -21,7 +20,7 @@ from common import (
     lookback,
     parse_day,
     pct_change,
-    repeated_runs,
+    price_carried,
     series_points,
 )
 
@@ -58,7 +57,11 @@ FRED_CHECK = {
     "DFII10": "tips_10y",
     "T10YIE": "t10yie",
     "T10Y2Y": "t10y2y",
+    "BAMLH0A0HYM2": "hy_oas",
 }
+FRED_WINDOW = 10
+HEALTH_ORDER = {"错误": 0, "警告": 1, "提示": 2}
+CALENDAR_HINTS = ("初请失业金", "加密", "韩国出口与 TSMC")
 RATE_RISK_IDS = ("us_10y", "tips_10y", "us_2y", "t10yie", "hy_oas")
 
 
@@ -379,15 +382,67 @@ def agenda(events: list[dict], today: date) -> list[dict]:
     return sorted(rows, key=lambda row: (row.get("date", ""), row.get("time_bj", ""), row.get("title", "")))
 
 
-def freshness(today: date, items: list[tuple[str, str, str]]) -> list[dict[str, str]]:
+def freshness_table(today: date, items: list[tuple[str, str, str]]) -> list[dict]:
+    """每块数据一行。过期与否写在表里，不再另写一条过期警告。"""
     out = []
     for name, when, kind in items:
-        days = age_days(today, when)
-        if days is None:
-            continue
+        days = age_days(today, when[:10] if when else "")
         limit = WEEKLY_STALE if kind == "week" else DAILY_STALE
-        if days > limit:
-            out.append(health("过期", f"{name} 最新日期 {when}，距今 {days} 天，超过 {limit} 天。"))
+        if days is None:
+            out.append({"name": name, "obs_date": "", "age_days": None, "status": "过期"})
+            continue
+        out.append({
+            "name": name,
+            "obs_date": when[:10],
+            "age_days": days,
+            "status": "过期" if days > limit else "正常",
+        })
+    return out
+
+
+def latest_row(rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    """每个序列取 obs_date 最大的一条；同一天再取笔记日期较新的那条。"""
+    latest: dict[str, dict[str, str]] = {}
+    for row in rows:
+        series_id = row.get("series_id") or ""
+        prev = latest.get(series_id)
+        key = ((row.get("obs_date") or "")[:10], row.get("date") or "")
+        if prev is None or key >= ((prev.get("obs_date") or "")[:10], prev.get("date") or ""):
+            latest[series_id] = row
+    return latest
+
+
+def fred_tables(data_dir: Path) -> dict[str, dict[str, float]]:
+    """series_id → {观测日: FRED 值}。文件不存在的序列不出现。"""
+    out = {}
+    for fred_id, series_id in FRED_CHECK.items():
+        path = data_dir / "series" / f"{fred_id}.csv"
+        if not path.exists():
+            continue
+        values = {}
+        for item in load_csv(path):
+            day = (item.get("date") or "")[:10]
+            value = fnum(item.get("value"))
+            if day and value is not None:
+                values[day] = value
+        out[series_id] = values
+    return out
+
+
+def with_fred_values(rows: list[dict[str, str]], tables: dict[str, dict[str, float]]) -> list[dict[str, str]]:
+    """FRED 有当天值时换成收盘价。FRED 还没有的日期保留笔记原值。"""
+    if not tables:
+        return rows
+    out = []
+    for row in rows:
+        values = tables.get(row.get("series_id") or "")
+        obs = (row.get("obs_date") or "")[:10]
+        if not values or obs not in values:
+            out.append(row)
+            continue
+        copied = dict(row)
+        copied["value"] = f"{values[obs]:g}"
+        out.append(copied)
     return out
 
 
@@ -421,18 +476,29 @@ def mismatch_health(sentiment_rows: list[dict[str, str]], gpu: list[dict[str, st
             gpu_bits.append(f"{name} 笔记写 {reported:+.1f}%，按价格是 {computed:+.1f}%")
     if gpu_bits:
         out.append(health("警告", "GPU 租金的一日涨跌和价格对不上：" + "；".join(gpu_bits) + "。今日小结和信号用价格自算。"))
-    repeats = []
-    for name, rows in grouped(gpu, "gpu").items():
-        for start, end, value in repeated_runs(series_points(rows, value_key="price")):
-            if start.isoformat() >= "2026-09-01":
-                repeats.append(f"{name} {start.isoformat()}–{end.isoformat()} 都是 {value:g}")
-    for name, rows in grouped(memory, "product").items():
-        for start, end, value in repeated_runs(series_points(rows)):
-            if start.isoformat() >= "2026-09-01":
-                repeats.append(f"{name} {start.isoformat()}–{end.isoformat()} 都是 {value:g}")
-    if repeats:
-        out.append(health("警告", "这些相邻日期价格完全一样，不当成新观测：" + "；".join(repeats[:8]) + ("。" if len(repeats) <= 8 else " 等。")))
-    conflicts = []
+    return out
+
+
+def carry_health(gpu: list[dict[str, str]], memory: list[dict[str, str]]) -> list[dict[str, str]]:
+    bits = []
+    for name_key, rows, value_key in (("gpu", gpu, "price"), ("product", memory, "value")):
+        for name, items in grouped(rows, name_key).items():
+            ordered = sorted(items, key=lambda row: row.get("date") or "")
+            for prev, curr in zip(ordered, ordered[1:]):
+                when = curr.get("date") or ""
+                if when < "2026-09-01" or not price_carried(prev, curr, value_key):
+                    continue
+                bits.append(f"{name} {when}")
+    if not bits:
+        return []
+    shown = "；".join(bits[:8]) + ("。" if len(bits) <= 8 else " 等。")
+    return [health("提示", "这些日期按沿用处理，不计入新观测。价格和涨跌列都与前一天相同，或周末且价格没变：" + shown)]
+
+
+def conflict_health(sentiment_rows: list[dict[str, str]], tables: dict[str, dict[str, float]]) -> list[dict[str, str]]:
+    by_id = grouped(sentiment_rows, "series_id")
+    settled = []
+    open_conflicts = []
     for series_id, rows in by_id.items():
         seen: dict[str, set[str]] = {}
         for row in rows:
@@ -440,39 +506,55 @@ def mismatch_health(sentiment_rows: list[dict[str, str]], gpu: list[dict[str, st
             value = row.get("value") or ""
             if obs and value:
                 seen.setdefault(obs, set()).add(value)
+        name = rows[-1].get("name") or series_id
+        fred = tables.get(series_id) or {}
         for obs, values in seen.items():
-            if len(values) > 1:
-                conflicts.append(f"{rows[-1].get('name') or series_id} 观测日 {obs} 有 {' 和 '.join(sorted(values))}")
-    if conflicts:
-        out.append(health("警告", "同一观测日出现了不同数字，页面用较新的那份笔记：" + "；".join(conflicts) + "。"))
+            if len(values) < 2:
+                continue
+            shown = " 和 ".join(sorted(values, key=lambda item: (len(item), item)))
+            if obs in fred:
+                settled.append(f"{name} 观测日 {obs} 有 {shown}，FRED 为 {fred[obs]:g}，以 {fred[obs]:g} 为准")
+            else:
+                open_conflicts.append(f"{name} 观测日 {obs} 有 {shown}")
+    out = []
+    if settled:
+        out.append(health("警告", "同一观测日出现了不同数字：" + "；".join(settled) + "。"))
+    if open_conflicts:
+        out.append(health("警告", "同一观测日出现了不同数字，页面用较新的那份笔记：" + "；".join(open_conflicts) + "。"))
     return out
 
 
-def fred_health(data_dir: Path, sentiment_rows: list[dict[str, str]]) -> list[dict[str, str]]:
-    latest = {}
-    for row in sentiment_rows:
-        latest[row.get("series_id") or ""] = row
-    missing = [fred_id for fred_id in FRED_CHECK if not (data_dir / "series" / f"{fred_id}.csv").exists()]
+def fred_health(data_dir: Path, sentiment_rows: list[dict[str, str]], tables: dict[str, dict[str, float]] | None = None) -> list[dict[str, str]]:
+    """最近 10 个 FRED 交易日里，每个重叠观测日都比。同一天有多条笔记时，用笔记日期较新的那条。"""
+    if tables is None:
+        tables = fred_tables(data_dir)
+    missing = [fred_id for fred_id, series_id in FRED_CHECK.items() if series_id not in tables]
     out = []
     if missing:
         out.append(health("警告", "还没有这些 FRED 利率序列，没法和笔记交叉核对：" + "、".join(missing) + "。"))
     gaps = []
     for fred_id, series_id in FRED_CHECK.items():
-        path = data_dir / "series" / f"{fred_id}.csv"
-        row = latest.get(series_id)
-        if not path.exists() or not row:
+        fred = tables.get(series_id) or {}
+        if not fred:
             continue
-        obs = (row.get("obs_date") or "")[:10]
-        note_value = fnum(row.get("value"))
-        fred_value = None
-        for item in load_csv(path):
-            if item.get("date") == obs:
-                fred_value = fnum(item.get("value"))
-        if fred_value is None or note_value is None:
-            continue
-        gap = diff(fred_value, note_value)
-        if gap is not None and abs(gap) > FRED_GAP:
-            gaps.append(f"{row.get('name') or series_id} 笔记 {note_value:g}，FRED {fred_id} {fred_value:g}（{obs}）")
+        window = set(sorted(fred)[-FRED_WINDOW:])
+        chosen: dict[str, dict[str, str]] = {}
+        for row in sentiment_rows:
+            if row.get("series_id") != series_id:
+                continue
+            obs = (row.get("obs_date") or "")[:10]
+            if obs not in window:
+                continue
+            prev = chosen.get(obs)
+            if prev is None or (row.get("date") or "") >= (prev.get("date") or ""):
+                chosen[obs] = row
+        for obs, row in sorted(chosen.items()):
+            note_value = fnum(row.get("value"))
+            fred_value = fred.get(obs)
+            if note_value is None or fred_value is None:
+                continue
+            if abs(round(note_value - fred_value, 4)) > FRED_GAP:
+                gaps.append(f"{row.get('name') or series_id} 笔记 {note_value:g}，FRED {fred_id} {fred_value:g}（{obs}）")
     if gaps:
         out.append(health("警告", "笔记和 FRED 同一天相差超过 0.02 个百分点：" + "；".join(gaps) + "。"))
     return out
@@ -494,7 +576,7 @@ def currency_health(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     if not names:
         return []
     return [health(
-        "待确认",
+        "错误",
         "、".join(name for name in names if name) + " 的 EPS 单位是人民币，股价是美元 ADR。笔记没有写明 Forward PE 是否已按汇率换算。未核对之前，估值触发只当笔记原文，不当成已经确认的便宜。",
     )]
 
@@ -526,16 +608,17 @@ def source_health(meta: dict, events_payload: dict) -> list[dict[str, str]]:
     for source in events_payload.get("sources") or []:
         status = source.get("status") or ""
         if status in {"failed", "skipped"}:
-            out.append(health("警告", f"日历来源 {source.get('name')}：{source.get('detail') or status}。"))
+            name = source.get("name") or ""
+            level = "提示" if any(hint in name for hint in CALENDAR_HINTS) else "警告"
+            out.append(health(level, f"日历来源 {name}：{source.get('detail') or status}。"))
     return out
 
 
 def build_signals(data_dir: Path, today: date | None = None) -> dict:
     today = today or date.today()
     sentiment_rows = load_csv(data_dir / "sentiment" / "series.csv")
-    latest: dict[str, dict[str, str]] = {}
-    for row in sentiment_rows:
-        latest[row.get("series_id") or ""] = row
+    latest = latest_row(sentiment_rows)
+    fred = fred_tables(data_dir)
     weekly = load_csv(data_dir / "derived" / "weekly.csv")
     spreads = load_csv(data_dir / "derived" / "spreads.csv")
     earnings = load_csv(data_dir / "earnings" / "daily.csv")
@@ -569,22 +652,36 @@ def build_signals(data_dir: Path, today: date | None = None) -> dict:
     buckets = {"风险": [], "机会": [], "关注": []}
     for row in rows:
         buckets[row["bucket"]].append({key: value for key, value in row.items() if key != "bucket"})
+    sentiment_obs = [
+        (row.get("obs_date") or "")[:10]
+        for row in sentiment_rows
+        if row.get("series_id") != "btc" and row.get("obs_date")
+    ]
     issues = []
-    issues.extend(freshness(today, [
-        ("市场情绪", (meta.get("sentiment") or {}).get("history_end") or "", "day"),
-        ("盈利跟踪", (meta.get("earnings") or {}).get("history_end") or "", "day"),
-        ("流动性周三", weekly[-1]["date"] if weekly else "", "week"),
-        ("GPU 租金", max((row.get("date") or "" for row in gpu), default=""), "day"),
-        ("存储价格", max((row.get("date") or "" for row in memory), default=""), "day"),
-    ]))
     issues.extend(mismatch_health(sentiment_rows, gpu, memory))
+    issues.extend(conflict_health(sentiment_rows, fred))
     issues.extend(extreme_health(earnings))
     issues.extend(currency_health(earnings))
-    issues.extend(fred_health(data_dir, sentiment_rows))
+    issues.extend(fred_health(data_dir, sentiment_rows, fred))
     issues.extend(source_health(meta, events_payload))
+    issues.extend(carry_health(gpu, memory))
+    issues.sort(key=lambda item: HEALTH_ORDER.get(item["level"], 9))
+    spread = latest_spread(spreads)
     return {
         "asof": today.isoformat(),
         "signals": buckets,
         "agenda": agenda(events_payload.get("events") or [], today),
         "health": issues,
+        "freshness": freshness_table(today, [
+            ("流动性周三", weekly[-1]["date"] if weekly else "", "week"),
+            ("SOFR/EFFR 利差", spread.get("date", "") if spread else "", "day"),
+            ("情绪笔记", max(sentiment_obs) if sentiment_obs else "", "day"),
+            ("盈利", max((row.get("date") or "" for row in earnings), default=""), "day"),
+            ("公告", max((row.get("date") or "" for row in filings), default=""), "day"),
+            ("存储", max((row.get("date") or "" for row in memory), default=""), "day"),
+            ("GPU", max((row.get("date") or "" for row in gpu), default=""), "day"),
+            ("OpenRouter", max((row.get("date") or "" for row in router), default=""), "day"),
+            ("SiliconData", max((row.get("date") or "" for row in silicon), default=""), "day"),
+            ("日历", (events_payload.get("today_bj") or (events_payload.get("generated_at") or "")[:10]), "day"),
+        ]),
     }

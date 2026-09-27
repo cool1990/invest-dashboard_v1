@@ -190,7 +190,25 @@ function renderBriefing(page) {
       list.appendChild(item);
     });
     box.appendChild(list);
-    const notes = page === "sentiment" ? null : (data.notes && data.notes[page]);
+    if (page === "sentiment" && data.caveat && data.caveat.sentiment) {
+      box.appendChild(el("p", "unit", data.caveat.sentiment));
+    }
+    const computed = page === "sentiment" && data.computed && data.computed.sentiment;
+    if (computed && computed.length) {
+      const fold = el("details", "note-src");
+      const summary = document.createElement("summary");
+      summary.textContent = "按数据自算的变动";
+      fold.appendChild(summary);
+      const computedList = el("ul", "brief-list");
+      computed.forEach((line) => {
+        const item = document.createElement("li");
+        item.textContent = line;
+        computedList.appendChild(item);
+      });
+      fold.appendChild(computedList);
+      box.appendChild(fold);
+    }
+    const notes = data.notes && data.notes[page];
     if (notes && notes.length) {
       const details = el("details", "note-src");
       const summary = document.createElement("summary");

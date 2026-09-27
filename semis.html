@@ -65,11 +65,19 @@
       return { from: prev[0], pct: (last[1] - prev[1]) / Math.abs(prev[1]) * 100 };
     }
 
-    function flatToday(points) {
-      if (points.length < 2) return false;
-      const prev = points[points.length - 2];
-      const last = points[points.length - 1];
-      return addDaysIso(prev[0], 1) === last[0] && prev[1] === last[1];
+    function isWeekend(iso) {
+      const parts = iso.split("-").map(Number);
+      const day = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])).getUTCDay();
+      return day === 0 || day === 6;
+    }
+
+    function priceCarried(prev, curr, valueKey) {
+      if (!prev || !curr) return false;
+      const priceSame = String(prev[valueKey] ?? "") === String(curr[valueKey] ?? "");
+      const keys = Object.keys(curr).filter((key) => key.startsWith("chg_"));
+      const changeSame = keys.length > 0 && keys.every((key) => String(prev[key] ?? "") === String(curr[key] ?? ""));
+      if (priceSame && changeSame) return true;
+      return priceSame && isWeekend(curr.date || "");
     }
 
     function weekText(self, notePct) {
@@ -100,13 +108,13 @@
       const up = known.filter((item) => item.pct > 0);
       const down = known.filter((item) => item.pct < 0);
       const flat = known.filter((item) => item.pct === 0);
-      if (!known.length) return "今天没有新的存储或 GPU 观测，看不出冷热。相邻日期价格一样的不计数。";
+      if (!known.length) return "今天没有新的存储或 GPU 观测，看不出冷热。价格和涨跌列都与前一天相同的，以及周末价格没变的，按沿用处理，不计入。";
       let tone = "冷热差不多";
       if (up.length > down.length) tone = "偏热";
       if (down.length > up.length) tone = "偏冷";
       const upNames = up.map((item) => item.name).join("、") || "无";
       const downNames = down.map((item) => item.name).join("、") || "无";
-      return "按自算的大约一周变化来数，相邻日期价格一样的不计入：上升 " + up.length + " 项（" + upNames + "），下降 " + down.length + " 项（" + downNames + "），持平 " + flat.length + " 项。所以近期" + tone + "。韩国出口是月度，token 价格指数单独放在下面，都不参加这个计数。";
+      return "按自算的大约一周变化来数。价格和涨跌列都与前一天相同的，以及周末价格没变的，按沿用处理，不计入：上升 " + up.length + " 项（" + upNames + "），下降 " + down.length + " 项（" + downNames + "），持平 " + flat.length + " 项。所以近期" + tone + "。韩国出口是月度，token 价格指数单独放在下面，都不参加这个计数。";
     }
 
     function render(meta, memory, gpu, openrouter, silicon, korea) {
@@ -115,17 +123,17 @@
       const memLast = latestDate(memory);
       const memNames = [...new Set(memory.map((row) => row.product))];
       memNames.forEach((name) => {
-        const points = uniquePoints(memory.filter((row) => row.product === name), "value");
-        if (flatToday(points)) return;
-        const self = weekMove(points);
+        const series = memory.filter((row) => row.product === name).sort((a, b) => a.date.localeCompare(b.date));
+        if (series.length >= 2 && priceCarried(series[series.length - 2], series[series.length - 1], "value")) return;
+        const self = weekMove(uniquePoints(series, "value"));
         if (self) votes.push({ name, pct: self.pct });
       });
       const gpuLast = latestDate(gpu);
       const gpuNames = [...new Set(gpu.map((row) => row.gpu))];
       gpuNames.forEach((name) => {
-        const points = uniquePoints(gpu.filter((row) => row.gpu === name), "price");
-        if (flatToday(points)) return;
-        const self = weekMove(points);
+        const series = gpu.filter((row) => row.gpu === name).sort((a, b) => a.date.localeCompare(b.date));
+        if (series.length >= 2 && priceCarried(series[series.length - 2], series[series.length - 1], "price")) return;
+        const self = weekMove(uniquePoints(series, "price"));
         if (self) votes.push({ name, pct: self.pct });
       });
       const orLast = latestDate(openrouter);

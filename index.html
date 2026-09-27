@@ -105,15 +105,51 @@
           list.appendChild(item);
         });
         block.appendChild(list);
+        if (page[0] === "sentiment" && briefing.caveat && briefing.caveat.sentiment) {
+          block.appendChild(el("p", "unit", briefing.caveat.sentiment));
+        }
         root.appendChild(block);
       });
     }
 
-    function renderHealth(rows) {
+    function renderHealth(rows, freshness) {
       const root = $("health");
       root.textContent = "";
+      if (freshness && freshness.length) {
+        const wrap = el("div", "table-scroll");
+        const table = document.createElement("table");
+        const head = document.createElement("thead");
+        const hr = document.createElement("tr");
+        ["数据", "最新观测日", "距今", "状态"].forEach((label) => {
+          const cell = document.createElement("th");
+          cell.textContent = label;
+          hr.appendChild(cell);
+        });
+        head.appendChild(hr);
+        table.appendChild(head);
+        const body = document.createElement("tbody");
+        freshness.forEach((row) => {
+          const tr = document.createElement("tr");
+          const cells = [
+            row.name || "",
+            row.obs_date || "—",
+            row.age_days == null ? "—" : row.age_days + " 天",
+            row.status || "",
+          ];
+          cells.forEach((text, index) => {
+            const cell = document.createElement("td");
+            cell.textContent = text;
+            if (index === 3 && text === "过期") cell.className = "stale";
+            tr.appendChild(cell);
+          });
+          body.appendChild(tr);
+        });
+        table.appendChild(body);
+        wrap.appendChild(table);
+        root.appendChild(wrap);
+      }
       if (!rows.length) {
-        root.appendChild(el("p", "lede", "没有需要标出的问题。"));
+        if (!freshness || !freshness.length) root.appendChild(el("p", "lede", "没有需要标出的问题。"));
         return;
       }
       const list = el("ul", "list");
@@ -133,7 +169,7 @@
         renderSignals(signals);
         renderAgenda(signals.agenda || []);
         renderPages(briefing);
-        renderHealth(signals.health || []);
+        renderHealth(signals.health || [], signals.freshness || []);
         $("status").hidden = true;
       } catch (err) {
         const status = $("status");
