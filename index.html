@@ -34,6 +34,12 @@
     }
     a { color: var(--teal); }
     .wrap { max-width: 1080px; margin: 0 auto; padding: 20px 16px 48px; overflow-x: clip; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    .nav a {
+      text-decoration: none; color: var(--ink); border: 1px solid var(--line);
+      background: var(--paper); border-radius: 999px; padding: 4px 12px; font-size: 14px;
+    }
+    .nav a[aria-current="page"] { background: var(--teal); color: #fff; border-color: var(--teal); }
     header.top { margin-bottom: 18px; }
     .mark {
       display: inline-flex;
@@ -150,6 +156,12 @@
 </head>
 <body>
   <div class="wrap">
+    <nav class="nav" aria-label="页面">
+      <a href="index.html" aria-current="page">流动性</a>
+      <a href="sentiment.html">市场情绪</a>
+      <a href="semis.html">半导体景气</a>
+      <a href="earnings.html">盈利跟踪</a>
+    </nav>
     <header class="top">
       <div class="mark"><i></i>个人查阅</div>
       <h1>美国流动性</h1>

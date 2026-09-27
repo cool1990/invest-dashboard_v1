@@ -172,5 +172,68 @@
       "observations": 1217
     }
   ],
-  "latest_wednesday": "2026-09-23"
+  "latest_wednesday": "2026-09-23",
+  "sentiment": {
+    "name": "市场情绪",
+    "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
+    "history_start": "2026-09-10",
+    "history_end": "2026-09-26",
+    "observations": 197,
+    "composite_end": "2026-09-26",
+    "files": {
+      "series": "sentiment/series.csv",
+      "composite": "sentiment/composite.csv"
+    },
+    "note": "日期是笔记的 data_date。obs_date 是该指标自己的观测日，可能更早。carried=1 表示笔记写明这是沿用的最近可得值。"
+  },
+  "earnings": {
+    "name": "盈利跟踪",
+    "source": "Hermes 早晨笔记 inbox/notes/每日/盈利跟踪_YYYY-MM-DD.md 或 美港股盈利跟踪_YYYY-MM-DD.md",
+    "history_start": "2026-09-09",
+    "history_end": "2026-09-26",
+    "rows": 440,
+    "events": 2,
+    "files": {
+      "daily": "earnings/daily.csv",
+      "events": "earnings/events.csv"
+    },
+    "note": "涨跌幅和 30 日修正都是百分数，不带百分号。triggered=1 表示笔记里的估值触发。"
+  },
+  "semis": {
+    "name": "半导体景气",
+    "source": "Hermes 早晨笔记 inbox/notes/半导体/YYYY-MM-DD_半导体-*.md",
+    "files": {
+      "memory": "semis/memory.csv",
+      "gpu": "semis/gpu.csv",
+      "openrouter": "semis/openrouter.csv",
+      "silicon": "semis/silicon.csv",
+      "korea": "semis/korea.csv"
+    },
+    "memory": {
+      "start": "2026-09-17",
+      "end": "2026-09-26"
+    },
+    "gpu": {
+      "start": "2026-09-16",
+      "end": "2026-09-26",
+      "unit": "USD/GPU-hour"
+    },
+    "openrouter": {
+      "start": "2026-09-16",
+      "end": "2026-09-26",
+      "unit": "万亿 token"
+    },
+    "silicon": {
+      "start": "2026-09-15",
+      "end": "2026-09-25",
+      "unit": "USD/M tokens"
+    },
+    "korea": {
+      "start": "2026-06",
+      "end": "2026-09",
+      "unit": "百万美元",
+      "note": "月度数据，按期间覆盖；空的全月数字不会抹掉已有值。"
+    }
+  },
+  "notes_asof": "2026-09-26"
 }

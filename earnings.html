@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>盈利跟踪</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/site.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="页面">
+      <a href="index.html">流动性</a>
+      <a href="sentiment.html">市场情绪</a>
+      <a href="semis.html">半导体景气</a>
+      <a href="earnings.html" aria-current="page">盈利跟踪</a>
+    </nav>
+    <header>
+      <h1>盈利跟踪</h1>
+      <p class="lede">观察名单上的收盘价、RSI、远期市盈率和盈利修正。点一个代码，下面画出它这几天的历史。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="summary" class="summary" hidden></section>
+    <h2 id="table-title" hidden>观察名单</h2>
+    <section id="table-panel" class="panel" hidden>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr id="head"></tr>
+          </thead>
+          <tbody id="body"></tbody>
+        </table>
+      </div>
+    </section>
+    <h2 id="detail-title" hidden>个股历史</h2>
+    <section id="detail" class="charts" hidden></section>
+    <footer id="footer" hidden></footer>
+  </div>
+  <script>
+    const COLUMNS = [
+      { key: "ticker", label: "代码", kind: "text" },
+      { key: "close", label: "收盘", kind: "num", digits: 2 },
+      { key: "day_pct", label: "当日%", kind: "pct" },
+      { key: "rsi", label: "RSI", kind: "num", digits: 2 },
+      { key: "forward_pe", label: "Forward PE", kind: "num", digits: 2 },
+      { key: "target_pe", label: "目标 PE", kind: "num", digits: 1 },
+      { key: "revision_signal", label: "修正信号", kind: "text" },
+      { key: "revision_30d", label: "30日修正%", kind: "pct" },
+      { key: "earnings", label: "下次财报", kind: "text" },
+    ];
+    let daily = [];
+    let events = [];
+    let latest = "";
+    let sortKey = "ticker";
+    let sortDir = 1;
+    let selected = "";
+    let charts = [];
+
+    function rowsNow() {
+      return daily.filter((row) => row.date === latest);
+    }
+
+    function eventFor(ticker) {
+      return events.find((row) => row.note_date === latest && row.ticker === ticker);
+    }
+
+    function sortValue(row, key) {
+      if (key === "earnings") return (eventFor(row.ticker) || {}).earnings_date || "";
+      if (key === "ticker" || key === "revision_signal") return row[key] || "";
+      const value = num(row[key]);
+      return value == null ? null : value;
+    }
+
+    function sortedRows() {
+      const rows = rowsNow().slice();
+      rows.sort((a, b) => {
+        const av = sortValue(a, sortKey);
+        const bv = sortValue(b, sortKey);
+        if (av == null && bv == null) return a.ticker.localeCompare(b.ticker);
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        if (typeof av === "string") return av.localeCompare(bv) * sortDir;
+        return (av - bv) * sortDir;
+      });
+      return rows;
+    }
+
+    function cellClass(row, key) {
+      if (key === "rsi") {
+        const rsi = num(row.rsi);
+        if (rsi != null && rsi < 30) return "lo";
+        if (rsi != null && rsi > 70) return "hi";
+      }
+      if (key === "revision_signal") {
+        if (row.revision_signal === "强上修") return "rev-up";
+        if (row.revision_signal === "强下修") return "rev-down";
+      }
+      if (key === "forward_pe" && row.triggered === "1") return "trigger";
+      return "";
+    }
+
+    function cellText(row, col) {
+      if (col.key === "earnings") {
+        const event = eventFor(row.ticker);
+        return event ? event.earnings_date : "—";
+      }
+      if (col.kind === "pct") {
+        const value = num(row[col.key]);
+        return value == null ? "—" : fmtSigned(value, 2) + "%";
+      }
+      if (col.kind === "num") {
+        const value = num(row[col.key]);
+        return value == null ? "—" : fmt(value, col.digits);
+      }
+      return row[col.key] || "—";
+    }
+
+    function renderTable() {
+      const head = $("head");
+      head.textContent = "";
+      COLUMNS.forEach((col) => {
+        const th = document.createElement("th");
+        const button = el("button", "sort", col.label + (sortKey === col.key ? (sortDir > 0 ? " ↑" : " ↓") : ""));
+        button.type = "button";
+        button.addEventListener("click", () => {
+          if (sortKey === col.key) sortDir *= -1;
+          else { sortKey = col.key; sortDir = col.kind === "text" ? 1 : -1; }
+          renderTable();
+        });
+        th.appendChild(button);
+        head.appendChild(th);
+      });
+      const body = $("body");
+      body.textContent = "";
+      sortedRows().forEach((row) => {
+        const tr = document.createElement("tr");
+        if (row.ticker === selected) tr.className = "selected";
+        COLUMNS.forEach((col) => {
+          const td = document.createElement("td");
+          td.className = cellClass(row, col.key);
+          if (col.key === "ticker") {
+            const button = el("button", "linkish", row.ticker);
+            button.type = "button";
+            button.addEventListener("click", () => selectTicker(row.ticker));
+            td.appendChild(button);
+          } else {
+            td.textContent = cellText(row, col);
+          }
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+    }
+
+    function selectTicker(ticker) {
+      selected = ticker;
+      history.replaceState(null, "", "#" + ticker);
+      renderTable();
+      drawDetail();
+      const title = $("detail-title");
+      if (title) title.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function drawDetail() {
+      charts.forEach((chart) => chart && chart.destroy());
+      charts = [];
+      const detail = $("detail");
+      detail.textContent = "";
+      detail.hidden = false;
+      $("detail-title").hidden = false;
+      const points = daily.filter((row) => row.ticker === selected).sort((a, b) => a.date.localeCompare(b.date));
+      $("detail-title").textContent = selected ? selected + " 的历史" : "个股历史";
+      if (!points.length) {
+        detail.appendChild(el("p", "sub", "还没有这个代码的历史。"));
+        return;
+      }
+      const note = "从 " + points[0].date + " 起，共 " + points.length + " 天。天数少就只画这几个点。";
+      const specs = [
+        { title: "Forward PE", key: "forward_pe", digits: 1, color: "#1a4d45" },
+        { title: "RSI(14)", key: "rsi", digits: 0, color: "#1f4e79" },
+        { title: "30 日修正 %", key: "revision_30d", digits: 1, color: "#8a5a12" },
+      ];
+      specs.forEach((spec) => {
+        const chart = addChart(detail, {
+          title: spec.title,
+          sub: note,
+          labels: points.map((row) => row.date),
+          digits: spec.digits,
+          datasets: [{ label: spec.title, data: points.map((row) => num(row[spec.key])), color: spec.color }],
+        });
+        charts.push(chart);
+      });
+    }
+
+    function renderSummary() {
+      const rows = rowsNow();
+      const names = (pred) => rows.filter(pred).map((row) => row.ticker);
+      const strongUp = names((row) => row.revision_signal === "强上修");
+      const strongDown = names((row) => row.revision_signal === "强下修");
+      const low = names((row) => { const rsi = num(row.rsi); return rsi != null && rsi < 30; });
+      const high = names((row) => { const rsi = num(row.rsi); return rsi != null && rsi > 70; });
+      const triggers = names((row) => row.triggered === "1");
+      const upcoming = events.filter((row) => row.note_date === latest);
+      const summary = $("summary");
+      summary.hidden = false;
+      const head = el("div", "lead-row");
+      const main = el("div");
+      main.appendChild(el("p", "label", "笔记日期"));
+      main.appendChild(el("p", "big", latest || "—"));
+      main.appendChild(el("p", "unit", rows.length + " 只股票"));
+      head.appendChild(main);
+      summary.appendChild(head);
+      const list = el("div", "notes");
+      list.appendChild(el("p", null, "强上修：" + (strongUp.join("、") || "无") + "。强下修：" + (strongDown.join("、") || "无") + "。"));
+      list.appendChild(el("p", null, "RSI 低于 30：" + (low.join("、") || "无") + "。高于 70：" + (high.join("、") || "无") + "。估值触发：" + (triggers.join("、") || "无") + "。"));
+      summary.appendChild(list);
+      const upcomingBox = el("div");
+      upcomingBox.appendChild(el("p", "label", "未来 7 天财报"));
+      if (!upcoming.length) {
+        upcomingBox.appendChild(el("p", null, "这份笔记没有写出未来 7 天的财报。"));
+      } else {
+        const ul = el("ul", "list");
+        upcoming.forEach((row) => {
+          const li = document.createElement("li");
+          const button = el("button", "linkish", row.ticker);
+          button.type = "button";
+          button.addEventListener("click", () => selectTicker(row.ticker));
+          li.appendChild(button);
+          li.appendChild(document.createTextNode(" " + (row.company || "") + " " + row.earnings_date));
+          ul.appendChild(li);
+        });
+        upcomingBox.appendChild(ul);
+      }
+      summary.appendChild(upcomingBox);
+    }
+
+    function render(meta, dailyRows, eventRows) {
+      daily = dailyRows;
+      events = eventRows;
+      latest = (meta.earnings || {}).history_end || daily.reduce((max, row) => row.date > max ? row.date : max, "");
+      renderSummary();
+      $("table-panel").hidden = false;
+      $("table-title").hidden = false;
+      const hash = decodeURIComponent(location.hash.replace("#", ""));
+      if (hash && rowsNow().some((row) => row.ticker === hash)) selected = hash;
+      renderTable();
+      if (selected) drawDetail();
+      const footer = $("footer");
+      footer.hidden = false;
+      const start = (meta.earnings || {}).history_start || "—";
+      footer.appendChild(el("p", null, "历史从 " + start + " 到 " + latest + "。RSI 低于 30 或高于 70、估值触发、强上修和强下修会在格子上标出来。只供个人查看，不是投资建议。"));
+      $("status").hidden = true;
+    }
+
+    async function main() {
+      try {
+        const meta = JSON.parse(await loadText("data/meta.json"));
+        const files = (meta.earnings || {}).files || {};
+        const [dailyText, eventText] = await Promise.all([
+          loadText("data/" + (files.daily || "earnings/daily.csv")),
+          loadText("data/" + (files.events || "earnings/events.csv")),
+        ]);
+        render(meta, parseCSV(dailyText), parseCSV(eventText));
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "数据没有读出来。请用本地服务器打开（python3 -m http.server）。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+    main();
+  </script>
+</body>
+</html>
