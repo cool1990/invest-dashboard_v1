@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T19:17:02+08:00",
+  "generated_at": "2026-09-27T19:33:48+08:00",
   "today_bj": "2026-09-27",
   "horizon_end": "2026-11-11",
   "events": [
@@ -13,7 +13,13 @@
       "note": "Discussion - Vice Chair for Supervision Michelle W. Bowman At the Military Banking Summit 2026 (Virtual) 美东 8:15 a.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://teams.microsoft.com/meet/212992571985590?p=yY3nvqkkrbQw6RMUL6"
+        }
+      ]
     },
     {
       "date": "2026-09-29",
@@ -25,7 +31,13 @@
       "note": "Speech - Governor Lisa D. Cook At Oakland Tech Week 2026, Oakland, Calif. 美东 1:25 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
+        }
+      ]
     },
     {
       "date": "2026-09-29",
@@ -37,7 +49,13 @@
       "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Federal Reserve System Community Bank Cyber Workshop (Virtual) 美东 11:00 a.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
+        }
+      ]
     },
     {
       "date": "2026-09-30",
@@ -45,12 +63,22 @@
       "category": "财报",
       "title": "Micron Technology, Inc.（MU）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
+      "source": "Nasdaq earnings calendar；盈利跟踪笔记",
+      "note": "美东盘后。日期不一样：Nasdaq earnings calendar写的是 2026-09-30，盈利跟踪笔记写的是 2026-10-01",
       "previous": "$2.86",
       "consensus": "$31.24",
       "tags": [
         "半导体"
+      ],
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        },
+        {
+          "source": "盈利跟踪笔记",
+          "url": ""
+        }
       ]
     },
     {
@@ -63,7 +91,13 @@
       "note": "Speech - Governor Michael S. Barr At A Conversation with Michael S. Barr on the State of the Economy, Detroit, Mich. 美东 12:40 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://youtube.com/live/ZcKwcEHku7w"
+        }
+      ]
     },
     {
       "date": "2026-09-30",
@@ -75,7 +109,13 @@
       "note": "Speech - Governor Christopher J. Waller At the Sibos 2026 Conference, Miami Beach, Fla. 美东 3:00 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://vimeo.com/event/6186977/6099e85d01"
+        }
+      ]
     },
     {
       "date": "2026-09-30",
@@ -87,7 +127,13 @@
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-09-30",
@@ -99,7 +145,13 @@
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-09-30",
@@ -111,7 +163,31 @@
       "note": "美东 8:30 AM August 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/econ/indicators/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "韩国9月进出口（产业通商部，全月初值）",
+      "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066",
+      "source": "calendar/manual.yaml",
+      "note": "e-나라지표写明产业通商部每月1日发布上月进出口动向；关税厅公表日程也写“전월 잠정치 수출입동향：매월1일”。页面未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066"
+        }
+      ]
     },
     {
       "date": "2026-10-01",
@@ -123,20 +199,12 @@
       "note": "美东盘前",
       "previous": "$3.03",
       "consensus": "$3.19",
-      "tags": []
-    },
-    {
-      "date": "2026-10-01",
-      "time_bj": "",
-      "category": "财报",
-      "title": "MICRON TECHNOLOGY INC（MU）财报",
-      "url": "",
-      "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-09-26.md 的未来 7 天财报",
-      "previous": "",
-      "consensus": "",
-      "tags": [
-        "半导体"
+      "tags": [],
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
       ]
     },
     {
@@ -149,7 +217,49 @@
       "note": "Speech - Governor Lisa D. Cook At the 2026 Investing in Rural America Conference, Asheville, N.C. 美东 3:25 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "07:50",
+      "category": "大事",
+      "title": "日本央行9月会议意见摘要",
+      "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm",
+      "source": "calendar/manual.yaml",
+      "note": "BoJ 日程：9月17-18日会议的 Summary of Opinions 于10月1日公布，原则上 08:50 JST",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "time_bj": "08:00",
+      "category": "加密",
+      "title": "SUI 代币解锁 1326万枚",
+      "url": "https://tokenomist.ai/sui",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-01T00:00Z，13,260,415 SUI，约占已释放供应0.32%。按归属表推算，可能有±1天误差；美元值随价格变动",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/sui"
+        }
+      ]
     },
     {
       "date": "2026-10-01",
@@ -161,7 +271,13 @@
       "note": "Speech - Governor Christopher J. Waller At FRED Con: Navigating Trust, AI & Storytelling in a World of Data, St. Louis, Mo. 美东 10:00 a.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.youtube.com/live/1fK5omRbOvM?si=9mToIa7-cn6iDC9F"
+        }
+      ]
     },
     {
       "date": "2026-10-01",
@@ -173,7 +289,13 @@
       "note": "美东 10:00 AM August 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/construction/c30/c30index.html"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -185,7 +307,13 @@
       "note": "笔记 盈利跟踪_2026-09-26.md 的未来 7 天财报",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "盈利跟踪笔记",
+          "url": ""
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -197,7 +325,13 @@
       "note": "Speech - Vice Chair Philip N. Jefferson At a Talk and Q&A with Federal Reserve Board Vice Chair Philip N. Jefferson, Charlottesville, Va. 美东 1:30 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://darden-virginia.zoom.us/j/92232791521"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -209,7 +343,13 @@
       "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Atlantic Council’s Conversation with Michelle W. Bowman, Washington, D.C. 美东 3:00 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.youtube.com/watch?v=UosIN7C-ZCE"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -221,7 +361,13 @@
       "note": "Discussion - Governor Lisa D. Cook At the Central Banking Seminar (Virtual) 美东 3:30 p.m.",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -233,7 +379,31 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "15:00",
+      "category": "加密",
+      "title": "ENA 代币解锁 4063万枚",
+      "url": "https://tokenomist.ai/ethena",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-02T07:00Z，40,625,000 ENA，约占已释放供应0.45%",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/ethena"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -245,19 +415,49 @@
       "note": "美东 10:00 AM August 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/manufacturing/m3/"
+        }
+      ]
     },
     {
       "date": "2026-10-06",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services",
-      "url": "https://www.census.gov/foreign-trade/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM August 2026",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "联电9月营收",
+      "url": "https://www.umc.com/en/IR_Event/ir_events",
+      "source": "calendar/manual.yaml",
+      "note": "UMC IR：September 10/6/2026(Tue)，官方标注 Subject to change，未写钟点",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.umc.com/en/IR_Event/ir_events"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "time_bj": "08:00",
+      "category": "加密",
+      "title": "HYPE 代币解锁 992万枚",
+      "url": "https://tokenomist.ai/hyperliquid",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-06T00:00Z，9,916,666 HYPE，按页面抓取时价格约9.2亿美元，约占已释放供应2.09%",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/hyperliquid"
+        }
+      ]
     },
     {
       "date": "2026-10-06",
@@ -265,11 +465,21 @@
       "category": "宏观",
       "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services, August 2026",
       "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
+      "source": "BEA Release Schedule；Census economic indicators calendar",
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        },
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/foreign-trade/"
+        }
+      ]
     },
     {
       "date": "2026-10-06",
@@ -281,7 +491,13 @@
       "note": "美东 10:00 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-10-08",
@@ -293,7 +509,67 @@
       "note": "美东盘前",
       "previous": "$2.29",
       "consensus": "$2.30",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "time_bj": "02:00",
+      "category": "大事",
+      "title": "FOMC 9月会议纪要",
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "source": "calendar/manual.yaml",
+      "note": "美联储10月日历：FOMC Minutes, Meeting of September 15-16，10月7日美东14:00",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "time_bj": "13:30",
+      "category": "半导体",
+      "title": "台积电9月营收",
+      "url": "https://investor.tsmc.com/english/financial-calendar",
+      "source": "calendar/manual.yaml",
+      "note": "TSMC IR 财务日历：TSMC Monthly Sales - September 2026，台北时间13:30（同北京时间）",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://investor.tsmc.com/english/financial-calendar"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "time_bj": "17:00",
+      "category": "半导体",
+      "title": "联发科9月营收",
+      "url": "https://www.mediatek.com/investor-relations",
+      "source": "calendar/manual.yaml",
+      "note": "MediaTek IR 首页 Upcoming Events：Monthly Sales - September 2026，GMT+8 17:00。IR Events 页同日期但标题写成 October，以首页为准",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.mediatek.com/investor-relations"
+        }
+      ]
     },
     {
       "date": "2026-10-08",
@@ -305,7 +581,13 @@
       "note": "美东 10:00 AM August 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/wholesale/index.html"
+        }
+      ]
     },
     {
       "date": "2026-10-09",
@@ -317,7 +599,51 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "SEMICON West 2026（旧金山，10月13-15日）",
+      "url": "https://www.semiconwest.org/",
+      "source": "calendar/manual.yaml",
+      "note": "官网：October 13–15, 2026；SEMI 新闻稿确认回到旧金山 Moscone Center",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.semiconwest.org/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "财报",
+      "title": "ASML 2026年第三季度业绩",
+      "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf",
+      "source": "calendar/manual.yaml",
+      "note": "ASML Statutory Interim Report 2026 财务日历：October 14, 2026 Announcement of third quarter results。未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [
+        "半导体"
+      ],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf"
+        }
+      ]
     },
     {
       "date": "2026-10-14",
@@ -329,7 +655,69 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/econ/bfs/index.html"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美国延期个税与公司税申报截止（影响 TGA）",
+      "url": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "source": "calendar/manual.yaml",
+      "note": "IRS Pub. 509 (2026)：October 15，已申请延期的个人申报 1040 并缴税；申请延期的日历年公司申报 1120 并缴税。美东日期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.irs.gov/pub/irs-pdf/p509.pdf"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "02:00",
+      "category": "大事",
+      "title": "美联储褐皮书",
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "source": "calendar/manual.yaml",
+      "note": "美联储10月日历：Beige Book，10月14日美东14:00",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "14:00",
+      "category": "财报",
+      "title": "台积电 3Q26 业绩会",
+      "url": "https://investor.tsmc.com/english/financial-calendar",
+      "source": "calendar/manual.yaml",
+      "note": "TSMC IR 财务日历：3Q'26 Earnings Conference and Conference Call，台北时间14:00-15:30",
+      "previous": "",
+      "consensus": "",
+      "tags": [
+        "半导体"
+      ],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://investor.tsmc.com/english/financial-calendar"
+        }
+      ]
     },
     {
       "date": "2026-10-15",
@@ -341,7 +729,13 @@
       "note": "美东 8:30 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/retail"
+        }
+      ]
     },
     {
       "date": "2026-10-15",
@@ -353,7 +747,31 @@
       "note": "美东 10:00 AM August 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/mtis/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美股月度期权到期",
+      "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar",
+      "source": "calendar/manual.yaml",
+      "note": "OCC 到期日历：10月16日为月度股票、指数期权到期日，PM 结算指数期权停止交易；AM 结算指数期权10月15日停止交易。美东日期，北京时间为次日凌晨",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar"
+        }
+      ]
     },
     {
       "date": "2026-10-16",
@@ -365,7 +783,67 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "time_bj": "21:00",
+      "category": "加密",
+      "title": "ARB 代币解锁 9265万枚",
+      "url": "https://tokenomist.ai/arbitrum",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-16T13:00Z，92,645,833 ARB，约占已释放供应1.56%",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/arbitrum"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "加密",
+      "title": "SEC《Regulation Crypto Assets》提案征求意见截止",
+      "url": "https://www.federalregister.gov/documents/2026/08/21/2026-17183/regulation-crypto-assets",
+      "source": "calendar/manual.yaml",
+      "note": "Federal Register 2026-17183：Comments should be received on or before October 20, 2026。美东日期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalregister.gov/documents/2026/08/21/2026-17183/regulation-crypto-assets"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "19:00",
+      "category": "加密",
+      "title": "ZRO 代币解锁 2571万枚",
+      "url": "https://tokenomist.ai/layerzero",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-20T11:00Z，25,708,334 ZRO，约占已释放供应4.04%",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/layerzero"
+        }
+      ]
     },
     {
       "date": "2026-10-20",
@@ -377,7 +855,31 @@
       "note": "美东 8:30 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/construction/nrc"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "韩国10月1-20日出口（关税厅速报）",
+      "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000",
+      "source": "calendar/manual.yaml",
+      "note": "关税厅公表日程：当月进出口速报每月11日、21日；10月21日为周三。页面未写钟点，公告注明日程变更会另行通知",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000"
+        }
+      ]
     },
     {
       "date": "2026-10-23",
@@ -389,7 +891,31 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-25",
+      "time_bj": "20:00",
+      "category": "加密",
+      "title": "XPL 代币解锁 2.28亿枚",
+      "url": "https://tokenomist.ai/plasma",
+      "source": "calendar/manual.yaml",
+      "note": "Tokenomist：2026-10-25T12:00Z，227,777,779 XPL，约占已释放供应5.02%",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tokenomist.ai/plasma"
+        }
+      ]
     },
     {
       "date": "2026-10-27",
@@ -401,7 +927,13 @@
       "note": "美东 8:30 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/manufacturing/m3/"
+        }
+      ]
     },
     {
       "date": "2026-10-27",
@@ -413,7 +945,13 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html"
+        }
+      ]
     },
     {
       "date": "2026-10-27",
@@ -425,7 +963,13 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/construction/nrs/"
+        }
+      ]
     },
     {
       "date": "2026-10-28",
@@ -437,7 +981,33 @@
       "note": "会议日落在北京时间同一天；声明通常在美东下午，具体钟点以当天新闻稿为准",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve FOMC calendars",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "联电 3Q26 业绩与法说会",
+      "url": "https://www.umc.com/en/IR_Event/ir_events",
+      "source": "calendar/manual.yaml",
+      "note": "UMC IR：3Q 2026 Earnings Release & Investor Conference Call 10/28/2026，官方标注 Subject to change；会议细节提前15天公布",
+      "previous": "",
+      "consensus": "",
+      "tags": [
+        "半导体"
+      ],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.umc.com/en/IR_Event/ir_events"
+        }
+      ]
     },
     {
       "date": "2026-10-28",
@@ -449,7 +1019,13 @@
       "note": "美东 8:30 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/econ/indicators/"
+        }
+      ]
     },
     {
       "date": "2026-10-28",
@@ -461,7 +1037,31 @@
       "note": "美东 10:00 AM Third Quarter 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/housing/hvs/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "time_bj": "",
+      "category": "大事",
+      "title": "欧洲央行议息会议（第二天，会后记者会）",
+      "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html",
+      "source": "calendar/manual.yaml",
+      "note": "ECB 日程：10月28-29日法兰克福货币政策会议，29日会后记者会。页面未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+        }
+      ]
     },
     {
       "date": "2026-10-29",
@@ -473,7 +1073,13 @@
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-10-29",
@@ -485,7 +1091,31 @@
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "大事",
+      "title": "日本央行议息结果与展望报告",
+      "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm",
+      "source": "calendar/manual.yaml",
+      "note": "BoJ 日程：10月29-30日会议，展望报告要点在会后立即公布，全文在下一个工作日14:00 JST 公布。会议结束钟点不固定",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+        }
+      ]
     },
     {
       "date": "2026-10-30",
@@ -497,7 +1127,67 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "16:00",
+      "category": "加密",
+      "title": "Deribit 月度期权到期（BTC/ETH 等）",
+      "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy",
+      "source": "calendar/manual.yaml",
+      "note": "Deribit 规则：月度期权在每月最后一个周五 08:00 UTC 到期；公开合约列表已有 2026-10-30 08:00 UTC 到期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "韩国10月进出口（产业通商部，全月初值）",
+      "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066",
+      "source": "calendar/manual.yaml",
+      "note": "规则同上：每月1日发布；11月1日是周日。页面未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美国财政部季度再融资：融资估计",
+      "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents",
+      "source": "calendar/manual.yaml",
+      "note": "财政部页面：The next release is scheduled for November 2, 2026。上次是美东15:00；如果时间相同，北京时间为11月3日04:00（美国已切换冬令时）",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents"
+        }
+      ]
     },
     {
       "date": "2026-11-02",
@@ -509,7 +1199,31 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/construction/c30/c30index.html"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美国中期选举日",
+      "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/",
+      "source": "calendar/manual.yaml",
+      "note": "FEC：Tuesday, November 3, 2026, is the next regularly scheduled federal General Election date。美东日期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/"
+        }
+      ]
     },
     {
       "date": "2026-11-03",
@@ -521,19 +1235,31 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/manufacturing/m3/"
+        }
+      ]
     },
     {
       "date": "2026-11-04",
-      "time_bj": "21:30",
-      "category": "宏观",
-      "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services",
-      "url": "https://www.census.gov/foreign-trade/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM September 2026",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美国财政部季度再融资声明",
+      "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents",
+      "source": "calendar/manual.yaml",
+      "note": "财政部页面：Policy Statement 等 The next release is scheduled for November 4, 2026。上次是美东08:30；如果时间相同，北京时间为11月4日21:30",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents"
+        }
+      ]
     },
     {
       "date": "2026-11-04",
@@ -541,11 +1267,57 @@
       "category": "宏观",
       "title": "国际贸易（商品和服务）：U.S. International Trade in Goods and Services, September 2026",
       "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
+      "source": "BEA Release Schedule；Census economic indicators calendar",
       "note": "美东 8:30 AM",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        },
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/foreign-trade/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "联电10月营收",
+      "url": "https://www.umc.com/en/IR_Event/ir_events",
+      "source": "calendar/manual.yaml",
+      "note": "UMC IR：October 11/5/2026(Thu)，官方标注 Subject to change",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.umc.com/en/IR_Event/ir_events"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "time_bj": "",
+      "category": "大事",
+      "title": "英国央行议息结果与货币政策报告",
+      "url": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates",
+      "source": "calendar/manual.yaml",
+      "note": "BoE：Thursday 5 November，November MPC Summary and minutes 和 Monetary Policy Report。页面未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+        }
+      ]
     },
     {
       "date": "2026-11-06",
@@ -557,7 +1329,13 @@
       "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
     },
     {
       "date": "2026-11-09",
@@ -569,7 +1347,213 @@
       "note": "美东 10:00 AM September 2026",
       "previous": "",
       "consensus": "",
-      "tags": []
+      "tags": [],
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/wholesale/index.html"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "SEMICON Europa 2026（慕尼黑，11月10-13日）",
+      "url": "https://www.semiconeuropa.org/",
+      "source": "calendar/manual.yaml",
+      "note": "官网：Nov 10–13, 2026，Messe München，与 electronica 同期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.semiconeuropa.org/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "time_bj": "13:30",
+      "category": "半导体",
+      "title": "台积电10月营收",
+      "url": "https://investor.tsmc.com/english/financial-calendar",
+      "source": "calendar/manual.yaml",
+      "note": "TSMC IR 财务日历：TSMC Monthly Sales - October 2026，台北时间13:30",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://investor.tsmc.com/english/financial-calendar"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "time_bj": "17:00",
+      "category": "半导体",
+      "title": "联发科10月营收",
+      "url": "https://www.mediatek.com/investor-relations",
+      "source": "calendar/manual.yaml",
+      "note": "MediaTek IR 首页：Monthly Sales - October 2026，GMT+8 17:00",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.mediatek.com/investor-relations"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "韩国11月1-10日出口（关税厅速报）",
+      "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000",
+      "source": "calendar/manual.yaml",
+      "note": "关税厅公表日程：每月11日、21日；11月11日为周三。页面未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "time_bj": "",
+      "category": "财报",
+      "title": "应用材料 FY26 Q4 业绩（官方标注预计）",
+      "url": "https://investors.appliedmaterials.com/events",
+      "source": "calendar/manual.yaml",
+      "note": "AMAT IR Fiscal Calendar 2026：Q4 季末 October 25，Earnings Call 写作 Projected - November 12，尚未正式确认。美东日期，未写钟点",
+      "previous": "",
+      "consensus": "",
+      "tags": [
+        "半导体"
+      ],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://investors.appliedmaterials.com/events"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "time_bj": "",
+      "category": "加密",
+      "title": "SEC 对 VanEck JitoSOL ETF 的最终决定期限",
+      "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18661/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-designation-of-a-longer-period",
+      "source": "calendar/manual.yaml",
+      "note": "Federal Register 2026-18661：SEC 指定 November 15, 2026 为批准或否决 SR-NASDAQ-2026-016 的期限（当天是周日），可能提前作出决定",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18661/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-designation-of-a-longer-period"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "time_bj": "03:00",
+      "category": "大事",
+      "title": "FOMC 10月会议纪要",
+      "url": "https://www.federalreserve.gov/newsevents/2026-november.htm",
+      "source": "calendar/manual.yaml",
+      "note": "美联储11月日历：FOMC Minutes, Meeting of October 27-28，11月18日美东14:00（冬令时）",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "time_bj": "",
+      "category": "大事",
+      "title": "美股月度期权到期",
+      "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar",
+      "source": "calendar/manual.yaml",
+      "note": "OCC 到期日历：11月20日为月度期权到期日；AM 结算指数期权11月19日停止交易。美东日期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "time_bj": "03:00",
+      "category": "大事",
+      "title": "美联储褐皮书",
+      "url": "https://www.federalreserve.gov/newsevents/2026-november.htm",
+      "source": "calendar/manual.yaml",
+      "note": "美联储11月日历：Beige Book，11月25日美东14:00（冬令时）",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "time_bj": "16:00",
+      "category": "加密",
+      "title": "Deribit 月度期权到期（BTC/ETH 等）",
+      "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy",
+      "source": "calendar/manual.yaml",
+      "note": "每月最后一个周五 08:00 UTC；公开合约列表已有 2026-11-27 08:00 UTC 到期",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-30",
+      "time_bj": "",
+      "category": "半导体",
+      "title": "NVIDIA GTC Washington, D.C.（11月30日-12月3日）",
+      "url": "https://www.nvidia.com/gtc/dc/",
+      "source": "calendar/manual.yaml",
+      "note": "官网：11月30日工作坊，12月1-3日会议；黄仁勋主题演讲12月1日美东14:00（北京时间12月2日03:00，在本次范围之外）",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "links": [
+        {
+          "source": "calendar/manual.yaml",
+          "url": "https://www.nvidia.com/gtc/dc/"
+        }
+      ]
     }
   ],
   "sources": [
@@ -619,7 +1603,7 @@
       "name": "手工日历",
       "url": "calendar/manual.yaml",
       "status": "ok",
-      "detail": "0 条"
+      "detail": "41 条"
     },
     {
       "name": "FRED 发布日",
@@ -637,13 +1621,13 @@
       "name": "加密",
       "url": "https://api.llama.fi/emissions",
       "status": "failed",
-      "detail": "DefiLlama emissions 返回 402，没有改用别的未核对清单"
+      "detail": "DefiLlama emissions 返回 402。核对过的解锁和期限在手工日历"
     },
     {
       "name": "韩国出口与 TSMC 月营收",
       "url": "",
       "status": "failed",
-      "detail": "这次没有抓到写明发布日的官方页面，manual.yaml 里也没有补"
+      "detail": "自动页面没有解析出发布日。核对过的日期在手工日历"
     }
   ]
 }

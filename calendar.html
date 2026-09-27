@@ -106,15 +106,21 @@
           if (item.consensus) extra.push("一致预期 " + item.consensus);
           if (item.note) extra.push(item.note);
           if (extra.length) body.appendChild(el("p", "unit", extra.join(" · ")));
-          if (item.url) {
-            const link = el("a", null, item.source || "来源");
-            link.href = item.url;
-            link.target = "_blank";
-            link.rel = "noreferrer";
-            body.appendChild(link);
-          } else if (item.source) {
-            body.appendChild(el("p", "unit", item.source));
-          }
+          const links = (item.links && item.links.length) ? item.links : [{ source: item.source || "来源", url: item.url || "" }];
+          const linkRow = el("p", "cal-links");
+          links.forEach((link) => {
+            if (!link.source && !link.url) return;
+            if (link.url) {
+              const anchor = el("a", null, link.source || "来源");
+              anchor.href = link.url;
+              anchor.target = "_blank";
+              anchor.rel = "noreferrer";
+              linkRow.appendChild(anchor);
+            } else {
+              linkRow.appendChild(el("span", null, link.source));
+            }
+          });
+          if (linkRow.childNodes.length) body.appendChild(linkRow);
           row.appendChild(body);
           block.appendChild(row);
         });
