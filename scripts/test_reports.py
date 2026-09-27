@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_site import build_site
-from report_pages import load_reports, reading_order, render_bodies
+from report_pages import load_allowlist, load_reports, page_html, reading_order, render_bodies, sidebar_label
 
 
 def write_fixture(root: Path) -> None:
@@ -63,6 +63,21 @@ date: 2026-09-27
         "---\ntitle: 市场观点汇总\ndate: 2026-09-26\n---\n\n昨天。\n",
         encoding="utf-8",
     )
+    (daily / "2026-09-26_日报.md").write_text(
+        """---
+title: 2026-09-27 日报（试跑版）
+date: 2026-09-26
+---
+# 2026-09-27 日报（试跑版）
+
+见 [[2026-09-27_市场观点汇总]] 和 [[2026-09-27_主题跟踪]]。
+""",
+        encoding="utf-8",
+    )
+    (daily / "2026-09-27_日报.md").write_text(
+        "---\ntitle: 2026-09-27 日报\ndate: 2026-09-27\n---\n\n今天的日报。\n",
+        encoding="utf-8",
+    )
     (macro / "2026-W39 宏观周报.md").write_text(
         """---
 title: 宏观周报
@@ -91,7 +106,9 @@ def test_render() -> None:
         write_fixture(root)
         reports = load_reports(root)
         assert {item.stem for item in reports} == {
+            "2026-09-26_日报",
             "2026-09-26_市场观点汇总",
+            "2026-09-27_日报",
             "2026-09-27_市场观点汇总",
             "2026-09-27_主题跟踪",
             "2026-W39 宏观周报",
@@ -99,14 +116,21 @@ def test_render() -> None:
         }
         ordered = reading_order(reports)
         assert [item.stem for item in ordered] == [
+            "2026-09-27_日报",
             "2026-09-27_市场观点汇总",
             "2026-09-27_主题跟踪",
+            "2026-09-26_日报",
             "2026-09-26_市场观点汇总",
             "2026-W39 宏观周报",
             "2026-W39 产业周报",
         ]
-        assert ordered[0].title == "市场观点汇总"
-        assert ordered[3].date_label == "2026-W39"
+        assert ordered[0].title == "2026-09-27 日报"
+        assert ordered[5].date_label == "2026-W39"
+        trial = next(item for item in reports if item.stem == "2026-09-26_日报")
+        assert trial.date_label == "2026-09-26"
+        assert trial.title == "2026-09-27 日报（试跑版）"
+        assert trial.subtype == 0
+        assert sidebar_label(trial, grouped=True) == "日报（试跑版）"
         render_bodies(reports)
         by_stem = {item.stem: item for item in reports}
         daily = by_stem["2026-09-27_市场观点汇总"]
@@ -133,6 +157,10 @@ def test_render() -> None:
         assert weekly.outline[0][2] == "这一周"
         theme = by_stem["2026-09-27_主题跟踪"]
         assert [level for level, _id, _text in theme.outline] == [2, 3]
+        page = page_html(reports, by_stem["2026-09-26_日报"])
+        assert "日报 · 2026-09-26" in page
+        assert "<h1>2026-09-27 日报（试跑版）</h1>" in page
+        assert ">日报（试跑版）</a>" in page
 
 
 def test_build_outputs() -> None:
@@ -142,7 +170,16 @@ def test_build_outputs() -> None:
         write_fixture(reports)
         root = Path(__file__).resolve().parent.parent
         dist = tmp_path / "dist"
-        build_site(root, dist, reports)
+        allow = {
+            "日报/2026-09-26_日报.md",
+            "日报/2026-09-26_市场观点汇总.md",
+            "日报/2026-09-27_日报.md",
+            "日报/2026-09-27_市场观点汇总.md",
+            "日报/2026-09-27_主题跟踪.md",
+            "宏观周报/2026-W39 宏观周报.md",
+            "产业周报/2026-W39 产业周报.md",
+        }
+        build_site(root, dist, reports, allow=allow)
         index = (dist / "reports" / "index.html").read_text(encoding="utf-8")
         weekly = (dist / "reports" / "2026-W39-宏观周报.html").read_text(encoding="utf-8")
         robots = (dist / "robots.txt").read_text(encoding="utf-8")
@@ -150,7 +187,7 @@ def test_build_outputs() -> None:
         assert "Disallow: /" in robots
         assert 'name="robots" content="noindex"' in index
         assert 'name="robots" content="noindex"' in home
-        assert "市场观点汇总" in index
+        assert "2026-09-27 日报" in index
         assert "2026-09-27" in index
         assert 'aria-current="page"' in index
         assert "主题跟踪" in index
@@ -166,7 +203,59 @@ def test_build_outputs() -> None:
             assert bit in index
 
 
+def test_allowlist_skips_unlisted() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        reports = tmp_path / "reports-src"
+        write_fixture(reports)
+        (reports / "宏观周报" / "2026-09-23 美国宏观流动性周报.md").write_text(
+            "---\ntitle: 2026-09-23 美国宏观流动性周报\n---\n\n流动性周报。\n",
+            encoding="utf-8",
+        )
+        allow_path = tmp_path / "publish.json"
+        allow_path.write_text(
+            """{"include": [
+              "inbox/reports/日报/2026-09-26_日报.md",
+              "宏观周报/2026-W39 宏观周报.md",
+              "产业周报/2026-W39 产业周报.md"
+            ]}""",
+            encoding="utf-8",
+        )
+        loaded = load_allowlist(allow_path)
+        assert loaded == {
+            "日报/2026-09-26_日报.md",
+            "宏观周报/2026-W39 宏观周报.md",
+            "产业周报/2026-W39 产业周报.md",
+        }
+        root = Path(__file__).resolve().parent.parent
+        dist = tmp_path / "dist"
+        build_site(root, dist, reports, allowlist=allow_path)
+        names = sorted(path.name for path in (dist / "reports").glob("*.html"))
+        assert names == [
+            "2026-09-26_日报.html",
+            "2026-W39-产业周报.html",
+            "2026-W39-宏观周报.html",
+            "index.html",
+        ]
+        index = (dist / "reports" / "index.html").read_text(encoding="utf-8")
+        assert "日报 · 2026-09-26" in index
+        assert "<h1>2026-09-27 日报（试跑版）</h1>" in index
+        assert "日报（试跑版）" in index
+        assert 'href="2026-09-27_市场观点汇总.html"' not in index
+        assert "2026-09-27_市场观点汇总" in index
+        assert not (dist / "reports" / "2026-09-27_市场观点汇总.html").exists()
+        assert not (dist / "reports" / "2026-09-23-美国宏观流动性周报.html").exists()
+        missing = tmp_path / "missing.json"
+        try:
+            load_allowlist(missing)
+        except FileNotFoundError:
+            pass
+        else:
+            raise AssertionError("缺少发布名单时应失败")
+
+
 if __name__ == "__main__":
     test_render()
     test_build_outputs()
+    test_allowlist_skips_unlisted()
     print("OK")

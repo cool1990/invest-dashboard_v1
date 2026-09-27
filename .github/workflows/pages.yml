@@ -11,6 +11,7 @@ on:
       - ".nojekyll"
       - "scripts/**"
       - "requirements.txt"
+      - "reports/publish.json"
       - ".github/workflows/pages.yml"
       - ".github/actions/publish-site/**"
 

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import date
@@ -13,7 +14,7 @@ import markdown
 
 KINDS = ("日报", "宏观周报", "产业周报")
 KIND_ORDER = {name: index for index, name in enumerate(KINDS)}
-DAILY_SUBTYPE = {"市场观点汇总": 0, "主题跟踪": 1}
+DAILY_SUBTYPE = {"日报": 0, "市场观点汇总": 1, "主题跟踪": 2}
 CALLOUT_LABEL = {
     "note": "注",
     "info": "说明",
@@ -126,7 +127,28 @@ def parse_when(stem: str, meta: dict[str, str]) -> tuple[date, str]:
     return date.min, ""
 
 
-def load_reports(root: Path) -> list[Report]:
+def normalize_report_path(value: str) -> str:
+    text = value.strip().replace("\\", "/")
+    prefix = "inbox/reports/"
+    if text.startswith(prefix):
+        text = text[len(prefix) :]
+    return text.lstrip("/")
+
+
+def load_allowlist(path: Path) -> set[str]:
+    if not path.is_file():
+        raise FileNotFoundError(f"缺少发布名单 {path}")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    items = data.get("include") if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items:
+        raise ValueError(f"发布名单 {path} 需要非空的 include 列表")
+    cleaned = {normalize_report_path(str(item)) for item in items if str(item).strip()}
+    if not cleaned:
+        raise ValueError(f"发布名单 {path} 没有有效路径")
+    return cleaned
+
+
+def load_reports(root: Path, allow: set[str] | None = None) -> list[Report]:
     if not root.exists():
         return []
     found: list[Report] = []
@@ -137,6 +159,9 @@ def load_reports(root: Path) -> list[Report]:
             continue
         for path in sorted(folder.glob("*.md")):
             if path.name.startswith("._"):
+                continue
+            rel = f"{kind}/{path.name}"
+            if allow is not None and rel not in allow:
                 continue
             text = path.read_text(encoding="utf-8", errors="replace")
             meta, body = split_frontmatter(text)
@@ -416,6 +441,7 @@ def sidebar_label(item: Report, grouped: bool) -> str:
     if item.date_label and title.startswith(item.date_label):
         title = title[len(item.date_label) :].strip(" -_") or item.title
     if grouped:
+        title = re.sub(r"^\d{4}-\d{2}-\d{2}\s*", "", title).strip(" -_") or item.title
         return title
     if item.date_label and not item.title.startswith(item.date_label):
         return f"{item.date_label} {title}"

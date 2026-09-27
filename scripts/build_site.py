@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from report_pages import load_reports, write_report_site
+from report_pages import load_allowlist, load_reports, write_report_site
 
 ROOT = Path(__file__).resolve().parent.parent
 STATIC_HTML = ("index.html", "sentiment.html", "semis.html", "earnings.html")
@@ -22,10 +22,18 @@ def ensure_robots(text: str) -> str:
     return text.replace("<head>", '<head>\n  <meta name="robots" content="noindex">', 1)
 
 
-def build_site(root: Path | None = None, dist: Path | None = None, reports_dir: Path | None = None) -> Path:
+def build_site(
+    root: Path | None = None,
+    dist: Path | None = None,
+    reports_dir: Path | None = None,
+    allow: set[str] | None = None,
+    allowlist: Path | None = None,
+) -> Path:
     root = root or ROOT
     dist = dist or (root / "dist")
     reports_dir = reports_dir if reports_dir is not None else root / "inbox" / "reports"
+    if allow is None:
+        allow = load_allowlist(allowlist or (root / "reports" / "publish.json"))
     if dist.exists():
         shutil.rmtree(dist)
     dist.mkdir(parents=True)
@@ -42,7 +50,7 @@ def build_site(root: Path | None = None, dist: Path | None = None, reports_dir: 
     if (root / "data").exists():
         shutil.copytree(root / "data", dist / "data")
     (dist / "robots.txt").write_text(ROBOTS, encoding="utf-8")
-    write_report_site(load_reports(reports_dir), dist / "reports")
+    write_report_site(load_reports(reports_dir, allow), dist / "reports")
     return dist
 
 
