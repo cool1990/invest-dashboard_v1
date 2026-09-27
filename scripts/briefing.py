@@ -7,7 +7,8 @@
 
 利率与情绪
 - 这一页的总结直接用最新笔记的「小结」，按句切开，页面标题写「笔记原文」。
-- 卡片上的涨跌仍按序列自己算，不写进这段总结。
+- 原文下面写一句：涨跌是相对百分比，利率和溢价以卡片上的基点、百分点为准。
+- 按序列自己算、并且 FRED 有当天收盘时改用 FRED 的变动，收在「按数据自算的变动」里，默认折起。
 
 盈利跟踪
 - 用最新一篇盈利笔记的「简要总结」，收成修正、RSI、估值触发、未来 7 天财报。不适用的代码单独一句。
@@ -45,10 +46,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import (  # noqa: E402
+    SENTIMENT_KIND,
     day_move,
+    format_change,
+    fresh_pair,
+    kind_change,
     lookback,
+    notable,
+    parse_day,
     series_points,
 )
+from signals import fred_tables, with_fred_values  # noqa: E402
 
 BJ = timezone(timedelta(hours=8))
 SEMI_NAMES = {"NVDA", "MU", "INTC", "TSM", "QCOM", "SNDK", "AVGO", "ASML", "AMD", "AMAT", "LRCX", "KLAC", "ARM", "SMCI"}
@@ -188,8 +196,42 @@ def earnings_audit(rows: list[dict[str, str]]) -> list[str]:
     return lines
 
 
-def earnings_lines(summary_text: str, filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]], daily: list[dict[str, str]] | None = None) -> list[str]:
-    lines = earnings_summary_lines(summary_text)
+def align_report_dates(lines: list[str], events: list[dict] | None) -> list[str]:
+    """笔记财报日和日历不一致时，两个日期都写上。日历用的是 Nasdaq 日期。"""
+    if not events:
+        return lines
+    by_ticker = {}
+    for event in events:
+        if event.get("category") != "财报":
+            continue
+        found = re.search(r"（([A-Za-z0-9.]+)）", event.get("title") or "")
+        if found and event.get("date"):
+            by_ticker[found.group(1).upper()] = event["date"]
+    out = []
+    for line in lines:
+        if not line.startswith("未来 7 天财报"):
+            out.append(line)
+            continue
+        prefix, _, rest = line.partition("：")
+        bits = []
+        for piece in rest.split("，"):
+            found = re.search(r"（([A-Za-z0-9.]+)）(20\d{2}-\d{2}-\d{2})", piece)
+            if not found:
+                bits.append(piece)
+                continue
+            code, when = found.group(1).upper(), found.group(2)
+            other = by_ticker.get(code, "")
+            if other and other != when:
+                name = piece[: piece.index("（")]
+                bits.append(f"{name}（{code}）{other[5:]} 或 {when[5:]}（Nasdaq 与笔记不一致）")
+            else:
+                bits.append(piece)
+        out.append(prefix + "：" + "，".join(bits))
+    return out
+
+
+def earnings_lines(summary_text: str, filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]], daily: list[dict[str, str]] | None = None, events: list[dict] | None = None) -> list[str]:
+    lines = align_report_dates(earnings_summary_lines(summary_text), events)
     lines.extend(earnings_audit(daily or []))
     latest_days = [row.get("date", "") for row in days if row.get("date")]
     latest = max(latest_days) if latest_days else ""
@@ -445,6 +487,42 @@ def calendar_lines(events: list[dict], today: date) -> list[str]:
     return lines
 
 
+SENTIMENT_ORDER = [
+    "cnn_fg", "aaii", "spx_rsi", "nasdaq_rsi", "vix", "etf_spx", "etf_ndx",
+    "spx_breadth_20", "spx_breadth_50", "spx_breadth_200",
+    "ndx_breadth_20", "ndx_breadth_50", "ndx_breadth_200",
+    "us_10y", "tips_10y", "t10yie", "us_2y", "t10y2y", "hy_oas",
+    "effr_next", "effr_year", "effr_ny",
+    "wti", "gold", "copper", "usdcny", "btc",
+]
+SENTIMENT_CAVEAT = "原文的涨跌是相对百分比，利率和溢价以卡片上的基点、百分点为准。"
+
+
+def sentiment_moves(rows: list[dict[str, str]]) -> list[str]:
+    by_id = grouped(rows, "series_id")
+    lines = []
+    for series_id in SENTIMENT_ORDER:
+        items = by_id.get(series_id) or []
+        prev, curr = fresh_pair(items)
+        if not prev or not curr:
+            continue
+        kind = SENTIMENT_KIND.get(series_id, "pct")
+        change = kind_change(kind, fnum(prev.get("value", "")), fnum(curr.get("value", "")))
+        if change is None or not notable(kind, series_id, change):
+            continue
+        name = "比特币" if series_id == "btc" else (curr.get("name") or series_id)
+        prev_obs = (prev.get("obs_date") or prev.get("date") or "")[:10]
+        curr_obs = (curr.get("obs_date") or curr.get("date") or "")[:10]
+        gap = ""
+        prev_day, curr_day = parse_day(prev_obs), parse_day(curr_obs)
+        if prev_day and curr_day and (curr_day - prev_day).days > 1:
+            gap = f"，较 {prev_obs[5:]}"
+        prev_txt = f"{fnum(prev.get('value', '')):g}"
+        curr_txt = f"{fnum(curr.get('value', '')):g}"
+        lines.append(f"{name} {format_change(kind, change)}{gap}（{prev_txt}→{curr_txt}）")
+    return lines
+
+
 def sentiment_note(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
         return []
@@ -472,6 +550,8 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
     outlook = json.loads(outlook_path.read_text(encoding="utf-8")) if outlook_path.exists() else None
     earnings_summary = load_csv(data_dir / "earnings" / "summary.csv")
     sentiment_rows = load_csv(data_dir / "sentiment" / "summary.csv")
+    sentiment_series = load_csv(data_dir / "sentiment" / "series.csv")
+    computed_sentiment = sentiment_moves(with_fred_values(sentiment_series, fred_tables(data_dir)))
     pages = {
         "liquidity": cap(liquidity_lines(
             weekly,
@@ -496,6 +576,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             press,
             days,
             load_csv(data_dir / "earnings" / "daily.csv"),
+            calendar_events,
         )),
         "calendar": cap(calendar_lines(calendar_events, today)),
     }
@@ -503,5 +584,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
         "asof": today.isoformat(),
         "pages": pages,
         "notes": {},
+        "computed": {"sentiment": computed_sentiment},
+        "caveat": {"sentiment": SENTIMENT_CAVEAT},
         "semi_ai": sorted(SEMI_NAMES),
     }

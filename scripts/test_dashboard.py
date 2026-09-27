@@ -11,9 +11,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ingest"))
 
-from briefing import build_briefing, calendar_lines, earnings_audit, earnings_summary_lines, semis_lines
+from briefing import build_briefing, calendar_lines, earnings_audit, earnings_lines, earnings_summary_lines, semis_lines
 from build_site import build_site
-from common import fresh_pair, kind_change, repeated_runs
+from common import fresh_pair, kind_change, price_carried, repeated_runs
 from signals import build_signals
 from fetch_calendar import annotate, dedupe, event, h41_events, load_manual, parse_bea, parse_census
 from parse_notes import parse_earnings, parse_filings, parse_press, parse_sentiment, to_beijing
@@ -113,6 +113,8 @@ def test_briefing_and_build() -> None:
             "利率指标：10年美债收益率偏高。",
         ]
         assert "CNN -10.0 点" not in " ".join(briefing["pages"]["sentiment"])
+        assert any("CNN -10.0 点" in line for line in briefing["computed"]["sentiment"])
+        assert "相对百分比" in briefing["caveat"]["sentiment"]
         assert not briefing.get("notes", {}).get("sentiment")
         assert not any("变为" in line for line in briefing["pages"]["sentiment"])
         dist = build_site(root, root / "dist")
@@ -269,6 +271,12 @@ def test_earnings_and_semis_lines() -> None:
     assert lines[1] == "RSI：低于 30 的是 MCD，高于 70 的是 META"
     assert lines[2] == "估值触发：PDD、MCD"
     assert "美光（MU）2026-10-01" in lines[3] and "耐克（NKE）2026-10-02" in lines[3]
+    aligned = earnings_lines(text, [], [], [], None, [
+        {"date": "2026-09-30", "category": "财报", "title": "美光（MU）财报"},
+        {"date": "2026-10-02", "category": "财报", "title": "耐克（NKE）财报"},
+    ])
+    assert any("美光（MU）09-30 或 10-01（Nasdaq 与笔记不一致）" in line for line in aligned)
+    assert any("耐克（NKE）2026-10-02" in line for line in aligned)
     assert lines[4].startswith("不适用：MARA、IREN")
     assert "Forward PE" in lines[4]
     semis = semis_lines(
@@ -327,6 +335,26 @@ def test_accuracy_rules() -> None:
     assert repeated_runs([(date(2026, 9, 25), 41.892), (date(2026, 9, 26), 41.892)]) == [
         (date(2026, 9, 25), date(2026, 9, 26), 41.892)
     ]
+    assert not price_carried(
+        {"date": "2026-09-24", "price": "7.50", "chg_1d_pct": "7.1", "chg_7d_pct": "25.7"},
+        {"date": "2026-09-25", "price": "7.50", "chg_1d_pct": "0.0", "chg_7d_pct": "27.1"},
+        "price",
+    )
+    assert price_carried(
+        {"date": "2026-09-25", "value": "41.892", "chg_1d_pct": "-0.70", "chg_7d_pct": "-2.29"},
+        {"date": "2026-09-26", "value": "41.892", "chg_1d_pct": "-0.70", "chg_7d_pct": "-2.29"},
+        "value",
+    )
+    assert price_carried(
+        {"date": "2026-09-25", "price": "7.50", "chg_1d_pct": "0.0", "chg_7d_pct": "27.1"},
+        {"date": "2026-09-26", "price": "7.50", "chg_1d_pct": "0.0", "chg_7d_pct": "15.4"},
+        "price",
+    )
+    assert not price_carried(
+        {"date": "2026-09-25", "price": "1.74", "chg_1d_pct": "7.1"},
+        {"date": "2026-09-26", "price": "1.75", "chg_1d_pct": "6.7"},
+        "price",
+    )
     with tempfile.TemporaryDirectory() as tmp:
         data = Path(tmp)
         (data / "sentiment").mkdir(parents=True)
@@ -353,7 +381,7 @@ def test_accuracy_rules() -> None:
         health = " ".join(item["level"] + item["text"] for item in payload["health"])
         assert "5.16" in health and "5.18" in health
         assert "MSTR" in health
-        assert "BABA" in health and "待确认" in health
+        assert "BABA" in health and "错误" in health
         assert "PDD" not in health and "TME" not in health
         assert "DGS2" in health
         titles = [item["title"] for item in payload["signals"]["风险"] + payload["signals"]["机会"] + payload["signals"]["关注"]]
@@ -365,6 +393,14 @@ def test_accuracy_rules() -> None:
         (data / "series" / "DGS10.csv").write_text("date,value\n2026-09-24,5.21\n", encoding="utf-8")
         wider = build_signals(data, date(2026, 9, 27))
         assert any("5.21" in item["text"] for item in wider["health"])
+        (data / "sentiment" / "series.csv").write_text(
+            "date,series_id,name,value,obs_date,carried,label\n"
+            "2026-09-23,us_2y,2年期美债,4.89,2026-09-23,,风险\n",
+            encoding="utf-8",
+        )
+        (data / "series" / "DGS2.csv").write_text("date,value\n2026-09-23,4.85\n", encoding="utf-8")
+        reported = build_signals(data, date(2026, 9, 27))
+        assert any("4.89" in item["text"] and "4.85" in item["text"] for item in reported["health"])
 
 
 if __name__ == "__main__":

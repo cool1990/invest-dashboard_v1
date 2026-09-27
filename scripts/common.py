@@ -172,8 +172,23 @@ def lookback(points: list[tuple[date, float]], days: int) -> tuple[date, float, 
     return prev[0], prev[1], last_day, last_val, change
 
 
+def price_carried(prev: dict, curr: dict, value_key: str = "price") -> bool:
+    """沿用：涨跌列和价格都与前一天逐字相同，或周末且价格没变。
+
+    只有价格相同、涨跌列不同的工作日，仍是新观测，一日变动记 0。
+    周末价格变了，仍算新观测。
+    """
+    price_same = str(prev.get(value_key, "")) == str(curr.get(value_key, ""))
+    keys = sorted(key for key in set(prev) | set(curr) if key.startswith("chg_"))
+    change_same = bool(keys) and all(str(prev.get(key, "")) == str(curr.get(key, "")) for key in keys)
+    if price_same and change_same:
+        return True
+    day = parse_day(curr.get("date") or "")
+    return bool(price_same and day is not None and day.weekday() >= 5)
+
+
 def repeated_runs(points: list[tuple[date, float]]) -> list[tuple[date, date, float]]:
-    """相邻日期数值完全一样，视为未更新。"""
+    """相邻日期数值完全一样。价格相同本身不是沿用，沿用看 price_carried。"""
     runs = []
     index = 1
     while index < len(points):

@@ -114,7 +114,7 @@ details.fold, details.note-src { margin: 8px 0 16px; }
 details.fold summary, details.note-src summary { cursor: pointer; font-weight: 700; }
 .links { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 8px; }
 footer ul { padding-left: 1.1em; margin: 8px 0; }
-td.anomaly { background: #f8eceb; font-weight: 700; }
+td.anomaly, td.stale { background: #f8eceb; font-weight: 700; }
 .notes {
   background: var(--teal-soft);
   border-radius: 12px;
