@@ -561,7 +561,7 @@
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
     "history_start": "2026-09-10",
     "history_end": "2026-09-26",
-    "observations": 220,
+    "observations": 233,
     "composite_end": "2026-09-26",
     "files": {
       "series": "sentiment/series.csv",
