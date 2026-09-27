@@ -590,7 +590,25 @@ def earliest_date(rows: list[dict[str, str]], field: str) -> str:
     return min(dates) if dates else ""
 
 
+# 这些键属于流动性抓取。整理笔记时先抄下来，写完再放回去。
+LIQUIDITY_META_KEYS = (
+    "updated_at",
+    "history_start",
+    "display_unit",
+    "spread_unit",
+    "net_liquidity",
+    "weekly_change",
+    "spreads",
+    "reserves_percentile",
+    "files",
+    "series",
+    "latest_wednesday",
+    "derived_refresh",
+)
+
+
 def build_meta(existing: dict, bundles: dict) -> dict:
+    preserved = {key: existing[key] for key in LIQUIDITY_META_KEYS if key in existing}
     sentiment = bundles["sentiment"]
     composite = bundles["composite"]
     earnings = bundles["earnings"]
@@ -647,6 +665,7 @@ def build_meta(existing: dict, bundles: dict) -> dict:
         existing["semis"]["korea"]["end"],
     ]
     existing["notes_asof"] = max((item for item in ends if item), default="")
+    existing.update(preserved)
     return existing
 
 

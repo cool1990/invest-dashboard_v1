@@ -76,7 +76,7 @@ FRED 里 WALCL、WDTGAL、准备金（WRBWFRBL）的单位是百万美元，写�
 
 周变动是与上一条周三观测相比的差额。SOFR−IORB 和 EFFR−IORB 的单位是基点。准备金分位是 2022-01-01 起、到该周三为止的周三观测中，准备金不高于当前值的占比，不是准备金短缺的度量。
 
-「更新数据」每天 22:00 UTC 跑一次，也可以手动运行。每条序列单独下载。成功就覆盖 `data/series/<id>.csv`；失败就留下原来的文件，并在 `data/meta.json` 该条写下 `last_fetch_ok`（false）、`last_obs_date`（文件里最后一个日期，没有旧文件则为 null）和 `fetched_at`。成功的条目同样有这三个字段，`last_fetch_ok` 为 true。周报读 CSV 时看这三项，就能判断这条是不是刚拉到的。工作流仍会把这次的 `data/` 提交上去，所以新鲜度标记不会丢。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
+「更新数据」每天 22:00 UTC 跑一次，也可以手动运行。每条序列单独下载。成功就覆盖 `data/series/<id>.csv`；失败就把原来的文件放进这一次的暂存目录，一起留下。`publish()` 只替换 `data/series` 和 `data/derived`，再合并 `data/meta.json` 里的流动性字段。情绪、盈利、半导体和 `notes_skipped.csv` 不会被这次发布删掉。每条写下 `last_fetch_ok`、`last_obs_date`（文件里最后一个日期，没有旧文件则为 null）和 `fetched_at`。失败时 `last_fetch_ok` 为 false，成功为 true。周报读 CSV 时看这三项，就能判断这条是不是刚拉到的。整理笔记时反过来：只更新情绪、盈利、半导体和 `notes_asof`，流动性字段原样保留。工作流仍会把这次的 `data/` 提交上去，所以新鲜度标记不会丢。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
 
 周三表和每日利差只在 WALCL、WDTGAL、RRPONTSYD、WRBWFRBL、SOFR、IORB、EFFR 这次都成功时重算。否则 `data/derived/` 保持原文件，`derived_refresh.ok` 为 false，并写明是哪几条没刷新。
 

@@ -3,7 +3,8 @@
 
 只用 Python 标准库。每条序列单独处理：下载成功就覆盖它的 CSV；
 失败就留下原来的文件，并在 data/meta.json 记下 last_fetch_ok、
-last_obs_date、fetched_at。不整目录替换 data/，以免清掉笔记整理出来的其他数据。
+last_obs_date、fetched_at。publish() 只替换 data/series 和 data/derived，
+再合并 meta.json 里的流动性字段，不动情绪、盈利、半导体和 notes_skipped.csv。
 
 不要给请求加自定义 User-Agent。2026-09-27 实测：自定义 UA 在
 HTTP/2 上会立刻 INTERNAL_ERROR，在 HTTP/1.1 上会挂起直到超时；
@@ -15,7 +16,9 @@ from __future__ import annotations
 import csv
 import io
 import json
+import shutil
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -270,6 +273,9 @@ SERIES: list[dict] = [
 
 # 周三派生表用到的序列。其中任何一条这次没刷新，就不重写 derived/。
 DERIVED_IDS = ("WALCL", "WDTGAL", "RRPONTSYD", "WRBWFRBL", "SOFR", "IORB", "EFFR")
+
+# 这些键属于早晨笔记。publish() 合并 meta 时一律保留磁盘上的原值。
+NOTES_META_KEYS = ("sentiment", "earnings", "semis", "notes_asof")
 
 
 def _log(msg: str) -> None:
@@ -615,21 +621,68 @@ def series_entry(
     return entry
 
 
-def load_meta() -> dict:
-    path = ROOT / "data" / "meta.json"
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+def merge_meta(existing: dict, incoming: dict) -> dict:
+    """用 incoming 更新流动性字段，笔记字段始终留 existing 里的那一份。"""
+    merged = dict(existing)
+    for key, value in incoming.items():
+        if key in NOTES_META_KEYS:
+            continue
+        merged[key] = value
+    for key in NOTES_META_KEYS:
+        if key in existing:
+            merged[key] = existing[key]
+    return merged
 
 
-def save_meta(meta: dict) -> None:
-    path = ROOT / "data" / "meta.json"
-    tmp = path.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    tmp.replace(path)
+def replace_subdir(src: Path, dest: Path) -> None:
+    """用 src 换掉 dest 这一个子目录，不动它旁边的其他目录。"""
+    if not src.is_dir():
+        return
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    incoming = dest.parent / f".{dest.name}.incoming"
+    backup = dest.parent / f".{dest.name}.backup"
+    if incoming.exists():
+        shutil.rmtree(incoming)
+    shutil.copytree(src, incoming)
+    if backup.exists():
+        shutil.rmtree(backup)
+    if dest.exists():
+        dest.rename(backup)
+    try:
+        incoming.rename(dest)
+    except Exception:
+        if backup.exists() and not dest.exists():
+            backup.rename(dest)
+        raise
+    if backup.exists():
+        shutil.rmtree(backup)
 
 
-def write_derived(weekly: list[dict], spreads: list[dict]) -> None:
+def publish(staging: Path, data_dir: Path | None = None) -> None:
+    """只替换 data/series 和 data/derived，并合并 meta.json。
+
+    staging 里就算带了 sentiment/ 或一份残缺的 meta，也不会覆盖笔记数据。
+    某个子目录不在 staging 里时，磁盘上的那个目录保持原样。
+    """
+    data = data_dir if data_dir is not None else ROOT / "data"
+    data.mkdir(parents=True, exist_ok=True)
+    for name in ("series", "derived"):
+        src = staging / name
+        if src.is_dir():
+            replace_subdir(src, data / name)
+    meta_src = staging / "meta.json"
+    if not meta_src.exists():
+        return
+    incoming = json.loads(meta_src.read_text(encoding="utf-8"))
+    meta_path = data / "meta.json"
+    existing = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
+    merged = merge_meta(existing, incoming)
+    tmp = meta_path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(meta_path)
+
+
+def write_derived(weekly: list[dict], spreads: list[dict], dest: Path) -> None:
     weekly_header = [
         "date",
         "walcl_bn",
@@ -674,10 +727,9 @@ def write_derived(weekly: list[dict], spreads: list[dict]) -> None:
                 row["rates_asof"],
             ]
         )
-    data = ROOT / "data"
-    write_csv(data / "derived" / "weekly.csv", weekly_header, weekly_rows)
+    write_csv(dest / "weekly.csv", weekly_header, weekly_rows)
     write_csv(
-        data / "derived" / "spreads.csv",
+        dest / "spreads.csv",
         ["date", "sofr", "iorb", "effr", "sofr_iorb_bp", "effr_iorb_bp"],
         [[r["date"], r["sofr"], r["iorb"], r["effr"], r["sofr_iorb_bp"], r["effr_iorb_bp"]] for r in spreads],
     )
@@ -728,119 +780,129 @@ def main() -> int:
             else:
                 _log(f"FETCH_FAIL {key} {decision['error']}")
 
+    staging = Path(tempfile.mkdtemp(prefix="liq-stage-", dir=str(ROOT)))
     levels: dict[str, list[tuple[date, Decimal]]] = {}
-    for spec in SERIES:
-        decision = outcomes[spec["id"]]
-        path = data_series / f"{spec['id']}.csv"
-        if decision["action"] == "write":
-            rows = decision["rows"]
-            write_csv(path, ["date", "value"], [[d.isoformat(), dec_str(v)] for d, v in rows])
-            levels[spec["id"]] = rows
-        elif decision["action"] == "keep":
-            kept = read_series_file(path)
-            if kept:
-                levels[spec["id"]] = kept
-                _log(f"KEPT {spec['id']} n={len(kept)} last={kept[-1][0].isoformat()}")
-            else:
+    try:
+        for spec in SERIES:
+            decision = outcomes[spec["id"]]
+            path = data_series / f"{spec['id']}.csv"
+            if decision["action"] == "write":
+                rows = decision["rows"]
+                write_csv(
+                    staging / "series" / f"{spec['id']}.csv",
+                    ["date", "value"],
+                    [[d.isoformat(), dec_str(v)] for d, v in rows],
+                )
+                levels[spec["id"]] = rows
+            elif decision["action"] == "keep" and path.exists():
+                dest = staging / "series" / path.name
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(path, dest)
+                kept = read_series_file(path)
+                if kept:
+                    levels[spec["id"]] = kept
+                    _log(f"KEPT {spec['id']} n={len(kept)} last={kept[-1][0].isoformat()}")
+            elif decision["action"] == "keep":
                 _log(f"KEPT {spec['id']} 没有旧文件")
 
-    updated_at = now_stamp()
-    meta = load_meta()
-    meta["updated_at"] = updated_at
-    meta["history_start"] = START.isoformat()
-    meta.setdefault("display_unit", "十亿美元")
-    meta.setdefault("spread_unit", "基点")
-    meta.setdefault(
-        "net_liquidity",
-        {
-            "name": "市场常用净流动性代理（非官方）",
-            "formula": "WALCL − WDTGAL − RRPONTSYD，三条都换算成十亿美元后再相减",
-            "note": "这是市场上常用的代理算法，不是美联储发布的官方指标。",
-            "file": "derived/weekly.csv",
-            "column": "net_liq_bn",
-        },
-    )
-    meta.setdefault("weekly_change", {"name": "周变动", "note": "与上一条周三观测相比的差额，单位是十亿美元。"})
-    meta.setdefault(
-        "spreads",
-        {
-            "name": "SOFR−IORB 与 EFFR−IORB",
-            "formula": "(利率 − IORB) × 100，单位是基点",
-            "file": "derived/spreads.csv",
-        },
-    )
-    meta.setdefault(
-        "reserves_percentile",
-        {
-            "name": "准备金分位（2022年以来）",
-            "definition": "2022-01-01 起至该周三（含）的周三观测中，准备金余额小于或等于当前值的占比。",
-            "note": "这不是准备金短缺的度量，只说明当前水平在这段历史里的位置。",
-            "file": "derived/weekly.csv",
-            "column": "reserves_percentile",
-        },
-    )
-    meta["files"] = {"weekly": "derived/weekly.csv", "spreads": "derived/spreads.csv"}
+        updated_at = now_stamp()
+        meta = {
+            "updated_at": updated_at,
+            "history_start": START.isoformat(),
+            "display_unit": "十亿美元",
+            "spread_unit": "基点",
+            "net_liquidity": {
+                "name": "市场常用净流动性代理（非官方）",
+                "formula": "WALCL − WDTGAL − RRPONTSYD，三条都换算成十亿美元后再相减",
+                "note": "这是市场上常用的代理算法，不是美联储发布的官方指标。",
+                "file": "derived/weekly.csv",
+                "column": "net_liq_bn",
+            },
+            "weekly_change": {
+                "name": "周变动",
+                "note": "与上一条周三观测相比的差额，单位是十亿美元。",
+            },
+            "spreads": {
+                "name": "SOFR−IORB 与 EFFR−IORB",
+                "formula": "(利率 − IORB) × 100，单位是基点",
+                "file": "derived/spreads.csv",
+            },
+            "reserves_percentile": {
+                "name": "准备金分位（2022年以来）",
+                "definition": "2022-01-01 起至该周三（含）的周三观测中，准备金余额小于或等于当前值的占比。",
+                "note": "这不是准备金短缺的度量，只说明当前水平在这段历史里的位置。",
+                "file": "derived/weekly.csv",
+                "column": "reserves_percentile",
+            },
+            "files": {"weekly": "derived/weekly.csv", "spreads": "derived/spreads.csv"},
+        }
 
-    entries = []
-    for spec in SERIES:
-        decision = outcomes[spec["id"]]
-        if decision["action"] == "discontinued":
+        entries = []
+        for spec in SERIES:
+            decision = outcomes[spec["id"]]
+            if decision["action"] == "discontinued":
+                entries.append(
+                    series_entry(
+                        spec,
+                        None,
+                        last_fetch_ok=decision["last_fetch_ok"],
+                        fetched_at=decision["fetched_at"],
+                        status="discontinued",
+                        last_raw=decision["last_raw"],
+                        error=decision["error"],
+                    )
+                )
+                continue
+            rows = levels.get(spec["id"])
+            status = "ok" if decision["last_fetch_ok"] else "fetch_failed"
             entries.append(
                 series_entry(
                     spec,
-                    None,
+                    rows,
                     last_fetch_ok=decision["last_fetch_ok"],
                     fetched_at=decision["fetched_at"],
-                    status="discontinued",
-                    last_raw=decision["last_raw"],
+                    status=status,
                     error=decision["error"],
                 )
             )
-            continue
-        rows = levels.get(spec["id"])
-        status = "ok" if decision["last_fetch_ok"] else "fetch_failed"
-        entries.append(
-            series_entry(
-                spec,
-                rows,
-                last_fetch_ok=decision["last_fetch_ok"],
-                fetched_at=decision["fetched_at"],
-                status=status,
-                error=decision["error"],
-            )
-        )
-    meta["series"] = entries
+        meta["series"] = entries
 
-    failed_core = [sid for sid in DERIVED_IDS if not outcomes[sid]["last_fetch_ok"]]
-    weekly = None
-    spreads = None
-    if failed_core:
-        meta["derived_refresh"] = {
-            "ok": False,
-            "fetched_at": updated_at,
-            "failed": failed_core,
-            "note": "这些序列本次没有刷新，周三表和利差表保持原文件：" + "、".join(failed_core),
-        }
-        _log("DERIVED_SKIP " + ",".join(failed_core))
-    else:
-        specs = {item["id"]: item for item in SERIES}
-        try:
-            weekly = build_weekly(levels, specs)
-            spreads = build_spreads(levels)
-            write_derived(weekly, spreads)
-            meta["latest_wednesday"] = weekly[-1]["date"].isoformat()
-            meta["derived_refresh"] = {"ok": True, "fetched_at": updated_at}
-            _log(f"DERIVED_OK wed={weekly[-1]['date'].isoformat()}")
-        except Exception as exc:  # noqa: BLE001
+        failed_core = [sid for sid in DERIVED_IDS if not outcomes[sid]["last_fetch_ok"]]
+        weekly = None
+        spreads = None
+        if failed_core:
             meta["derived_refresh"] = {
                 "ok": False,
                 "fetched_at": updated_at,
-                "note": f"周三表没有重算，原文件保留：{exc}",
+                "failed": failed_core,
+                "note": "这些序列本次没有刷新，周三表和利差表保持原文件：" + "、".join(failed_core),
             }
-            _log(f"DERIVED_FAIL {exc}")
-            weekly = None
+            _log("DERIVED_SKIP " + ",".join(failed_core))
+        else:
+            specs = {item["id"]: item for item in SERIES}
+            try:
+                weekly = build_weekly(levels, specs)
+                spreads = build_spreads(levels)
+                write_derived(weekly, spreads, staging / "derived")
+                meta["latest_wednesday"] = weekly[-1]["date"].isoformat()
+                meta["derived_refresh"] = {"ok": True, "fetched_at": updated_at}
+                _log(f"DERIVED_OK wed={weekly[-1]['date'].isoformat()}")
+            except Exception as exc:  # noqa: BLE001
+                meta["derived_refresh"] = {
+                    "ok": False,
+                    "fetched_at": updated_at,
+                    "note": f"周三表没有重算，原文件保留：{exc}",
+                }
+                _log(f"DERIVED_FAIL {exc}")
+                weekly = None
 
-    save_meta(meta)
+        (staging / "meta.json").write_text(
+            json.dumps(meta, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        publish(staging)
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
 
     failed = [spec["id"] for spec in SERIES if outcomes[spec["id"]]["action"] == "keep"]
     discontinued = [spec["id"] for spec in SERIES if outcomes[spec["id"]]["action"] == "discontinued"]
