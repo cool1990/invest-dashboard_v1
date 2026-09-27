@@ -148,6 +148,9 @@ td.trigger { background: #fbf3e8; font-weight: 700; }
 }
 .ind-card:hover .hint, .ind-card:focus-within .hint, .ind-card.open .hint { display: block; }
 .chip.chance { color: var(--teal); border-color: #c5ddd6; background: var(--teal-soft); }
+.chip.pri-high { color: var(--down); border-color: #e7c9c6; background: #f8eceb; margin-right: 6px; }
+.chip.pri-mid { color: #8a5a12; border-color: #ead9bc; background: #fbf3e8; margin-right: 6px; }
+.chip.pri-low { color: var(--muted); margin-right: 6px; }
 .subhead { margin: 14px 0 8px; font-size: 15px; }
 .filing-list { display: grid; gap: 10px; }
 .filing {

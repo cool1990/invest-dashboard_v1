@@ -8,12 +8,14 @@
 - 直接用最新一篇宏观指标笔记的「小结」，不另写。小结按句拆开。没有小结就写「今日无变动」。
 
 盈利跟踪
-- 估值触发达成、RSI 跨过 30 或 70、修正信号新变成强上修或强下修。
-- 最新一天有公告或新闻稿。
+- 用最新一篇盈利笔记的「简要总结」，收成修正、RSI、估值触发、未来 7 天财报。不适用的代码单独一句。
+- 最新一天有公告或新闻稿才再加一句。
 
 半导体
-- 存储或 GPU 的 1 日变动达到 5%，OpenRouter 7 日环比达到 10%，SiliconData 7 日达到 5%。
-- 韩国出口：只有最新一期的 asof 比上一期更晚时，才写成新期间。笔记把各期 asof 覆盖成同一天时不报。
+- 存储：最新一天里，一日变动达到 5% 的才点名；都没到就写没有明显波动。
+- GPU 租金：一日达到 5% 写一日；一日没到、但一周达到 10% 的，写一日和一周。都没到就写没有明显波动。
+- 用量：OpenRouter 7 日环比达到 10%，或 SiliconData 7 日达到 5%，才写。
+- 韩国出口：只有最新一期的 asof 比上一期更晚时，才写成新期间。否则写今日无新数。
 
 流动性（四段，数字都从 data/ 现算）
 - 数量层：净流动性周变动达到 20（十亿美元）写边际放松或收紧，否则写变化不大。准备金分位不高于 25 写缓冲仍薄，不低于 50 写缓冲还厚。净流动性写本周和上周的周变动，准备金写本周周变动。净流动性公式里，WALCL、TGA、隔夜逆回购三项里贡献最大的那一项写主因。联储资产周变动绝对值小于 10 写基本横盘。准备金分位照 weekly.csv。隔夜逆回购低于 10 写缓冲基本用完。
@@ -22,7 +24,7 @@
 - TGA 前景：读 data/liquidity/tga_outlook.json。峰值来自 2026-08-05 财政部季度再融资声明（https://home.treasury.gov/news/press-releases/sb0590）：10 月下旬约 1.05 万亿，上下 500 亿美元。高出本周 TGA 的差额按本周三的数来算。没有这个文件就不写这一段。
 
 日历
-- 只列北京时间的今天和明天。没有就写「今日无变动」。
+- 只列北京时间的今天和明天、而且优先级是「高」的条目。没有就写「今日无变动」。
 
 每页最多 8 句。没有任何一句时写「今日无变动」。
 """
@@ -31,6 +33,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -84,27 +87,67 @@ def cap(lines: list[str]) -> list[str]:
     return clean
 
 
-def cross(prev: float, curr: float, level: float) -> bool:
-    return (prev - level) * (curr - level) < 0 or (prev < level <= curr) or (prev > level >= curr)
+EARNINGS_NAMES = {
+    "MU": "美光", "NKE": "耐克", "AAPL": "苹果", "MSFT": "微软", "GOOGL": "谷歌",
+    "AMZN": "亚马逊", "META": "Meta", "NVDA": "英伟达", "TSM": "台积电", "AVGO": "博通",
+    "AMD": "超威", "INTC": "英特尔", "QCOM": "高通", "AMAT": "应用材料", "ASML": "ASML",
+    "ARM": "Arm", "COST": "开市客", "WMT": "沃尔玛", "JPM": "摩根大通",
+}
 
 
-def earnings_lines(daily: list[dict[str, str]], filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]]) -> list[str]:
+def ticker_list(text: str) -> str:
+    names = re.findall(r"[A-Z][A-Z0-9.]{1,5}", text or "")
+    return "、".join(names)
+
+
+def earnings_summary_lines(text: str) -> list[str]:
+    if not text:
+        return []
     lines: list[str] = []
-    by_ticker = grouped(daily, "ticker")
-    for ticker, points in by_ticker.items():
-        if len(points) < 2:
-            continue
-        prev, curr = points[-2], points[-1]
-        if prev.get("triggered") != "1" and curr.get("triggered") == "1":
-            lines.append(f"{ticker} 估值触发")
-        old, new = fnum(prev.get("rsi", "")), fnum(curr.get("rsi", ""))
-        if old is not None and new is not None:
-            for level in (30, 70):
-                if cross(old, new, level):
-                    lines.append(f"{ticker} RSI 跨过 {level}")
-        old_sig, new_sig = prev.get("revision_signal", ""), curr.get("revision_signal", "")
-        if new_sig in {"强上修", "强下修"} and new_sig != old_sig:
-            lines.append(f"{ticker} 修正信号变为{new_sig}")
+    parts = []
+    up = re.search(r"强上修[：:]\s*([^；。\n]+)", text)
+    down = re.search(r"强下修[：:]\s*([^；。\n]+)", text)
+    if up and ticker_list(up.group(1)):
+        parts.append("强上修 " + ticker_list(up.group(1)))
+    if down and ticker_list(down.group(1)):
+        parts.append("强下修 " + ticker_list(down.group(1)))
+    if parts or re.search(r"下财年\s*EPS", text):
+        sentence = "修正：" + "；".join(parts) if parts else "修正"
+        if re.search(r"无变化", text):
+            sentence += "。下财年 EPS 没有变化"
+        lines.append(sentence)
+    low = re.search(r"低于\s*30\s*([A-Z0-9、,， ]+)", text)
+    high = re.search(r"高于\s*70\s*([A-Z0-9、,， ]+)", text)
+    rsi = []
+    if low and ticker_list(low.group(1)):
+        rsi.append("低于 30 的是 " + ticker_list(low.group(1)))
+    if high and ticker_list(high.group(1)):
+        rsi.append("高于 70 的是 " + ticker_list(high.group(1)))
+    if rsi:
+        lines.append("RSI：" + "，".join(rsi))
+    trigger = re.search(r"估值触发[：:]\s*([^\n。]+)", text)
+    if trigger and ticker_list(trigger.group(1)):
+        lines.append("估值触发：" + ticker_list(trigger.group(1)))
+    upcoming = re.search(r"未来\s*7\s*天财报[：:]\s*([^\n]+)", text)
+    if upcoming:
+        bits = []
+        for company, ticker, when in re.findall(r"([^；;]{0,80}?)\(([A-Za-z0-9.]+)\)\s*(20\d{2}-\d{2}-\d{2})", upcoming.group(1)):
+            code = ticker.upper()
+            name = EARNINGS_NAMES.get(code, code)
+            bits.append(f"{name}（{code}）{when}")
+        if bits:
+            lines.append("未来 7 天财报：" + "，".join(bits))
+    if "不适用" in text:
+        tail = text.split("不适用", 1)[1]
+        codes = re.findall(r"/\s*([A-Z][A-Z0-9.]{1,5})", tail)
+        if codes:
+            reason = "EPS 合计不超过 0，没有 Forward PE" if "Forward PE" in tail else "笔记标明不适用"
+            lines.append("不适用：" + "、".join(codes) + "，" + reason)
+    return lines
+
+
+def earnings_lines(summary_text: str, filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]]) -> list[str]:
+    lines = earnings_summary_lines(summary_text)
     latest_days = [row.get("date", "") for row in days if row.get("date")]
     latest = max(latest_days) if latest_days else ""
     if latest:
@@ -119,35 +162,58 @@ def earnings_lines(daily: list[dict[str, str]], filings: list[dict[str, str]], p
     return lines
 
 
+def signed_pct(value: float) -> str:
+    return f"{value:+.1f}%"
+
+
 def semis_lines(memory: list[dict[str, str]], gpu: list[dict[str, str]], router: list[dict[str, str]], silicon: list[dict[str, str]], korea: list[dict[str, str]]) -> list[str]:
     lines: list[str] = []
-    for row in memory:
-        change = fnum(row.get("chg_1d_pct", ""))
-        if change is not None and abs(change) >= 5 and row.get("date") == max(item.get("date", "") for item in memory):
-            lines.append(f"{row.get('product')} 一日变动 {change:+.1f}%")
-    if gpu:
-        latest = max(row.get("date", "") for row in gpu)
-        for row in gpu:
+    if memory:
+        latest = max(row.get("date", "") for row in memory)
+        moved = []
+        for row in memory:
             if row.get("date") != latest:
                 continue
             change = fnum(row.get("chg_1d_pct", ""))
             if change is not None and abs(change) >= 5:
-                lines.append(f"{row.get('gpu')} 租金一日变动 {change:+.1f}%")
+                moved.append(f"{row.get('product')} 一日 {signed_pct(change)}")
+        lines.append("存储：" + ("，".join(moved) if moved else "今天没有明显波动"))
+    if gpu:
+        latest = max(row.get("date", "") for row in gpu)
+        bits = []
+        for row in gpu:
+            if row.get("date") != latest:
+                continue
+            day_chg = fnum(row.get("chg_1d_pct", ""))
+            week_chg = fnum(row.get("chg_7d_pct", ""))
+            name = row.get("gpu") or ""
+            if day_chg is not None and abs(day_chg) >= 5:
+                bits.append(f"{name} 一日 {signed_pct(day_chg)}")
+            elif week_chg is not None and abs(week_chg) >= 10:
+                day_text = "一日没动" if day_chg is not None and abs(day_chg) < 0.05 else (f"一日 {signed_pct(day_chg)}" if day_chg is not None else "一日没有数")
+                bits.append(f"{name} {day_text}，一周 {signed_pct(week_chg)}")
+        lines.append("GPU 租金：" + ("；".join(bits) if bits else "今天没有明显波动"))
+    usage = []
     week = [row for row in router if row.get("window") == "7日"]
-    if len(week) >= 1:
+    if week:
         change = fnum(week[-1].get("change_pct", ""))
         if change is not None and abs(change) >= 10:
-            lines.append(f"OpenRouter 7 日用量环比 {change:+.1f}%")
+            usage.append(f"OpenRouter 7 日环比 {signed_pct(change)}")
     if silicon:
         change = fnum(silicon[-1].get("chg_7d_pct", ""))
         if change is not None and abs(change) >= 5:
-            lines.append(f"SiliconData 7 日变动 {change:+.1f}%")
+            usage.append(f"SiliconData 7 日 {signed_pct(change)}")
+    if usage:
+        lines.append("用量：" + "，".join(usage))
     korea_sorted = sorted(korea, key=lambda row: row.get("period", ""))
     if len(korea_sorted) >= 2:
         prev, curr = korea_sorted[-2], korea_sorted[-1]
-        # 各期的 asof 会被最新笔记覆盖成同一天，所以只有最新一期的 asof 更晚时才算新发布。
         if curr.get("asof", "") > prev.get("asof", "") and curr.get("period"):
             lines.append(f"韩国出口新期间 {curr.get('period')}")
+        else:
+            lines.append("韩国出口今日无新数")
+    elif korea_sorted:
+        lines.append("韩国出口今日无新数")
     return lines
 
 
@@ -325,6 +391,8 @@ def calendar_lines(events: list[dict], today: date) -> list[str]:
     today_s = today.isoformat()
     lines = []
     for event in events:
+        if event.get("priority") != "高":
+            continue
         when = event.get("date", "")
         if when not in {today_s, tomorrow}:
             continue
@@ -347,8 +415,6 @@ def sentiment_note(rows: list[dict[str, str]]) -> list[str]:
 
 def build_briefing(data_dir: Path, today: date | None = None, calendar_events: list[dict] | None = None) -> dict:
     today = today or beijing_today()
-    sentiment = load_csv(data_dir / "sentiment" / "series.csv")
-    earnings = load_csv(data_dir / "earnings" / "daily.csv")
     filings = load_csv(data_dir / "filings" / "announcements.csv")
     press = load_csv(data_dir / "filings" / "press.csv")
     days = load_csv(data_dir / "filings" / "days.csv")
@@ -362,6 +428,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             calendar_events = []
     outlook_path = data_dir / "liquidity" / "tga_outlook.json"
     outlook = json.loads(outlook_path.read_text(encoding="utf-8")) if outlook_path.exists() else None
+    earnings_summary = load_csv(data_dir / "earnings" / "summary.csv")
     pages = {
         "liquidity": cap(liquidity_lines(
             weekly,
@@ -380,7 +447,12 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             load_csv(data_dir / "semis" / "silicon.csv"),
             load_csv(data_dir / "semis" / "korea.csv"),
         )),
-        "earnings": cap(earnings_lines(earnings, filings, press, days)),
+        "earnings": cap(earnings_lines(
+            earnings_summary[-1].get("text", "") if earnings_summary else "",
+            filings,
+            press,
+            days,
+        )),
         "calendar": cap(calendar_lines(calendar_events, today)),
     }
     return {"asof": today.isoformat(), "pages": pages, "semi_ai": sorted(SEMI_NAMES)}
