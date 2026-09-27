@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""从已经整理好的 data/ 生成各页「今日小结」。
+"""从已经整理好的 data/ 生成各页顶部摘要。
 
+利率与情绪用最新笔记的「小结」原文。其余各页是「今日小结」。
 规则都写在这个文件里，同一份数据每次得到同一段话。
 比较的是每个序列最近一条和它上一条，不猜笔记没写过的数字。
 
-市场情绪
-- 变动按序列自己算。收益率和利差用基点，参与度、ETF 溢价、AAII 用百分点，CNN、RSI、VIX 用点，价格用百分比。
-- 标明沿用的不写进今日小结。跨了不止一天的，写上一个观测日。笔记原文收在 notes.sentiment，页面另作「笔记原文」。
+利率与情绪
+- 这一页的总结直接用最新笔记的「小结」，按句切开，页面标题写「笔记原文」。
+- 卡片上的涨跌仍按序列自己算，不写进这段总结。
 
 盈利跟踪
 - 用最新一篇盈利笔记的「简要总结」，收成修正、RSI、估值触发、未来 7 天财报。不适用的代码单独一句。
@@ -44,13 +45,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import (  # noqa: E402
-    SENTIMENT_KIND,
     day_move,
-    format_change,
-    fresh_pair,
-    kind_change,
     lookback,
-    notable,
     series_points,
 )
 
@@ -449,50 +445,6 @@ def calendar_lines(events: list[dict], today: date) -> list[str]:
     return lines
 
 
-SENTIMENT_ORDER = [
-    "cnn_fg", "aaii", "spx_rsi", "nasdaq_rsi", "vix", "etf_spx", "etf_ndx",
-    "spx_breadth_20", "spx_breadth_50", "spx_breadth_200",
-    "ndx_breadth_20", "ndx_breadth_50", "ndx_breadth_200",
-    "us_10y", "tips_10y", "t10yie", "us_2y", "t10y2y", "hy_oas",
-    "effr_next", "effr_year", "effr_ny",
-    "wti", "gold", "copper", "usdcny", "btc",
-]
-
-
-def sentiment_moves(rows: list[dict[str, str]]) -> list[str]:
-    by_id = grouped(rows, "series_id")
-    lines = []
-    for series_id in SENTIMENT_ORDER:
-        items = by_id.get(series_id) or []
-        prev, curr = fresh_pair(items)
-        if not prev or not curr:
-            continue
-        kind = SENTIMENT_KIND.get(series_id, "pct")
-        change = kind_change(kind, fnum(prev.get("value", "")), fnum(curr.get("value", "")))
-        if change is None or not notable(kind, series_id, change):
-            continue
-        name = "比特币" if series_id == "btc" else (curr.get("name") or series_id)
-        prev_obs = (prev.get("obs_date") or prev.get("date") or "")[:10]
-        curr_obs = (curr.get("obs_date") or curr.get("date") or "")[:10]
-        gap = ""
-        prev_day, curr_day = parse_day_text(prev_obs), parse_day_text(curr_obs)
-        if prev_day and curr_day and (curr_day - prev_day).days > 1:
-            gap = f"，较 {prev_obs[5:]}"
-        prev_txt = f"{fnum(prev.get('value', '')):g}"
-        curr_txt = f"{fnum(curr.get('value', '')):g}"
-        lines.append(f"{name} {format_change(kind, change)}{gap}（{prev_txt}→{curr_txt}）")
-    return lines
-
-
-def parse_day_text(text: str):
-    if not text:
-        return None
-    try:
-        return date.fromisoformat(text[:10])
-    except ValueError:
-        return None
-
-
 def sentiment_note(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
         return []
@@ -530,7 +482,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             load_csv(data_dir / "series" / "DPSACBW027SBOG.csv"),
             outlook,
         )),
-        "sentiment": cap(sentiment_moves(load_csv(data_dir / "sentiment" / "series.csv"))),
+        "sentiment": cap(sentiment_note(sentiment_rows)),
         "semis": cap(semis_lines(
             load_csv(data_dir / "semis" / "memory.csv"),
             load_csv(data_dir / "semis" / "gpu.csv"),
@@ -550,6 +502,6 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
     return {
         "asof": today.isoformat(),
         "pages": pages,
-        "notes": {"sentiment": sentiment_note(sentiment_rows)},
+        "notes": {},
         "semi_ai": sorted(SEMI_NAMES),
     }
