@@ -1,11 +1,14 @@
-name: 收录笔记
+name: 更新日历
 
 on:
+  schedule:
+    - cron: "0 22 * * *"
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - "inbox/notes/**"
-  workflow_dispatch:
+      - "calendar/**"
+      - "scripts/fetch_calendar.py"
 
 permissions:
   contents: write
@@ -13,15 +16,14 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ingest-notes
+  group: fetch-calendar
   cancel-in-progress: false
 
 jobs:
-  ingest:
+  fetch:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
-      deploy: ${{ steps.commit.outputs.deploy }}
       sha: ${{ steps.commit.outputs.sha }}
     steps:
       - name: 检出仓库
@@ -32,35 +34,31 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 整理笔记
-        run: python3 ingest/parse_notes.py --notes inbox/notes
+      - name: 抓公开日历
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python3 scripts/fetch_calendar.py
 
-      - name: 提交整理后的数据
+      - name: 把日历提交到 main
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
+          git add data/calendar
           if git diff --staged --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo "deploy=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "deploy=false" >> "$GITHUB_OUTPUT"
-            fi
             echo "sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
-            echo "数据没有变化"
+            echo "日历没有变化"
             exit 0
           fi
-          git commit -m "data: 收录早晨笔记"
+          git commit -m "data: 更新日历"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
-          echo "deploy=true" >> "$GITHUB_OUTPUT"
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   deploy:
-    needs: ingest
-    if: needs.ingest.outputs.deploy == 'true'
+    needs: fetch
+    if: needs.fetch.outputs.changed == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -73,7 +71,7 @@ jobs:
       - name: 检出刚提交的数据
         uses: actions/checkout@v4
         with:
-          ref: ${{ needs.ingest.outputs.sha }}
+          ref: ${{ needs.fetch.outputs.sha }}
 
       - name: 发布网页
         id: publish

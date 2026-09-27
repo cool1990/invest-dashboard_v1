@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>日历</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="页面">
+      <a href="index.html">流动性</a>
+      <a href="sentiment.html">市场情绪</a>
+      <a href="semis.html">半导体景气</a>
+      <a href="earnings.html">盈利跟踪</a>
+      <a href="calendar.html" aria-current="page">日历</a>
+    </nav>
+    <header>
+      <h1>日历</h1>
+      <p class="lede">从今天起 14 天。时间是北京时间。没有核对到的项目不会出现。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="briefing" class="briefing" hidden></section>
+    <div id="filters" class="cal-filters"></div>
+    <div id="days"></div>
+    <footer id="footer" hidden></footer>
+  </div>
+  <script>
+    const CATS = ["全部", "宏观", "半导体", "加密", "财报", "大事"];
+    let events = [];
+    let sources = [];
+    let active = "全部";
+
+    function beijingToday() {
+      return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+    }
+
+    function addDays(iso, n) {
+      const [y, m, d] = iso.split("-").map(Number);
+      const dt = new Date(Date.UTC(y, m - 1, d + n));
+      return dt.toISOString().slice(0, 10);
+    }
+
+    function fillBriefing(today) {
+      const tomorrow = addDays(today, 1);
+      const lines = events.filter((item) => item.date === today || item.date === tomorrow).map((item) => {
+        const prefix = item.date === today ? "今天" : "明天";
+        return prefix + (item.time_bj ? " " + item.time_bj : "") + " " + item.title;
+      });
+      const box = $("briefing");
+      box.hidden = false;
+      box.textContent = "";
+      box.appendChild(el("p", "label", "今日小结"));
+      const list = el("ul", "brief-list");
+      (lines.length ? lines : ["今日无变动"]).forEach((line) => {
+        const li = document.createElement("li");
+        li.textContent = line;
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+    }
+
+    function render() {
+      const today = beijingToday();
+      const end = addDays(today, 14);
+      fillBriefing(today);
+      const filters = $("filters");
+      filters.textContent = "";
+      CATS.forEach((cat) => {
+        const button = el("button", null, cat);
+        button.type = "button";
+        button.setAttribute("aria-pressed", cat === active ? "true" : "false");
+        button.addEventListener("click", () => { active = cat; render(); });
+        filters.appendChild(button);
+      });
+      const shown = events.filter((item) => item.date >= today && item.date <= end && (active === "全部" || item.category === active || (active === "半导体" && (item.tags || []).includes("半导体"))));
+      const days = $("days");
+      days.textContent = "";
+      if (!shown.length) {
+        days.appendChild(el("p", "lede", "这 14 天里没有这一类的已核对日程。"));
+      }
+      const byDay = new Map();
+      shown.forEach((item) => {
+        if (!byDay.has(item.date)) byDay.set(item.date, []);
+        byDay.get(item.date).push(item);
+      });
+      [...byDay.keys()].sort().forEach((day) => {
+        const block = el("section", "day-block" + (day === today ? " today" : day === addDays(today, 1) ? " tomorrow" : ""));
+        const label = day === today ? day + " · 今天" : day === addDays(today, 1) ? day + " · 明天" : day;
+        block.appendChild(el("h2", null, label));
+        byDay.get(day).forEach((item) => {
+          const row = el("div", "cal-item");
+          row.appendChild(el("p", "label", item.time_bj || item.category));
+          const body = el("div");
+          const title = el("p", null, item.title);
+          if ((item.tags || []).includes("半导体")) title.appendChild(el("span", "chip", " 半导体"));
+          body.appendChild(title);
+          const extra = [];
+          if (item.previous) extra.push("上次 " + item.previous);
+          if (item.consensus) extra.push("一致预期 " + item.consensus);
+          if (item.note) extra.push(item.note);
+          if (extra.length) body.appendChild(el("p", "unit", extra.join(" · ")));
+          if (item.url) {
+            const link = el("a", null, item.source || "来源");
+            link.href = item.url;
+            link.target = "_blank";
+            link.rel = "noreferrer";
+            body.appendChild(link);
+          } else if (item.source) {
+            body.appendChild(el("p", "unit", item.source));
+          }
+          row.appendChild(body);
+          block.appendChild(row);
+        });
+        days.appendChild(block);
+      });
+    }
+
+    async function main() {
+      try {
+        const payload = JSON.parse(await loadText("data/calendar/events.json"));
+        events = payload.events || [];
+        sources = payload.sources || [];
+        render();
+        const footer = $("footer");
+        footer.hidden = false;
+        const bits = sources.map((item) => item.name + "：" + item.status);
+        footer.appendChild(el("p", null, "来源状态：" + bits.join("；") + "。只供个人查看，不是投资建议。"));
+        $("status").hidden = true;
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "日历还没有数据。先运行 python3 scripts/fetch_calendar.py。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+    main();
+  </script>
+</body>
+</html>

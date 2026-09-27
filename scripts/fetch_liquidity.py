@@ -275,7 +275,7 @@ SERIES: list[dict] = [
 DERIVED_IDS = ("WALCL", "WDTGAL", "RRPONTSYD", "WRBWFRBL", "SOFR", "IORB", "EFFR")
 
 # 这些键属于早晨笔记。publish() 合并 meta 时一律保留磁盘上的原值。
-NOTES_META_KEYS = ("sentiment", "earnings", "semis", "notes_asof")
+NOTES_META_KEYS = ("sentiment", "earnings", "semis", "filings", "notes_asof")
 
 
 def _log(msg: str) -> None:

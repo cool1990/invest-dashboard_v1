@@ -1,1 +1,1 @@
-Markdown==3.8.2
+# 构建只用 Python 3.12 标准库。这一行留着，是为了让 pip install -r requirements.txt 仍然能跑。

@@ -11,7 +11,8 @@ on:
       - ".nojekyll"
       - "scripts/**"
       - "requirements.txt"
-      - "reports/publish.json"
+      - "calendar.html"
+      - "calendar/**"
       - ".github/workflows/pages.yml"
       - ".github/actions/publish-site/**"
 

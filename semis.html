@@ -20,13 +20,14 @@
       <a href="sentiment.html">市场情绪</a>
       <a href="semis.html" aria-current="page">半导体景气</a>
       <a href="earnings.html">盈利跟踪</a>
-      <a href="reports/index.html">研报</a>
+      <a href="calendar.html">日历</a>
     </nav>
     <header>
       <h1>半导体景气</h1>
       <p class="lede">存储现货、GPU 租金、OpenRouter 用量、SiliconData 的 token 价格指数，以及韩国芯片出口。历史不长，图上有几天就画几天。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
+    <section id="briefing" class="briefing" hidden></section>
     <section id="summary" class="summary" hidden></section>
     <h2 id="mem-title" hidden>存储价格</h2>
     <section id="memory" class="charts" hidden></section>
@@ -167,6 +168,7 @@
 
     async function main() {
       try {
+        await renderBriefing("semis");
         const meta = JSON.parse(await loadText("data/meta.json"));
         const files = (meta.semis || {}).files || {};
         const [memory, gpu, openrouter, silicon, korea] = await Promise.all([
