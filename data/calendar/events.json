@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T19:41:45+08:00",
+  "generated_at": "2026-09-27T20:45:49+08:00",
   "today_bj": "2026-09-27",
   "horizon_end": "2026-11-11",
   "events": [
@@ -14,13 +14,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://teams.microsoft.com/meet/212992571985590?p=yY3nvqkkrbQw6RMUL6"
         }
-      ],
-      "priority": "低"
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "JOLTS 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=192",
+      "source": "FRED release dates",
+      "note": "JOLTS",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=192"
+        }
+      ]
     },
     {
       "date": "2026-09-29",
@@ -33,13 +52,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-09-29",
@@ -52,13 +71,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-09-30",
@@ -67,12 +86,13 @@
       "title": "美光（MU）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar；盈利跟踪笔记",
-      "note": "美东盘后。日期不一样：Nasdaq earnings calendar写的是 2026-09-30，盈利跟踪笔记写的是 2026-10-01。原名：Micron Technology, Inc.",
+      "note": "美东盘后。原名：Micron Technology, Inc.。日期不一样：Nasdaq earnings calendar写的是 2026-09-30，盈利跟踪笔记写的是 2026-10-01",
       "previous": "$2.86",
       "consensus": "$31.24",
       "tags": [
         "半导体"
       ],
+      "priority": "高",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
@@ -82,8 +102,7 @@
           "source": "盈利跟踪笔记",
           "url": ""
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-09-30",
@@ -96,13 +115,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://youtube.com/live/ZcKwcEHku7w"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-09-30",
@@ -115,32 +134,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://vimeo.com/event/6186977/6099e85d01"
         }
-      ],
-      "priority": "低"
-    },
-    {
-      "date": "2026-09-30",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年二季度 GDP 第三次估计",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 8:30 AM。原名：GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 2nd Quarter 2026; State PCE, 2025",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-09-30",
@@ -153,13 +153,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-09-30",
@@ -172,13 +172,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/econ/indicators/"
         }
-      ],
-      "priority": "中"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "2026年二季度 GDP 第三次估计",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM。原名：GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 2nd Quarter 2026; State PCE, 2025",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-10-01",
@@ -191,13 +210,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -210,13 +229,13 @@
       "previous": "$3.03",
       "consensus": "$3.19",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -229,13 +248,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -248,13 +267,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -267,13 +286,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/sui"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -286,13 +305,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.youtube.com/live/1fK5omRbOvM?si=9mToIa7-cn6iDC9F"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-01",
@@ -305,13 +324,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/construction/c30/c30index.html"
         }
-      ],
-      "priority": "中"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "Employment Situation 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=50",
+      "source": "FRED release dates",
+      "note": "Employment Situation",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=50"
+        }
+      ]
     },
     {
       "date": "2026-10-02",
@@ -324,13 +362,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "盈利跟踪笔记",
           "url": ""
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -343,13 +381,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://darden-virginia.zoom.us/j/92232791521"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -362,13 +400,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.youtube.com/watch?v=UosIN7C-ZCE"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -381,13 +419,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -400,13 +438,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -419,13 +457,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/ethena"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-02",
@@ -438,13 +476,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/manufacturing/m3/"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-06",
@@ -457,13 +495,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.umc.com/en/IR_Event/ir_events"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-06",
@@ -476,13 +514,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/hyperliquid"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-06",
@@ -495,6 +533,7 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "BEA Release Schedule",
@@ -504,8 +543,7 @@
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/foreign-trade/"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-06",
@@ -518,13 +556,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-08",
@@ -537,13 +575,13 @@
       "previous": "$2.29",
       "consensus": "$2.30",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-08",
@@ -556,13 +594,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-08",
@@ -575,13 +613,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://investor.tsmc.com/english/financial-calendar"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-08",
@@ -594,13 +632,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.mediatek.com/investor-relations"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-08",
@@ -613,13 +651,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/wholesale/index.html"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-09",
@@ -632,13 +670,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-13",
@@ -651,13 +689,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.semiconwest.org/"
         }
-      ],
-      "priority": "低"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "CPI 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=10",
+      "source": "FRED release dates",
+      "note": "CPI",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=10"
+        }
+      ]
     },
     {
       "date": "2026-10-14",
@@ -672,13 +729,13 @@
       "tags": [
         "半导体"
       ],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-14",
@@ -691,13 +748,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/econ/bfs/index.html"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-15",
@@ -710,13 +767,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.irs.gov/pub/irs-pdf/p509.pdf"
         }
-      ],
-      "priority": "高"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "PPI 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=46",
+      "source": "FRED release dates",
+      "note": "PPI",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=46"
+        }
+      ]
     },
     {
       "date": "2026-10-15",
@@ -729,13 +805,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-15",
@@ -750,13 +826,13 @@
       "tags": [
         "半导体"
       ],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://investor.tsmc.com/english/financial-calendar"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-15",
@@ -769,13 +845,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/retail"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-15",
@@ -788,13 +864,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/mtis/"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-16",
@@ -807,13 +883,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-16",
@@ -826,13 +902,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-16",
@@ -845,13 +921,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/arbitrum"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-20",
@@ -864,13 +940,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalregister.gov/documents/2026/08/21/2026-17183/regulation-crypto-assets"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-20",
@@ -883,13 +959,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/layerzero"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-20",
@@ -902,13 +978,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/construction/nrc"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-21",
@@ -921,13 +997,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-23",
@@ -940,13 +1016,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-25",
@@ -959,13 +1035,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/plasma"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-27",
@@ -978,32 +1054,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/manufacturing/m3/"
         }
-      ],
-      "priority": "中"
-    },
-    {
-      "date": "2026-10-27",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "钢材进口初值",
-      "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Preliminary U.S. Imports for Consumption of Steel Products",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html"
-        }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-27",
@@ -1016,13 +1073,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/construction/nrs/"
         }
-      ],
-      "priority": "中"
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "钢材进口初值",
+      "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026。原名：Preliminary U.S. Imports for Consumption of Steel Products",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html"
+        }
+      ]
     },
     {
       "date": "2026-10-28",
@@ -1035,13 +1111,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve FOMC calendars",
           "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-28",
@@ -1056,13 +1132,13 @@
       "tags": [
         "半导体"
       ],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.umc.com/en/IR_Event/ir_events"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-28",
@@ -1075,13 +1151,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/econ/indicators/"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-28",
@@ -1094,13 +1170,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/housing/hvs/"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-10-29",
@@ -1113,32 +1189,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
         }
-      ],
-      "priority": "中"
-    },
-    {
-      "date": "2026-10-29",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年三季度 GDP 首次估计",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 8:30 AM。原名：GDP (Advance Estimate), 3rd Quarter 2026",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-29",
@@ -1151,13 +1208,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
         }
-      ],
-      "priority": "高"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "time_bj": "20:30",
+      "category": "宏观",
+      "title": "2026年三季度 GDP 首次估计",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM。原名：GDP (Advance Estimate), 3rd Quarter 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     },
     {
       "date": "2026-10-30",
@@ -1170,13 +1246,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-10-30",
@@ -1189,13 +1265,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-10-30",
@@ -1208,13 +1284,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-01",
@@ -1227,13 +1303,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-02",
@@ -1246,13 +1322,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-02",
@@ -1265,13 +1341,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/construction/c30/c30index.html"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-03",
@@ -1284,13 +1360,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/"
         }
-      ],
-      "priority": "中"
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "JOLTS 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=192",
+      "source": "FRED release dates",
+      "note": "JOLTS",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=192"
+        }
+      ]
     },
     {
       "date": "2026-11-03",
@@ -1303,13 +1398,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/manufacturing/m3/"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-04",
@@ -1322,13 +1417,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding/most-recent-quarterly-refunding-documents"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-04",
@@ -1341,6 +1436,7 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "BEA Release Schedule",
@@ -1350,8 +1446,7 @@
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/foreign-trade/"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-05",
@@ -1364,13 +1459,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.umc.com/en/IR_Event/ir_events"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-05",
@@ -1383,13 +1478,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
         }
-      ],
-      "priority": "中"
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "Employment Situation 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=50",
+      "source": "FRED release dates",
+      "note": "Employment Situation",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=50"
+        }
+      ]
     },
     {
       "date": "2026-11-06",
@@ -1402,13 +1516,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-09",
@@ -1421,13 +1535,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "Census economic indicators calendar",
           "url": "https://www.census.gov/wholesale/index.html"
         }
-      ],
-      "priority": "低"
+      ]
     },
     {
       "date": "2026-11-10",
@@ -1440,13 +1554,32 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.semiconeuropa.org/"
         }
-      ],
-      "priority": "低"
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "CPI 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=10",
+      "source": "FRED release dates",
+      "note": "CPI",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=10"
+        }
+      ]
     },
     {
       "date": "2026-11-10",
@@ -1459,13 +1592,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://investor.tsmc.com/english/financial-calendar"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-10",
@@ -1478,13 +1611,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.mediatek.com/investor-relations"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-11",
@@ -1497,13 +1630,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-12",
@@ -1518,13 +1651,13 @@
       "tags": [
         "半导体"
       ],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://investors.appliedmaterials.com/events"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-15",
@@ -1537,13 +1670,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18661/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-designation-of-a-longer-period"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-19",
@@ -1556,13 +1689,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "高",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
         }
-      ],
-      "priority": "高"
+      ]
     },
     {
       "date": "2026-11-20",
@@ -1575,13 +1708,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.optionseducation.org/referencelibrary/expiration-calendar"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-26",
@@ -1594,13 +1727,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-27",
@@ -1613,13 +1746,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "中",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://support.deribit.com/hc/en-us/articles/25944688876957-Contract-Introduction-Policy"
         }
-      ],
-      "priority": "中"
+      ]
     },
     {
       "date": "2026-11-30",
@@ -1632,13 +1765,13 @@
       "previous": "",
       "consensus": "",
       "tags": [],
+      "priority": "低",
       "links": [
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.nvidia.com/gtc/dc/"
         }
-      ],
-      "priority": "低"
+      ]
     }
   ],
   "sources": [
@@ -1693,8 +1826,8 @@
     {
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
-      "status": "skipped",
-      "detail": "未设置 FRED_API_KEY，CPI、PPI、非农、JOLTS 的发布日没有抓"
+      "status": "ok",
+      "detail": "CPI 2 天；PPI 1 天；Employment Situation 2 天；JOLTS 2 天"
     },
     {
       "name": "初请失业金",
