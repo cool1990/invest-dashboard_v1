@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "inbox/notes/**"
+      - "inbox/reports/**"
   workflow_dispatch:
 
 permissions:
@@ -21,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
+      deploy: ${{ steps.commit.outputs.deploy }}
       sha: ${{ steps.commit.outputs.sha }}
     steps:
       - name: 检出仓库
@@ -40,8 +42,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data
+          deploy=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            deploy=true
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            if git diff --name-only "${{ github.event.before }}" HEAD -- inbox/reports | grep -q .; then
+              deploy=true
+            fi
+          fi
           if git diff --staged --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "deploy=${deploy}" >> "$GITHUB_OUTPUT"
             echo "sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
             echo "数据没有变化"
             exit 0
@@ -49,11 +60,12 @@ jobs:
           git commit -m "data: 收录早晨笔记"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   deploy:
     needs: ingest
-    if: needs.ingest.outputs.changed == 'true'
+    if: needs.ingest.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

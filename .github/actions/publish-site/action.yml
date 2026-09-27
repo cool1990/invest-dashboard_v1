@@ -1,5 +1,5 @@
 name: 发布当前工作区
-description: 把已经检出的网页和 data 发布到 GitHub Pages
+description: 构建 dist/ 并发布到 GitHub Pages
 
 outputs:
   page_url:
@@ -9,14 +9,18 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: 组装静态站点
+    - name: 准备 Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: 安装构建依赖
       shell: bash
-      run: |
-        mkdir -p _site
-        cp .nojekyll _site/
-        cp *.html _site/
-        cp -r assets _site/assets
-        cp -r data _site/data
+      run: pip install -r requirements.txt
+
+    - name: 构建静态站点
+      shell: bash
+      run: python scripts/build_site.py
 
     - name: 配置 Pages
       uses: actions/configure-pages@v5
@@ -24,7 +28,7 @@ runs:
     - name: 上传站点
       uses: actions/upload-pages-artifact@v3
       with:
-        path: _site
+        path: dist
 
     - name: 部署
       id: deployment
