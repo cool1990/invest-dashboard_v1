@@ -479,6 +479,8 @@ def parse_earnings(path: Path, meta: dict[str, str], body: str, skipped: list[di
                     row[field] = "1" if any(mark in raw for mark in ("✔️", "✓", "✔")) else "0"
                 elif raw and not is_fail_text(raw):
                     row[field] = raw
+            if ticker in {"PDD", "TME"} and (row.get("market") or "US").upper() in {"", "US"}:
+                row["eps_unit"] = "USD"
             quotes.append(row)
     for line in body.splitlines():
         if "财报" not in line:

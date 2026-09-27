@@ -48,6 +48,8 @@ REVISION_EXTREME = 50
 FRED_GAP = 0.02
 DAILY_STALE = 4
 WEEKLY_STALE = 10
+# 笔记把这两只美元 ADR 的财报单位写成 CNY。已核对 EPS 就是美元，数字不再换汇。
+USD_EPS_ADR = {"PDD", "TME"}
 FILING_RISK = ("辞职", "诉讼", "调查", "减值", "违约", "下调")
 FILING_WATCH = ("收购", "协议")
 FRED_CHECK = {
@@ -484,8 +486,11 @@ def currency_health(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     for row in rows:
         if row.get("date") != latest:
             continue
+        ticker = row.get("ticker") or ""
+        if ticker in USD_EPS_ADR:
+            continue
         if (row.get("eps_unit") or "").upper() == "CNY" and (row.get("market") or "").upper() in {"", "US"}:
-            names.append(row.get("ticker") or "")
+            names.append(ticker)
     if not names:
         return []
     return [health(
