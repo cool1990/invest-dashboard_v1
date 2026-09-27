@@ -113,13 +113,13 @@ inbox/notes/半导体/YYYY-MM-DD_半导体-韩国出口.md
 | 美联储讲话 | https://www.federalreserve.gov/newsevents/calendar.htm | 官方月历，时刻按美东换算 |
 | H.4.1 | https://www.federalreserve.gov/releases/h41/ | 页面写明每周四、通常美东 16:30。按周四生成，假日顺延没有另核 |
 | Nasdaq 财报 | https://api.nasdaq.com/api/calendar/earnings | 公开接口，每次大约 20 家。保留市值不低于 1000 亿美元的，以及半导体/AI 代码 |
-| 盈利笔记 | `data/earnings/events.csv` | 观察名单「未来 7 天财报」，和 Nasdaq 分开列 |
+| 盈利笔记 | `data/earnings/events.csv` | 观察名单「未来 7 天财报」。和 Nasdaq 是同一家公司时合成一条；日期不同就在这一条里写明两个日期 |
 | FRED 发布日 | 需 `FRED_API_KEY` | 可选。用来补 CPI、PPI、非农、JOLTS。不设密钥就跳过 |
 | 初请失业金 | https://oui.doleta.gov/unemploy/claims.asp | 这次的页面没有写每周几发布，所以没有按周四生成 |
-| 加密解锁 | https://api.llama.fi/emissions | 返回 402，没有改用未核对的清单 |
-| 韩国出口、TSMC 月营收 | | 这次没有抓到写明日期的官方页 |
+| 加密解锁 | https://api.llama.fi/emissions | 返回 402。核对过的解锁、ETF 期限、期权到期写在手工日历，每条有自己的来源链接 |
+| 韩国出口、月营收、行业活动 | 见 `calendar/manual.yaml` 里各条的链接 | 自动页面没有解析出发布日。手工日历里是核对过的官方日期 |
 
-手工补充放在 `calendar/manual.yaml`。只写核对过官方页面的条目。这次自动来源已经覆盖核对过的项目，这个文件是空的。
+手工补充在 `calendar/manual.yaml`，目前 41 条，核对到 2026-11-30。台积电、ASML、联电、应用材料的季报归入财报，并标上半导体；月营收、韩国出口和行业活动仍是半导体。同一天的同一件事如果自动来源也有，只显示一条，备注用手工的，来源链接都留下。
 
 可选密钥：仓库 **Settings → Secrets and variables → Actions**，新建 `FRED_API_KEY`（在 https://fred.stlouisfed.org/docs/api/api_key.html 免费申请）。不设也能发布日历，只是没有 BLS 那几项的发布日。流动性序列本身仍然不需要这把密钥。
 

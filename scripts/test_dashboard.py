@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ingest"))
 
 from briefing import build_briefing
 from build_site import build_site
-from fetch_calendar import h41_events, load_manual, parse_bea, parse_census
+from fetch_calendar import dedupe, event, h41_events, load_manual, parse_bea, parse_census
 from parse_notes import parse_filings, parse_press, parse_sentiment, to_beijing
 
 
@@ -129,7 +129,61 @@ def test_calendar_parsers() -> None:
     assert "零售" in retail[0]["title"]
     h41 = h41_events("These data are released each Thursday, generally at 4:30 p.m.", date(2026, 9, 27), date(2026, 10, 8))
     assert any(row["title"].startswith("美联储 H.4.1") for row in h41)
-    assert load_manual(Path("/workspace/calendar/manual.yaml")) == []
+    manual = load_manual(Path("/workspace/calendar/manual.yaml"))
+    assert len(manual) == 41
+    by_title = {row["title"]: row for row in manual}
+    for title in (
+        "ASML 2026年第三季度业绩",
+        "台积电 3Q26 业绩会",
+        "联电 3Q26 业绩与法说会",
+        "应用材料 FY26 Q4 业绩（官方标注预计）",
+    ):
+        assert by_title[title]["category"] == "财报"
+        assert by_title[title]["tags"] == ["半导体"]
+        assert by_title[title]["note"]
+    assert by_title["台积电9月营收"]["category"] == "半导体"
+    assert by_title["台积电9月营收"]["tags"] == []
+    assert by_title["韩国9月进出口（产业通商部，全月初值）"]["category"] == "半导体"
+    assert "NVIDIA GTC" in by_title["NVIDIA GTC Washington, D.C.（11月30日-12月3日）"]["title"]
+    nasdaq = event(
+        "2026-09-30", "", "财报", "Micron Technology, Inc.（MU）财报",
+        "https://www.nasdaq.com/market-activity/earnings", "Nasdaq earnings calendar",
+        "美东盘后", previous="2.86", consensus="31.24", tags=["半导体"],
+    )
+    note = event(
+        "2026-10-01", "", "财报", "MICRON TECHNOLOGY INC（MU）财报",
+        "", "盈利跟踪笔记", "笔记里的未来 7 天财报", tags=["半导体"],
+    )
+    nike = event("2026-10-02", "", "财报", "NIKE, Inc.（NKE）财报", "", "盈利跟踪笔记", "")
+    merged = dedupe([note, nasdaq, nike])
+    assert len(merged) == 2
+    mu = next(row for row in merged if "MU" in row["title"])
+    assert mu["date"] == "2026-09-30"
+    assert "2026-09-30" in mu["note"] and "2026-10-01" in mu["note"]
+    assert mu["consensus"] == "31.24"
+    assert {link["source"] for link in mu["links"]} == {"Nasdaq earnings calendar", "盈利跟踪笔记"}
+    tsm_manual = event(
+        "2026-10-15", "14:00", "财报", "台积电 3Q26 业绩会",
+        "https://investor.tsmc.com/english/financial-calendar", "calendar/manual.yaml",
+        "TSMC IR 财务日历", tags=["半导体"],
+    )
+    tsm_auto = event(
+        "2026-10-15", "", "财报", "Taiwan Semiconductor Manufacturing（TSM）财报",
+        "https://www.nasdaq.com/market-activity/earnings", "Nasdaq earnings calendar",
+        "美东盘前", consensus="1.00", tags=["半导体"],
+    )
+    one = dedupe([tsm_auto, tsm_manual])
+    assert len(one) == 1
+    assert one[0]["title"] == "台积电 3Q26 业绩会"
+    assert one[0]["note"] == "TSMC IR 财务日历"
+    assert one[0]["consensus"] == "1.00"
+    assert len(one[0]["links"]) == 2
+    minutes_auto = event("2026-10-08", "", "大事", "September 会议纪要", "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm", "Federal Reserve FOMC calendars", "页面写的是发布日")
+    minutes_manual = event("2026-10-08", "02:00", "大事", "FOMC 9月会议纪要", "https://www.federalreserve.gov/newsevents/2026-october.htm", "calendar/manual.yaml", "美联储10月日历")
+    minutes = dedupe([minutes_auto, minutes_manual])
+    assert len(minutes) == 1
+    assert minutes[0]["title"] == "FOMC 9月会议纪要"
+    assert minutes[0]["note"] == "美联储10月日历"
 
 
 if __name__ == "__main__":

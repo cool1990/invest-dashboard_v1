@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """抓公开日历，和 calendar/manual.yaml、盈利笔记里的下次财报合并。
 
+同一件事只留一条。财报按公司代码合并，日期不同就在备注里写明两个日期，卡片放在较早的那天；有手工条目时，备注和标题用手工的，来源链接都保留。同一天、同一分类、标题指同一件事（会议纪要、褐皮书，或标题互相包含）也合并，备注用手工的。
+
 不编造日期。某个来源失败就记在 sources 里，页面上不出现它的条目。
 发布时刻页面按北京时间显示。美东时刻用 America/New_York 换算，含夏令时。
 
@@ -384,24 +386,135 @@ def load_manual(path: Path) -> list[dict]:
     for item in rows:
         if not item.get("date") or not item.get("title") or not item.get("category"):
             continue
+        tags = [part.strip() for part in item.get("tags", "").replace("，", ",").split(",") if part.strip()]
         out.append(event(
             item["date"], item.get("time_bj", ""), item["category"], item["title"],
             item.get("url", ""), "calendar/manual.yaml", item.get("note", ""),
             previous=item.get("previous", ""), consensus=item.get("consensus", ""),
+            tags=tags,
         ))
     return out
 
 
-def dedupe(rows: list[dict]) -> list[dict]:
+COMPANY_TICKERS = (
+    ("台积电", "TSM"),
+    ("TSMC", "TSM"),
+    ("ASML", "ASML"),
+    ("联电", "UMC"),
+    ("应用材料", "AMAT"),
+    ("APPLIED MATERIALS", "AMAT"),
+    ("美光", "MU"),
+    ("MICRON", "MU"),
+    ("英伟达", "NVDA"),
+    ("NVIDIA", "NVDA"),
+)
+PHRASE_GROUPS = (
+    ("会议纪要", "fomcminutes"),
+    ("褐皮书", "beigebook"),
+)
+
+
+def ticker_of(title: str) -> str:
+    match = re.search(r"[（(]([A-Za-z][A-Za-z0-9.]*)[）)]", title or "")
+    if match:
+        return match.group(1).upper()
+    upper = (title or "").upper()
+    for needle, ticker in COMPANY_TICKERS:
+        if needle in title or needle in upper:
+            return ticker
+    return ""
+
+
+def normalize_title(title: str) -> str:
+    return re.sub(r"[\s\-—_:：,，.。'’\"“”()（）]+", "", title or "").lower()
+
+
+def same_event(left: dict, right: dict) -> bool:
+    if left["category"] == "财报" and right["category"] == "财报":
+        ticker = ticker_of(left["title"])
+        if ticker and ticker == ticker_of(right["title"]):
+            return True
+    if left["date"] != right["date"] or left["category"] != right["category"]:
+        return False
+    a = normalize_title(left["title"])
+    b = normalize_title(right["title"])
+    if a == b:
+        return True
+    if len(a) >= 8 and len(b) >= 8 and (a in b or b in a):
+        return True
+    for group in PHRASE_GROUPS:
+        keys = [normalize_title(key) for key in group]
+        if any(key in a for key in keys) and any(key in b for key in keys):
+            return True
+    return False
+
+
+def _filled(primary: dict, rows: list[dict], key: str) -> str:
+    if primary.get(key):
+        return primary[key]
+    for row in rows:
+        if row.get(key):
+            return row[key]
+    return ""
+
+
+def merge_events(group: list[dict]) -> dict:
+    manuals = [row for row in group if row.get("source") == "calendar/manual.yaml"]
+    ordered = manuals + [row for row in sorted(group, key=lambda item: item["date"]) if row not in manuals]
+    primary = ordered[0]
+    day = primary["date"] if manuals else min(row["date"] for row in group)
+    time_bj = primary.get("time_bj") or ""
+    if not time_bj:
+        for row in ordered:
+            if row["date"] == day and row.get("time_bj"):
+                time_bj = row["time_bj"]
+                break
+    note = (primary.get("note") or "").strip()
+    dates = {row["date"] for row in group}
+    if len(dates) > 1:
+        parts = [f"{row['source']}写的是 {row['date']}" for row in sorted(group, key=lambda item: (item["date"], item["source"]))]
+        sentence = "日期不一样：" + "，".join(parts)
+        note = f"{note}。{sentence}" if note else sentence
+    links = []
     seen = set()
-    out = []
-    for row in sorted(rows, key=lambda item: (item["date"], item["time_bj"], item["category"], item["title"])):
-        key = (row["date"], row["category"], row["title"], row["source"])
-        if key in seen:
+    for row in ordered:
+        link = {"source": row.get("source") or "", "url": row.get("url") or ""}
+        key = (link["source"], link["url"])
+        if key in seen or key == ("", ""):
             continue
         seen.add(key)
-        out.append(row)
-    return out
+        links.append(link)
+    tags = []
+    for row in ordered:
+        for tag in row.get("tags") or []:
+            if tag not in tags:
+                tags.append(tag)
+    merged = event(
+        day, time_bj, primary["category"], primary["title"],
+        _filled(primary, ordered, "url"),
+        "；".join(link["source"] for link in links),
+        note,
+        previous=_filled(primary, ordered, "previous"),
+        consensus=_filled(primary, ordered, "consensus"),
+        tags=tags,
+    )
+    merged["links"] = links
+    return merged
+
+
+def dedupe(rows: list[dict]) -> list[dict]:
+    groups: list[list[dict]] = []
+    for row in rows:
+        placed = False
+        for group in groups:
+            if any(same_event(row, other) for other in group):
+                group.append(row)
+                placed = True
+                break
+        if not placed:
+            groups.append([row])
+    merged = [merge_events(group) for group in groups]
+    return sorted(merged, key=lambda item: (item["date"], item["time_bj"], item["category"], item["title"]))
 
 
 def fred_events(start: date, end: date, key: str) -> tuple[list[dict], str]:
@@ -531,17 +644,19 @@ def collect(root: Path, today: date | None = None) -> dict:
         "status": "failed",
         "detail": "页面没有写每周几、几点发布，所以没有按周四生成",
     })
+    has_crypto = any(item["category"] == "加密" for item in manual)
+    has_semi_manual = any(item["category"] == "半导体" and ("韩国" in item["title"] or "营收" in item["title"]) for item in manual)
     sources.append({
         "name": "加密",
         "url": "https://api.llama.fi/emissions",
         "status": "failed",
-        "detail": "DefiLlama emissions 返回 402，没有改用别的未核对清单",
+        "detail": "DefiLlama emissions 返回 402。核对过的解锁和期限在手工日历" if has_crypto else "DefiLlama emissions 返回 402，没有改用别的未核对清单",
     })
     sources.append({
         "name": "韩国出口与 TSMC 月营收",
         "url": "",
         "status": "failed",
-        "detail": "这次没有抓到写明发布日的官方页面，manual.yaml 里也没有补",
+        "detail": "自动页面没有解析出发布日。核对过的日期在手工日历" if has_semi_manual else "这次没有抓到写明发布日的官方页面，manual.yaml 里也没有补",
     })
     return {
         "generated_at": datetime.now(BJ).isoformat(timespec="seconds"),

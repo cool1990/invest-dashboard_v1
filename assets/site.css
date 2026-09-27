@@ -171,6 +171,7 @@ td.trigger { background: #fbf3e8; font-weight: 700; }
 .day-block { margin: 0 0 16px; }
 .day-block.today, .day-block.tomorrow { background: #f4faf7; border-radius: 14px; padding: 8px 10px; }
 .cal-item { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.cal-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 4px 0 0; }
 .cal-item:last-child { border-bottom: 0; }
 footer { margin-top: 28px; color: var(--muted); font-size: 13px; }
 .list { margin: 8px 0 0; padding-left: 1.2em; }
