@@ -13,7 +13,8 @@
 
 ## 文件夹
 
-- `data/series/`、`data/derived/`：流动性原始序列和周三派生表。金额单位是十亿美元。
+- `data/series/`：流动性原始序列，从 2022-01-01 起，列是 `date,value`，数值是 FRED 原文。百万美元和十亿美元看 `meta.json` 里的 `unit`。
+- `data/derived/`：周三派生表。金额单位是十亿美元。
 - `data/sentiment/`：市场情绪时间序列和综合评价。
 - `data/earnings/`：观察名单每日一行，以及笔记里写明的未来财报。
 - `data/semis/`：存储价格、GPU 租金、OpenRouter 用量、SiliconData 指数、韩国芯片出口。
@@ -75,9 +76,15 @@ FRED 里 WALCL、WDTGAL、准备金（WRBWFRBL）的单位是百万美元，写�
 
 周变动是与上一条周三观测相比的差额。SOFR−IORB 和 EFFR−IORB 的单位是基点。准备金分位是 2022-01-01 起、到该周三为止的周三观测中，准备金不高于当前值的占比，不是准备金短缺的度量。
 
-「更新数据」每天 22:00 UTC 跑一次。某一条下载失败就退出，并且不改写 `data/`。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
+「更新数据」每天 22:00 UTC 跑一次，也可以手动运行。每条序列单独下载。成功就覆盖 `data/series/<id>.csv`；失败就留下原来的文件，并在 `data/meta.json` 该条写下 `last_fetch_ok`（false）、`last_obs_date`（文件里最后一个日期，没有旧文件则为 null）和 `fetched_at`。成功的条目同样有这三个字段，`last_fetch_ok` 为 true。周报读 CSV 时看这三项，就能判断这条是不是刚拉到的。工作流仍会把这次的 `data/` 提交上去，所以新鲜度标记不会丢。不要给 FRED 请求加自定义 User-Agent：自定义 UA 在 HTTP/2 上会立刻报错，在 HTTP/1.1 上会挂起；Python 默认请求头可以下载。
 
-要加一条 FRED 序列：编辑 `scripts/fetch_liquidity.py` 的 `SERIES`，百万美元用 `to_bn = Decimal("0.001")`，利率和指数用 `None`，然后运行 `python3 scripts/fetch_liquidity.py`。要显示在流动性页上，再改 `index.html`。
+周三表和每日利差只在 WALCL、WDTGAL、RRPONTSYD、WRBWFRBL、SOFR、IORB、EFFR 这次都成功时重算。否则 `data/derived/` 保持原文件，`derived_refresh.ok` 为 false，并写明是哪几条没刷新。
+
+旧版金融压力指数 STLFSI 若在 2022-01-01 之后没有观测，就视为已停更：不写 CSV，`status` 为 `discontinued`，`last_obs_date` 是 FRED 上的最后观测日。目前这条停在 2020-03-13。
+
+周报会用到、并已放进 `data/series/` 的序列，除了原来的 WALCL、WDTGAL、RRPONTSYD、WRBWFRBL、SOFR、IORB、EFFR、NFCI、BAMLH0A0HYM2、VIXCLS，还有：ANFCI、STLFSI4、WRESBAL、WTREGEN、WLRRAOL、WCURCIR、SOFR1、SOFR25、SOFR75、SOFR99、SOFRVOL、TOTBKCR、TOTCI、TLAACBW027SBOG、CCLACBW027SBOG、CREACBW027SBOG、DPSACBW027SBOG、DPSLCBW027SBOG。中文名和单位在 `meta.json`。
+
+要加一条 FRED 序列：编辑 `scripts/fetch_liquidity.py` 的 `SERIES`，百万美元用 `to_bn = Decimal("0.001")`，已经是十亿美元的用 `Decimal("1")`，利率和指数用 `None`，然后运行 `python3 scripts/fetch_liquidity.py`。要显示在流动性页上，再改 `index.html`。
 
 ## 另外三页的历史有多长
 
