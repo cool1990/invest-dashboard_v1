@@ -1,15 +1,18 @@
 # 宏观看板
 
-这个仓库保存自己看的宏观数据，并用静态网页展示。页面是简体中文。现在有四页：
+这个仓库保存自己看的宏观数据，并用静态网页展示。页面是简体中文。现在有五页：
 
 - [流动性](https://cool1990.github.io/macro-dashboard/)
 - [市场情绪](https://cool1990.github.io/macro-dashboard/sentiment.html)
 - [半导体景气](https://cool1990.github.io/macro-dashboard/semis.html)
 - [盈利跟踪](https://cool1990.github.io/macro-dashboard/earnings.html)
+- [研报](https://cool1990.github.io/macro-dashboard/reports/)
 
 网页地址：https://cool1990.github.io/macro-dashboard/
 
-流动性来自圣路易斯联储 FRED 的公开 CSV，不需要密钥。另外三页来自每天早晨的笔记，笔记由自己的服务器推到 `inbox/notes/`。
+流动性来自圣路易斯联储 FRED 的公开 CSV，不需要密钥。情绪、半导体、盈利来自每天早晨的笔记，笔记由自己的服务器推到 `inbox/notes/`。研报是自己的 Obsidian 笔记，推到 `inbox/reports/`。
+
+站点用一条命令构建到 `dist/`，页面之间用相对路径，不写死 `/macro-dashboard/`。每页都有 `<meta name="robots" content="noindex">`，`dist/robots.txt` 禁止抓取。准备改成私有仓库、放到 Cloudflare Pages 后面用 Access 时，按下面的构建说明即可。在那之前，GitHub Pages 仍会发布 `dist/`。
 
 ## 文件夹
 
@@ -21,22 +24,39 @@
 - `data/meta.json`：名称、单位、来源、各块数据的起止日期。
 - `data/notes_skipped.csv`：单元格写了「未更新」或「抓取失败」、因而没有当成数字的记录。
 - `inbox/notes/`：服务器推上来的原始 Markdown。网页不直接读这里。
-- `ingest/parse_notes.py`：把笔记整理进 `data/`。只用 Python 标准库。
+- `inbox/reports/`：研报原文。构建时渲染进 `dist/reports/`，不另存一份 HTML 进 git。
+- `ingest/parse_notes.py`：把指标笔记整理进 `data/`。只用 Python 标准库。
 - `scripts/fetch_liquidity.py`：拉取 FRED。
-- `index.html`、`sentiment.html`、`semis.html`、`earnings.html`：四个页面。图表库从 CDN 加载，没有构建步骤。
+- `scripts/build_site.py`：构建整个站点到 `dist/`。
+- `index.html`、`sentiment.html`、`semis.html`、`earnings.html`：四个数据页的源文件。研报页由构建生成。
 - `.github/workflows/fetch-data.yml`：每天 22:00 UTC 更新流动性，有变化时提交 `data/` 并发布网页。
-- `.github/workflows/ingest-notes.yml`：`inbox/notes/` 有推送时整理数据、提交，并发布网页。
-- `.github/workflows/pages.yml`：发布 GitHub Pages。可以被上面两个工作流调用。
+- `.github/workflows/ingest-notes.yml`：`inbox/notes/` 或 `inbox/reports/` 有推送时整理数据、在需要时提交，并发布网页。
+- `.github/workflows/pages.yml`：发布 GitHub Pages。源文件或数据有变动时构建 `dist/` 再发布。
 
 用 `GITHUB_TOKEN` 推上去的提交不会再触发别的工作流。所以「更新数据」和「收录笔记」在提交之后，会检出这个新提交，自己再跑一遍发布，而不是干等「发布网页」被触发。直接改网页或合并到 `main` 时，仍由「发布网页」发布。
 
 ## 本地查看
 
 ```bash
-python3 -m http.server 8000
+pip install -r requirements.txt
+python3 scripts/build_site.py
+python3 -m http.server 8000 -d dist
 ```
 
-浏览器打开 http://localhost:8000/ 。不要直接双击 html，浏览器不允许页面那样读取旁边的数据文件。
+浏览器打开 http://localhost:8000/ 。Python 3.12。不要直接双击 html，浏览器不允许页面那样读取旁边的数据文件。
+
+## Cloudflare Pages
+
+仓库改成私有、改由 Cloudflare Pages 托管时：
+
+| 项 | 值 |
+| --- | --- |
+| 构建命令 | `pip install -r requirements.txt && python scripts/build_site.py` |
+| 输出目录 | `dist` |
+| 根目录 | 仓库根目录 |
+| Python | 3.12，环境变量 `PYTHON_VERSION` = `3.12` |
+
+构建产物里的链接都是相对路径，站点挂在域名根上即可。Access 放在这个站点前面。GitHub Pages 的工作流先留着，切换完成后再停。
 
 ## 笔记怎么推进来
 
@@ -65,6 +85,22 @@ inbox/notes/半导体/YYYY-MM-DD_半导体-韩国出口.md
 4. 服务器用这把私钥 `git push origin main`。`main` 需要允许这把钥匙直接推送；如果开了分支保护、禁止直接推送，这次推送会被拒绝。
 
 推上去之后，「收录笔记」工作流会跑。也可以在 Actions 里手动运行它。
+
+## 研报怎么推进来
+
+服务器把 Obsidian 笔记推到 `main` 的 `inbox/reports/`。文件名用来识别种类，日期优先用文首的 `date`，标题优先用 `title`，没有就从文件名取。
+
+```
+inbox/reports/日报/YYYY-MM-DD_市场观点汇总.md
+inbox/reports/日报/YYYY-MM-DD_主题跟踪.md
+inbox/reports/宏观周报/2026-W39 宏观周报.md
+inbox/reports/宏观周报/YYYY-MM-DD 美国宏观流动性周报.md
+inbox/reports/产业周报/2026-W39 产业周报.md
+```
+
+每天的日报在目录里按日期放在一起，新的在前。打开「研报」先看到最新一篇日报。每篇有自己的地址，在 `dist/reports/` 下，文件名来自笔记文件名。`[[笔记名]]` 如果对得上已发布的一篇，就变成站内链接，否则只留下文字。`![[...]]` 只留下文字。带颜色的 `<span>` 会去掉，留下里面的字。
+
+推送用同一把可以写仓库的 Deploy key，服务器只提交 `inbox/reports/` 里的文件。「收录笔记」看到 `inbox/reports/**` 有变化就会重新构建并发布，即使指标数据没有改动。
 
 ## 流动性
 

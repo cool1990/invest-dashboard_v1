@@ -9,7 +9,10 @@ on:
       - "assets/**"
       - "data/**"
       - ".nojekyll"
+      - "scripts/**"
+      - "requirements.txt"
       - ".github/workflows/pages.yml"
+      - ".github/actions/publish-site/**"
 
 permissions:
   contents: read
@@ -25,27 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.publish.outputs.page_url }}
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: 组装静态站点
-        run: |
-          mkdir -p _site
-          cp .nojekyll _site/
-          cp *.html _site/
-          cp -r assets _site/assets
-          cp -r data _site/data
-
-      - name: 配置 Pages
-        uses: actions/configure-pages@v5
-
-      - name: 上传站点
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: 部署
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: 发布网页
+        id: publish
+        uses: ./.github/actions/publish-site
