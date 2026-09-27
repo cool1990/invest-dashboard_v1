@@ -15,28 +15,13 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="nav" aria-label="页面">
-      <a href="index.html">流动性</a>
-      <a href="sentiment.html">市场情绪</a>
-      <a href="semis.html">半导体景气</a>
-      <a href="earnings.html" aria-current="page">盈利跟踪</a>
-      <a href="calendar.html">日历</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="页面"></nav>
     <header>
       <h1>盈利跟踪</h1>
       <p class="lede">观察名单上的收盘价、RSI、远期市盈率和盈利修正。点一个代码，下面画出它这几天的历史。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
     <section id="briefing" class="briefing" hidden></section>
-    <h2>公告</h2>
-    <section id="filings" class="filing-list"></section>
-    <h2>公司新闻</h2>
-    <section id="press" class="filing-list"></section>
-    <section id="insiders" hidden></section>
-    <details id="history">
-      <summary>近 7 天</summary>
-      <div id="history-body"></div>
-    </details>
     <section id="summary" class="summary" hidden></section>
     <h2 id="table-title" hidden>观察名单</h2>
     <section id="table-panel" class="panel" hidden>
@@ -51,6 +36,15 @@
     </section>
     <h2 id="detail-title" hidden>个股历史</h2>
     <section id="detail" class="charts" hidden></section>
+    <h2>公告</h2>
+    <section id="filings" class="filing-list"></section>
+    <h2>公司新闻</h2>
+    <section id="press" class="filing-list"></section>
+    <section id="insiders" hidden></section>
+    <details id="history">
+      <summary>近 7 天</summary>
+      <div id="history-body"></div>
+    </details>
     <footer id="footer" hidden></footer>
   </div>
   <script>
@@ -63,6 +57,8 @@
       { key: "target_pe", label: "目标 PE", kind: "num", digits: 1 },
       { key: "revision_signal", label: "修正信号", kind: "text" },
       { key: "revision_30d", label: "30日修正%", kind: "pct" },
+      { key: "up30", label: "30日上调", kind: "num", digits: 0 },
+      { key: "down30", label: "30日下调", kind: "num", digits: 0 },
       { key: "earnings", label: "下次财报", kind: "text" },
     ];
     let daily = [];
@@ -111,6 +107,10 @@
       if (key === "revision_signal") {
         if (row.revision_signal === "强上修") return "rev-up";
         if (row.revision_signal === "强下修") return "rev-down";
+      }
+      if (key === "revision_30d") {
+        const rev = num(row.revision_30d);
+        if (rev != null && Math.abs(rev) >= 50) return "anomaly";
       }
       if (key === "forward_pe" && row.triggered === "1") return "trigger";
       return "";
@@ -224,10 +224,11 @@
       const main = el("div");
       main.appendChild(el("p", "label", "笔记日期"));
       main.appendChild(el("p", "big", latest || "—"));
-      main.appendChild(el("p", "unit", rows.length + " 只股票"));
+      main.appendChild(el("p", "unit", rows.length + " 只股票。笔记日期不是美股收盘日，周末的笔记用的是前一个交易日的价格。"));
       head.appendChild(main);
       summary.appendChild(head);
       const list = el("div", "notes");
+      list.appendChild(el("p", null, "修正信号按上调、下调的家数，不按 30 日修正的正负。强下修也可以是正的修正。绝对值达到 50% 的标成异常，不参与总览。"));
       list.appendChild(el("p", null, "强上修：" + (strongUp.join("、") || "无") + "。强下修：" + (strongDown.join("、") || "无") + "。"));
       list.appendChild(el("p", null, "RSI 低于 30：" + (low.join("、") || "无") + "。高于 70：" + (high.join("、") || "无") + "。估值触发：" + (triggers.join("、") || "无") + "。"));
       summary.appendChild(list);
@@ -341,6 +342,7 @@
     }
 
     async function main() {
+      renderNav("earnings.html");
       try {
         await renderBriefing("earnings");
         const meta = JSON.parse(await loadText("data/meta.json"));

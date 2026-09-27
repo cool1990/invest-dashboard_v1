@@ -6,14 +6,16 @@ from __future__ import annotations
 import json
 import shutil
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from briefing import build_briefing
+from signals import build_signals
 
 ROOT = Path(__file__).resolve().parent.parent
-STATIC_HTML = ("index.html", "sentiment.html", "semis.html", "earnings.html", "calendar.html")
+STATIC_HTML = ("index.html", "liquidity.html", "sentiment.html", "semis.html", "earnings.html", "calendar.html")
 ROBOTS = "User-agent: *\nDisallow: /\n"
 
 
@@ -49,6 +51,11 @@ def build_site(root: Path | None = None, dist: Path | None = None) -> Path:
     briefing = build_briefing(dist / "data")
     (dist / "data" / "briefing.json").write_text(
         json.dumps(briefing, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    signals = build_signals(dist / "data", date.fromisoformat(briefing["asof"]))
+    (dist / "data" / "signals.json").write_text(
+        json.dumps(signals, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     (dist / "robots.txt").write_text(ROBOTS, encoding="utf-8")
