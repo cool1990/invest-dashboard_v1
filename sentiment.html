@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>市场情绪</title>
+  <title>利率与情绪</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,10 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="nav" aria-label="页面">
-      <a href="index.html">流动性</a>
-      <a href="sentiment.html" aria-current="page">市场情绪</a>
-      <a href="semis.html">半导体景气</a>
-      <a href="earnings.html">盈利跟踪</a>
-      <a href="calendar.html">日历</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="页面"></nav>
     <header>
-      <h1>市场情绪</h1>
-      <p class="lede">按最新笔记的三块来排：情绪、利率、其他。每张卡片是该指标最近一次读数，细线是它自己的历史。</p>
+      <h1>利率与情绪</h1>
+      <p class="lede">情绪、利率，以及大宗、汇率与加密。涨跌按序列自己算。灰卡片是沿用，观测日没变。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
     <section id="briefing" class="briefing" hidden></section>
@@ -65,7 +59,12 @@
     }
 
     function history(rows, id) {
-      return rows.filter((row) => row.series_id === id).sort((a, b) => (a.obs_date || a.date).localeCompare(b.obs_date || b.date));
+      const map = new Map();
+      seriesRows(rows, id).forEach((row) => {
+        const obs = (row.obs_date || row.date || "").slice(0, 10);
+        if (obs) map.set(obs, row);
+      });
+      return [...map.values()].sort((a, b) => (a.obs_date || a.date).localeCompare(b.obs_date || b.date));
     }
 
     function spark(points) {
@@ -107,10 +106,57 @@
       return "";
     }
 
-    function card(row, points) {
-      const box = el("article", "ind-card");
+    const KIND = {
+      us_10y: "bp", us_2y: "bp", tips_10y: "bp", t10yie: "bp", t10y2y: "bp", hy_oas: "bp",
+      effr_next: "bp", effr_year: "bp", effr_ny: "bp",
+      etf_spx: "pp", etf_ndx: "pp", aaii: "pp",
+      spx_breadth_20: "pp", spx_breadth_50: "pp", spx_breadth_200: "pp",
+      ndx_breadth_20: "pp", ndx_breadth_50: "pp", ndx_breadth_200: "pp",
+      cnn_fg: "pt", spx_rsi: "pt", nasdaq_rsi: "pt", vix: "pt"
+    };
+
+    function displayName(row) {
+      if (row.series_id === "btc") return "比特币";
+      return row.name || row.series_id;
+    }
+
+    function kindOf(id) {
+      return KIND[id] || "pct";
+    }
+
+    function formatKind(kind, value) {
+      if (value == null || !Number.isFinite(value)) return "";
+      if (kind === "bp") {
+        const whole = Math.abs(value - Math.round(value)) < 0.05;
+        const shown = whole ? Math.round(value) : value.toFixed(1);
+        return (value > 0 ? "+" : "") + shown + "bp";
+      }
+      if (kind === "pp") return (value > 0 ? "+" : "") + value.toFixed(2) + " 个百分点";
+      if (kind === "pt") return (value > 0 ? "+" : "") + value.toFixed(1) + " 点";
+      return (value > 0 ? "+" : "") + value.toFixed(1) + "%";
+    }
+
+    function seriesRows(rows, id) {
+      return rows.filter((row) => row.series_id === id).sort((a, b) => a.date.localeCompare(b.date));
+    }
+
+    function priorRow(rows, id, row) {
+      if (row.carried === "1") return null;
+      const obs = (row.obs_date || row.date || "").slice(0, 10);
+      const items = seriesRows(rows, id);
+      for (let i = items.length - 1; i >= 0; i -= 1) {
+        const item = items[i];
+        if (item === row || item.date > row.date) continue;
+        const other = (item.obs_date || item.date || "").slice(0, 10);
+        if (other && other !== obs) return item;
+      }
+      return null;
+    }
+
+    function card(row, points, rows) {
+      const box = el("article", "ind-card" + (row.carried === "1" ? " carried" : ""));
       box.tabIndex = 0;
-      box.appendChild(el("p", "label", row.name || row.series_id));
+      box.appendChild(el("p", "label", displayName(row)));
       const digits = DIGITS[row.series_id] == null ? 2 : DIGITS[row.series_id];
       const value = el("p", "v", fmt(num(row.value), digits));
       if (row.unit) value.appendChild(el("span", "unit", " " + row.unit));
@@ -118,11 +164,28 @@
       const meta = el("p", "chg");
       if (row.label) meta.appendChild(el("span", chipClass(row.label), row.label));
       const bits = [];
-      if (row.change_text) bits.push(row.change_text);
-      if (row.hike_count) bits.push("隐含加息 " + row.hike_count + " 次");
-      if (row.carried === "1") bits.push("沿用");
       const when = row.obs_date || row.date;
-      if (when) bits.push(when);
+      if (row.carried === "1") {
+        bits.push("沿用");
+        if (when) bits.push(when);
+      } else {
+        const prev = priorRow(rows, row.series_id, row);
+        if (prev) {
+          const kind = kindOf(row.series_id);
+          const left = num(prev.value);
+          const right = num(row.value);
+          let change = null;
+          if (left != null && right != null) {
+            if (kind === "bp") change = (right - left) * 100;
+            else if (kind === "pct") change = left === 0 ? null : (right - left) / Math.abs(left) * 100;
+            else change = right - left;
+          }
+          const text = formatKind(kind, change);
+          if (text) bits.push(text);
+        }
+        if (row.hike_count) bits.push("隐含加息 " + row.hike_count + " 次");
+        if (when) bits.push(when);
+      }
       if (bits.length) meta.appendChild(document.createTextNode((row.label ? " · " : "") + bits.join(" · ")));
       box.appendChild(meta);
       box.appendChild(spark(points));
@@ -137,7 +200,7 @@
       ids.forEach((id) => {
         const row = map.get(id);
         if (!row) return;
-        grid.appendChild(card(row, history(rows, id)));
+        grid.appendChild(card(row, history(rows, id), rows));
       });
       if (grid.childElementCount) parent.appendChild(grid);
     }
@@ -165,7 +228,7 @@
       root.appendChild(rates);
 
       const other = el("section", "group-block");
-      other.appendChild(el("h2", null, "其他"));
+      other.appendChild(el("h2", null, "大宗、汇率与加密"));
       paint(other, OTHER, map, rows);
       root.appendChild(other);
 
@@ -176,6 +239,7 @@
     }
 
     async function main() {
+      renderNav("sentiment.html");
       try {
         await renderBriefing("sentiment");
         const meta = JSON.parse(await loadText("data/meta.json"));

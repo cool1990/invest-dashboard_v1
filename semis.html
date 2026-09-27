@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>半导体景气</title>
+  <title>半导体与算力</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,15 +15,9 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="nav" aria-label="页面">
-      <a href="index.html">流动性</a>
-      <a href="sentiment.html">市场情绪</a>
-      <a href="semis.html" aria-current="page">半导体景气</a>
-      <a href="earnings.html">盈利跟踪</a>
-      <a href="calendar.html">日历</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="页面"></nav>
     <header>
-      <h1>半导体景气</h1>
+      <h1>半导体与算力</h1>
       <p class="lede">存储现货、GPU 租金、OpenRouter 用量、SiliconData 的 token 价格指数，以及韩国芯片出口。历史不长，图上有几天就画几天。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
@@ -46,23 +40,57 @@
       return rows.reduce((max, row) => row.date > max ? row.date : max, "");
     }
 
-    function weekText(pct) {
-      if (pct == null) return "笔记里没有大约一周的涨跌";
-      return "大约一周 " + fmtSigned(pct, 2) + "%";
+    function addDaysIso(iso, n) {
+      const parts = iso.split("-").map(Number);
+      const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + n));
+      return dt.toISOString().slice(0, 10);
+    }
+
+    function uniquePoints(rows, valueKey) {
+      const map = new Map();
+      rows.forEach((row) => {
+        const value = num(row[valueKey]);
+        if (row.date && value != null) map.set(row.date, value);
+      });
+      return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+    }
+
+    function weekMove(points) {
+      if (points.length < 2) return null;
+      const last = points[points.length - 1];
+      const target = addDaysIso(last[0], -7);
+      let prev = null;
+      points.forEach((point) => { if (point[0] <= target) prev = point; });
+      if (!prev || prev[0] === last[0] || prev[1] === 0) return null;
+      return { from: prev[0], pct: (last[1] - prev[1]) / Math.abs(prev[1]) * 100 };
+    }
+
+    function flatToday(points) {
+      if (points.length < 2) return false;
+      const prev = points[points.length - 2];
+      const last = points[points.length - 1];
+      return addDaysIso(prev[0], 1) === last[0] && prev[1] === last[1];
+    }
+
+    function weekText(self, notePct) {
+      if (!self) return "自算没有大约一周的变动";
+      let text = "自算大约一周 " + fmtSigned(self.pct, 1) + "%（较 " + self.from.slice(5) + "）";
+      if (notePct != null && Math.abs(notePct - self.pct) >= 1) text += " · 笔记写 " + fmtSigned(notePct, 1) + "%";
+      return text;
     }
 
     function renderGroup(parent, rows, titleKey, valueKey, pctKey, digits, unit) {
       const names = [...new Set(rows.map((row) => row[titleKey]))];
       names.forEach((name, index) => {
-        const points = rows.filter((row) => row[titleKey] === name).sort((a, b) => a.date.localeCompare(b.date));
-        const last = points[points.length - 1];
-        const pct = num(last[pctKey]);
+        const series = rows.filter((row) => row[titleKey] === name).sort((a, b) => a.date.localeCompare(b.date));
+        const points = uniquePoints(series, valueKey);
+        const last = series[series.length - 1];
         addChart(parent, {
           title: name,
-          sub: fmt(num(last[valueKey]), digits) + (unit || last.unit ? " " + (last.unit || unit) : "") + " · 截至 " + last.date + " · " + weekText(pct) + " · 从 " + points[0].date + " 起，共 " + points.length + " 个点",
-          labels: points.map((row) => row.date),
+          sub: fmt(num(last[valueKey]), digits) + (unit || last.unit ? " " + (last.unit || unit) : "") + " · 截至 " + last.date + " · " + weekText(weekMove(points), num(last[pctKey])) + " · 从 " + series[0].date + " 起，共 " + points.length + " 个点",
+          labels: series.map((row) => row.date),
           digits,
-          datasets: [{ label: name, data: points.map((row) => num(row[valueKey])), color: COLORS[index % COLORS.length] }],
+          datasets: [{ label: name, data: series.map((row) => num(row[valueKey])), color: COLORS[index % COLORS.length] }],
         });
       });
     }
@@ -72,25 +100,33 @@
       const up = known.filter((item) => item.pct > 0);
       const down = known.filter((item) => item.pct < 0);
       const flat = known.filter((item) => item.pct === 0);
-      if (!known.length) return "笔记里没有大约一周的涨跌，看不出冷热。";
+      if (!known.length) return "今天没有新的存储或 GPU 观测，看不出冷热。相邻日期价格一样的不计数。";
       let tone = "冷热差不多";
       if (up.length > down.length) tone = "偏热";
       if (down.length > up.length) tone = "偏冷";
       const upNames = up.map((item) => item.name).join("、") || "无";
       const downNames = down.map((item) => item.name).join("、") || "无";
-      return "按存储价格、GPU 租金的大约一周变化，加上 OpenRouter 近 7 日用量的环比来数：上升 " + up.length + " 项（" + upNames + "），下降 " + down.length + " 项（" + downNames + "），持平 " + flat.length + " 项。所以近期" + tone + "。只数这些数，没有另写故事。韩国出口是月度，token 价格指数单独放在下面，都不参加这个计数。";
+      return "按自算的大约一周变化来数，相邻日期价格一样的不计入：上升 " + up.length + " 项（" + upNames + "），下降 " + down.length + " 项（" + downNames + "），持平 " + flat.length + " 项。所以近期" + tone + "。韩国出口是月度，token 价格指数单独放在下面，都不参加这个计数。";
     }
 
     function render(meta, memory, gpu, openrouter, silicon, korea) {
       const semis = meta.semis || {};
       const votes = [];
       const memLast = latestDate(memory);
-      memory.filter((row) => row.date === memLast).forEach((row) => {
-        votes.push({ name: row.product, pct: num(row.chg_7d_pct) });
+      const memNames = [...new Set(memory.map((row) => row.product))];
+      memNames.forEach((name) => {
+        const points = uniquePoints(memory.filter((row) => row.product === name), "value");
+        if (flatToday(points)) return;
+        const self = weekMove(points);
+        if (self) votes.push({ name, pct: self.pct });
       });
       const gpuLast = latestDate(gpu);
-      gpu.filter((row) => row.date === gpuLast).forEach((row) => {
-        votes.push({ name: row.gpu, pct: num(row.chg_7d_pct) });
+      const gpuNames = [...new Set(gpu.map((row) => row.gpu))];
+      gpuNames.forEach((name) => {
+        const points = uniquePoints(gpu.filter((row) => row.gpu === name), "price");
+        if (flatToday(points)) return;
+        const self = weekMove(points);
+        if (self) votes.push({ name, pct: self.pct });
       });
       const orLast = latestDate(openrouter);
       const weekUsage = openrouter.find((row) => row.date === orLast && row.window === "7日");
@@ -167,6 +203,7 @@
     }
 
     async function main() {
+      renderNav("semis.html");
       try {
         await renderBriefing("semis");
         const meta = JSON.parse(await loadText("data/meta.json"));

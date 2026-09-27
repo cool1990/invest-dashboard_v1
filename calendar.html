@@ -14,29 +14,24 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="nav" aria-label="页面">
-      <a href="index.html">流动性</a>
-      <a href="sentiment.html">市场情绪</a>
-      <a href="semis.html">半导体景气</a>
-      <a href="earnings.html">盈利跟踪</a>
-      <a href="calendar.html" aria-current="page">日历</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="页面"></nav>
     <header>
       <h1>日历</h1>
       <p class="lede">从今天起 14 天。时间是北京时间。每条标了高、中或低。没有核对到的项目不会出现。</p>
     </header>
     <p id="status" class="status">正在读取数据…</p>
+    <p id="banner" class="banner" hidden></p>
     <section id="briefing" class="briefing" hidden></section>
     <div id="filters" class="cal-filters"></div>
     <div id="days"></div>
     <footer id="footer" hidden></footer>
   </div>
   <script>
-    const CATS = ["全部", "高优先级", "宏观", "半导体", "加密", "财报", "大事"];
+    const CATS = ["不含低", "全部", "高优先级", "宏观", "半导体", "加密", "财报", "大事"];
     const RANK = { "高": 0, "中": 1, "低": 2 };
     let events = [];
     let sources = [];
-    let active = "全部";
+    let active = "不含低";
 
     function beijingToday() {
       return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
@@ -48,29 +43,9 @@
       return dt.toISOString().slice(0, 10);
     }
 
-    function fillBriefing(today) {
-      const tomorrow = addDays(today, 1);
-      const lines = events.filter((item) => (item.date === today || item.date === tomorrow) && item.priority === "高").map((item) => {
-        const prefix = item.date === today ? "今天" : "明天";
-        return prefix + (item.time_bj ? " " + item.time_bj : "") + " " + item.title;
-      });
-      const box = $("briefing");
-      box.hidden = false;
-      box.textContent = "";
-      box.appendChild(el("p", "label", "今日小结"));
-      const list = el("ul", "brief-list");
-      (lines.length ? lines : ["今日无变动"]).forEach((line) => {
-        const li = document.createElement("li");
-        li.textContent = line;
-        list.appendChild(li);
-      });
-      box.appendChild(list);
-    }
-
     function render() {
       const today = beijingToday();
       const end = addDays(today, 14);
-      fillBriefing(today);
       const filters = $("filters");
       filters.textContent = "";
       CATS.forEach((cat) => {
@@ -82,6 +57,7 @@
       });
       const shown = events.filter((item) => {
         if (item.date < today || item.date > end) return false;
+        if (active === "不含低") return item.priority !== "低";
         if (active === "全部") return true;
         if (active === "高优先级") return item.priority === "高";
         if (item.category === active) return true;
@@ -139,10 +115,18 @@
     }
 
     async function main() {
+      renderNav("calendar.html");
       try {
+        await renderBriefing("calendar");
         const payload = JSON.parse(await loadText("data/calendar/events.json"));
         events = payload.events || [];
         sources = payload.sources || [];
+        const fred = sources.find((item) => (item.name || "").includes("FRED") && (item.status === "failed" || item.status === "skipped"));
+        if (fred) {
+          const banner = $("banner");
+          banner.hidden = false;
+          banner.textContent = "FRED 发布日这次没有抓到（" + (fred.detail || fred.status) + "）。日历里因此没有 CPI、PPI、非农、JOLTS 的日期，这些日子没有编造。";
+        }
         render();
         const footer = $("footer");
         footer.hidden = false;

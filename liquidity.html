@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>美国流动性</title>
+  <meta name="description" content="美国流动性周度记录：净流动性、财政部账户、准备金、隔夜逆回购和融资利差。数据来自 FRED。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/site.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="nav" aria-label="页面"></nav>
+    <header>
+      <h1>美国流动性</h1>
+      <p class="lede">美联储资产、财政部账户、准备金和隔夜逆回购。数字来自圣路易斯联储 FRED，方便每周自己看一眼。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="briefing" class="briefing" hidden></section>
+    <section id="summary" class="summary" hidden></section>
+    <details class="fold" id="method">
+      <summary>口径说明</summary>
+      <div id="notes" class="notes"></div>
+    </details>
+    <h2 id="chart-title" hidden>走势</h2>
+    <section id="charts" class="charts" hidden></section>
+    <h2 id="table-title" hidden>最近 8 周</h2>
+    <section id="table-panel" class="panel" hidden>
+      <div class="table-scroll">
+        <table>
+          <caption>单位是十亿美元。利差是基点，表里的利差是该周三的数，页顶卡片用的是最新交易日。分位是 2022 年以来、截至该周三的周三观测里，准备金不高于该周水平的比例。</caption>
+          <thead>
+            <tr>
+              <th>周三</th>
+              <th>净流动性</th>
+              <th>周变动</th>
+              <th>总资产</th>
+              <th>TGA</th>
+              <th>准备金</th>
+              <th>分位</th>
+              <th>隔夜逆回购</th>
+              <th>SOFR−IORB</th>
+            </tr>
+          </thead>
+          <tbody id="weeks"></tbody>
+        </table>
+      </div>
+    </section>
+    <h2 id="extra-title" hidden>其他市场指标</h2>
+    <section id="extra" class="extra" hidden></section>
+    <footer id="footer" hidden></footer>
+  </div>
+  <noscript>需要打开 JavaScript，页面才能读取 data 文件夹里的数据。</noscript>
+  <script>
+    function fmtBj(iso) {
+      const date = new Date(iso);
+      if (Number.isNaN(date.getTime())) return iso;
+      return new Intl.DateTimeFormat("zh-CN", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(date);
+    }
+
+    function wowText(prefix, value, digits) {
+      const line = document.createElement("span");
+      line.appendChild(document.createTextNode(prefix));
+      line.appendChild(el("span", signClass(value), fmtSigned(value, digits)));
+      return line;
+    }
+
+    function metric(parent, label, value, detail, valueClass) {
+      const box = el("div", "metric");
+      box.appendChild(el("p", "label", label));
+      box.appendChild(el("p", "v" + (valueClass ? " " + valueClass : ""), value));
+      const line = el("p", "s");
+      if (typeof detail === "string") line.textContent = detail;
+      else line.appendChild(detail);
+      box.appendChild(line);
+      parent.appendChild(box);
+    }
+
+    function levelShift(rows, steps, key) {
+      if (rows.length <= steps) return null;
+      const last = num(rows[rows.length - 1][key]);
+      const prev = rows[rows.length - 1 - steps];
+      const base = num(prev[key]);
+      if (last == null || base == null) return null;
+      return { delta: last - base, date: prev.date };
+    }
+
+    function render(meta, weekly, spreads, extras) {
+      const latest = weekly[weekly.length - 1];
+      const spread = [...spreads].reverse().find((row) => row.sofr_iorb_bp !== "");
+      const net = num(latest.net_liq_bn);
+      const netWow = num(latest.net_liq_wow_bn);
+      const summary = $("summary");
+      summary.hidden = false;
+
+      const head = el("div", "summary-head");
+      head.appendChild(el("p", "kicker", "最新周三"));
+      head.appendChild(el("p", "date-lg", latest.date));
+      summary.appendChild(head);
+
+      const lead = el("div", "lead-row");
+      const leadMain = el("div");
+      leadMain.appendChild(el("p", "label", "市场常用净流动性代理（非官方）"));
+      leadMain.appendChild(el("p", "big", fmt(net, 1)));
+      leadMain.appendChild(el("p", "unit", "十亿美元"));
+      const leadDelta = el("div");
+      leadDelta.appendChild(el("p", "label", "较上一周三"));
+      leadDelta.appendChild(el("p", "big delta-num " + signClass(netWow), fmtSigned(netWow, 1)));
+      lead.appendChild(leadMain);
+      lead.appendChild(leadDelta);
+      summary.appendChild(lead);
+
+      const metrics = el("div", "metrics");
+      metric(
+        metrics,
+        "财政部账户 TGA",
+        fmt(num(latest.tga_bn), 1),
+        wowText("周变动 ", num(latest.tga_wow_bn), 1)
+      );
+      metric(
+        metrics,
+        "准备金",
+        fmt(num(latest.reserves_bn), 1),
+        "2022 年以来分位 " + fmt(num(latest.reserves_percentile), 1) + "%。不是短缺指标"
+      );
+      metric(
+        metrics,
+        "隔夜逆回购",
+        fmt(num(latest.on_rrp_bn), 2),
+        wowText("周变动 ", num(latest.on_rrp_wow_bn), 2)
+      );
+      const sofrBp = spread ? num(spread.sofr_iorb_bp) : null;
+      const effrBp = spread ? num(spread.effr_iorb_bp) : null;
+      const spreadDetail = document.createElement("span");
+      if (spread) {
+        spreadDetail.appendChild(document.createTextNode("截至 " + spread.date + " · EFFR−IORB "));
+        spreadDetail.appendChild(el("span", signClass(effrBp), fmtSigned(effrBp, 1) + " bp"));
+      } else {
+        spreadDetail.textContent = "暂无";
+      }
+      metric(
+        metrics,
+        "SOFR − IORB",
+        sofrBp == null ? "—" : fmtSigned(sofrBp, 1) + " bp",
+        spreadDetail,
+        signClass(sofrBp)
+      );
+      const net4 = levelShift(weekly, 4, "net_liq_bn");
+      const net13 = levelShift(weekly, 13, "net_liq_bn");
+      const tga4 = levelShift(weekly, 4, "tga_bn");
+      const res4 = levelShift(weekly, 4, "reserves_bn");
+      metric(metrics, "净流动性 4 周", net4 ? fmtSigned(net4.delta, 1) : "—", net4 ? "相对 " + net4.date : "没有更早的周三", net4 ? signClass(net4.delta) : "");
+      metric(metrics, "净流动性 13 周", net13 ? fmtSigned(net13.delta, 1) : "—", net13 ? "相对 " + net13.date : "没有更早的周三", net13 ? signClass(net13.delta) : "");
+      metric(metrics, "TGA 4 周", tga4 ? fmtSigned(tga4.delta, 1) : "—", tga4 ? "相对 " + tga4.date : "没有更早的周三", tga4 ? signClass(tga4.delta) : "");
+      metric(metrics, "准备金 4 周", res4 ? fmtSigned(res4.delta, 1) : "—", res4 ? "相对 " + res4.date : "没有更早的周三", res4 ? signClass(res4.delta) : "");
+      summary.appendChild(metrics);
+
+      const notes = $("notes");
+      notes.appendChild(el("p", null, "净流动性 = 美联储总资产（WALCL）− 财政部在美联储的账户（WDTGAL，周三水平）− 隔夜逆回购（RRPONTSYD）。这是市场上常用的算法，不是美联储发布的官方指标。准备金分位是 2022 年以来、到这个周三为止的周三观测里，准备金不高于当前水平的比例，只说明当前位置，不是准备金短缺的度量。总资产、财政部账户、准备金在 FRED 里的单位是百万美元，这里除以 1000，改成十亿美元。隔夜逆回购本来就是十亿美元。利差单位是基点，1 个百分点等于 100 个基点。"));
+
+      const charts = $("charts");
+      charts.hidden = false;
+      $("chart-title").hidden = false;
+      const dates = weekly.map((row) => row.date);
+      addChart(charts, {
+        title: "净流动性",
+        sub: "十亿美元 · 市场常用代理（非官方）· 截至 " + latest.date,
+        labels: dates,
+        digits: 0,
+        full: true,
+        datasets: [{
+          label: "净流动性",
+          data: weekly.map((row) => num(row.net_liq_bn)),
+          color: "#1a4d45",
+          fill: "rgba(26, 77, 69, 0.08)",
+        }],
+      });
+      addChart(charts, {
+        title: "财政部账户",
+        sub: "十亿美元 · TGA 周三水平 · 截至 " + latest.tga_asof,
+        labels: dates,
+        digits: 0,
+        datasets: [{ label: "TGA", data: weekly.map((row) => num(row.tga_bn)), color: "#8a5a12" }],
+      });
+      addChart(charts, {
+        title: "准备金余额",
+        sub: "十亿美元 · 周三水平 · 截至 " + latest.reserves_asof,
+        labels: dates,
+        digits: 0,
+        datasets: [{ label: "准备金", data: weekly.map((row) => num(row.reserves_bn)), color: "#1f4e79" }],
+      });
+      addChart(charts, {
+        title: "隔夜逆回购",
+        sub: "十亿美元 · 截至 " + latest.on_rrp_asof,
+        labels: dates,
+        digits: 1,
+        datasets: [{ label: "隔夜逆回购", data: weekly.map((row) => num(row.on_rrp_bn)), color: "#5c4d7a" }],
+      });
+      addChart(charts, {
+        title: "融资利差",
+        sub: "相对 IORB，单位是基点 · 截至 " + (spread ? spread.date : "—"),
+        labels: spreads.map((row) => row.date),
+        digits: 0,
+        full: true,
+        datasets: [
+          { label: "SOFR−IORB", data: spreads.map((row) => num(row.sofr_iorb_bp)), color: "#9d2c2c" },
+          { label: "EFFR−IORB", data: spreads.map((row) => num(row.effr_iorb_bp)), color: "#1f4e79" },
+        ],
+      });
+
+      const body = $("weeks");
+      weekly.slice(-8).reverse().forEach((row) => {
+        const tr = document.createElement("tr");
+        const cells = [
+          row.date,
+          fmt(num(row.net_liq_bn), 1),
+          fmtSigned(num(row.net_liq_wow_bn), 1),
+          fmt(num(row.walcl_bn), 1),
+          fmt(num(row.tga_bn), 1),
+          fmt(num(row.reserves_bn), 1),
+          fmt(num(row.reserves_percentile), 1) + "%",
+          fmt(num(row.on_rrp_bn), 2),
+          row.sofr_iorb_bp === "" ? "—" : fmtSigned(num(row.sofr_iorb_bp), 1),
+        ];
+        cells.forEach((text, index) => {
+          const td = el("td", null, text);
+          if (index === 2) td.className = signClass(num(row.net_liq_wow_bn));
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+      $("table-panel").hidden = false;
+      $("table-title").hidden = false;
+
+      const extra = $("extra");
+      extra.hidden = false;
+      $("extra-title").hidden = false;
+      const extraSpecs = [
+        { id: "NFCI", title: "金融状况 NFCI", digits: 2, color: "#1a4d45", note: "低于 0 表示比长期平均更松" },
+        { id: "BAMLH0A0HYM2", title: "高收益债利差", digits: 2, color: "#8a5a12", note: "单位是百分点，不是基点" },
+        { id: "VIXCLS", title: "VIX", digits: 1, color: "#5c4d7a", note: "指数点位" },
+      ];
+      extraSpecs.forEach((spec) => {
+        const rows = extras[spec.id];
+        const last = rows[rows.length - 1];
+        const seriesMeta = meta.series.find((item) => item.id === spec.id);
+        addChart(extra, {
+          title: spec.title,
+          sub: fmt(num(last.value), spec.digits) + " · 截至 " + last.date + " · " + spec.note,
+          labels: rows.map((row) => row.date),
+          digits: spec.digits === 2 ? 1 : spec.digits,
+          datasets: [{
+            label: seriesMeta ? seriesMeta.name : spec.title,
+            data: rows.map((row) => num(row.value)),
+            color: spec.color,
+          }],
+        });
+      });
+
+      const footer = $("footer");
+      footer.hidden = false;
+      footer.appendChild(el("p", null, "本库更新时间：" + fmtBj(meta.updated_at) + "（北京时间）。历史从 " + meta.history_start + " 起。"));
+      const list = document.createElement("ul");
+      meta.series.forEach((item) => {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(item.name + "（" + item.id + "），观测至 " + item.last_date + "，原始单位：" + item.unit + "。"));
+        const link = document.createElement("a");
+        link.href = item.source_url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "FRED 来源";
+        li.appendChild(document.createTextNode(" "));
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+      const fold = el("details", "fold");
+      const summaryEl = document.createElement("summary");
+      summaryEl.textContent = "FRED 序列";
+      fold.appendChild(summaryEl);
+      fold.appendChild(list);
+      footer.appendChild(fold);
+      const links = el("div", "links");
+      [
+        ["data/meta.json", "序列说明"],
+        ["data/derived/weekly.csv", "周三数据"],
+        ["data/derived/spreads.csv", "每日利差"],
+      ].forEach(([href, text]) => {
+        const link = document.createElement("a");
+        link.href = sitePrefix() + href;
+        link.textContent = text;
+        links.appendChild(link);
+      });
+      footer.appendChild(links);
+      footer.appendChild(el("p", null, "只供个人查看，不是投资建议。"));
+      $("status").hidden = true;
+    }
+
+    async function main() {
+      renderNav("liquidity.html");
+      try {
+        await renderBriefing("liquidity");
+        const meta = JSON.parse(await loadText("data/meta.json"));
+        const [weeklyText, spreadsText, nfci, hy, vix] = await Promise.all([
+          loadText("data/" + meta.files.weekly),
+          loadText("data/" + meta.files.spreads),
+          loadText("data/series/NFCI.csv"),
+          loadText("data/series/BAMLH0A0HYM2.csv"),
+          loadText("data/series/VIXCLS.csv"),
+        ]);
+        render(meta, parseCSV(weeklyText), parseCSV(spreadsText), {
+          NFCI: parseCSV(nfci),
+          BAMLH0A0HYM2: parseCSV(hy),
+          VIXCLS: parseCSV(vix),
+        });
+        if (!window.Chart) {
+          const status = $("status");
+          status.hidden = false;
+          status.textContent = "图表库没有加载出来。上面的数字和下面的表仍然可以看。";
+        }
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "数据没有读出来。请用本地服务器打开这个页面（python3 -m http.server），不要直接双击 html 文件。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+
+    if (window.Chart) {
+      Chart.defaults.font.family = '"Noto Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif';
+      Chart.defaults.color = "#6d655c";
+      Chart.defaults.font.size = 12;
+    }
+    main();
+  </script>
+</body>
+</html>

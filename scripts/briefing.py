@@ -5,14 +5,17 @@
 比较的是每个序列最近一条和它上一条，不猜笔记没写过的数字。
 
 市场情绪
-- 直接用最新一篇宏观指标笔记的「小结」，不另写。小结按句拆开。没有小结就写「今日无变动」。
+- 变动按序列自己算。收益率和利差用基点，参与度、ETF 溢价、AAII 用百分点，CNN、RSI、VIX 用点，价格用百分比。
+- 标明沿用的不写进今日小结。跨了不止一天的，写上一个观测日。笔记原文收在 notes.sentiment，页面另作「笔记原文」。
 
 盈利跟踪
 - 用最新一篇盈利笔记的「简要总结」，收成修正、RSI、估值触发、未来 7 天财报。不适用的代码单独一句。
+- 再补一句：修正信号按分析师家数。强下修但 30 日修正为正的，把代码和家数写出来。绝对值达到 50% 的标成异常。
 - 最新一天有公告或新闻稿才再加一句。
 
 半导体
-- 存储：最新一天里，一日变动达到 5% 的才点名；都没到就写没有明显波动。
+- 存储和 GPU 的一日、一周都按价格自己算，不用笔记里的涨跌列。相邻两天价格一样，一日就是没动。
+- 存储：一日变动达到 5% 的才点名；都没到就写没有明显波动。
 - GPU 租金：一日达到 5% 写一日；一日没到、但一周达到 10% 的，写一日和一周。都没到就写没有明显波动。
 - 用量：OpenRouter 7 日环比达到 10%，或 SiliconData 7 日达到 5%，才写。
 - 韩国出口：只有最新一期的 asof 比上一期更晚时，才写成新期间。否则写今日无新数。
@@ -34,8 +37,22 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from common import (  # noqa: E402
+    SENTIMENT_KIND,
+    day_move,
+    format_change,
+    fresh_pair,
+    kind_change,
+    lookback,
+    notable,
+    series_points,
+)
 
 BJ = timezone(timedelta(hours=8))
 SEMI_NAMES = {"NVDA", "MU", "INTC", "TSM", "QCOM", "SNDK", "AVGO", "ASML", "AMD", "AMAT", "LRCX", "KLAC", "ARM", "SMCI"}
@@ -146,8 +163,38 @@ def earnings_summary_lines(text: str) -> list[str]:
     return lines
 
 
-def earnings_lines(summary_text: str, filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]]) -> list[str]:
+def earnings_audit(rows: list[dict[str, str]]) -> list[str]:
+    """修正信号看的是上调、下调家数。幅度另说，极大的幅度标成异常。"""
+    if not rows:
+        return []
+    latest = max(row.get("date") or "" for row in rows)
+    odd = []
+    extreme = []
+    for row in rows:
+        if row.get("date") != latest:
+            continue
+        rev = fnum(row.get("revision_30d", ""))
+        name = row.get("revision_signal") or ""
+        if rev is not None and abs(rev) >= 50:
+            extreme.append(f"{row.get('ticker')} {rev:+.2f}%")
+        if rev is None:
+            continue
+        counts = f"上调 {row.get('up30') or '—'} / 下调 {row.get('down30') or '—'}"
+        if name == "强下修" and rev > 0:
+            odd.append(f"{row.get('ticker')} {rev:+.2f}%（{counts}）")
+        elif name == "强上修" and rev < 0:
+            odd.append(f"{row.get('ticker')} {rev:+.2f}%（{counts}）")
+    lines = []
+    if odd:
+        lines.append("修正信号按分析师家数，不按幅度：" + "；".join(odd))
+    if extreme:
+        lines.append("30 日修正绝对值达到 50%，标成异常，不参与总览信号：" + "、".join(extreme))
+    return lines
+
+
+def earnings_lines(summary_text: str, filings: list[dict[str, str]], press: list[dict[str, str]], days: list[dict[str, str]], daily: list[dict[str, str]] | None = None) -> list[str]:
     lines = earnings_summary_lines(summary_text)
+    lines.extend(earnings_audit(daily or []))
     latest_days = [row.get("date", "") for row in days if row.get("date")]
     latest = max(latest_days) if latest_days else ""
     if latest:
@@ -166,27 +213,26 @@ def signed_pct(value: float) -> str:
     return f"{value:+.1f}%"
 
 
+def _price_moves(rows: list[dict[str, str]], value_key: str) -> tuple[float | None, float | None]:
+    points = series_points(rows, value_key=value_key)
+    day = day_move(points)
+    week = lookback(points, 7)
+    return (day[4] if day else None, week[4] if week else None)
+
+
 def semis_lines(memory: list[dict[str, str]], gpu: list[dict[str, str]], router: list[dict[str, str]], silicon: list[dict[str, str]], korea: list[dict[str, str]]) -> list[str]:
     lines: list[str] = []
     if memory:
-        latest = max(row.get("date", "") for row in memory)
         moved = []
-        for row in memory:
-            if row.get("date") != latest:
-                continue
-            change = fnum(row.get("chg_1d_pct", ""))
-            if change is not None and abs(change) >= 5:
-                moved.append(f"{row.get('product')} 一日 {signed_pct(change)}")
+        for name, items in grouped(memory, "product").items():
+            day_chg, _week_chg = _price_moves(items, "value")
+            if day_chg is not None and abs(day_chg) >= 5:
+                moved.append(f"{name} 一日 {signed_pct(day_chg)}")
         lines.append("存储：" + ("，".join(moved) if moved else "今天没有明显波动"))
     if gpu:
-        latest = max(row.get("date", "") for row in gpu)
         bits = []
-        for row in gpu:
-            if row.get("date") != latest:
-                continue
-            day_chg = fnum(row.get("chg_1d_pct", ""))
-            week_chg = fnum(row.get("chg_7d_pct", ""))
-            name = row.get("gpu") or ""
+        for name, items in grouped(gpu, "gpu").items():
+            day_chg, week_chg = _price_moves(items, "price")
             if day_chg is not None and abs(day_chg) >= 5:
                 bits.append(f"{name} 一日 {signed_pct(day_chg)}")
             elif week_chg is not None and abs(week_chg) >= 10:
@@ -403,6 +449,50 @@ def calendar_lines(events: list[dict], today: date) -> list[str]:
     return lines
 
 
+SENTIMENT_ORDER = [
+    "cnn_fg", "aaii", "spx_rsi", "nasdaq_rsi", "vix", "etf_spx", "etf_ndx",
+    "spx_breadth_20", "spx_breadth_50", "spx_breadth_200",
+    "ndx_breadth_20", "ndx_breadth_50", "ndx_breadth_200",
+    "us_10y", "tips_10y", "t10yie", "us_2y", "t10y2y", "hy_oas",
+    "effr_next", "effr_year", "effr_ny",
+    "wti", "gold", "copper", "usdcny", "btc",
+]
+
+
+def sentiment_moves(rows: list[dict[str, str]]) -> list[str]:
+    by_id = grouped(rows, "series_id")
+    lines = []
+    for series_id in SENTIMENT_ORDER:
+        items = by_id.get(series_id) or []
+        prev, curr = fresh_pair(items)
+        if not prev or not curr:
+            continue
+        kind = SENTIMENT_KIND.get(series_id, "pct")
+        change = kind_change(kind, fnum(prev.get("value", "")), fnum(curr.get("value", "")))
+        if change is None or not notable(kind, series_id, change):
+            continue
+        name = "比特币" if series_id == "btc" else (curr.get("name") or series_id)
+        prev_obs = (prev.get("obs_date") or prev.get("date") or "")[:10]
+        curr_obs = (curr.get("obs_date") or curr.get("date") or "")[:10]
+        gap = ""
+        prev_day, curr_day = parse_day_text(prev_obs), parse_day_text(curr_obs)
+        if prev_day and curr_day and (curr_day - prev_day).days > 1:
+            gap = f"，较 {prev_obs[5:]}"
+        prev_txt = f"{fnum(prev.get('value', '')):g}"
+        curr_txt = f"{fnum(curr.get('value', '')):g}"
+        lines.append(f"{name} {format_change(kind, change)}{gap}（{prev_txt}→{curr_txt}）")
+    return lines
+
+
+def parse_day_text(text: str):
+    if not text:
+        return None
+    try:
+        return date.fromisoformat(text[:10])
+    except ValueError:
+        return None
+
+
 def sentiment_note(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
         return []
@@ -429,6 +519,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
     outlook_path = data_dir / "liquidity" / "tga_outlook.json"
     outlook = json.loads(outlook_path.read_text(encoding="utf-8")) if outlook_path.exists() else None
     earnings_summary = load_csv(data_dir / "earnings" / "summary.csv")
+    sentiment_rows = load_csv(data_dir / "sentiment" / "summary.csv")
     pages = {
         "liquidity": cap(liquidity_lines(
             weekly,
@@ -439,7 +530,7 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             load_csv(data_dir / "series" / "DPSACBW027SBOG.csv"),
             outlook,
         )),
-        "sentiment": cap(sentiment_note(load_csv(data_dir / "sentiment" / "summary.csv"))),
+        "sentiment": cap(sentiment_moves(load_csv(data_dir / "sentiment" / "series.csv"))),
         "semis": cap(semis_lines(
             load_csv(data_dir / "semis" / "memory.csv"),
             load_csv(data_dir / "semis" / "gpu.csv"),
@@ -452,7 +543,13 @@ def build_briefing(data_dir: Path, today: date | None = None, calendar_events: l
             filings,
             press,
             days,
+            load_csv(data_dir / "earnings" / "daily.csv"),
         )),
         "calendar": cap(calendar_lines(calendar_events, today)),
     }
-    return {"asof": today.isoformat(), "pages": pages, "semi_ai": sorted(SEMI_NAMES)}
+    return {
+        "asof": today.isoformat(),
+        "pages": pages,
+        "notes": {"sentiment": sentiment_note(sentiment_rows)},
+        "semi_ai": sorted(SEMI_NAMES),
+    }

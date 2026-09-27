@@ -82,6 +82,33 @@ function el(tag, cls, text) {
   return node;
 }
 
+const NAV = [
+  ["index.html", "总览"],
+  ["liquidity.html", "流动性"],
+  ["sentiment.html", "利率与情绪"],
+  ["earnings.html", "盈利跟踪"],
+  ["semis.html", "半导体与算力"],
+  ["calendar.html", "日历"],
+];
+
+function renderNav(current) {
+  const nav = document.getElementById("nav");
+  if (!nav) return;
+  nav.textContent = "";
+  NAV.forEach((pair) => {
+    const anchor = el("a", null, pair[1]);
+    anchor.href = pair[0];
+    if (pair[0] === current) anchor.setAttribute("aria-current", "page");
+    nav.appendChild(anchor);
+  });
+}
+
+function signClass(n) {
+  if (n > 0) return "up";
+  if (n < 0) return "down";
+  return "";
+}
+
 function addChart(parent, spec) {
   const card = el("article", "chart-card" + (spec.full ? " full" : ""));
   card.appendChild(el("h3", null, spec.title));
@@ -163,6 +190,21 @@ function renderBriefing(page) {
       list.appendChild(item);
     });
     box.appendChild(list);
+    const notes = data.notes && data.notes[page];
+    if (notes && notes.length) {
+      const details = el("details", "note-src");
+      const summary = document.createElement("summary");
+      summary.textContent = "笔记原文";
+      details.appendChild(summary);
+      const noteList = el("ul", "brief-list");
+      notes.forEach((line) => {
+        const item = document.createElement("li");
+        item.textContent = line;
+        noteList.appendChild(item);
+      });
+      details.appendChild(noteList);
+      box.appendChild(details);
+    }
   }).catch(() => {
     box.hidden = true;
   });
