@@ -341,6 +341,8 @@ def test_accuracy_rules() -> None:
             "date,ticker,market,eps_unit,revision_30d,revision_signal,up30,down30,triggered\n"
             "2026-09-26,MSTR,US,USD,151.86,温和上修,3,0,0\n"
             "2026-09-26,PDD,US,CNY,0.07,中性,11,12,1\n"
+            "2026-09-26,TME,US,CNY,0.00,强下修,2,17,0\n"
+            "2026-09-26,BABA,US,CNY,1.00,中性,1,1,0\n"
             "2026-09-26,AAPL,US,USD,0.49,强下修,2,7,0\n",
             encoding="utf-8",
         )
@@ -350,7 +352,8 @@ def test_accuracy_rules() -> None:
         health = " ".join(item["level"] + item["text"] for item in payload["health"])
         assert "5.16" in health and "5.18" in health
         assert "MSTR" in health
-        assert "PDD" in health and "待确认" in health
+        assert "BABA" in health and "待确认" in health
+        assert "PDD" not in health and "TME" not in health
         assert "DGS2" in health
         titles = [item["title"] for item in payload["signals"]["风险"] + payload["signals"]["机会"] + payload["signals"]["关注"]]
         assert "盈利强下修" in titles
