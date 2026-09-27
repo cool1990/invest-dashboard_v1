@@ -1,0 +1,176 @@
+{
+  "updated_at": "2026-09-27T09:23:11Z",
+  "history_start": "2022-01-01",
+  "display_unit": "十亿美元",
+  "spread_unit": "基点",
+  "net_liquidity": {
+    "name": "市场常用净流动性代理（非官方）",
+    "formula": "WALCL − WDTGAL − RRPONTSYD，三条都换算成十亿美元后再相减",
+    "note": "这是市场上常用的代理算法，不是美联储发布的官方指标。",
+    "file": "derived/weekly.csv",
+    "column": "net_liq_bn"
+  },
+  "weekly_change": {
+    "name": "周变动",
+    "note": "与上一条周三观测相比的差额，单位是十亿美元。"
+  },
+  "spreads": {
+    "name": "SOFR−IORB 与 EFFR−IORB",
+    "formula": "(利率 − IORB) × 100，单位是基点",
+    "file": "derived/spreads.csv"
+  },
+  "reserves_percentile": {
+    "name": "准备金分位（2022年以来）",
+    "definition": "2022-01-01 起至该周三（含）的周三观测中，准备金余额小于或等于当前值的占比。",
+    "note": "这不是准备金短缺的度量，只说明当前水平在这段历史里的位置。",
+    "file": "derived/weekly.csv",
+    "column": "reserves_percentile"
+  },
+  "files": {
+    "weekly": "derived/weekly.csv",
+    "spreads": "derived/spreads.csv"
+  },
+  "series": [
+    {
+      "id": "WALCL",
+      "name": "美联储总资产",
+      "unit": "百万美元",
+      "display_unit": "十亿美元",
+      "scale_to_billions": 0.001,
+      "frequency": "每周三",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/WALCL",
+      "file": "series/WALCL.csv",
+      "last_date": "2026-09-23",
+      "last_value": "6747704",
+      "observations": 247
+    },
+    {
+      "id": "WDTGAL",
+      "name": "财政部在美联储账户（TGA，周三水平）",
+      "unit": "百万美元",
+      "display_unit": "十亿美元",
+      "scale_to_billions": 0.001,
+      "frequency": "每周三",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/WDTGAL",
+      "file": "series/WDTGAL.csv",
+      "last_date": "2026-09-23",
+      "last_value": "947317",
+      "observations": 247
+    },
+    {
+      "id": "RRPONTSYD",
+      "name": "隔夜逆回购（ON RRP）",
+      "unit": "十亿美元",
+      "display_unit": "十亿美元",
+      "scale_to_billions": 1.0,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/RRPONTSYD",
+      "file": "series/RRPONTSYD.csv",
+      "last_date": "2026-09-25",
+      "last_value": "0.576",
+      "observations": 1181
+    },
+    {
+      "id": "WRBWFRBL",
+      "name": "准备金余额（周三）",
+      "unit": "百万美元",
+      "display_unit": "十亿美元",
+      "scale_to_billions": 0.001,
+      "frequency": "每周三",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/WRBWFRBL",
+      "file": "series/WRBWFRBL.csv",
+      "last_date": "2026-09-23",
+      "last_value": "2969922",
+      "observations": 247
+    },
+    {
+      "id": "SOFR",
+      "name": "担保隔夜融资利率（SOFR）",
+      "unit": "百分比",
+      "display_unit": "百分比",
+      "scale_to_billions": null,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/SOFR",
+      "file": "series/SOFR.csv",
+      "last_date": "2026-09-24",
+      "last_value": "3.88",
+      "observations": 1180
+    },
+    {
+      "id": "IORB",
+      "name": "准备金余额利率（IORB）",
+      "unit": "百分比",
+      "display_unit": "百分比",
+      "scale_to_billions": null,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/IORB",
+      "file": "series/IORB.csv",
+      "last_date": "2026-09-28",
+      "last_value": "3.90",
+      "observations": 1732
+    },
+    {
+      "id": "EFFR",
+      "name": "有效联邦基金利率（EFFR）",
+      "unit": "百分比",
+      "display_unit": "百分比",
+      "scale_to_billions": null,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/EFFR",
+      "file": "series/EFFR.csv",
+      "last_date": "2026-09-24",
+      "last_value": "3.88",
+      "observations": 1186
+    },
+    {
+      "id": "NFCI",
+      "name": "芝加哥联储全国金融状况指数（NFCI）",
+      "unit": "指数",
+      "display_unit": "指数",
+      "scale_to_billions": null,
+      "frequency": "每周",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/NFCI",
+      "file": "series/NFCI.csv",
+      "last_date": "2026-09-18",
+      "last_value": "-0.555",
+      "observations": 246
+    },
+    {
+      "id": "BAMLH0A0HYM2",
+      "name": "美国高收益债期权调整利差（HY OAS）",
+      "unit": "百分比",
+      "display_unit": "百分比",
+      "scale_to_billions": null,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "file": "series/BAMLH0A0HYM2.csv",
+      "last_date": "2026-09-24",
+      "last_value": "2.80",
+      "observations": 787
+    },
+    {
+      "id": "VIXCLS",
+      "name": "标普 500 波动率指数（VIX）",
+      "unit": "指数",
+      "display_unit": "指数",
+      "scale_to_billions": null,
+      "frequency": "每个交易日",
+      "source": "FRED",
+      "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
+      "file": "series/VIXCLS.csv",
+      "last_date": "2026-09-22",
+      "last_value": "14.21",
+      "observations": 1217
+    }
+  ],
+  "latest_wednesday": "2026-09-23"
+}
