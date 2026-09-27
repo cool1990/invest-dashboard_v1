@@ -118,6 +118,7 @@
       if (freshness && freshness.length) {
         const wrap = el("div", "table-scroll");
         const table = document.createElement("table");
+        table.className = "freshness";
         const head = document.createElement("thead");
         const hr = document.createElement("tr");
         ["数据", "最新观测日", "距今", "状态"].forEach((label) => {

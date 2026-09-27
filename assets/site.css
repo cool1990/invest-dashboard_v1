@@ -115,6 +115,15 @@ details.fold summary, details.note-src summary { cursor: pointer; font-weight: 7
 .links { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 8px; }
 footer ul { padding-left: 1.1em; margin: 8px 0; }
 td.anomaly, td.stale { background: #f8eceb; font-weight: 700; }
+table.freshness th,
+table.freshness td,
+table.freshness th:first-child,
+table.freshness td:first-child,
+table.freshness tbody tr:first-child td,
+table.freshness tbody tr:first-child td:first-child {
+  background: var(--paper);
+}
+table.freshness td.stale { background: #f8eceb; }
 .notes {
   background: var(--teal-soft);
   border-radius: 12px;
