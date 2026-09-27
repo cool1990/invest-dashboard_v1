@@ -31,6 +31,9 @@ jobs:
           python-version: "3.12"
 
       - name: 从 FRED 拉取并计算
+        # 单条失败也会正常结束：旧 CSV 保留，meta.json 写下 last_fetch_ok。
+        # 这样本步之后的提交能把新鲜度记下来。用 GITHUB_TOKEN 推送不会再触发
+        # 「发布网页」，所以数据有变化时由下面的 deploy 自己发布。
         run: python3 scripts/fetch_liquidity.py
 
       - name: 把新数据提交到 main

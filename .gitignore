@@ -4,3 +4,8 @@ __pycache__/
 _site/
 data.prev/
 data.new/
+data/.series.incoming/
+data/.series.backup/
+data/.derived.incoming/
+data/.derived.backup/
+liq-stage-*/
