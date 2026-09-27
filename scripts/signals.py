@@ -60,6 +60,8 @@ FRED_CHECK = {
     "BAMLH0A0HYM2": "hy_oas",
 }
 FRED_WINDOW = 10
+RATIO_TOLERANCE = 1
+RATIO_DAYS = 10
 HEALTH_ORDER = {"错误": 0, "警告": 1, "提示": 2}
 CALENDAR_HINTS = ("初请失业金", "加密", "韩国出口与 TSMC")
 RATE_RISK_IDS = ("us_10y", "tips_10y", "us_2y", "t10yie", "hy_oas")
@@ -495,10 +497,16 @@ def carry_health(gpu: list[dict[str, str]], memory: list[dict[str, str]]) -> lis
     return [health("提示", "这些日期按沿用处理，不计入新观测。价格和涨跌列都与前一天相同，或周末且价格没变：" + shown)]
 
 
-def conflict_health(sentiment_rows: list[dict[str, str]], tables: dict[str, dict[str, float]]) -> list[dict[str, str]]:
+def ratio_series(series_id: str) -> bool:
+    """参与度和 ETF 溢价是比例，小修订不值得单独警告。"""
+    return "breadth" in series_id or series_id in {"etf_spx", "etf_ndx"}
+
+
+def conflict_health(sentiment_rows: list[dict[str, str]], tables: dict[str, dict[str, float]], today: date | None = None) -> list[dict[str, str]]:
     by_id = grouped(sentiment_rows, "series_id")
     settled = []
     open_conflicts = []
+    cutoff = (today - timedelta(days=RATIO_DAYS)).isoformat() if today else ""
     for series_id, rows in by_id.items():
         seen: dict[str, set[str]] = {}
         for row in rows:
@@ -511,6 +519,12 @@ def conflict_health(sentiment_rows: list[dict[str, str]], tables: dict[str, dict
         for obs, values in seen.items():
             if len(values) < 2:
                 continue
+            if ratio_series(series_id):
+                if cutoff and obs < cutoff:
+                    continue
+                numbers = [fnum(value) for value in values]
+                if all(number is not None for number in numbers) and max(numbers) - min(numbers) <= RATIO_TOLERANCE:
+                    continue
             shown = " 和 ".join(sorted(values, key=lambda item: (len(item), item)))
             if obs in fred:
                 settled.append(f"{name} 观测日 {obs} 有 {shown}，FRED 为 {fred[obs]:g}，以 {fred[obs]:g} 为准")
@@ -659,7 +673,7 @@ def build_signals(data_dir: Path, today: date | None = None) -> dict:
     ]
     issues = []
     issues.extend(mismatch_health(sentiment_rows, gpu, memory))
-    issues.extend(conflict_health(sentiment_rows, fred))
+    issues.extend(conflict_health(sentiment_rows, fred, today))
     issues.extend(extreme_health(earnings))
     issues.extend(currency_health(earnings))
     issues.extend(fred_health(data_dir, sentiment_rows, fred))

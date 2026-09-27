@@ -401,6 +401,24 @@ def test_accuracy_rules() -> None:
         (data / "series" / "DGS2.csv").write_text("date,value\n2026-09-23,4.85\n", encoding="utf-8")
         reported = build_signals(data, date(2026, 9, 27))
         assert any("4.89" in item["text"] and "4.85" in item["text"] for item in reported["health"])
+        (data / "sentiment" / "series.csv").write_text(
+            "date,series_id,name,value,obs_date,carried,label\n"
+            "2026-09-24,us_10y,10年期美债,5.16,2026-09-24,,风险\n"
+            "2026-09-26,us_10y,10年期美债,5.18,2026-09-24,1,风险\n"
+            "2026-09-18,spx_breadth_50,标普500参与度>50日,29.2,2026-09-18,,\n"
+            "2026-09-20,spx_breadth_50,标普500参与度>50日,29.7,2026-09-18,,\n"
+            "2026-09-20,spx_breadth_20,标普500参与度>20日,20,2026-09-20,,\n"
+            "2026-09-21,spx_breadth_20,标普500参与度>20日,22,2026-09-20,,\n"
+            "2026-09-01,ndx_breadth_200,纳指参与度>200日,50,2026-09-01,,\n"
+            "2026-09-02,ndx_breadth_200,纳指参与度>200日,55,2026-09-01,,\n",
+            encoding="utf-8",
+        )
+        ratios = build_signals(data, date(2026, 9, 27))
+        ratio_text = " ".join(item["text"] for item in ratios["health"])
+        assert "29.2" not in ratio_text and "29.7" not in ratio_text
+        assert "纳指参与度" not in ratio_text
+        assert "标普500参与度>20日" in ratio_text
+        assert "5.16" in ratio_text and "5.18" in ratio_text
 
 
 if __name__ == "__main__":

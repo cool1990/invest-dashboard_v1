@@ -84,6 +84,32 @@
       });
     }
 
+    function addDaysIso(iso, days) {
+      const parts = iso.split("-").map(Number);
+      const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + days));
+      return dt.toISOString().slice(0, 10);
+    }
+
+    function yearSpark(notePoints, fredMap) {
+      if (!fredMap) return notePoints;
+      const days = Object.keys(fredMap).filter((day) => num(fredMap[day]) != null).sort();
+      if (!days.length) return notePoints;
+      const end = days[days.length - 1];
+      const start = addDaysIso(end, -365);
+      const points = days.filter((day) => day >= start).map((day) => ({
+        obs_date: day,
+        value: String(fredMap[day]),
+        fred: "1",
+      }));
+      const latest = notePoints[notePoints.length - 1];
+      if (latest) {
+        const obs = (latest.obs_date || latest.date || "").slice(0, 10);
+        const last = points.length ? points[points.length - 1].obs_date : "";
+        if (obs > last) points.push(latest);
+      }
+      return points.length ? points : notePoints;
+    }
+
     function unitText(row) {
       if (row.series_id === "aaii") return " 个百分点";
       if (row.unit === "百分比" || row.unit === "百分点") return "%";
@@ -176,7 +202,7 @@
       return null;
     }
 
-    function card(row, points, rows) {
+    function card(row, points, rows, linePoints) {
       const box = el("article", "ind-card" + (row.carried === "1" ? " carried" : ""));
       box.tabIndex = 0;
       box.appendChild(el("p", "label", displayName(row)));
@@ -215,7 +241,7 @@
       }
       if (bits.length) meta.appendChild(document.createTextNode((row.label ? " · " : "") + bits.join(" · ")));
       box.appendChild(meta);
-      box.appendChild(spark(points));
+      box.appendChild(spark(linePoints || points));
       const hint = hintText(row);
       if (hint) box.appendChild(el("p", "hint", hint));
       box.addEventListener("click", () => box.classList.toggle("open"));
@@ -228,7 +254,8 @@
         const row = map.get(id);
         if (!row) return;
         const points = FRED_FILE[id] ? rateHistory(rows, id, fredMaps[id]) : history(rows, id);
-        grid.appendChild(card(row, points, rows));
+        const line = FRED_FILE[id] ? yearSpark(points, fredMaps[id]) : points;
+        grid.appendChild(card(row, points, rows, line));
       });
       if (grid.childElementCount) parent.appendChild(grid);
     }
