@@ -97,11 +97,20 @@ def test_briefing_and_build() -> None:
             "2026-09-26,cnn_fg,CNN,30,点,,恐慌,,,,,,\n",
             encoding="utf-8",
         )
+        (data / "summary.csv").write_text(
+            "date,text,source\n"
+            "2026-09-26,情绪指标：CNN仍处恐慌区间。 利率指标：10年美债收益率偏高。,\n",
+            encoding="utf-8",
+        )
         (root / "index.html").write_text("<head></head><p>流动性</p>", encoding="utf-8")
         (root / "assets").mkdir()
         (root / "assets" / "site.css").write_text("body{}", encoding="utf-8")
         briefing = build_briefing(root / "data", today=date(2026, 9, 27), calendar_events=[])
-        assert any("恐慌" in line for line in briefing["pages"]["sentiment"])
+        assert briefing["pages"]["sentiment"] == [
+            "情绪指标：CNN仍处恐慌区间。",
+            "利率指标：10年美债收益率偏高。",
+        ]
+        assert not any("变为" in line for line in briefing["pages"]["sentiment"])
         dist = build_site(root, root / "dist")
         text = (dist / "index.html").read_text(encoding="utf-8")
         assert 'name="robots"' in text

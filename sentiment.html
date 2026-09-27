@@ -27,7 +27,6 @@
     </header>
     <p id="status" class="status">正在读取数据…</p>
     <section id="briefing" class="briefing" hidden></section>
-    <section id="note-summary" class="notes" hidden></section>
     <div id="groups"></div>
     <footer id="footer" hidden></footer>
   </div>
@@ -143,7 +142,7 @@
       if (grid.childElementCount) parent.appendChild(grid);
     }
 
-    function render(meta, rows, summaries) {
+    function render(meta, rows) {
       const info = meta.sentiment || {};
       const latestDate = info.history_end || "";
       const map = latestMap(rows);
@@ -170,13 +169,6 @@
       paint(other, OTHER, map, rows);
       root.appendChild(other);
 
-      const note = summaries.filter((row) => row.date === latestDate).pop();
-      if (note && note.text) {
-        const box = $("note-summary");
-        box.hidden = false;
-        box.appendChild(el("p", "label", "笔记小结"));
-        box.appendChild(el("p", null, note.text));
-      }
       const footer = $("footer");
       footer.hidden = false;
       footer.appendChild(el("p", null, "历史从 " + (info.history_start || "—") + " 到 " + (info.history_end || "—") + "。旧笔记里没有的指标就留空。标签照笔记原样写。把鼠标放在卡片上，或点一下，可以看阈值和休市说明。只供个人查看，不是投资建议。"));
@@ -188,11 +180,8 @@
         await renderBriefing("sentiment");
         const meta = JSON.parse(await loadText("data/meta.json"));
         const files = (meta.sentiment || {}).files || {};
-        const [seriesText, summaryText] = await Promise.all([
-          loadText("data/" + (files.series || "sentiment/series.csv")),
-          loadText("data/" + (files.summary || "sentiment/summary.csv")).catch(() => "")
-        ]);
-        render(meta, parseCSV(seriesText), summaryText ? parseCSV(summaryText) : []);
+        const seriesText = await loadText("data/" + (files.series || "sentiment/series.csv"));
+        render(meta, parseCSV(seriesText));
       } catch (err) {
         const status = $("status");
         status.className = "status error";
