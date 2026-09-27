@@ -178,7 +178,7 @@
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
     "history_start": "2026-09-10",
     "history_end": "2026-09-26",
-    "observations": 197,
+    "observations": 220,
     "composite_end": "2026-09-26",
     "files": {
       "series": "sentiment/series.csv",
@@ -191,8 +191,8 @@
     "source": "Hermes 早晨笔记 inbox/notes/每日/盈利跟踪_YYYY-MM-DD.md 或 美港股盈利跟踪_YYYY-MM-DD.md",
     "history_start": "2026-09-09",
     "history_end": "2026-09-26",
-    "rows": 440,
-    "events": 2,
+    "rows": 466,
+    "events": 4,
     "files": {
       "daily": "earnings/daily.csv",
       "events": "earnings/events.csv"
@@ -210,7 +210,7 @@
       "korea": "semis/korea.csv"
     },
     "memory": {
-      "start": "2026-09-17",
+      "start": "2026-09-16",
       "end": "2026-09-26"
     },
     "gpu": {
