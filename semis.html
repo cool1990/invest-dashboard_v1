@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>半导体景气</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/site.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="页面">
+      <a href="index.html">流动性</a>
+      <a href="sentiment.html">市场情绪</a>
+      <a href="semis.html" aria-current="page">半导体景气</a>
+      <a href="earnings.html">盈利跟踪</a>
+    </nav>
+    <header>
+      <h1>半导体景气</h1>
+      <p class="lede">存储现货、GPU 租金、OpenRouter 用量、SiliconData 的 token 价格指数，以及韩国芯片出口。历史不长，图上有几天就画几天。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="summary" class="summary" hidden></section>
+    <h2 id="mem-title" hidden>存储价格</h2>
+    <section id="memory" class="charts" hidden></section>
+    <h2 id="gpu-title" hidden>GPU 租赁</h2>
+    <section id="gpu" class="charts" hidden></section>
+    <h2 id="usage-title" hidden>用量和价格</h2>
+    <section id="usage" class="charts" hidden></section>
+    <h2 id="korea-title" hidden>韩国芯片出口</h2>
+    <section id="korea" class="charts" hidden></section>
+    <footer id="footer" hidden></footer>
+  </div>
+  <script>
+    const COLORS = ["#1a4d45", "#8a5a12", "#1f4e79", "#5c4d7a", "#9d2c2c"];
+
+    function latestDate(rows) {
+      return rows.reduce((max, row) => row.date > max ? row.date : max, "");
+    }
+
+    function weekText(pct) {
+      if (pct == null) return "笔记里没有大约一周的涨跌";
+      return "大约一周 " + fmtSigned(pct, 2) + "%";
+    }
+
+    function renderGroup(parent, rows, titleKey, valueKey, pctKey, digits, unit) {
+      const names = [...new Set(rows.map((row) => row[titleKey]))];
+      names.forEach((name, index) => {
+        const points = rows.filter((row) => row[titleKey] === name).sort((a, b) => a.date.localeCompare(b.date));
+        const last = points[points.length - 1];
+        const pct = num(last[pctKey]);
+        addChart(parent, {
+          title: name,
+          sub: fmt(num(last[valueKey]), digits) + (unit || last.unit ? " " + (last.unit || unit) : "") + " · 截至 " + last.date + " · " + weekText(pct) + " · 从 " + points[0].date + " 起，共 " + points.length + " 个点",
+          labels: points.map((row) => row.date),
+          digits,
+          datasets: [{ label: name, data: points.map((row) => num(row[valueKey])), color: COLORS[index % COLORS.length] }],
+        });
+      });
+    }
+
+    function heatLine(votes) {
+      const known = votes.filter((item) => item.pct != null);
+      const up = known.filter((item) => item.pct > 0);
+      const down = known.filter((item) => item.pct < 0);
+      const flat = known.filter((item) => item.pct === 0);
+      if (!known.length) return "笔记里没有大约一周的涨跌，看不出冷热。";
+      let tone = "冷热差不多";
+      if (up.length > down.length) tone = "偏热";
+      if (down.length > up.length) tone = "偏冷";
+      const upNames = up.map((item) => item.name).join("、") || "无";
+      const downNames = down.map((item) => item.name).join("、") || "无";
+      return "按存储价格、GPU 租金的大约一周变化，加上 OpenRouter 近 7 日用量的环比来数：上升 " + up.length + " 项（" + upNames + "），下降 " + down.length + " 项（" + downNames + "），持平 " + flat.length + " 项。所以近期" + tone + "。只数这些数，没有另写故事。韩国出口是月度，token 价格指数单独放在下面，都不参加这个计数。";
+    }
+
+    function render(meta, memory, gpu, openrouter, silicon, korea) {
+      const semis = meta.semis || {};
+      const votes = [];
+      const memLast = latestDate(memory);
+      memory.filter((row) => row.date === memLast).forEach((row) => {
+        votes.push({ name: row.product, pct: num(row.chg_7d_pct) });
+      });
+      const gpuLast = latestDate(gpu);
+      gpu.filter((row) => row.date === gpuLast).forEach((row) => {
+        votes.push({ name: row.gpu, pct: num(row.chg_7d_pct) });
+      });
+      const orLast = latestDate(openrouter);
+      const weekUsage = openrouter.find((row) => row.date === orLast && row.window === "7日");
+      if (weekUsage) votes.push({ name: "OpenRouter 近7日用量", pct: num(weekUsage.change_pct) });
+
+      const summary = $("summary");
+      summary.hidden = false;
+      summary.appendChild(el("p", "kicker", "近期热不热"));
+      summary.appendChild(el("p", null, heatLine(votes)));
+      const asof = [memLast && ("存储 " + memLast), gpuLast && ("GPU " + gpuLast), orLast && ("OpenRouter " + orLast)].filter(Boolean).join(" · ");
+      summary.appendChild(el("p", "unit", asof));
+
+      $("memory").hidden = false;
+      $("mem-title").hidden = false;
+      renderGroup($("memory"), memory, "product", "value", "chg_7d_pct", 2, "");
+
+      $("gpu").hidden = false;
+      $("gpu-title").hidden = false;
+      renderGroup($("gpu"), gpu, "gpu", "price", "chg_7d_pct", 2, "美元/小时");
+
+      $("usage").hidden = false;
+      $("usage-title").hidden = false;
+      ["1日", "7日"].forEach((windowName, index) => {
+        const points = openrouter.filter((row) => row.window === windowName).sort((a, b) => a.date.localeCompare(b.date));
+        if (!points.length) return;
+        const last = points[points.length - 1];
+        addChart($("usage"), {
+          title: "OpenRouter " + windowName + " token",
+          sub: fmt(num(last.tokens), 2) + " 万亿 · 截至 " + last.date + " · 笔记里的环比 " + (num(last.change_pct) == null ? "没有" : fmtSigned(num(last.change_pct), 1) + "%") + " · 从 " + points[0].date + " 起，共 " + points.length + " 个点",
+          labels: points.map((row) => row.date),
+          digits: 1,
+          datasets: [{ label: windowName, data: points.map((row) => num(row.tokens)), color: COLORS[index] }],
+        });
+      });
+      const siliconPoints = [...silicon].sort((a, b) => a.date.localeCompare(b.date));
+      if (siliconPoints.length) {
+        const last = siliconPoints[siliconPoints.length - 1];
+        addChart($("usage"), {
+          title: "SiliconData token 价格指数",
+          sub: fmt(num(last.value), 4) + " 美元/百万 token · 指数日期 " + last.date + " · 大约一周 " + (num(last.chg_7d_pct) == null ? "没有" : fmtSigned(num(last.chg_7d_pct), 2) + "%") + " · 从 " + siliconPoints[0].date + " 起，共 " + siliconPoints.length + " 个点",
+          labels: siliconPoints.map((row) => row.date),
+          digits: 3,
+          full: true,
+          datasets: [{ label: "指数", data: siliconPoints.map((row) => num(row.value)), color: "#1f4e79" }],
+        });
+      }
+
+      $("korea").hidden = false;
+      $("korea-title").hidden = false;
+      const koreaPoints = [...korea].sort((a, b) => a.period.localeCompare(b.period));
+      const lastKorea = koreaPoints[koreaPoints.length - 1];
+      if (lastKorea) {
+        const d20 = num(lastKorea.d20_usd_mn);
+        const yoy = num(lastKorea.d20_yoy);
+        addChart($("korea"), {
+          title: "前 10 日芯片出口",
+          sub: (d20 == null ? "前 20 日还没有数" : "最近一月前 20 日 " + fmt(d20, 0) + " 百万美元，同比 " + fmt(yoy, 1) + "%") + " · 笔记日期 " + (lastKorea.asof || "—") + " · 没有大约一周的变化，这是月度数字 · 从 " + koreaPoints[0].period + " 起，共 " + koreaPoints.length + " 个月",
+          labels: koreaPoints.map((row) => row.period),
+          digits: 0,
+          full: true,
+          datasets: [
+            { label: "前10日", data: koreaPoints.map((row) => num(row.d10_usd_mn)), color: "#1a4d45" },
+            { label: "前20日", data: koreaPoints.map((row) => num(row.d20_usd_mn)), color: "#8a5a12" },
+            { label: "全月", data: koreaPoints.map((row) => num(row.month_usd_mn)), color: "#1f4e79" },
+          ],
+        });
+      }
+
+      const footer = $("footer");
+      footer.hidden = false;
+      const start = (semis.memory && semis.memory.start) || "—";
+      footer.appendChild(el("p", null, "存储从 " + start + " 开始记。单位照笔记：存储是统一口径，GPU 是美元/小时，OpenRouter 是万亿 token，韩国出口是百万美元。只供个人查看，不是投资建议。"));
+      $("status").hidden = true;
+    }
+
+    async function main() {
+      try {
+        const meta = JSON.parse(await loadText("data/meta.json"));
+        const files = (meta.semis || {}).files || {};
+        const [memory, gpu, openrouter, silicon, korea] = await Promise.all([
+          loadText("data/" + (files.memory || "semis/memory.csv")),
+          loadText("data/" + (files.gpu || "semis/gpu.csv")),
+          loadText("data/" + (files.openrouter || "semis/openrouter.csv")),
+          loadText("data/" + (files.silicon || "semis/silicon.csv")),
+          loadText("data/" + (files.korea || "semis/korea.csv")),
+        ]);
+        render(meta, parseCSV(memory), parseCSV(gpu), parseCSV(openrouter), parseCSV(silicon), parseCSV(korea));
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "数据没有读出来。请用本地服务器打开（python3 -m http.server）。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+    main();
+  </script>
+</body>
+</html>

@@ -1,9 +1,10 @@
-name: 更新数据
+name: 收录笔记
 
 on:
-  schedule:
-    # 每天 22:00 UTC，约北京时间次日 06:00
-    - cron: "0 22 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "inbox/notes/**"
   workflow_dispatch:
 
 permissions:
@@ -12,11 +13,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: fetch-liquidity-data
+  group: ingest-notes
   cancel-in-progress: false
 
 jobs:
-  fetch:
+  ingest:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
@@ -30,10 +31,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 从 FRED 拉取并计算
-        run: python3 scripts/fetch_liquidity.py
+      - name: 整理笔记
+        run: python3 ingest/parse_notes.py --notes inbox/notes
 
-      - name: 把新数据提交到 main
+      - name: 提交整理后的数据
         id: commit
         run: |
           git config user.name "github-actions[bot]"
@@ -45,14 +46,14 @@ jobs:
             echo "数据没有变化"
             exit 0
           fi
-          git commit -m "data: 更新美国流动性序列"
+          git commit -m "data: 收录早晨笔记"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   deploy:
-    needs: fetch
-    if: needs.fetch.outputs.changed == 'true'
+    needs: ingest
+    if: needs.ingest.outputs.changed == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -65,7 +66,7 @@ jobs:
       - name: 检出刚提交的数据
         uses: actions/checkout@v4
         with:
-          ref: ${{ needs.fetch.outputs.sha }}
+          ref: ${{ needs.ingest.outputs.sha }}
 
       - name: 发布网页
         id: publish

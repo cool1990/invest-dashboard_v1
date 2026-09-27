@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>市场情绪</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231a4d45'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/site.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="页面">
+      <a href="index.html">流动性</a>
+      <a href="sentiment.html" aria-current="page">市场情绪</a>
+      <a href="semis.html">半导体景气</a>
+      <a href="earnings.html">盈利跟踪</a>
+    </nav>
+    <header>
+      <h1>市场情绪</h1>
+      <p class="lede">每天早晨笔记里的情绪和利率。标签照笔记原样写，恐慌、中性、贪婪不另做解释。</p>
+    </header>
+    <p id="status" class="status">正在读取数据…</p>
+    <section id="summary" class="summary" hidden></section>
+    <div id="notes" class="notes" hidden></div>
+    <h2 id="chart-title" hidden>走势</h2>
+    <section id="charts" class="charts" hidden></section>
+    <footer id="footer" hidden></footer>
+  </div>
+  <script>
+    const ORDER = ["cnn_fg", "aaii", "spx_rsi", "nasdaq_rsi", "us_2y", "us_10y", "t10y2y", "tips_10y", "hy_oas", "vix", "etf_spx", "etf_ndx", "spx_breadth_20", "spx_breadth_50", "spx_breadth_200", "ndx_breadth_20", "ndx_breadth_50", "ndx_breadth_200", "wti", "gold", "copper", "usdcny", "btc"];
+    const DIGITS = { cnn_fg: 0, aaii: 1, spx_rsi: 1, nasdaq_rsi: 1, vix: 1, btc: 0, gold: 0 };
+
+    function chipClass(label) {
+      if (label === "恐慌") return "chip panic";
+      if (label === "贪婪") return "chip greed";
+      if (label === "风险" || label === "机会") return "chip risk";
+      return "chip";
+    }
+
+    function latestById(rows) {
+      const map = new Map();
+      rows.forEach((row) => {
+        const prev = map.get(row.series_id);
+        if (!prev || row.date > prev.date) map.set(row.series_id, row);
+      });
+      return map;
+    }
+
+    function seriesRows(rows, id) {
+      return rows.filter((row) => row.series_id === id).sort((a, b) => a.date.localeCompare(b.date));
+    }
+
+    function spanText(points) {
+      if (!points.length) return "还没有数据";
+      return "从 " + points[0].date + " 起，共 " + points.length + " 个点";
+    }
+
+    function render(meta, rows, composite) {
+      const info = meta.sentiment || {};
+      const latestDate = info.history_end || "";
+      const latestMap = latestById(rows);
+      const comp = composite.filter((row) => row.date === latestDate).pop() || composite[composite.length - 1];
+      const summary = $("summary");
+      summary.hidden = false;
+      const head = el("div", "lead-row");
+      const main = el("div");
+      main.appendChild(el("p", "label", "情绪综合评价"));
+      main.appendChild(el("p", "big", comp && comp.label ? comp.label : "笔记里没有"));
+      const bits = [];
+      if (comp && comp.score) bits.push("加权分 " + comp.score);
+      if (comp && comp.cnn_official) bits.push("CNN 官方分级 " + comp.cnn_official);
+      main.appendChild(el("p", "unit", bits.join(" · ") || "这一天没有综合评价"));
+      const side = el("div");
+      side.appendChild(el("p", "label", "笔记日期"));
+      side.appendChild(el("p", "big", latestDate || "—"));
+      if (comp && comp.date && comp.date !== latestDate) {
+        side.appendChild(el("p", "unit", "综合评价来自 " + comp.date));
+      }
+      head.appendChild(main);
+      head.appendChild(side);
+      summary.appendChild(head);
+
+      const metrics = el("div", "metrics");
+      const ids = [...latestMap.keys()].sort((a, b) => {
+        const ia = ORDER.indexOf(a);
+        const ib = ORDER.indexOf(b);
+        return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+      });
+      ids.forEach((id) => {
+        const row = latestMap.get(id);
+        const box = el("div", "metric");
+        box.appendChild(el("p", "label", row.name || id));
+        const digits = DIGITS[id] == null ? 2 : DIGITS[id];
+        box.appendChild(el("p", "v", fmt(num(row.value), digits)));
+        const line = el("p", "s");
+        if (row.label) line.appendChild(el("span", chipClass(row.label), row.label));
+        const extra = [];
+        if (row.obs_date && row.obs_date !== row.date) extra.push("观测日 " + row.obs_date);
+        if (row.carried === "1") extra.push("沿用最近可得值");
+        if (row.unit) extra.push(row.unit);
+        if (extra.length) line.appendChild(document.createTextNode((row.label ? " · " : "") + extra.join(" · ")));
+        box.appendChild(line);
+        metrics.appendChild(box);
+      });
+      summary.appendChild(metrics);
+
+      const notes = $("notes");
+      notes.hidden = false;
+      notes.appendChild(el("p", null, "历史从 " + (info.history_start || "—") + " 到 " + (info.history_end || "—") + "。有的指标更晚才出现，图上就只有那几天的点。"));
+      notes.appendChild(el("p", null, "早期笔记用的是机会、风险、中性；后来改成恐慌、中性、贪婪。页面不把这两种说法互相换算。"));
+
+      const charts = $("charts");
+      charts.hidden = false;
+      $("chart-title").hidden = false;
+      const colors = { cnn_fg: "#9d2c2c", aaii: "#8a5a12", spx_rsi: "#1f4e79", tips_10y: "#1a4d45", hy_oas: "#5c4d7a", us_10y: "#1a4d45", us_2y: "#8a5a12" };
+      ["cnn_fg", "aaii", "spx_rsi", "tips_10y", "hy_oas"].forEach((id) => {
+        const points = seriesRows(rows, id);
+        const name = (latestMap.get(id) || {}).name || id;
+        addChart(charts, {
+          title: name,
+          sub: spanText(points),
+          labels: points.map((row) => row.date),
+          digits: DIGITS[id] == null ? 2 : DIGITS[id],
+          datasets: [{ label: name, data: points.map((row) => num(row.value)), color: colors[id] }],
+        });
+      });
+      const y10 = seriesRows(rows, "us_10y");
+      const y2 = seriesRows(rows, "us_2y");
+      const dates = [...new Set([...y10, ...y2].map((row) => row.date))].sort();
+      const pick = (list, day) => {
+        const hit = list.find((row) => row.date === day);
+        return hit ? num(hit.value) : null;
+      };
+      addChart(charts, {
+        title: "美国 2 年与 10 年国债收益率",
+        sub: "百分比 · " + spanText(y10.length ? y10 : y2),
+        labels: dates,
+        digits: 2,
+        full: true,
+        datasets: [
+          { label: "10 年", data: dates.map((day) => pick(y10, day)), color: "#1a4d45" },
+          { label: "2 年", data: dates.map((day) => pick(y2, day)), color: "#8a5a12" },
+        ],
+      });
+
+      const footer = $("footer");
+      footer.hidden = false;
+      footer.appendChild(el("p", null, "来源是每天早晨的宏观指标笔记。笔记日期和指标自己的观测日可能差一天。只供个人查看，不是投资建议。"));
+      $("status").hidden = true;
+    }
+
+    async function main() {
+      try {
+        const meta = JSON.parse(await loadText("data/meta.json"));
+        const files = (meta.sentiment || {}).files || {};
+        const [seriesText, compositeText] = await Promise.all([
+          loadText("data/" + (files.series || "sentiment/series.csv")),
+          loadText("data/" + (files.composite || "sentiment/composite.csv")),
+        ]);
+        render(meta, parseCSV(seriesText), parseCSV(compositeText));
+      } catch (err) {
+        const status = $("status");
+        status.className = "status error";
+        status.textContent = "数据没有读出来。请用本地服务器打开（python3 -m http.server）。" + (err && err.message ? " " + err.message : "");
+      }
+    }
+    main();
+  </script>
+</body>
+</html>
