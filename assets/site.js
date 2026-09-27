@@ -182,7 +182,7 @@ function renderBriefing(page) {
     const lines = (data.pages && data.pages[page]) || ["今日无变动"];
     box.hidden = false;
     box.textContent = "";
-    box.appendChild(el("p", "label", "今日小结"));
+    box.appendChild(el("p", "label", page === "sentiment" ? "笔记原文" : "今日小结"));
     const list = el("ul", "brief-list");
     lines.forEach((line) => {
       const item = document.createElement("li");
@@ -190,7 +190,7 @@ function renderBriefing(page) {
       list.appendChild(item);
     });
     box.appendChild(list);
-    const notes = data.notes && data.notes[page];
+    const notes = page === "sentiment" ? null : (data.notes && data.notes[page]);
     if (notes && notes.length) {
       const details = el("details", "note-src");
       const summary = document.createElement("summary");

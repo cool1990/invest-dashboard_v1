@@ -108,11 +108,12 @@ def test_briefing_and_build() -> None:
         (root / "assets").mkdir()
         (root / "assets" / "site.css").write_text("body{}", encoding="utf-8")
         briefing = build_briefing(root / "data", today=date(2026, 9, 27), calendar_events=[])
-        assert briefing["pages"]["sentiment"] == ["CNN -10.0 点（40→30）。"]
-        assert briefing["notes"]["sentiment"] == [
+        assert briefing["pages"]["sentiment"] == [
             "情绪指标：CNN仍处恐慌区间。",
             "利率指标：10年美债收益率偏高。",
         ]
+        assert "CNN -10.0 点" not in " ".join(briefing["pages"]["sentiment"])
+        assert not briefing.get("notes", {}).get("sentiment")
         assert not any("变为" in line for line in briefing["pages"]["sentiment"])
         dist = build_site(root, root / "dist")
         text = (dist / "index.html").read_text(encoding="utf-8")
