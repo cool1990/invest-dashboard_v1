@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-27T20:45:49+08:00",
-  "today_bj": "2026-09-27",
-  "horizon_end": "2026-11-11",
+  "generated_at": "2026-09-28T08:11:24+08:00",
+  "today_bj": "2026-09-28",
+  "horizon_end": "2026-11-12",
   "events": [
     {
       "date": "2026-09-28",
@@ -694,6 +694,120 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.semiconwest.org/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "BlackRock, Inc.（BLK）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "$11.55",
+      "consensus": "$14.24",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Citigroup Inc.（C）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.24",
+      "consensus": "$2.67",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "J P Morgan Chase & Co（JPM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$5.07",
+      "consensus": "$5.84",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Johnson & Johnson（JNJ）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.80",
+      "consensus": "$2.96",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "The Goldman Sachs Group, Inc.（GS）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$12.25",
+      "consensus": "$15.18",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "UnitedHealth Group Incorporated（UNH）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.92",
+      "consensus": "$4.12",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -1660,6 +1774,25 @@
       ]
     },
     {
+      "date": "2026-11-12",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "新企业统计",
+      "url": "https://www.census.gov/econ/bfs/index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM October 2026。原名：Business Formation Statistics",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/econ/bfs/index.html"
+        }
+      ]
+    },
+    {
       "date": "2026-11-15",
       "time_bj": "",
       "category": "加密",
@@ -1785,7 +1918,7 @@
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "18 条"
+      "detail": "19 条"
     },
     {
       "name": "FOMC",
@@ -1809,7 +1942,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "3 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "9 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
