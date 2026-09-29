@@ -1,27 +1,8 @@
 {
-  "generated_at": "2026-09-28T08:11:24+08:00",
-  "today_bj": "2026-09-28",
-  "horizon_end": "2026-11-12",
+  "generated_at": "2026-09-29T09:23:07+08:00",
+  "today_bj": "2026-09-29",
+  "horizon_end": "2026-11-13",
   "events": [
-    {
-      "date": "2026-09-28",
-      "time_bj": "20:15",
-      "category": "大事",
-      "title": "美联储讲话：银行监管近况",
-      "url": "https://teams.microsoft.com/meet/212992571985590?p=yY3nvqkkrbQw6RMUL6",
-      "source": "Federal Reserve calendar",
-      "note": "Discussion - Vice Chair for Supervision Michelle W. Bowman At the Military Banking Summit 2026 (Virtual) 美东 8:15 a.m.。原名：Recent Developments in Bank Supervision and Regulation",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://teams.microsoft.com/meet/212992571985590?p=yY3nvqkkrbQw6RMUL6"
-        }
-      ]
-    },
     {
       "date": "2026-09-29",
       "time_bj": "",
@@ -358,7 +339,7 @@
       "title": "耐克（NKE）财报",
       "url": "",
       "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-09-26.md 的未来 7 天财报。原名：NIKE, Inc.",
+      "note": "笔记 盈利跟踪_2026-09-28.md 的未来 7 天财报。原名：NIKE, Inc.",
       "previous": "",
       "consensus": "",
       "tags": [],
@@ -836,10 +817,10 @@
       "category": "财报",
       "title": "ASML 2026年第三季度业绩",
       "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf",
-      "source": "calendar/manual.yaml",
+      "source": "calendar/manual.yaml；Nasdaq earnings calendar",
       "note": "ASML Statutory Interim Report 2026 财务日历：October 14, 2026 Announcement of third quarter results。未写钟点",
-      "previous": "",
-      "consensus": "",
+      "previous": "$6.41",
+      "consensus": "$12.54",
       "tags": [
         "半导体"
       ],
@@ -848,6 +829,67 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf"
+        },
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Bank of America Corporation（BAC）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.06",
+      "consensus": "$1.16",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Morgan Stanley（MS）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.80",
+      "consensus": "$3.06",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Wells Fargo & Company（WFC）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.73",
+      "consensus": "$1.84",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -1793,6 +1835,44 @@
       ]
     },
     {
+      "date": "2026-11-13",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "PPI 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=46",
+      "source": "FRED release dates",
+      "note": "PPI",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=46"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "time_bj": "05:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
       "date": "2026-11-15",
       "time_bj": "",
       "category": "加密",
@@ -1930,19 +2010,19 @@
       "name": "H.4.1",
       "url": "https://www.federalreserve.gov/releases/h41/",
       "status": "ok",
-      "detail": "6 条"
+      "detail": "7 条"
     },
     {
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "10 条"
+      "detail": "9 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "9 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "13 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -1960,7 +2040,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 2 天；PPI 1 天；Employment Situation 2 天；JOLTS 2 天"
+      "detail": "CPI 2 天；PPI 2 天；Employment Situation 2 天；JOLTS 2 天"
     },
     {
       "name": "初请失业金",
