@@ -33,7 +33,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 ET = ZoneInfo("America/New_York")
 BJ = ZoneInfo("Asia/Shanghai")
-UA = "Mozilla/5.0 (compatible; macro-dashboard/1.0; +https://github.com/cool1990/macro-dashboard)"
+UA = "Mozilla/5.0 (compatible; invest-dashboard_v1/1.0; +https://github.com/cool1990/invest-dashboard_v1)"
 BROWSER_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 HORIZON_DAYS = 45
 MEGA_CAP = 100_000_000_000

@@ -2,18 +2,18 @@
 
 这个仓库保存自己看的宏观数据，并用静态网页展示。页面是简体中文。现在有六页：
 
-- [总览](https://cool1990.github.io/macro-dashboard/)
-- [流动性](https://cool1990.github.io/macro-dashboard/liquidity.html)
-- [利率与情绪](https://cool1990.github.io/macro-dashboard/sentiment.html)
-- [盈利跟踪](https://cool1990.github.io/macro-dashboard/earnings.html)
-- [半导体与算力](https://cool1990.github.io/macro-dashboard/semis.html)
-- [日历](https://cool1990.github.io/macro-dashboard/calendar.html)
+- [总览](https://cool1990.github.io/invest-dashboard_v1/)
+- [流动性](https://cool1990.github.io/invest-dashboard_v1/liquidity.html)
+- [利率与情绪](https://cool1990.github.io/invest-dashboard_v1/sentiment.html)
+- [盈利跟踪](https://cool1990.github.io/invest-dashboard_v1/earnings.html)
+- [半导体与算力](https://cool1990.github.io/invest-dashboard_v1/semis.html)
+- [日历](https://cool1990.github.io/invest-dashboard_v1/calendar.html)
 
-网页地址：https://cool1990.github.io/macro-dashboard/
+网页地址：https://cool1990.github.io/invest-dashboard_v1/
 
 流动性来自圣路易斯联储 FRED 的公开 CSV，不需要密钥。情绪、半导体、盈利、公告和新闻稿来自每天早晨的笔记，笔记由自己的服务器推到 `inbox/notes/`。日历来自公开网页，外加 `calendar/manual.yaml`。
 
-站点用一条命令构建到 `dist/`，页面之间用相对路径，不写死 `/macro-dashboard/`。每页都有 `<meta name="robots" content="noindex">`，`dist/robots.txt` 禁止抓取。现在由 GitHub Pages 发布 `dist/`。迁到 Cloudflare Pages 的安排先放下，构建命令仍是下面这一条。
+站点用一条命令构建到 `dist/`，页面之间用相对路径，不写死 `/invest-dashboard_v1/`。每页都有 `<meta name="robots" content="noindex">`，`dist/robots.txt` 禁止抓取。现在由 GitHub Pages 发布 `dist/`。迁到 Cloudflare Pages 的安排先放下，构建命令仍是下面这一条。
 
 ## 文件夹
 
