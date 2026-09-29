@@ -2,7 +2,8 @@
 """把 Hermes 早晨笔记（Markdown + YAML 头）整理进 data/。
 
 只使用 Python 标准库。重复运行同一批笔记不会制造重复行：按主键覆盖，
-空值和「未更新 / 抓取失败」不会把已有数字抹掉。
+空值和「未更新 / 抓取失败」不会把已有数字抹掉。沿用标记每次按备注重算，
+备注不再写明沿用时会清掉，不能留下上一次的「沿用」。
 
 日期优先用文首 data_date，没有则从文件名里的 YYYY-MM-DD 取。
 """
@@ -83,7 +84,8 @@ def log(msg: str) -> None:
 
 
 def strip_html(text: str) -> str:
-    text = re.sub(r"<[^>]+>", "", text)
+    # 只去掉 HTML 标签。<20机会/> 这类阈值不是标签，要留下来给页面显示。
+    text = re.sub(r"</?[A-Za-z][^>]*>", "", text)
     return text.replace("&nbsp;", " ").replace("&amp;", "&").strip()
 
 
@@ -256,10 +258,18 @@ def sentiment_label(raw: str) -> str:
 
 
 def carried_flag(remark: str) -> str:
+    """备注写明这是沿用的旧读数才标 1。
+
+    「价格增量更新」「概率更新时间」只是说明数据怎么来的，不是沿用。
+    """
     text = remark or ""
     if any(word in text for word in ("未更新", "沿用", "使用最近", "休市")):
         return "1"
     return ""
+
+
+# 这些列每次都按当次笔记重算。空字符串表示「没有」，不能留下上一次的值。
+RESET_WHEN_EMPTY = {"carried", "hike_count"}
 
 
 def load_csv(path: Path) -> list[dict[str, str]]:
@@ -279,8 +289,8 @@ def upsert(existing: list[dict[str, str]], incoming: list[dict[str, str]], keys:
         key = tuple(row.get(field, "") for field in keys)
         current = dict(merged.get(key, {}))
         for field, value in row.items():
-            if value not in ("", None):
-                current[field] = value
+            if field in RESET_WHEN_EMPTY or value not in ("", None):
+                current[field] = "" if value is None else value
         for field in keys:
             current.setdefault(field, row.get(field, ""))
         merged[key] = current

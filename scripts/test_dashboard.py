@@ -16,7 +16,7 @@ from build_site import build_site
 from common import fresh_pair, kind_change, price_carried, repeated_runs
 from signals import build_signals
 from fetch_calendar import annotate, dedupe, event, h41_events, load_manual, parse_bea, parse_census
-from parse_notes import parse_earnings, parse_filings, parse_press, parse_sentiment, to_beijing
+from parse_notes import parse_earnings, parse_filings, parse_press, parse_sentiment, to_beijing, upsert
 
 
 def test_beijing() -> None:
@@ -46,6 +46,75 @@ def test_sentiment_schema() -> None:
     assert by_id["effr_next"]["hike_count"] == "0.7"
     assert by_id["effr_next"]["section"] == "利率"
     assert "恐慌" in summary["text"]
+    assert "<20机会/>80风险" in by_id["spx_breadth_20"]["remark"]
+    assert by_id["spx_breadth_20"]["carried"] == ""
+
+
+def test_stale_carried_clears() -> None:
+    """同一天后来写成最新值时，沿用标记要清掉。数字空着仍然保留旧值。"""
+    body = """
+## 情绪指标
+|指标|数值|涨跌幅|日期|情绪|备注|
+|---|---:|---:|---|---|---|
+|标普500参与度>20日|29.6|-0.6pp|2026-09-28|中性|成分股收盘>SMA20占比；有效503/503只；<20机会/>80风险；yfinance日线；价格增量更新2026-09-14起|
+|纳斯达克100参与度>20日|55.4|+1.0pp|2026-09-28|中性|成分股收盘>SMA20占比；价格增量更新2026-09-14起|
+## 利率指标
+|指标|数值|涨跌幅|日期|情绪|备注|
+|---|---:|---:|---|---|---|
+|10年期美债|5.24|-0.08%|2026-09-28|风险|CNBC/Tradeweb US10Y 实时市场数据，单位%；realTime=true|
+|10年期实际利率|2.83|-0.70%|2026-09-25|风险|休市/未更新，停留3天，使用最近价格 2026-09-25；FRED DFII10|
+|下月EFFR|4.061||2026-09-28|中性|Investing Fed Rate Monitor；概率更新时间 Sep 28, 2026|
+|AAII指数|-15.4|+9.1pp|2026-09-23|恐慌|非发布日，沿用2026-09-23读数|
+"""
+    rows, _composite, _summary = parse_sentiment(Path("宏观指标_2026-09-28.md"), {"data_date": "2026-09-28"}, body, [])
+    by_id = {row["series_id"]: row for row in rows}
+    assert by_id["spx_breadth_20"]["carried"] == ""
+    assert "<20机会/>80风险" in by_id["spx_breadth_20"]["remark"]
+    assert by_id["ndx_breadth_20"]["carried"] == ""
+    assert by_id["us_10y"]["carried"] == ""
+    assert by_id["effr_next"]["carried"] == ""
+    assert by_id["effr_next"]["hike_count"] == ""
+    assert by_id["tips_10y"]["carried"] == "1"
+    assert by_id["aaii"]["carried"] == "1"
+
+    existing = [
+        {
+            "date": "2026-09-28",
+            "series_id": "spx_breadth_20",
+            "value": "30.2",
+            "carried": "1",
+            "hike_count": "9",
+            "remark": "休市/未更新，停留3天，使用最近价格 2026-09-25",
+        },
+        {
+            "date": "2026-09-28",
+            "series_id": "us_10y",
+            "value": "5.17",
+            "carried": "1",
+            "remark": "休市/未更新，停留3天，使用最近价格 2026-09-25",
+        },
+        {
+            "date": "2026-09-28",
+            "series_id": "tips_10y",
+            "value": "2.80",
+            "carried": "1",
+            "remark": "休市/未更新",
+        },
+    ]
+    merged = {row["series_id"]: row for row in upsert(existing, rows, ["date", "series_id"])}
+    assert merged["spx_breadth_20"]["carried"] == ""
+    assert merged["spx_breadth_20"]["value"] == "29.6"
+    assert merged["spx_breadth_20"]["hike_count"] == ""
+    assert merged["us_10y"]["carried"] == ""
+    assert merged["us_10y"]["value"] == "5.24"
+    assert merged["tips_10y"]["carried"] == "1"
+    kept = upsert(
+        [merged["spx_breadth_20"]],
+        [{"date": "2026-09-28", "series_id": "spx_breadth_20", "value": "", "carried": ""}],
+        ["date", "series_id"],
+    )
+    assert kept[0]["value"] == "29.6"
+    assert kept[0]["carried"] == ""
 
 
 def test_filings_and_press() -> None:
@@ -424,6 +493,7 @@ def test_accuracy_rules() -> None:
 if __name__ == "__main__":
     test_beijing()
     test_sentiment_schema()
+    test_stale_carried_clears()
     test_filings_and_press()
     test_briefing_and_build()
     test_calendar_parsers()
