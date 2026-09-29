@@ -737,8 +737,8 @@
     "name": "公告和新闻稿",
     "source": "inbox/notes/每日/美港股公告 与 美港股新闻稿",
     "history_end": "2026-09-28",
-    "announcements": 34,
-    "press": 21,
+    "announcements": 36,
+    "press": 44,
     "files": {
       "announcements": "filings/announcements.csv",
       "press": "filings/press.csv",
