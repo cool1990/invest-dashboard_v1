@@ -1,65 +1,8 @@
 {
-  "generated_at": "2026-09-29T17:05:44+08:00",
-  "today_bj": "2026-09-29",
-  "horizon_end": "2026-11-13",
+  "generated_at": "2026-09-30T08:56:41+08:00",
+  "today_bj": "2026-09-30",
+  "horizon_end": "2026-11-14",
   "events": [
-    {
-      "date": "2026-09-29",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "JOLTS 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=192",
-      "source": "FRED release dates",
-      "note": "JOLTS",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=192"
-        }
-      ]
-    },
-    {
-      "date": "2026-09-29",
-      "time_bj": "01:25",
-      "category": "大事",
-      "title": "美联储讲话：人工智能与新兴技术",
-      "url": "https://www.federalreserve.gov/newsevents/2026-september.htm",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Lisa D. Cook At Oakland Tech Week 2026, Oakland, Calif. 美东 1:25 p.m.。原名：AI and Emerging Tech",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-09-29",
-      "time_bj": "23:00",
-      "category": "大事",
-      "title": "美联储讲话：开幕致辞",
-      "url": "https://www.federalreserve.gov/newsevents/2026-september.htm",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Federal Reserve System Community Bank Cyber Workshop (Virtual) 美东 11:00 a.m.。原名：Opening Remarks (via pre-recorded video)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-september.htm"
-        }
-      ]
-    },
     {
       "date": "2026-09-30",
       "time_bj": "",
@@ -69,7 +12,7 @@
       "source": "Nasdaq earnings calendar；盈利跟踪笔记",
       "note": "美东盘后。原名：Micron Technology, Inc.。日期不一样：Nasdaq earnings calendar写的是 2026-09-30，盈利跟踪笔记写的是 2026-10-01",
       "previous": "$2.86",
-      "consensus": "$31.24",
+      "consensus": "$31.35",
       "tags": [
         "半导体"
       ],
@@ -339,7 +282,7 @@
       "title": "耐克（NKE）财报",
       "url": "",
       "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-09-28.md 的未来 7 天财报。原名：NIKE, Inc.",
+      "note": "笔记 盈利跟踪_2026-09-29.md 的未来 7 天财报。原名：NIKE, Inc.",
       "previous": "",
       "consensus": "",
       "tags": [],
@@ -687,7 +630,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "",
       "previous": "$11.55",
-      "consensus": "$14.24",
+      "consensus": "$14.19",
       "tags": [],
       "priority": "中",
       "links": [
@@ -706,7 +649,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.24",
-      "consensus": "$2.67",
+      "consensus": "$2.70",
       "tags": [],
       "priority": "中",
       "links": [
@@ -845,7 +788,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.06",
-      "consensus": "$1.16",
+      "consensus": "$1.17",
       "tags": [],
       "priority": "中",
       "links": [
@@ -952,6 +895,63 @@
     },
     {
       "date": "2026-10-15",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Prologis, Inc.（PLD）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.49",
+      "consensus": "$1.58",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "",
+      "category": "财报",
+      "title": "The Bank Of New York Mellon Corporation （BNY）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "$1.91",
+      "consensus": "$2.25",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "time_bj": "",
+      "category": "财报",
+      "title": "The Charles Schwab Corporation（SCHW）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.31",
+      "consensus": "$1.67",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
       "time_bj": "02:00",
       "category": "大事",
       "title": "美联储褐皮书",
@@ -975,10 +975,10 @@
       "category": "财报",
       "title": "台积电 3Q26 业绩会",
       "url": "https://investor.tsmc.com/english/financial-calendar",
-      "source": "calendar/manual.yaml",
+      "source": "calendar/manual.yaml；Nasdaq earnings calendar",
       "note": "TSMC IR 财务日历：3Q'26 Earnings Conference and Conference Call，台北时间14:00-15:30",
-      "previous": "",
-      "consensus": "",
+      "previous": "$2.92",
+      "consensus": "$4.45",
       "tags": [
         "半导体"
       ],
@@ -987,6 +987,10 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://investor.tsmc.com/english/financial-calendar"
+        },
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -2016,13 +2020,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "9 条"
+      "detail": "7 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "13 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "17 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -2040,7 +2044,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 2 天；PPI 2 天；Employment Situation 2 天；JOLTS 2 天"
+      "detail": "CPI 2 天；PPI 2 天；Employment Situation 2 天；JOLTS 1 天"
     },
     {
       "name": "初请失业金",
