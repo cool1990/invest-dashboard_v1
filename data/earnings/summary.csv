@@ -189,3 +189,17 @@ date,text,source
 三、估值触发：PDD（6.69<7）, MCD（17.97<20）。
 四、未来7天财报：MICRON TECHNOLOGY INC(MU) 2026-10-01；NIKE, Inc.(NKE) 2026-10-02。
 ⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-29.md
+2026-09-30,"一、EPS：
+1、修正信号：强上修：HOOD, NVDA, GOOGL, TSM, MSFT；强下修：MCD, AAPL, META, QCOM, TME。
+2、EPS变化：
+1）变好：
+- GOOGL：下财年EPS 14.94→14.95（上涨0.07%），30日上/下修 8/1→8/1（上调无变动，下调无变动），上修人数大于下修。
+2）变差：
+- 无
+3）不定：
+- MU：下财年EPS 161.49→181.98（上涨12.69%），30日上/下修 2/2→3/1（上调1家，下调减少1家），修正信号 中性→温和上修；EPS上升，但上/下修人数差异不显著。
+- MSFT：下财年EPS 23.68→23.64（下跌0.17%），30日上/下修 19/3→19/3（上调无变动，下调无变动）；EPS下跌，但当前上修人数多于下修。
+二、RSI信号：低于30 MCD；高于70 无。
+三、估值触发：PDD（6.72<7）, MCD（17.74<20）。
+四、未来7天财报：MICRON TECHNOLOGY INC(MU) 2026-10-01；NIKE, Inc.(NKE) 2026-10-02。
+⚠️不适用：MARA Holdings, Inc. / MARA：EPS 合计 ≤ 0，所以不计算 Forward PE；IREN Ltd / IREN：EPS 合计 ≤ 0，所以不计算 Forward PE。",盈利跟踪_2026-09-30.md
