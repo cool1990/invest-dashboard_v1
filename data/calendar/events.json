@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-01T08:57:56+08:00",
-  "today_bj": "2026-10-01",
-  "horizon_end": "2026-11-15",
+  "generated_at": "2026-10-02T09:13:40+08:00",
+  "today_bj": "2026-10-02",
+  "horizon_end": "2026-11-16",
   "events": [
     {
       "date": "2026-10-01",
@@ -19,46 +19,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1066"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-01",
-      "time_bj": "",
-      "category": "财报",
-      "title": "埃森哲（ACN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前。原名：Accenture plc",
-      "previous": "$3.03",
-      "consensus": "$3.19",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-01",
-      "time_bj": "",
-      "category": "财报",
-      "title": "美光（MU）财报",
-      "url": "",
-      "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-09-30.md 的未来 7 天财报。原名：MICRON TECHNOLOGY INC",
-      "previous": "",
-      "consensus": "",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "盈利跟踪笔记",
-          "url": ""
         }
       ]
     },
@@ -101,44 +61,6 @@
       ]
     },
     {
-      "date": "2026-10-01",
-      "time_bj": "22:00",
-      "category": "大事",
-      "title": "美联储讲话：FRED 数据",
-      "url": "https://www.youtube.com/live/1fK5omRbOvM?si=9mToIa7-cn6iDC9F",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Christopher J. Waller At FRED Con: Navigating Trust, AI & Storytelling in a World of Data, St. Louis, Mo. 美东 10:00 a.m.。原名：Federal Reserve Economic Data",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.youtube.com/live/1fK5omRbOvM?si=9mToIa7-cn6iDC9F"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-01",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "2026年8月建筑支出",
-      "url": "https://www.census.gov/construction/c30/c30index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM August 2026。原名：Construction Spending (Construction Put in Place)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/construction/c30/c30index.html"
-        }
-      ]
-    },
-    {
       "date": "2026-10-02",
       "time_bj": "",
       "category": "宏观",
@@ -164,7 +86,7 @@
       "title": "耐克（NKE）财报",
       "url": "",
       "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-09-30.md 的未来 7 天财报。原名：NIKE, Inc.",
+      "note": "笔记 盈利跟踪_2026-10-01.md 的未来 7 天财报。原名：NIKE, Inc.",
       "previous": "",
       "consensus": "",
       "tags": [],
@@ -230,25 +152,6 @@
         {
           "source": "Federal Reserve calendar",
           "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "04:30",
-      "category": "宏观",
-      "title": "美联储 H.4.1（资产负债表）",
-      "url": "https://www.federalreserve.gov/releases/h41/",
-      "source": "Federal Reserve H.4.1",
-      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Federal Reserve H.4.1",
-          "url": "https://www.federalreserve.gov/releases/h41/"
         }
       ]
     },
@@ -367,6 +270,25 @@
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "time_bj": "22:45",
+      "category": "大事",
+      "title": "美联储讲话",
+      "url": "https://www.communitybanking.org/",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the 2026 Community Banking Research Conference, St. Louis, Missouri 美东 10:45 a.m.。原名：Modernizing Regulation and Supervision",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.communitybanking.org/"
         }
       ]
     },
@@ -588,7 +510,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$12.25",
-      "consensus": "$15.18",
+      "consensus": "$14.59",
       "tags": [],
       "priority": "中",
       "links": [
@@ -689,7 +611,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.80",
-      "consensus": "$3.06",
+      "consensus": "$3.01",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1884,7 +1806,7 @@
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "18 条"
+      "detail": "17 条"
     },
     {
       "name": "FOMC",
@@ -1896,7 +1818,7 @@
       "name": "H.4.1",
       "url": "https://www.federalreserve.gov/releases/h41/",
       "status": "ok",
-      "detail": "7 条"
+      "detail": "6 条"
     },
     {
       "name": "美联储讲话",
@@ -1908,13 +1830,13 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "16 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "15 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
       "url": "",
       "status": "ok",
-      "detail": "2 条"
+      "detail": "1 条"
     },
     {
       "name": "手工日历",
