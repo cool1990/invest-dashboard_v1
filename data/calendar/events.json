@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-02T09:13:40+08:00",
-  "today_bj": "2026-10-02",
-  "horizon_end": "2026-11-16",
+  "generated_at": "2026-10-03T08:51:52+08:00",
+  "today_bj": "2026-10-03",
+  "horizon_end": "2026-11-17",
   "events": [
     {
       "date": "2026-10-01",
@@ -62,101 +62,6 @@
     },
     {
       "date": "2026-10-02",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "Employment Situation 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=50",
-      "source": "FRED release dates",
-      "note": "Employment Situation",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=50"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "",
-      "category": "财报",
-      "title": "耐克（NKE）财报",
-      "url": "",
-      "source": "盈利跟踪笔记",
-      "note": "笔记 盈利跟踪_2026-10-01.md 的未来 7 天财报。原名：NIKE, Inc.",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "盈利跟踪笔记",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "01:30",
-      "category": "大事",
-      "title": "美联储讲话：美国经济与货币政策",
-      "url": "https://darden-virginia.zoom.us/j/92232791521",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Vice Chair Philip N. Jefferson At a Talk and Q&A with Federal Reserve Board Vice Chair Philip N. Jefferson, Charlottesville, Va. 美东 1:30 p.m.。原名：U.S. Economy and Monetary Policy",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://darden-virginia.zoom.us/j/92232791521"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "03:00",
-      "category": "大事",
-      "title": "美联储讲话：金融监管现代化",
-      "url": "https://www.youtube.com/watch?v=UosIN7C-ZCE",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Atlantic Council’s Conversation with Michelle W. Bowman, Washington, D.C. 美东 3:00 p.m.。原名：Modernizing Financial Regulation: Initial Observations from eSLR",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.youtube.com/watch?v=UosIN7C-ZCE"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "03:30",
-      "category": "大事",
-      "title": "美联储讲话：全球央行",
-      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
-      "source": "Federal Reserve calendar",
-      "note": "Discussion - Governor Lisa D. Cook At the Central Banking Seminar (Virtual) 美东 3:30 p.m.。原名：Global Central Banking",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
       "time_bj": "15:00",
       "category": "加密",
       "title": "ENA 代币解锁 4063万枚",
@@ -171,25 +76,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/ethena"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "2026年8月制造业出货、库存和订单",
-      "url": "https://www.census.gov/manufacturing/m3/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM August 2026。原名：Full Report - Manufacturers' Shipments, Inventories and Orders",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/manufacturing/m3/"
         }
       ]
     },
@@ -351,6 +237,25 @@
     },
     {
       "date": "2026-10-08",
+      "time_bj": "16:30",
+      "category": "大事",
+      "title": "美联储讲话：经济展望",
+      "url": "https://istanbulef.org/eng/yayin/",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Governor Christopher J. Waller At the Central Bank of the Republic of Türkiye (TCMB) İstanbul Economic Forum, Ümraniye/İstanbul, Türkiye 美东 4:30 a.m.。原名：Economic Outlook",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://istanbulef.org/eng/yayin/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
       "time_bj": "17:00",
       "category": "半导体",
       "title": "联发科9月营收",
@@ -422,25 +327,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.semiconwest.org/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-13",
-      "time_bj": "",
-      "category": "财报",
-      "title": "BlackRock, Inc.（BLK）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$11.55",
-      "consensus": "$14.19",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -593,6 +479,25 @@
       "note": "美东盘前",
       "previous": "$1.06",
       "consensus": "$1.16",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "time_bj": "",
+      "category": "财报",
+      "title": "BlackRock, Inc.（BLK）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$11.55",
+      "consensus": "$14.19",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1700,6 +1605,44 @@
       ]
     },
     {
+      "date": "2026-11-17",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "2026年10月零售和餐饮销售",
+      "url": "https://www.census.gov/retail",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM October 2026。原名：Advance Monthly Sales for Retail and Food Services",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/retail"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "制造业与贸易库存和销售",
+      "url": "https://www.census.gov/mtis/",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM September 2026。原名：Manufacturing and Trade: Inventories and Sales",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/mtis/"
+        }
+      ]
+    },
+    {
       "date": "2026-11-19",
       "time_bj": "03:00",
       "category": "大事",
@@ -1806,7 +1749,7 @@
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "17 条"
+      "detail": "18 条"
     },
     {
       "name": "FOMC",
@@ -1824,7 +1767,7 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "4 条"
+      "detail": "2 条"
     },
     {
       "name": "Nasdaq 财报",
@@ -1836,7 +1779,7 @@
       "name": "盈利笔记财报日",
       "url": "",
       "status": "ok",
-      "detail": "1 条"
+      "detail": "0 条"
     },
     {
       "name": "手工日历",
@@ -1848,7 +1791,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 2 天；PPI 2 天；Employment Situation 2 天；JOLTS 1 天"
+      "detail": "CPI 2 天；PPI 2 天；Employment Situation 1 天；JOLTS 1 天"
     },
     {
       "name": "初请失业金",
