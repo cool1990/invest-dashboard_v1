@@ -669,7 +669,7 @@
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
     "history_start": "2026-09-10",
     "history_end": "2026-10-03",
-    "observations": 390,
+    "observations": 402,
     "composite_end": "2026-09-26",
     "files": {
       "series": "sentiment/series.csv",
@@ -737,7 +737,7 @@
     "name": "公告和新闻稿",
     "source": "inbox/notes/每日/美港股公告 与 美港股新闻稿",
     "history_end": "2026-10-03",
-    "announcements": 41,
+    "announcements": 43,
     "press": 49,
     "files": {
       "announcements": "filings/announcements.csv",
