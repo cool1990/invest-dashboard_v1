@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-03T08:51:52+08:00",
-  "today_bj": "2026-10-03",
-  "horizon_end": "2026-11-17",
+  "generated_at": "2026-10-04T08:18:02+08:00",
+  "today_bj": "2026-10-04",
+  "horizon_end": "2026-11-18",
   "events": [
     {
       "date": "2026-10-01",
@@ -1643,6 +1643,25 @@
       ]
     },
     {
+      "date": "2026-11-18",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "2026年10月新屋开工",
+      "url": "https://www.census.gov/construction/nrc",
+      "source": "Census economic indicators calendar",
+      "note": "美东 8:30 AM October 2026。原名：New Residential Construction (Building Permits, Housing Starts, and Housing Completions)",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/construction/nrc"
+        }
+      ]
+    },
+    {
       "date": "2026-11-19",
       "time_bj": "03:00",
       "category": "大事",
@@ -1749,7 +1768,7 @@
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "18 条"
+      "detail": "19 条"
     },
     {
       "name": "FOMC",
