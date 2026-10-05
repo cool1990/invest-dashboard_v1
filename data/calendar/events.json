@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-04T08:18:02+08:00",
-  "today_bj": "2026-10-04",
-  "horizon_end": "2026-11-18",
+  "generated_at": "2026-10-05T08:21:14+08:00",
+  "today_bj": "2026-10-05",
+  "horizon_end": "2026-11-19",
   "events": [
     {
       "date": "2026-10-01",
@@ -814,6 +814,139 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalregister.gov/documents/2026/08/21/2026-17183/regulation-crypto-assets"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Capital One Financial Corporation（COF）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$5.95",
+      "consensus": "$5.43",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Chubb Limited（CB）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$7.49",
+      "consensus": "$6.26",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "GE Aerospace（GE）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.66",
+      "consensus": "$2.01",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Intuitive Surgical, Inc.（ISRG）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$1.96",
+      "consensus": "$2.13",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Netflix, Inc.（NFLX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.59",
+      "consensus": "$0.82",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Philip Morris International Inc（PM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.24",
+      "consensus": "$2.33",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "time_bj": "",
+      "category": "财报",
+      "title": "RTX Corporation（RTX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.70",
+      "consensus": "$1.75",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -1681,6 +1814,25 @@
       ]
     },
     {
+      "date": "2026-11-19",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "Advance Services Report",
+      "url": "https://www.census.gov/services/index.html",
+      "source": "Census economic indicators calendar",
+      "note": "美东 10:00 AM Third Quarter 2026。原名：Advance Services Report",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Census economic indicators calendar",
+          "url": "https://www.census.gov/services/index.html"
+        }
+      ]
+    },
+    {
       "date": "2026-11-20",
       "time_bj": "",
       "category": "大事",
@@ -1768,7 +1920,7 @@
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "19 条"
+      "detail": "20 条"
     },
     {
       "name": "FOMC",
@@ -1792,7 +1944,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "15 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "22 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
