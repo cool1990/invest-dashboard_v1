@@ -668,8 +668,8 @@
     "name": "市场情绪",
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
     "history_start": "2026-09-10",
-    "history_end": "2026-10-04",
-    "observations": 429,
+    "history_end": "2026-10-05",
+    "observations": 455,
     "composite_end": "2026-09-26",
     "files": {
       "series": "sentiment/series.csv",
@@ -682,8 +682,8 @@
     "name": "盈利跟踪",
     "source": "Hermes 早晨笔记 inbox/notes/每日/盈利跟踪_YYYY-MM-DD.md 或 美港股盈利跟踪_YYYY-MM-DD.md",
     "history_start": "2026-09-09",
-    "history_end": "2026-10-04",
-    "rows": 666,
+    "history_end": "2026-10-05",
+    "rows": 688,
     "events": 13,
     "files": {
       "daily": "earnings/daily.csv",
@@ -704,21 +704,21 @@
     },
     "memory": {
       "start": "2026-09-16",
-      "end": "2026-10-04"
+      "end": "2026-10-05"
     },
     "gpu": {
       "start": "2026-09-16",
-      "end": "2026-10-04",
+      "end": "2026-10-05",
       "unit": "USD/GPU-hour"
     },
     "openrouter": {
       "start": "2026-09-16",
-      "end": "2026-10-04",
+      "end": "2026-10-05",
       "unit": "万亿 token"
     },
     "silicon": {
       "start": "2026-09-15",
-      "end": "2026-10-03",
+      "end": "2026-10-04",
       "unit": "USD/M tokens"
     },
     "korea": {
@@ -728,7 +728,7 @@
       "note": "月度数据，按期间覆盖；空的全月数字不会抹掉已有值。"
     }
   },
-  "notes_asof": "2026-10-04",
+  "notes_asof": "2026-10-05",
   "derived_refresh": {
     "ok": true,
     "fetched_at": "2026-10-05T00:27:05Z"
@@ -736,9 +736,9 @@
   "filings": {
     "name": "公告和新闻稿",
     "source": "inbox/notes/每日/美港股公告 与 美港股新闻稿",
-    "history_end": "2026-10-04",
-    "announcements": 43,
-    "press": 49,
+    "history_end": "2026-10-05",
+    "announcements": 45,
+    "press": 50,
     "files": {
       "announcements": "filings/announcements.csv",
       "press": "filings/press.csv",
