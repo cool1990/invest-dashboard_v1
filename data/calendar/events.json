@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-06T10:00:41+08:00",
-  "today_bj": "2026-10-06",
-  "horizon_end": "2026-11-20",
+  "generated_at": "2026-10-07T09:10:06+08:00",
+  "today_bj": "2026-10-07",
+  "horizon_end": "2026-11-21",
   "events": [
     {
       "date": "2026-10-01",
@@ -118,67 +118,6 @@
       ]
     },
     {
-      "date": "2026-10-06",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年8月国际贸易（商品和服务）",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule；Census economic indicators calendar",
-      "note": "美东 8:30 AM。原名：U.S. International Trade in Goods and Services, August 2026",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        },
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/foreign-trade/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-06",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "2024年附属机构服务供应",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 10:00 AM。原名：Services Supplied Through Affiliates, 2024",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-06",
-      "time_bj": "22:45",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://www.communitybanking.org/",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the 2026 Community Banking Research Conference, St. Louis, Missouri 美东 10:45 a.m.。原名：Modernizing Regulation and Supervision",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.communitybanking.org/"
-        }
-      ]
-    },
-    {
       "date": "2026-10-08",
       "time_bj": "",
       "category": "财报",
@@ -274,25 +213,6 @@
       ]
     },
     {
-      "date": "2026-10-08",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "2026年8月批发贸易",
-      "url": "https://www.census.gov/wholesale/index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM August 2026。原名：Monthly Wholesale Trade: Sales and Inventories",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/wholesale/index.html"
-        }
-      ]
-    },
-    {
       "date": "2026-10-09",
       "time_bj": "04:30",
       "category": "宏观",
@@ -358,7 +278,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$5.07",
-      "consensus": "$5.88",
+      "consensus": "$5.94",
       "tags": [],
       "priority": "中",
       "links": [
@@ -396,7 +316,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$12.25",
-      "consensus": "$14.05",
+      "consensus": "$13.89",
       "tags": [],
       "priority": "中",
       "links": [
@@ -416,6 +336,25 @@
       "note": "美东盘前",
       "previous": "$2.92",
       "consensus": "$4.12",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Wells Fargo & Company（WFC）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.73",
+      "consensus": "$1.85",
       "tags": [],
       "priority": "中",
       "links": [
@@ -453,7 +392,7 @@
       "source": "calendar/manual.yaml；Nasdaq earnings calendar",
       "note": "ASML Statutory Interim Report 2026 财务日历：October 14, 2026 Announcement of third quarter results。未写钟点",
       "previous": "$6.41",
-      "consensus": "$12.54",
+      "consensus": "$12.47",
       "tags": [
         "半导体"
       ],
@@ -478,7 +417,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.06",
-      "consensus": "$1.13",
+      "consensus": "$1.12",
       "tags": [],
       "priority": "中",
       "links": [
@@ -497,7 +436,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$11.55",
-      "consensus": "$14.19",
+      "consensus": "$14.04",
       "tags": [],
       "priority": "中",
       "links": [
@@ -516,51 +455,13 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.80",
-      "consensus": "$2.97",
+      "consensus": "$2.88",
       "tags": [],
       "priority": "中",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Wells Fargo & Company（WFC）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.73",
-      "consensus": "$1.85",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "新企业统计",
-      "url": "https://www.census.gov/econ/bfs/index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Business Formation Statistics",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/econ/bfs/index.html"
         }
       ]
     },
@@ -630,7 +531,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.31",
-      "consensus": "$1.67",
+      "consensus": "$1.66",
       "tags": [],
       "priority": "中",
       "links": [
@@ -681,44 +582,6 @@
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-15",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年9月零售和餐饮销售",
-      "url": "https://www.census.gov/retail",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM September 2026。原名：Advance Monthly Sales for Retail and Food Services",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/retail"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-15",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "制造业与贸易库存和销售",
-      "url": "https://www.census.gov/mtis/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM August 2026。原名：Manufacturing and Trade: Inventories and Sales",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/mtis/"
         }
       ]
     },
@@ -970,25 +833,6 @@
       ]
     },
     {
-      "date": "2026-10-20",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年9月新屋开工",
-      "url": "https://www.census.gov/construction/nrc",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM September 2026。原名：New Residential Construction (Building Permits, Housing Starts, and Housing Completions)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/construction/nrc"
-        }
-      ]
-    },
-    {
       "date": "2026-10-21",
       "time_bj": "",
       "category": "半导体",
@@ -1090,7 +934,7 @@
       "title": "Progressive Corporation (The)（PGR）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "日期不一样：Nasdaq earnings calendar写的是 2026-10-21，Nasdaq earnings calendar写的是 2026-10-22",
       "previous": "$4.05",
       "consensus": "$4.26",
       "tags": [],
@@ -1181,6 +1025,103 @@
       ]
     },
     {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Lockheed Martin Corporation（LMT）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$6.95",
+      "consensus": "$7.25",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Newmont Corporation（NEM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$1.71",
+      "consensus": "$1.92",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Union Pacific Corporation（UNP）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$3.08",
+      "consensus": "$3.44",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Valero Energy Corporation（VLO）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$3.66",
+      "consensus": "$17.92",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
+      "title": "英特尔（INTC）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "原名：Intel Corporation",
+      "previous": "$0.11",
+      "consensus": "$0.27",
+      "tags": [
+        "半导体"
+      ],
+      "priority": "高",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
       "date": "2026-10-23",
       "time_bj": "04:30",
       "category": "宏观",
@@ -1215,63 +1156,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://tokenomist.ai/plasma"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年9月耐用品订单",
-      "url": "https://www.census.gov/manufacturing/m3/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM September 2026。原名：Advance Report on Durable Goods--Manufacturers' Shipments, Inventories, and Orders",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/manufacturing/m3/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "2026年9月新屋销售",
-      "url": "https://www.census.gov/construction/nrs/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：New Residential Sales",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/construction/nrs/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "钢材进口初值",
-      "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Preliminary U.S. Imports for Consumption of Steel Products",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/foreign-trade/Press-Release/steel_index.html"
         }
       ]
     },
@@ -1312,44 +1196,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.umc.com/en/IR_Event/ir_events"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-28",
-      "time_bj": "20:30",
-      "category": "宏观",
-      "title": "2026年9月经济指标预览",
-      "url": "https://www.census.gov/econ/indicators/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM September 2026。原名：Advance Economic Indicators Report (International Trade, Retail, & Wholesale)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/econ/indicators/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-28",
-      "time_bj": "22:00",
-      "category": "宏观",
-      "title": "住房空置与自有住房率",
-      "url": "https://www.census.gov/housing/hvs/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM Third Quarter 2026。原名：Housing Vacancies and Homeownership",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/housing/hvs/"
         }
       ]
     },
@@ -1506,25 +1352,6 @@
       ]
     },
     {
-      "date": "2026-11-02",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "2026年9月建筑支出",
-      "url": "https://www.census.gov/construction/c30/c30index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Construction Spending (Construction Put in Place)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/construction/c30/c30index.html"
-        }
-      ]
-    },
-    {
       "date": "2026-11-03",
       "time_bj": "",
       "category": "大事",
@@ -1563,25 +1390,6 @@
       ]
     },
     {
-      "date": "2026-11-03",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "2026年9月制造业出货、库存和订单",
-      "url": "https://www.census.gov/manufacturing/m3/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Full Report - Manufacturers' Shipments, Inventories and Orders",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/manufacturing/m3/"
-        }
-      ]
-    },
-    {
       "date": "2026-11-04",
       "time_bj": "",
       "category": "大事",
@@ -1606,7 +1414,7 @@
       "category": "宏观",
       "title": "2026年9月国际贸易（商品和服务）",
       "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule；Census economic indicators calendar",
+      "source": "BEA Release Schedule",
       "note": "美东 8:30 AM。原名：U.S. International Trade in Goods and Services, September 2026",
       "previous": "",
       "consensus": "",
@@ -1616,10 +1424,6 @@
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
-        },
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/foreign-trade/"
         }
       ]
     },
@@ -1696,25 +1500,6 @@
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-09",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "2026年9月批发贸易",
-      "url": "https://www.census.gov/wholesale/index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Monthly Wholesale Trade: Sales and Inventories",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/wholesale/index.html"
         }
       ]
     },
@@ -1835,25 +1620,6 @@
       ]
     },
     {
-      "date": "2026-11-12",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "新企业统计",
-      "url": "https://www.census.gov/econ/bfs/index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM October 2026。原名：Business Formation Statistics",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/econ/bfs/index.html"
-        }
-      ]
-    },
-    {
       "date": "2026-11-13",
       "time_bj": "",
       "category": "宏观",
@@ -1911,63 +1677,6 @@
       ]
     },
     {
-      "date": "2026-11-17",
-      "time_bj": "21:30",
-      "category": "宏观",
-      "title": "2026年10月零售和餐饮销售",
-      "url": "https://www.census.gov/retail",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM October 2026。原名：Advance Monthly Sales for Retail and Food Services",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/retail"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "制造业与贸易库存和销售",
-      "url": "https://www.census.gov/mtis/",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM September 2026。原名：Manufacturing and Trade: Inventories and Sales",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/mtis/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-18",
-      "time_bj": "21:30",
-      "category": "宏观",
-      "title": "2026年10月新屋开工",
-      "url": "https://www.census.gov/construction/nrc",
-      "source": "Census economic indicators calendar",
-      "note": "美东 8:30 AM October 2026。原名：New Residential Construction (Building Permits, Housing Starts, and Housing Completions)",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/construction/nrc"
-        }
-      ]
-    },
-    {
       "date": "2026-11-19",
       "time_bj": "03:00",
       "category": "大事",
@@ -1983,25 +1692,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-19",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "Advance Services Report",
-      "url": "https://www.census.gov/services/index.html",
-      "source": "Census economic indicators calendar",
-      "note": "美东 10:00 AM Third Quarter 2026。原名：Advance Services Report",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Census economic indicators calendar",
-          "url": "https://www.census.gov/services/index.html"
         }
       ]
     },
@@ -2125,13 +1815,13 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "6 条"
+      "detail": "4 条"
     },
     {
       "name": "Census",
       "url": "https://www.census.gov/economic-indicators/calendar-listview.html",
       "status": "ok",
-      "detail": "20 条"
+      "detail": "0 条"
     },
     {
       "name": "FOMC",
@@ -2149,13 +1839,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "2 条"
+      "detail": "1 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "31 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "37 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
