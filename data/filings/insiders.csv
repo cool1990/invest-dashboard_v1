@@ -3,3 +3,4 @@ date,text,source
 2026-10-04,监控失败：insider result data_date 2026-10-05 != 2026-10-04,美港股公告 2026-10-04.md
 2026-10-05,监控失败：insider result data_date 2026-10-06 != 2026-10-05,美港股公告 2026-10-05.md
 2026-10-06,监控失败：RuntimeError: SEC request failed 503: https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&company=&dateb=&owner=include&start=5100&count=100&output=atom（exit=1）,美港股公告 2026-10-06.md
+2026-10-07,监控失败：insider result data_date 2026-10-08 != 2026-10-07,美港股公告 2026-10-07.md
