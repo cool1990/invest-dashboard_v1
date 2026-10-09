@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-08T01:34:28Z",
+  "updated_at": "2026-10-09T01:45:12Z",
   "history_start": "2022-01-01",
   "display_unit": "十亿美元",
   "spread_unit": "基点",
@@ -42,12 +42,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WALCL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WALCL.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "6743031",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "6747560",
+      "observations": 249
     },
     {
       "id": "WDTGAL",
@@ -60,12 +60,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WDTGAL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WDTGAL.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "984046",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "885783",
+      "observations": 249
     },
     {
       "id": "RRPONTSYD",
@@ -78,12 +78,12 @@
       "source_url": "https://fred.stlouisfed.org/series/RRPONTSYD",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/RRPONTSYD.csv",
-      "last_obs_date": "2026-10-07",
-      "last_date": "2026-10-07",
-      "last_value": "2.338",
-      "observations": 1189
+      "last_obs_date": "2026-10-08",
+      "last_date": "2026-10-08",
+      "last_value": "0.335",
+      "observations": 1190
     },
     {
       "id": "WRBWFRBL",
@@ -96,12 +96,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WRBWFRBL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WRBWFRBL.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "2881686",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3022066",
+      "observations": 249
     },
     {
       "id": "SOFR",
@@ -114,12 +114,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFR",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/SOFR.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.90",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.88",
+      "observations": 1189
     },
     {
       "id": "IORB",
@@ -132,12 +132,12 @@
       "source_url": "https://fred.stlouisfed.org/series/IORB",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/IORB.csv",
-      "last_obs_date": "2026-10-08",
-      "last_date": "2026-10-08",
+      "last_obs_date": "2026-10-09",
+      "last_date": "2026-10-09",
       "last_value": "3.90",
-      "observations": 1742
+      "observations": 1743
     },
     {
       "id": "EFFR",
@@ -150,12 +150,12 @@
       "source_url": "https://fred.stlouisfed.org/series/EFFR",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/EFFR.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
       "last_value": "3.88",
-      "observations": 1194
+      "observations": 1195
     },
     {
       "id": "NFCI",
@@ -168,7 +168,7 @@
       "source_url": "https://fred.stlouisfed.org/series/NFCI",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/NFCI.csv",
       "last_obs_date": "2026-10-02",
       "last_date": "2026-10-02",
@@ -186,12 +186,12 @@
       "source_url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/BAMLH0A0HYM2.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.03",
-      "observations": 785
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.09",
+      "observations": 786
     },
     {
       "id": "VIXCLS",
@@ -204,12 +204,12 @@
       "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/VIXCLS.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "15.01",
-      "observations": 1227
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "15.08",
+      "observations": 1228
     },
     {
       "id": "ANFCI",
@@ -222,7 +222,7 @@
       "source_url": "https://fred.stlouisfed.org/series/ANFCI",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/ANFCI.csv",
       "last_obs_date": "2026-10-02",
       "last_date": "2026-10-02",
@@ -240,7 +240,7 @@
       "source_url": "https://fred.stlouisfed.org/series/STLFSI4",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:24Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/STLFSI4.csv",
       "last_obs_date": "2026-10-02",
       "last_date": "2026-10-02",
@@ -258,7 +258,7 @@
       "source_url": "https://fred.stlouisfed.org/series/STLFSI",
       "status": "discontinued",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": null,
       "last_obs_date": "2020-03-13",
       "last_date": "2020-03-13",
@@ -277,12 +277,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WRESBAL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WRESBAL.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "2948090",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3029659",
+      "observations": 249
     },
     {
       "id": "WTREGEN",
@@ -295,12 +295,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WTREGEN",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WTREGEN.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "948674",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "880253",
+      "observations": 249
     },
     {
       "id": "WLRRAOL",
@@ -313,12 +313,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WLRRAOL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WLRRAOL.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "11539",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "2338",
+      "observations": 249
     },
     {
       "id": "WCURCIR",
@@ -331,12 +331,12 @@
       "source_url": "https://fred.stlouisfed.org/series/WCURCIR",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/WCURCIR.csv",
-      "last_obs_date": "2026-09-30",
-      "last_date": "2026-09-30",
-      "last_value": "2482015",
-      "observations": 248
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "2483821",
+      "observations": 249
     },
     {
       "id": "SOFR1",
@@ -349,12 +349,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFR1",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:08Z",
       "file": "series/SOFR1.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.84",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.81",
+      "observations": 1189
     },
     {
       "id": "SOFR25",
@@ -367,12 +367,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFR25",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/SOFR25.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.88",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.86",
+      "observations": 1189
     },
     {
       "id": "SOFR75",
@@ -385,12 +385,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFR75",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/SOFR75.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.95",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.92",
+      "observations": 1189
     },
     {
       "id": "SOFR99",
@@ -403,12 +403,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFR99",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:25Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/SOFR99.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "3.98",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "3.96",
+      "observations": 1189
     },
     {
       "id": "SOFRVOL",
@@ -421,12 +421,12 @@
       "source_url": "https://fred.stlouisfed.org/series/SOFRVOL",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/SOFRVOL.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "2997",
-      "observations": 1188
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "2968",
+      "observations": 1189
     },
     {
       "id": "TOTBKCR",
@@ -439,7 +439,7 @@
       "source_url": "https://fred.stlouisfed.org/series/TOTBKCR",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/TOTBKCR.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -457,7 +457,7 @@
       "source_url": "https://fred.stlouisfed.org/series/TOTCI",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/TOTCI.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -475,7 +475,7 @@
       "source_url": "https://fred.stlouisfed.org/series/TLAACBW027SBOG",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/TLAACBW027SBOG.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -493,7 +493,7 @@
       "source_url": "https://fred.stlouisfed.org/series/CCLACBW027SBOG",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/CCLACBW027SBOG.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -511,7 +511,7 @@
       "source_url": "https://fred.stlouisfed.org/series/CREACBW027SBOG",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/CREACBW027SBOG.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -529,7 +529,7 @@
       "source_url": "https://fred.stlouisfed.org/series/DPSACBW027SBOG",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:26Z",
+      "fetched_at": "2026-10-09T01:45:09Z",
       "file": "series/DPSACBW027SBOG.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -547,7 +547,7 @@
       "source_url": "https://fred.stlouisfed.org/series/DPSLCBW027SBOG",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:10Z",
       "file": "series/DPSLCBW027SBOG.csv",
       "last_obs_date": "2026-09-23",
       "last_date": "2026-09-23",
@@ -565,12 +565,12 @@
       "source_url": "https://fred.stlouisfed.org/series/DGS10",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:10Z",
       "file": "series/DGS10.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "5.27",
-      "observations": 1190
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "5.28",
+      "observations": 1191
     },
     {
       "id": "DGS2",
@@ -583,12 +583,12 @@
       "source_url": "https://fred.stlouisfed.org/series/DGS2",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:10Z",
       "file": "series/DGS2.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "4.79",
-      "observations": 1190
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "4.77",
+      "observations": 1191
     },
     {
       "id": "DFII10",
@@ -601,12 +601,12 @@
       "source_url": "https://fred.stlouisfed.org/series/DFII10",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:10Z",
       "file": "series/DFII10.csv",
-      "last_obs_date": "2026-10-06",
-      "last_date": "2026-10-06",
-      "last_value": "2.91",
-      "observations": 1190
+      "last_obs_date": "2026-10-07",
+      "last_date": "2026-10-07",
+      "last_value": "2.92",
+      "observations": 1191
     },
     {
       "id": "T10YIE",
@@ -619,12 +619,12 @@
       "source_url": "https://fred.stlouisfed.org/series/T10YIE",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:10Z",
       "file": "series/T10YIE.csv",
-      "last_obs_date": "2026-10-07",
-      "last_date": "2026-10-07",
-      "last_value": "2.36",
-      "observations": 1191
+      "last_obs_date": "2026-10-08",
+      "last_date": "2026-10-08",
+      "last_value": "2.35",
+      "observations": 1192
     },
     {
       "id": "T10Y2Y",
@@ -637,12 +637,12 @@
       "source_url": "https://fred.stlouisfed.org/series/T10Y2Y",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:27Z",
+      "fetched_at": "2026-10-09T01:45:11Z",
       "file": "series/T10Y2Y.csv",
-      "last_obs_date": "2026-10-07",
-      "last_date": "2026-10-07",
-      "last_value": "0.51",
-      "observations": 1191
+      "last_obs_date": "2026-10-08",
+      "last_date": "2026-10-08",
+      "last_value": "0.47",
+      "observations": 1192
     },
     {
       "id": "DTWEXBGS",
@@ -655,7 +655,7 @@
       "source_url": "https://fred.stlouisfed.org/series/DTWEXBGS",
       "status": "ok",
       "last_fetch_ok": true,
-      "fetched_at": "2026-10-08T01:34:28Z",
+      "fetched_at": "2026-10-09T01:45:11Z",
       "file": "series/DTWEXBGS.csv",
       "last_obs_date": "2026-10-02",
       "last_date": "2026-10-02",
@@ -663,7 +663,7 @@
       "observations": 1190
     }
   ],
-  "latest_wednesday": "2026-09-30",
+  "latest_wednesday": "2026-10-07",
   "sentiment": {
     "name": "市场情绪",
     "source": "Hermes 早晨笔记 inbox/notes/每日/宏观指标_YYYY-MM-DD.md",
@@ -731,7 +731,7 @@
   "notes_asof": "2026-10-08",
   "derived_refresh": {
     "ok": true,
-    "fetched_at": "2026-10-08T01:34:28Z"
+    "fetched_at": "2026-10-09T01:45:12Z"
   },
   "filings": {
     "name": "公告和新闻稿",
