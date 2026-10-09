@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-08T09:28:09+08:00",
-  "today_bj": "2026-10-08",
-  "horizon_end": "2026-11-22",
+  "generated_at": "2026-10-09T09:36:28+08:00",
+  "today_bj": "2026-10-09",
+  "horizon_end": "2026-11-23",
   "events": [
     {
       "date": "2026-10-01",
@@ -119,25 +119,6 @@
     },
     {
       "date": "2026-10-08",
-      "time_bj": "",
-      "category": "财报",
-      "title": "百事（PEP）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前。原名：Pepsico, Inc.",
-      "previous": "$2.29",
-      "consensus": "$2.29",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-08",
       "time_bj": "02:00",
       "category": "大事",
       "title": "FOMC 9月会议纪要",
@@ -176,25 +157,6 @@
     },
     {
       "date": "2026-10-08",
-      "time_bj": "16:30",
-      "category": "大事",
-      "title": "美联储讲话：经济展望",
-      "url": "https://istanbulef.org/eng/yayin/",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Christopher J. Waller At the Central Bank of the Republic of Türkiye (TCMB) İstanbul Economic Forum, Ümraniye/İstanbul, Türkiye 美东 4:30 a.m.。原名：Economic Outlook",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://istanbulef.org/eng/yayin/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-08",
       "time_bj": "17:00",
       "category": "半导体",
       "title": "联发科9月营收",
@@ -209,25 +171,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.mediatek.com/investor-relations"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-09",
-      "time_bj": "04:30",
-      "category": "宏观",
-      "title": "美联储 H.4.1（资产负债表）",
-      "url": "https://www.federalreserve.gov/releases/h41/",
-      "source": "Federal Reserve H.4.1",
-      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Federal Reserve H.4.1",
-          "url": "https://www.federalreserve.gov/releases/h41/"
         }
       ]
     },
@@ -297,7 +240,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.80",
-      "consensus": "$2.90",
+      "consensus": "$2.82",
       "tags": [],
       "priority": "中",
       "links": [
@@ -316,7 +259,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$12.25",
-      "consensus": "$13.35",
+      "consensus": "$12.90",
       "tags": [],
       "priority": "中",
       "links": [
@@ -361,6 +304,25 @@
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "time_bj": "15:45",
+      "category": "大事",
+      "title": "美联储讲话",
+      "url": "https://www.youtube.com/@BloombergNewEconomy",
+      "source": "Federal Reserve calendar",
+      "note": "Discussion - Governor Christopher J. Waller At the Bloomberg New Economy Forum 2026, New Delhi, India 美东 3:45 a.m.",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.youtube.com/@BloombergNewEconomy"
         }
       ]
     },
@@ -466,6 +428,25 @@
       ]
     },
     {
+      "date": "2026-10-14",
+      "time_bj": "17:40",
+      "category": "大事",
+      "title": "美联储讲话",
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "source": "Federal Reserve calendar",
+      "note": "Discussion - Vice Chair for Supervision Michelle W. Bowman At the 2026 IIF Annual Membership Summit, Bangkok, Thailand 美东 5:40 a.m.。原名：Supervision and Regulation",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+        }
+      ]
+    },
+    {
       "date": "2026-10-15",
       "time_bj": "",
       "category": "大事",
@@ -562,11 +543,30 @@
     },
     {
       "date": "2026-10-15",
+      "time_bj": "10:55",
+      "category": "大事",
+      "title": "美联储讲话",
+      "url": "https://www.youtube.com/live/V7H5F2C5PNc",
+      "source": "Federal Reserve calendar",
+      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At the Bangkok Economic Festival 2026 美东 10:55 p.m.。原名：To be announced.",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.youtube.com/live/V7H5F2C5PNc"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
       "time_bj": "14:00",
       "category": "财报",
       "title": "台积电 3Q26 业绩会",
       "url": "https://investor.tsmc.com/english/financial-calendar",
-      "source": "calendar/manual.yaml；Nasdaq earnings calendar",
+      "source": "calendar/manual.yaml；Nasdaq earnings calendar；盈利跟踪笔记",
       "note": "TSMC IR 财务日历：3Q'26 Earnings Conference and Conference Call，台北时间14:00-15:30",
       "previous": "$2.92",
       "consensus": "$4.45",
@@ -582,6 +582,10 @@
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
+        },
+        {
+          "source": "盈利跟踪笔记",
+          "url": ""
         }
       ]
     },
@@ -625,25 +629,6 @@
     },
     {
       "date": "2026-10-16",
-      "time_bj": "",
-      "category": "财报",
-      "title": "ICICI Bank Limited（IBN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$0.39",
-      "consensus": "$0.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-16",
       "time_bj": "04:30",
       "category": "宏观",
       "title": "美联储 H.4.1（资产负债表）",
@@ -658,6 +643,25 @@
         {
           "source": "Federal Reserve H.4.1",
           "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "time_bj": "11:30",
+      "category": "大事",
+      "title": "美联储讲话",
+      "url": "https://www.youtube.com/watch?v=T20jWBJ66X0&amp;list=PLGHsBhoupusk&amp;index=31",
+      "source": "Federal Reserve calendar",
+      "note": "Discussion - Chairman Kevin Warsh At the Fireside Chat with International Monetary Fund (IMF) Managing Director Kristalina Georgieva, Bangkok, Thailand 美东 11:30 p.m.。原名：Conversation between IMF Managing Director Georgieva and Federal Reserve Chaiman Warsh",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "低",
+      "links": [
+        {
+          "source": "Federal Reserve calendar",
+          "url": "https://www.youtube.com/watch?v=T20jWBJ66X0&amp;list=PLGHsBhoupusk&amp;index=31"
         }
       ]
     },
@@ -727,7 +731,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$7.49",
-      "consensus": "$6.26",
+      "consensus": "$6.29",
       "tags": [],
       "priority": "中",
       "links": [
@@ -950,12 +954,31 @@
       "date": "2026-10-21",
       "time_bj": "",
       "category": "财报",
+      "title": "NextEra Energy, Inc.（NEE）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.13",
+      "consensus": "$1.20",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "time_bj": "",
+      "category": "财报",
       "title": "Progressive Corporation (The)（PGR）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "日期不一样：Nasdaq earnings calendar写的是 2026-10-21，Nasdaq earnings calendar写的是 2026-10-22",
       "previous": "$4.05",
-      "consensus": "$4.26",
+      "consensus": "$4.37",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1147,30 +1170,9 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.66",
-      "consensus": "$17.92",
+      "consensus": "$18.15",
       "tags": [],
       "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-22",
-      "time_bj": "",
-      "category": "财报",
-      "title": "英特尔（INTC）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "原名：Intel Corporation",
-      "previous": "$0.11",
-      "consensus": "$0.27",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
@@ -1909,25 +1911,25 @@
       "name": "H.4.1",
       "url": "https://www.federalreserve.gov/releases/h41/",
       "status": "ok",
-      "detail": "7 条"
+      "detail": "6 条"
     },
     {
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "1 条"
+      "detail": "4 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "41 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "39 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
       "url": "",
       "status": "ok",
-      "detail": "0 条"
+      "detail": "1 条"
     },
     {
       "name": "手工日历",
