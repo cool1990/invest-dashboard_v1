@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-10T09:25:51+08:00",
-  "today_bj": "2026-10-10",
-  "horizon_end": "2026-11-24",
+  "generated_at": "2026-10-11T08:36:48+08:00",
+  "today_bj": "2026-10-11",
+  "horizon_end": "2026-11-25",
   "events": [
     {
       "date": "2026-10-01",
@@ -1257,6 +1257,44 @@
       ]
     },
     {
+      "date": "2026-10-26",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Verizon Communications Inc.（VZ）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.21",
+      "consensus": "$1.28",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Welltower Inc.（WELL）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$1.34",
+      "consensus": "$1.64",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
       "date": "2026-10-28",
       "time_bj": "",
       "category": "大事",
@@ -1850,6 +1888,44 @@
       ]
     },
     {
+      "date": "2026-11-25",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "2026年10月个人收入与支出",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM。原名：Personal Income and Outlays, October 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "2026年三季度 GDP 第二次估计",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM。原名：GDP (Second Estimate) and Corporate Profits, 3rd Quarter 2026",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
       "date": "2026-11-26",
       "time_bj": "03:00",
       "category": "大事",
@@ -1912,7 +1988,7 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "4 条"
+      "detail": "6 条"
     },
     {
       "name": "Census",
@@ -1942,7 +2018,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "40 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "42 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
