@@ -7,3 +7,4 @@ date,text,source
 2026-10-08,监控失败：insider result data_date 2026-10-09 != 2026-10-08,美港股公告 2026-10-08.md
 2026-10-09,监控失败：insider result data_date 2026-10-10 != 2026-10-09,美港股公告 2026-10-09.md
 2026-10-10,监控失败：insider result data_date 2026-10-11 != 2026-10-10,美港股公告 2026-10-10.md
+2026-10-11,监控失败：insider result data_date 2026-10-12 != 2026-10-11,美港股公告 2026-10-11.md
