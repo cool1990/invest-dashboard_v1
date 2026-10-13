@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-12T08:53:19+08:00",
-  "today_bj": "2026-10-12",
-  "horizon_end": "2026-11-26",
+  "generated_at": "2026-10-13T10:47:47+08:00",
+  "today_bj": "2026-10-13",
+  "horizon_end": "2026-11-27",
   "events": [
     {
       "date": "2026-10-01",
@@ -436,7 +436,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-10-14，Nasdaq earnings calendar写的是 2026-10-22，Nasdaq earnings calendar写的是 2026-10-27，Nasdaq earnings calendar写的是 2026-10-27",
       "previous": "$4.05",
-      "consensus": "$4.37",
+      "consensus": "$4.35",
       "tags": [],
       "priority": "中",
       "links": [
@@ -826,7 +826,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.24",
-      "consensus": "$2.33",
+      "consensus": "$2.32",
       "tags": [],
       "priority": "中",
       "links": [
@@ -902,7 +902,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$0.54",
-      "consensus": "$0.59",
+      "consensus": "$0.61",
       "tags": [],
       "priority": "中",
       "links": [
@@ -922,6 +922,25 @@
       "note": "美东盘前",
       "previous": "$1.30",
       "consensus": "$1.42",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "time_bj": "",
+      "category": "财报",
+      "title": "CME Group Inc.（CME）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.68",
+      "consensus": "$2.96",
       "tags": [],
       "priority": "中",
       "links": [
@@ -959,7 +978,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$2.65",
-      "consensus": "$2.89",
+      "consensus": "$2.87",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1016,7 +1035,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$0.37",
-      "consensus": "$0.23",
+      "consensus": "$0.22",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1151,7 +1170,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.08",
-      "consensus": "$3.44",
+      "consensus": "$3.47",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1170,7 +1189,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.66",
-      "consensus": "$18.45",
+      "consensus": "$19.54",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1434,7 +1453,7 @@
       "title": "Visa Inc.（V）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘后",
       "previous": "$2.98",
       "consensus": "$3.43",
       "tags": [],
@@ -1462,6 +1481,253 @@
         {
           "source": "Federal Reserve FOMC calendars",
           "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Alphabet Inc.（GOOGL）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$2.87",
+      "consensus": "$2.94",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Alphabet Inc.（GOOG）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$2.87",
+      "consensus": "$2.94",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Amphenol Corporation（APH）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$0.47",
+      "consensus": "$0.72",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Automatic Data Processing, Inc.（ADP）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.49",
+      "consensus": "$2.78",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Banco Bilbao Vizcaya Argentaria S.A.（BBVA）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.49",
+      "consensus": "$0.59",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Equinix, Inc.（EQIX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$9.83",
+      "consensus": "$9.28",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Fortinet, Inc.（FTNT）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.65",
+      "consensus": "$0.77",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "GE Vernova Inc.（GEV）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.64",
+      "consensus": "$4.09",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Microsoft Corporation（MSFT）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$4.13",
+      "consensus": "$4.71",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Phillips 66（PSX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.52",
+      "consensus": "$10.41",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "ServiceNow, Inc.（NOW）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.59",
+      "consensus": "$0.56",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "T-Mobile US, Inc.（TMUS）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$2.59",
+      "consensus": "$2.86",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "UBS AG（UBS）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$0.76",
+      "consensus": "$0.91",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -2098,6 +2364,25 @@
     },
     {
       "date": "2026-11-27",
+      "time_bj": "05:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
       "time_bj": "16:00",
       "category": "加密",
       "title": "Deribit 月度期权到期（BTC/ETH 等）",
@@ -2158,7 +2443,7 @@
       "name": "H.4.1",
       "url": "https://www.federalreserve.gov/releases/h41/",
       "status": "ok",
-      "detail": "6 条"
+      "detail": "7 条"
     },
     {
       "name": "美联储讲话",
@@ -2170,7 +2455,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "52 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "66 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
