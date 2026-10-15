@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-14T08:47:13+08:00",
-  "today_bj": "2026-10-14",
-  "horizon_end": "2026-11-28",
+  "generated_at": "2026-10-15T08:13:02+08:00",
+  "today_bj": "2026-10-15",
+  "horizon_end": "2026-11-29",
   "events": [
     {
       "date": "2026-10-01",
@@ -196,32 +196,13 @@
     {
       "date": "2026-10-14",
       "time_bj": "",
-      "category": "宏观",
-      "title": "CPI 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=10",
-      "source": "FRED release dates",
-      "note": "CPI",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=10"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
       "category": "财报",
       "title": "ASML 2026年第三季度业绩",
       "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf",
-      "source": "calendar/manual.yaml；Nasdaq earnings calendar",
+      "source": "calendar/manual.yaml",
       "note": "ASML Statutory Interim Report 2026 财务日历：October 14, 2026 Announcement of third quarter results。未写钟点",
-      "previous": "$6.41",
-      "consensus": "$12.47",
+      "previous": "",
+      "consensus": "",
       "tags": [
         "半导体"
       ],
@@ -230,105 +211,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://ourbrand.asml.com/asset/468514ab-2a25-42be-a284-1560ebebcb6a/Statutory-Interim-Report-2026.pdf"
-        },
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Bank of America Corporation（BAC）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.06",
-      "consensus": "$1.11",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
-      "category": "财报",
-      "title": "BlackRock, Inc.（BLK）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$11.55",
-      "consensus": "$14.01",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Morgan Stanley（MS）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$2.80",
-      "consensus": "$2.83",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Progressive Corporation (The)（PGR）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-10-14，Nasdaq earnings calendar写的是 2026-10-22，Nasdaq earnings calendar写的是 2026-10-27，Nasdaq earnings calendar写的是 2026-10-27",
-      "previous": "$4.05",
-      "consensus": "$4.46",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "time_bj": "17:40",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
-      "source": "Federal Reserve calendar",
-      "note": "Discussion - Vice Chair for Supervision Michelle W. Bowman At the 2026 IIF Annual Membership Summit, Bangkok, Thailand 美东 5:40 a.m.。原名：Supervision and Regulation",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
         }
       ]
     },
@@ -398,7 +280,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.31",
-      "consensus": "$1.67",
+      "consensus": "$1.66",
       "tags": [],
       "priority": "中",
       "links": [
@@ -558,7 +440,7 @@
       "title": "美联储讲话",
       "url": "https://www.youtube.com/watch?v=T20jWBJ66X0&amp;list=PLGHsBhoupusk&amp;index=31",
       "source": "Federal Reserve calendar",
-      "note": "Discussion - Chairman Kevin Warsh At the Fireside Chat with International Monetary Fund (IMF) Managing Director Kristalina Georgieva, Bangkok, Thailand 美东 11:30 p.m.。原名：Conversation between IMF Managing Director Georgieva and Federal Reserve Chaiman Warsh",
+      "note": "Discussion - Chairman Kevin Warsh At the Fireside Chat with International Monetary Fund (IMF) Managing Director Kristalina Georgieva, Bangkok, Thailand 美东 11:30 p.m.。原名：Conversation between IMF Managing Director Georgieva and Federal Reserve Chairman Warsh",
       "previous": "",
       "consensus": "",
       "tags": [],
@@ -617,7 +499,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$5.95",
-      "consensus": "$5.43",
+      "consensus": "$5.45",
       "tags": [],
       "priority": "中",
       "links": [
@@ -731,7 +613,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.70",
-      "consensus": "$1.75",
+      "consensus": "$1.76",
       "tags": [],
       "priority": "中",
       "links": [
@@ -859,12 +741,31 @@
       "date": "2026-10-21",
       "time_bj": "",
       "category": "财报",
+      "title": "Meta Platforms, Inc.（META）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$7.25",
+      "consensus": "$6.39",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "time_bj": "",
+      "category": "财报",
       "title": "NextEra Energy, Inc.（NEE）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.13",
-      "consensus": "$1.20",
+      "consensus": "$1.18",
       "tags": [],
       "priority": "中",
       "links": [
@@ -902,7 +803,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$0.37",
-      "consensus": "$0.22",
+      "consensus": "$0.21",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1013,6 +914,25 @@
       "date": "2026-10-22",
       "time_bj": "",
       "category": "财报",
+      "title": "Procter & Gamble Company (The)（PG）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-10-22，Nasdaq earnings calendar写的是 2026-10-27，Nasdaq earnings calendar写的是 2026-10-27",
+      "previous": "$1.99",
+      "consensus": "$1.89",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "",
+      "category": "财报",
       "title": "Spotify Technology S.A.（SPOT）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
@@ -1094,7 +1014,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$4.14",
-      "consensus": "$4.49",
+      "consensus": "$4.47",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1531,7 +1451,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.52",
-      "consensus": "$10.49",
+      "consensus": "$10.50",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1723,7 +1643,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.63",
-      "consensus": "$1.48",
+      "consensus": "$1.42",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1854,7 +1774,7 @@
       "title": "Quanta Services, Inc.（PWR）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘前",
       "previous": "$3.08",
       "consensus": "$4.68",
       "tags": [],
@@ -2057,6 +1977,101 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "AbbVie Inc.（ABBV）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.86",
+      "consensus": "$3.76",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "AstraZeneca PLC（AZN）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.38",
+      "consensus": "$2.16",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "BP p.l.c.（BP）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$0.85",
+      "consensus": "$2.09",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Chevron Corporation（CVX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.85",
+      "consensus": "$4.66",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "ExxonMobil Holdings Corporation（XOM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "$1.88",
+      "consensus": "$3.93",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -2681,13 +2696,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "3 条"
+      "detail": "2 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "79 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "80 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -2705,7 +2720,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 2 天；PPI 2 天；Employment Situation 1 天；JOLTS 1 天"
+      "detail": "CPI 1 天；PPI 2 天；Employment Situation 1 天；JOLTS 1 天"
     },
     {
       "name": "初请失业金",
