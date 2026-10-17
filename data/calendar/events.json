@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-17T08:05:16+08:00",
-  "today_bj": "2026-10-17",
-  "horizon_end": "2026-12-01",
+  "generated_at": "2026-10-18T07:41:27+08:00",
+  "today_bj": "2026-10-18",
+  "horizon_end": "2026-12-02",
   "events": [
     {
       "date": "2026-10-01",
@@ -744,7 +744,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$6.95",
-      "consensus": "$7.48",
+      "consensus": "$7.49",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1977,6 +1977,82 @@
       ]
     },
     {
+      "date": "2026-11-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Apple Inc.（AAPL）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$1.85",
+      "consensus": "$1.99",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Marriott International（MAR）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.47",
+      "consensus": "$2.84",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Palantir Technologies Inc.（PLTR）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.18",
+      "consensus": "$0.34",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Vertex Pharmaceuticals Incorporated（VRTX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$4.22",
+      "consensus": "$4.35",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
       "date": "2026-11-03",
       "time_bj": "",
       "category": "大事",
@@ -2509,6 +2585,25 @@
           "url": "https://fred.stlouisfed.org/release?rid=192"
         }
       ]
+    },
+    {
+      "date": "2026-12-02",
+      "time_bj": "21:30",
+      "category": "宏观",
+      "title": "GDP",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 8:30 AM。原名：GDP by County and Personal Income by County, 2025",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
     }
   ],
   "sources": [
@@ -2516,7 +2611,7 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "6 条"
+      "detail": "7 条"
     },
     {
       "name": "Census",
@@ -2546,7 +2641,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "74 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "78 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
