@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T07:59:56+08:00",
-  "today_bj": "2026-10-16",
-  "horizon_end": "2026-11-30",
+  "generated_at": "2026-10-17T08:05:16+08:00",
+  "today_bj": "2026-10-17",
+  "horizon_end": "2026-12-01",
   "events": [
     {
       "date": "2026-10-01",
@@ -294,63 +294,6 @@
     },
     {
       "date": "2026-10-16",
-      "time_bj": "",
-      "category": "财报",
-      "title": "HDFC Bank Limited（HDB）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$0.44",
-      "consensus": "$0.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-16",
-      "time_bj": "",
-      "category": "财报",
-      "title": "ICICI Bank Limited（IBN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$0.39",
-      "consensus": "$0.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-16",
-      "time_bj": "11:30",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://www.youtube.com/watch?v=T20jWBJ66X0&amp;list=PLGHsBhoupusk&amp;index=31",
-      "source": "Federal Reserve calendar",
-      "note": "Discussion - Chairman Kevin Warsh At the Fireside Chat with International Monetary Fund (IMF) Managing Director Kristalina Georgieva, Bangkok, Thailand 美东 11:30 p.m.。原名：Conversation between IMF Managing Director Georgieva and Federal Reserve Chairman Warsh",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.youtube.com/watch?v=T20jWBJ66X0&amp;list=PLGHsBhoupusk&amp;index=31"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-16",
       "time_bj": "21:00",
       "category": "加密",
       "title": "ARB 代币解锁 9265万枚",
@@ -415,7 +358,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$7.49",
-      "consensus": "$6.42",
+      "consensus": "$6.53",
       "tags": [],
       "priority": "中",
       "links": [
@@ -434,7 +377,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.66",
-      "consensus": "$2.01",
+      "consensus": "$2.02",
       "tags": [],
       "priority": "中",
       "links": [
@@ -491,7 +434,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.70",
-      "consensus": "$1.76",
+      "consensus": "$1.78",
       "tags": [],
       "priority": "中",
       "links": [
@@ -643,7 +586,7 @@
       "source": "Nasdaq earnings calendar；盈利跟踪笔记",
       "note": "美东盘后",
       "previous": "$7.25",
-      "consensus": "$6.35",
+      "consensus": "$6.67",
       "tags": [],
       "priority": "高",
       "links": [
@@ -666,7 +609,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.13",
-      "consensus": "$1.18",
+      "consensus": "$1.19",
       "tags": [],
       "priority": "中",
       "links": [
@@ -685,7 +628,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.24",
-      "consensus": "$2.31",
+      "consensus": "$2.30",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1030,6 +973,25 @@
       "note": "美东盘前",
       "previous": "$0.67",
       "consensus": "$0.88",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Freeport-McMoran, Inc.（FCX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$0.50",
+      "consensus": "$0.75",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1463,31 +1425,12 @@
       "date": "2026-10-29",
       "time_bj": "",
       "category": "财报",
-      "title": "ASE Technology Holding Co., Ltd.（ASX）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$0.16",
-      "consensus": "$0.34",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-29",
-      "time_bj": "",
-      "category": "财报",
       "title": "Altria Group（MO）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.45",
-      "consensus": "$1.50",
+      "consensus": "$1.51",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1544,7 +1487,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.63",
-      "consensus": "$1.42",
+      "consensus": "$1.28",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1558,12 +1501,12 @@
       "date": "2026-10-29",
       "time_bj": "",
       "category": "财报",
-      "title": "Cloudflare, Inc.（NET）财报",
+      "title": "Caterpillar, Inc.（CAT）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "($0.01)",
-      "consensus": "$0.02",
+      "note": "美东盘前",
+      "previous": "$4.95",
+      "consensus": "$6.95",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1582,7 +1525,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$7.02",
-      "consensus": "$7.54",
+      "consensus": "$5.38",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1620,7 +1563,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$4.21",
-      "consensus": "$4.52",
+      "consensus": "$4.51",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1659,25 +1602,6 @@
       "note": "美东盘前",
       "previous": "$2.58",
       "consensus": "$2.12",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-29",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Quanta Services, Inc.（PWR）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$3.08",
-      "consensus": "$4.68",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1753,7 +1677,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.77",
-      "consensus": "$3.36",
+      "consensus": "$3.37",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1791,7 +1715,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后。原名：Intel Corporation",
       "previous": "$0.11",
-      "consensus": "$0.27",
+      "consensus": "$0.28",
       "tags": [
         "半导体"
       ],
@@ -1947,7 +1871,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.85",
-      "consensus": "$4.66",
+      "consensus": "$4.74",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1966,7 +1890,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "",
       "previous": "$1.88",
-      "consensus": "$3.93",
+      "consensus": "$3.92",
       "tags": [],
       "priority": "中",
       "links": [
@@ -2566,6 +2490,25 @@
           "url": "https://www.nvidia.com/gtc/dc/"
         }
       ]
+    },
+    {
+      "date": "2026-12-01",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "JOLTS 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=192",
+      "source": "FRED release dates",
+      "note": "JOLTS",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=192"
+        }
+      ]
     }
   ],
   "sources": [
@@ -2597,13 +2540,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "ok",
-      "detail": "1 条"
+      "detail": "0 条"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "77 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "74 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -2621,7 +2564,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 1 天；PPI 1 天；Employment Situation 1 天；JOLTS 1 天"
+      "detail": "CPI 1 天；PPI 1 天；Employment Situation 1 天；JOLTS 2 天"
     },
     {
       "name": "初请失业金",
