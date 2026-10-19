@@ -841,6 +841,7 @@ date,series_id,name,value,unit,change_text,label,obs_date,carried,section,remark
 2026-10-18,5年名义,5年名义,4.89,,,,,,利率,美国财政部 Daily Treasury Par Yield Curve,,宏观指标_2026-10-18.md
 2026-10-18,5年实际,5年实际,2.52,,,,,,利率,美国财政部 Daily Treasury Par Real Yield Curve,,宏观指标_2026-10-18.md
 2026-10-18,ACM10年期限溢价,ACM 10年期限溢价,0.747,,,,,,利率,过期：数据日2026-10-15，停留1个美股交易日；纽约联储 ACM Daily ACMTP10，数据日 2026-10-15，可能滞后；不计入国债日期一致性报错,,宏观指标_2026-10-18.md
+2026-10-18,CoreWeave债收益率,CoreWeave债收益率,14.97,,,,,,利率,Kilambi TRACE；CoreWeave 9.625% 2032（144A CUSIP 21873SAK4；与 RegS USU2069EAE06 同券）；YTW + 价格；现金债非 CDS；上期 2026-10-15 YTW 14.40%,,宏观指标_2026-10-18.md
 2026-10-18,HY利差,HY利差,3.23,,,,,,利率,过期：数据日2026-10-15，停留1个美股交易日；FRED BAMLH0A0HYM2；档位 3–4.5%；周变动（5个交易日前）+8bp,,宏观指标_2026-10-18.md
 2026-10-18,IG利差,IG利差,0.84,,,,,,利率,过期：数据日2026-10-15，停留1个美股交易日；FRED BAMLC0A0CM,,宏观指标_2026-10-18.md
 2026-10-18,MOVE,MOVE,101.11,,,,,,利率,TradingView TVC:MOVE，指数变动用%不是bp,,宏观指标_2026-10-18.md
