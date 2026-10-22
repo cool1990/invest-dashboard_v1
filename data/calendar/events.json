@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-21T08:17:13+08:00",
-  "today_bj": "2026-10-21",
-  "horizon_end": "2026-12-05",
+  "generated_at": "2026-10-22T08:20:53+08:00",
+  "today_bj": "2026-10-22",
+  "horizon_end": "2026-12-06",
   "events": [
     {
       "date": "2026-10-01",
@@ -369,259 +369,6 @@
       ]
     },
     {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "AT&T Inc.（T）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$0.54",
-      "consensus": "$0.61",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Abbott Laboratories（ABT）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.30",
-      "consensus": "$1.42",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "CME Group Inc.（CME）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$2.68",
-      "consensus": "$2.98",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Danaher Corporation（DHR）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.89",
-      "consensus": "$1.92",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "International Business Machines Corporation（IBM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$2.65",
-      "consensus": "$2.88",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Meta Platforms, Inc.（META）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar；盈利跟踪笔记",
-      "note": "美东盘后",
-      "previous": "$7.25",
-      "consensus": "$6.54",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        },
-        {
-          "source": "盈利跟踪笔记",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "NextEra Energy, Inc.（NEE）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.13",
-      "consensus": "$1.19",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Philip Morris International Inc（PM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$2.24",
-      "consensus": "$2.30",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "SAP SE（SAP）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$1.86",
-      "consensus": "$2.03",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Tesla, Inc. （TSLA）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$0.37",
-      "consensus": "$0.22",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Texas Instruments Incorporated（TXN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$1.48",
-      "consensus": "$2.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Thermo Fisher Scientific Inc（TMO）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$5.79",
-      "consensus": "$6.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-21",
-      "time_bj": "",
-      "category": "财报",
-      "title": "拉姆研究（LRCX）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后。原名：Lam Research Corporation",
-      "previous": "$1.26",
-      "consensus": "$2.17",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
       "date": "2026-10-22",
       "time_bj": "",
       "category": "财报",
@@ -649,7 +396,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$1.71",
-      "consensus": "$1.96",
+      "consensus": "$1.94",
       "tags": [],
       "priority": "中",
       "links": [
@@ -687,7 +434,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.83",
-      "consensus": "$3.12",
+      "consensus": "$3.10",
       "tags": [],
       "priority": "中",
       "links": [
@@ -725,7 +472,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.66",
-      "consensus": "$21.23",
+      "consensus": "$21.28",
       "tags": [],
       "priority": "中",
       "links": [
@@ -744,13 +491,32 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$1.64",
-      "consensus": "$3.97",
+      "consensus": "$3.99",
       "tags": [],
       "priority": "中",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
           "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "time_bj": "22:00",
+      "category": "宏观",
+      "title": "Experimental Research and Development Economic Statistics, U.S. and States, 2024",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 10:00 AM。原名：Experimental Research and Development Economic Statistics, U.S. and States, 2024",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
         }
       ]
     },
@@ -872,12 +638,12 @@
       "date": "2026-10-27",
       "time_bj": "",
       "category": "财报",
-      "title": "Freeport-McMoran, Inc.（FCX）财报",
+      "title": "HCA Healthcare, Inc.（HCA）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
-      "previous": "$0.50",
-      "consensus": "$0.75",
+      "previous": "$6.96",
+      "consensus": "$6.75",
       "tags": [],
       "priority": "中",
       "links": [
@@ -929,12 +695,31 @@
       "date": "2026-10-27",
       "time_bj": "",
       "category": "财报",
+      "title": "Robinhood Markets, Inc.（HOOD）财报",
+      "url": "",
+      "source": "盈利跟踪笔记",
+      "note": "笔记 盈利跟踪_2026-10-20.md 的未来 7 天财报",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "盈利跟踪笔记",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "time_bj": "",
+      "category": "财报",
       "title": "S&P Global Inc.（SPGI）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$4.73",
-      "consensus": "$4.42",
+      "consensus": "$4.43",
       "tags": [],
       "priority": "中",
       "links": [
@@ -953,7 +738,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$2.51",
-      "consensus": "$7.11",
+      "consensus": "$7.17",
       "tags": [],
       "priority": "中",
       "links": [
@@ -972,7 +757,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "",
       "previous": "$1.35",
-      "consensus": "$2.07",
+      "consensus": "$2.04",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1067,7 +852,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$0.47",
-      "consensus": "$0.72",
+      "consensus": "$0.73",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1157,25 +942,6 @@
       "date": "2026-10-28",
       "time_bj": "",
       "category": "财报",
-      "title": "GSK plc（GSK）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.48",
-      "consensus": "$1.40",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-28",
-      "time_bj": "",
-      "category": "财报",
       "title": "Microsoft Corporation（MSFT）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
@@ -1200,7 +966,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$2.52",
-      "consensus": "$10.87",
+      "consensus": "$12.02",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1260,6 +1026,27 @@
       "consensus": "$0.91",
       "tags": [],
       "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "time_bj": "",
+      "category": "财报",
+      "title": "科磊（KLAC）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后。原名：KLA Corporation",
+      "previous": "$0.88",
+      "consensus": "$1.18",
+      "tags": [
+        "半导体"
+      ],
+      "priority": "高",
       "links": [
         {
           "source": "Nasdaq earnings calendar",
@@ -1335,7 +1122,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$1.95",
-      "consensus": "$2.01",
+      "consensus": "$2.02",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1392,7 +1179,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$4.95",
-      "consensus": "$6.95",
+      "consensus": "$7.12",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1468,7 +1255,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$4.38",
-      "consensus": "$5.13",
+      "consensus": "$5.14",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1525,7 +1312,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$0.52",
-      "consensus": "$0.72",
+      "consensus": "$0.73",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1544,7 +1331,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$3.19",
-      "consensus": "$3.59",
+      "consensus": "$3.56",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1563,7 +1350,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.77",
-      "consensus": "$3.37",
+      "consensus": "$3.99",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1738,7 +1525,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$0.85",
-      "consensus": "$2.09",
+      "consensus": "$2.43",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1757,7 +1544,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.85",
-      "consensus": "$4.74",
+      "consensus": "$4.78",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1776,7 +1563,26 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.88",
-      "consensus": "$3.92",
+      "consensus": "$3.93",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Sanofi（SNY）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.70",
+      "consensus": "$1.63",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1928,7 +1734,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$4.22",
-      "consensus": "$4.35",
+      "consensus": "$4.36",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1954,25 +1760,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-03",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "JOLTS 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=192",
-      "source": "FRED release dates",
-      "note": "JOLTS",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=192"
         }
       ]
     },
@@ -2040,9 +1827,9 @@
       "title": "Eaton Corporation, PLC（ETN）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘前",
       "previous": "$3.07",
-      "consensus": "$3.53",
+      "consensus": "$3.54",
       "tags": [],
       "priority": "中",
       "links": [
@@ -2059,7 +1846,7 @@
       "title": "Itau Unibanco Banco Holding SA（ITUB）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘后",
       "previous": "$0.18",
       "consensus": "$0.22",
       "tags": [],
@@ -2080,7 +1867,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$3.01",
-      "consensus": "$25.13",
+      "consensus": "$25.63",
       "tags": [],
       "priority": "中",
       "links": [
@@ -2132,31 +1919,12 @@
       "date": "2026-11-03",
       "time_bj": "",
       "category": "财报",
-      "title": "Space Exploration Technologies Corp.（SPCX）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "N/A",
-      "consensus": "$0.11",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-03",
-      "time_bj": "",
-      "category": "财报",
       "title": "超威（AMD）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后。原名：Advanced Micro Devices, Inc.",
       "previous": "$0.97",
-      "consensus": "$1.67",
+      "consensus": "$1.68",
       "tags": [
         "半导体"
       ],
@@ -2293,7 +2061,7 @@
       "title": "McDonald's Corporation（MCD）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘前",
       "previous": "$3.22",
       "consensus": "$3.37",
       "tags": [],
@@ -2385,31 +2153,10 @@
       "date": "2026-11-04",
       "time_bj": "",
       "category": "财报",
-      "title": "科磊（KLAC）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "原名：KLA Corporation",
-      "previous": "$0.88",
-      "consensus": "$1.18",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
       "title": "高通（QCOM）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "原名：QUALCOMM Incorporated",
+      "note": "美东盘后。原名：QUALCOMM Incorporated",
       "previous": "$2.56",
       "consensus": "$1.46",
       "tags": [
@@ -2616,19 +2363,57 @@
     {
       "date": "2026-11-06",
       "time_bj": "",
-      "category": "宏观",
-      "title": "Employment Situation 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=50",
-      "source": "FRED release dates",
-      "note": "Employment Situation",
-      "previous": "",
+      "category": "财报",
+      "title": "Berkshire Hathaway Inc.（BRK.A）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "N/A",
       "consensus": "",
       "tags": [],
       "priority": "中",
       "links": [
         {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=50"
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Berkshire Hathaway Inc.（BRK.B）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "$6.26",
+      "consensus": "$5.91",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Enbridge Inc（ENB）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$0.33",
+      "consensus": "$0.38",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -2667,25 +2452,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.semiconeuropa.org/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-10",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "CPI 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=10",
-      "source": "FRED release dates",
-      "note": "CPI",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=10"
         }
       ]
     },
@@ -2769,25 +2535,6 @@
     },
     {
       "date": "2026-11-13",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "PPI 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=46",
-      "source": "FRED release dates",
-      "note": "PPI",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=46"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-13",
       "time_bj": "05:30",
       "category": "宏观",
       "title": "美联储 H.4.1（资产负债表）",
@@ -2821,6 +2568,25 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.federalregister.gov/documents/2026/09/14/2026-18661/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-designation-of-a-longer-period"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 10:00 AM。原名：Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
         }
       ]
     },
@@ -3015,25 +2781,6 @@
       ]
     },
     {
-      "date": "2026-12-01",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "JOLTS 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=192",
-      "source": "FRED release dates",
-      "note": "JOLTS",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "高",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=192"
-        }
-      ]
-    },
-    {
       "date": "2026-12-02",
       "time_bj": "21:30",
       "category": "宏观",
@@ -3049,25 +2796,6 @@
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
-        }
-      ]
-    },
-    {
-      "date": "2026-12-04",
-      "time_bj": "",
-      "category": "宏观",
-      "title": "Employment Situation 发布",
-      "url": "https://fred.stlouisfed.org/release?rid=50",
-      "source": "FRED release dates",
-      "note": "Employment Situation",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "FRED release dates",
-          "url": "https://fred.stlouisfed.org/release?rid=50"
         }
       ]
     },
@@ -3096,7 +2824,7 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "7 条"
+      "detail": "9 条"
     },
     {
       "name": "Census",
@@ -3126,7 +2854,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "102 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "91 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -3144,7 +2872,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 1 天；PPI 1 天；Employment Situation 2 天；JOLTS 2 天"
+      "detail": "CPI 失败：Expecting value: line 1 column 1 (char 0)；PPI 失败：Expecting value: line 1 column 1 (char 0)；Employment Situation 失败：Expecting value: line 1 column 1 (char 0)；JOLTS 失败：Expecting value: line 1 column 1 (char 0)"
     },
     {
       "name": "初请失业金",
