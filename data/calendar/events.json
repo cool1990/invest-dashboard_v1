@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-24T08:10:47+08:00",
-  "today_bj": "2026-10-24",
-  "horizon_end": "2026-12-08",
+  "generated_at": "2026-10-25T07:54:11+08:00",
+  "today_bj": "2026-10-25",
+  "horizon_end": "2026-12-09",
   "events": [
     {
       "date": "2026-10-01",
@@ -2768,6 +2768,25 @@
           "url": "https://www.bea.gov/news/schedule"
         }
       ]
+    },
+    {
+      "date": "2026-12-09",
+      "time_bj": "",
+      "category": "大事",
+      "title": "FOMC 会议（含经济预测摘要）",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "source": "Federal Reserve FOMC calendars",
+      "note": "会议日落在北京时间同一天；声明通常在美东下午，具体钟点以当天新闻稿为准",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "Federal Reserve FOMC calendars",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        }
+      ]
     }
   ],
   "sources": [
@@ -2787,7 +2806,7 @@
       "name": "FOMC",
       "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
       "status": "ok",
-      "detail": "1 条"
+      "detail": "2 条"
     },
     {
       "name": "H.4.1",
