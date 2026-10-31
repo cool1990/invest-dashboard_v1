@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-30T09:29:39+08:00",
-  "today_bj": "2026-10-30",
-  "horizon_end": "2026-12-14",
+  "generated_at": "2026-10-31T09:18:51+08:00",
+  "today_bj": "2026-10-31",
+  "horizon_end": "2026-12-15",
   "events": [
     {
       "date": "2026-10-01",
@@ -443,120 +443,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "AbbVie Inc.（ABBV）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.86",
-      "consensus": "$3.74",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "AstraZeneca PLC（AZN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$2.38",
-      "consensus": "$2.60",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "BP p.l.c.（BP）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$0.85",
-      "consensus": "$2.66",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Chevron Corporation（CVX）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.85",
-      "consensus": "$4.78",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "ExxonMobil Holdings Corporation（XOM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.88",
-      "consensus": "$3.90",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Sanofi（SNY）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.70",
-      "consensus": "$1.63",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -1202,7 +1088,7 @@
       "title": "Monster Beverage Corporation（MNST）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘后",
       "previous": "$0.28",
       "consensus": "$0.30",
       "tags": [],
@@ -2055,6 +1941,25 @@
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
       ]
+    },
+    {
+      "date": "2026-12-15",
+      "time_bj": "",
+      "category": "宏观",
+      "title": "PPI 发布",
+      "url": "https://fred.stlouisfed.org/release?rid=46",
+      "source": "FRED release dates",
+      "note": "PPI",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "FRED release dates",
+          "url": "https://fred.stlouisfed.org/release?rid=46"
+        }
+      ]
     }
   ],
   "sources": [
@@ -2092,7 +1997,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "44 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "38 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
@@ -2110,7 +2015,7 @@
       "name": "FRED 发布日",
       "url": "https://fred.stlouisfed.org/docs/api/fred/",
       "status": "ok",
-      "detail": "CPI 2 天；PPI 1 天；Employment Situation 2 天；JOLTS 2 天"
+      "detail": "CPI 2 天；PPI 2 天；Employment Situation 2 天；JOLTS 2 天"
     },
     {
       "name": "初请失业金",
