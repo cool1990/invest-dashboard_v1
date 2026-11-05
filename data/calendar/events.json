@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-04T09:46:56+08:00",
-  "today_bj": "2026-11-04",
-  "horizon_end": "2026-12-19",
+  "generated_at": "2026-11-05T09:55:40+08:00",
+  "today_bj": "2026-11-05",
+  "horizon_end": "2026-12-20",
   "events": [
     {
       "date": "2026-10-01",
@@ -542,181 +542,6 @@
       ]
     },
     {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Arm（ARM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后。原名：Arm Holdings plc",
-      "previous": "$0.15",
-      "consensus": "$0.22",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "CVS Health Corporation（CVS）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.60",
-      "consensus": "$1.62",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "McDonald's Corporation（MCD）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$3.22",
-      "consensus": "$3.36",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "McKesson Corporation（MCK）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$9.86",
-      "consensus": "$10.69",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Novo Nordisk A/S（NVO）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.02",
-      "consensus": "$0.81",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Toyota Motor Corp Ltd Ord（TM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "$4.85",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Uber Technologies, Inc.（UBER）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$3.11",
-      "consensus": "$0.94",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "",
-      "category": "财报",
-      "title": "高通（QCOM）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后。原名：QUALCOMM Incorporated",
-      "previous": "$2.56",
-      "consensus": "$1.46",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "time_bj": "21:30",
-      "category": "宏观",
-      "title": "2026年9月国际贸易（商品和服务）",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 8:30 AM。原名：U.S. International Trade in Goods and Services, September 2026",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ]
-    },
-    {
       "date": "2026-11-05",
       "time_bj": "",
       "category": "半导体",
@@ -758,25 +583,6 @@
       "date": "2026-11-05",
       "time_bj": "",
       "category": "财报",
-      "title": "Airbnb, Inc.（ABNB）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "$2.21",
-      "consensus": "$2.86",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-05",
-      "time_bj": "",
-      "category": "财报",
       "title": "Canadian Natural Resources Limited（CNQ）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
@@ -801,26 +607,7 @@
       "source": "Nasdaq earnings calendar",
       "note": "美东盘前",
       "previous": "$1.61",
-      "consensus": "$2.97",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-05",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Duke Energy Corporation（DUK）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$1.81",
-      "consensus": "$1.87",
+      "consensus": "$3.06",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1176,25 +963,6 @@
       "date": "2026-11-12",
       "time_bj": "",
       "category": "财报",
-      "title": "Brookfield Corporation（BN）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前",
-      "previous": "$0.63",
-      "consensus": "$0.72",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-12",
-      "time_bj": "",
-      "category": "财报",
       "title": "应用材料 FY26 Q4 业绩（官方标注预计）",
       "url": "https://investors.appliedmaterials.com/events",
       "source": "calendar/manual.yaml；Nasdaq earnings calendar",
@@ -1409,6 +1177,25 @@
       ]
     },
     {
+      "date": "2026-11-17",
+      "time_bj": "23:00",
+      "category": "宏观",
+      "title": "Experimental Super Intelligence Economic Statistics, 2024",
+      "url": "https://www.bea.gov/news/schedule",
+      "source": "BEA Release Schedule",
+      "note": "美东 10:00 AM。原名：Experimental Super Intelligence Economic Statistics, 2024",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "BEA Release Schedule",
+          "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
       "date": "2026-11-18",
       "time_bj": "",
       "category": "财报",
@@ -1434,7 +1221,7 @@
       "title": "Palo Alto Networks, Inc.（PANW）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "",
+      "note": "美东盘后",
       "previous": "$0.53",
       "consensus": "$0.52",
       "tags": [],
@@ -1938,7 +1725,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "37 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "26 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
