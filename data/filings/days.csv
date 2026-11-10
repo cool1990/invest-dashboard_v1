@@ -120,3 +120,5 @@ date,kind,item_count,status,insider_count,source
 2026-11-07,press,0,OK,,美港股新闻稿 2026-11-07.md
 2026-11-08,announcement,0,NO_TRIGGER,0,美港股公告 2026-11-08.md
 2026-11-08,press,2,OK,,美港股新闻稿 2026-11-08.md
+2026-11-09,announcement,3,OK,0,美港股公告 2026-11-09.md
+2026-11-09,press,4,OK,,美港股新闻稿 2026-11-09.md
