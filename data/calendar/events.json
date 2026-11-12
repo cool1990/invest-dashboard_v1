@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-11T09:37:23+08:00",
-  "today_bj": "2026-11-11",
-  "horizon_end": "2026-12-26",
+  "generated_at": "2026-11-12T10:37:50+08:00",
+  "today_bj": "2026-11-12",
+  "horizon_end": "2026-12-27",
   "events": [
     {
       "date": "2026-10-01",
@@ -652,29 +652,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://tradedata.go.kr/cts/hmpg/openETS0100211Q.do?blbrTpcd=10&ntarSrno=1428&menuId=ETS_MNK_50200000"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-11",
-      "time_bj": "07:30",
-      "category": "大事",
-      "title": "美联储讲话：经济展望",
-      "url": "https://us06web.zoom.us/j/82913231287?pwd=LVtmihv49gUcWXnQz4q9by5b5aixiP.1",
-      "source": "Federal Reserve calendar；Federal Reserve calendar",
-      "note": "Speech - Vice Chair for Supervision Michelle W. Bowman At A View from the Federal Reserve Board (virtual) 美东 6:30 p.m.。原名：Economic Outlook",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://us06web.zoom.us/j/82913231287?pwd=LVtmihv49gUcWXnQz4q9by5b5aixiP.1"
-        },
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://youtube.com/live/uLrEW7SeMKU?feature=share"
         }
       ]
     },
@@ -1356,13 +1333,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "5 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "3 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "failed",
-      "detail": "0 条；未抓到 2026-11-11 HTTP Error 403: Forbidden；2026-11-12 HTTP Error 403: Forbidden；2026-11-13 HTTP Error 403: Forbidden；2026-11-14 HTTP Error 403: Forbidden；2026-11-15 HTTP Error 403: Forbidden；2026-11-16 HTTP Error 403: Forbidden；2026-11-17 HTTP Error 403: Forbidden；2026-11-18 HTTP Error 403: Forbidden；2026-11-19 HTTP Error 403: Forbidden；2026-11-20 HTTP Error 403: Forbidden；2026-11-21 HTTP Error 403: Forbidden；2026-11-22 HTTP Error 403: Forbidden；2026-11-23 HTTP Error 403: Forbidden；2026-11-24 HTTP Error 403: Forbidden；2026-11-25 HTTP Error 403: Forbidden；2026-11-26 HTTP Error 403: Forbidden"
+      "detail": "0 条；未抓到 2026-11-12 HTTP Error 403: Forbidden；2026-11-13 HTTP Error 403: Forbidden；2026-11-14 HTTP Error 403: Forbidden；2026-11-15 HTTP Error 403: Forbidden；2026-11-16 HTTP Error 403: Forbidden；2026-11-17 HTTP Error 403: Forbidden；2026-11-18 HTTP Error 403: Forbidden；2026-11-19 HTTP Error 403: Forbidden；2026-11-20 HTTP Error 403: Forbidden；2026-11-21 HTTP Error 403: Forbidden；2026-11-22 HTTP Error 403: Forbidden；2026-11-23 HTTP Error 403: Forbidden；2026-11-24 HTTP Error 403: Forbidden；2026-11-25 HTTP Error 403: Forbidden；2026-11-26 HTTP Error 403: Forbidden；2026-11-27 HTTP Error 403: Forbidden"
     },
     {
       "name": "盈利笔记财报日",
