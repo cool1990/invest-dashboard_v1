@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-14T09:55:49+08:00",
-  "today_bj": "2026-11-14",
-  "horizon_end": "2026-12-29",
+  "generated_at": "2026-11-15T09:27:48+08:00",
+  "today_bj": "2026-11-15",
+  "horizon_end": "2026-12-30",
   "events": [
     {
       "date": "2026-10-01",
@@ -673,25 +673,6 @@
         {
           "source": "calendar/manual.yaml",
           "url": "https://investors.appliedmaterials.com/events"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-14",
-      "time_bj": "08:00",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://cvent.me/8AmwNV",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Vice Chair Philip N. Jefferson At the University of California San Diego Economics Roundtable, La Jolla, Calif. 美东 7:00 p.m.。原名：New Technology, Old Questions: Assessing Productivity Puzzles and Their Implications for Macroeconomic Activity",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://cvent.me/8AmwNV"
         }
       ]
     },
@@ -1609,7 +1590,7 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "9 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "8 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
