@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-15T09:27:48+08:00",
-  "today_bj": "2026-11-15",
-  "horizon_end": "2026-12-30",
+  "generated_at": "2026-11-16T09:30:26+08:00",
+  "today_bj": "2026-11-16",
+  "horizon_end": "2026-12-31",
   "events": [
     {
       "date": "2026-10-01",
@@ -1295,6 +1295,44 @@
       ]
     },
     {
+      "date": "2026-12-01",
+      "time_bj": "",
+      "category": "财报",
+      "title": "CrowdStrike Holdings, Inc.（CRWD）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "N/A",
+      "consensus": "$0",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-01",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Marvell Technology, Inc.（MRVL）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$0.62",
+      "consensus": "$0.79",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
       "date": "2026-12-02",
       "time_bj": "21:30",
       "category": "宏观",
@@ -1596,7 +1634,7 @@
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "14 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "16 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
