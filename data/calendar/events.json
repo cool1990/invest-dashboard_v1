@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-16T09:30:26+08:00",
-  "today_bj": "2026-11-16",
-  "horizon_end": "2026-12-31",
+  "generated_at": "2026-11-17T12:16:34+08:00",
+  "today_bj": "2026-11-17",
+  "horizon_end": "2027-01-01",
   "events": [
     {
       "date": "2026-10-01",
@@ -696,25 +696,6 @@
       ]
     },
     {
-      "date": "2026-11-16",
-      "time_bj": "18:00",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://us06web.zoom.us/j/84433320946?pwd=zq5qHzI0IgCBc7QKytDbJ5X90yXZKC.1 ",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Michael S. Barr At the 7th ACM International Conference on AI in Finance, Milan, Italy 美东 5:00 a.m.。原名：Artificial Intelligence and Financial Stability",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://us06web.zoom.us/j/84433320946?pwd=zq5qHzI0IgCBc7QKytDbJ5X90yXZKC.1 "
-        }
-      ]
-    },
-    {
       "date": "2026-11-17",
       "time_bj": "",
       "category": "财报",
@@ -740,9 +721,9 @@
       "title": "Home Depot, Inc. (The)（HD）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
-      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-18",
+      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-18，Nasdaq earnings calendar写的是 2026-12-02",
       "previous": "$3.74",
-      "consensus": "$3.87",
+      "consensus": "$3.86",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1334,6 +1315,63 @@
     },
     {
       "date": "2026-12-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Bank Of Montreal（BMO）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.36",
+      "consensus": "$2.76",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Salesforce, Inc.（CRM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "$2.66",
+      "consensus": "$2.41",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Snowflake Inc.（SNOW）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘后",
+      "previous": "($0.84)",
+      "consensus": "($0.32)",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
       "time_bj": "21:30",
       "category": "宏观",
       "title": "GDP",
@@ -1597,6 +1635,25 @@
           "url": "https://www.federalreserve.gov/releases/h41/"
         }
       ]
+    },
+    {
+      "date": "2027-01-01",
+      "time_bj": "05:30",
+      "category": "宏观",
+      "title": "美联储 H.4.1（资产负债表）",
+      "url": "https://www.federalreserve.gov/releases/h41/",
+      "source": "Federal Reserve H.4.1",
+      "note": "页面写明每周四、通常美东 16:30；遇联邦假日顺延。这一条按周四生成，没有另核假日表",
+      "previous": "",
+      "consensus": "",
+      "tags": [],
+      "priority": "高",
+      "links": [
+        {
+          "source": "Federal Reserve H.4.1",
+          "url": "https://www.federalreserve.gov/releases/h41/"
+        }
+      ]
     }
   ],
   "sources": [
@@ -1622,19 +1679,19 @@
       "name": "H.4.1",
       "url": "https://www.federalreserve.gov/releases/h41/",
       "status": "ok",
-      "detail": "6 条"
+      "detail": "7 条"
     },
     {
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "8 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "7 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "16 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "20 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
