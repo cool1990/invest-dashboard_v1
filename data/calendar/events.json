@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T12:16:34+08:00",
-  "today_bj": "2026-11-17",
-  "horizon_end": "2027-01-01",
+  "generated_at": "2026-11-18T11:16:24+08:00",
+  "today_bj": "2026-11-18",
+  "horizon_end": "2027-01-02",
   "events": [
     {
       "date": "2026-10-01",
@@ -696,122 +696,6 @@
       ]
     },
     {
-      "date": "2026-11-17",
-      "time_bj": "",
-      "category": "财报",
-      "title": "BHP Group Limited（BHP）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "",
-      "previous": "N/A",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Home Depot, Inc. (The)（HD）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-17，Nasdaq earnings calendar写的是 2026-11-18，Nasdaq earnings calendar写的是 2026-12-02",
-      "previous": "$3.74",
-      "consensus": "$3.86",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "",
-      "category": "财报",
-      "title": "英伟达（NVDA）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后。原名：NVIDIA Corporation",
-      "previous": "$1.24",
-      "consensus": "$2.49",
-      "tags": [
-        "半导体"
-      ],
-      "priority": "高",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "01:00",
-      "category": "大事",
-      "title": "美联储讲话：开幕致辞",
-      "url": "https://www.frbsf.org/news-and-media/events/2026/11/productivity-and-jobs-task-force-conference/",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Chairman Kevin Warsh At the Federal Reserve’s Productivity and Jobs Task Force Conference, Federal Reserve Bank of San Francisco, San Francisco, Calif. 美东 12:00 p.m.。原名：Opening Remarks",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.frbsf.org/news-and-media/events/2026/11/productivity-and-jobs-task-force-conference/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "22:10",
-      "category": "大事",
-      "title": "美联储讲话：支付",
-      "url": "https://avdusa.zoom.us/j/81071533579",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Christopher J. Waller At The Clearing House (TCH) Annual Conference, New York, N.Y. 美东 9:10 a.m.。原名：Payments",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://avdusa.zoom.us/j/81071533579"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-17",
-      "time_bj": "23:00",
-      "category": "宏观",
-      "title": "Experimental Super Intelligence Economic Statistics, 2024",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 10:00 AM。原名：Experimental Super Intelligence Economic Statistics, 2024",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ]
-    },
-    {
       "date": "2026-11-18",
       "time_bj": "",
       "category": "财报",
@@ -840,6 +724,25 @@
       "note": "美东盘后",
       "previous": "$0.53",
       "consensus": "$0.52",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "time_bj": "",
+      "category": "财报",
+      "title": "TJX Companies, Inc. (The)（TJX）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前。日期不一样：Nasdaq earnings calendar写的是 2026-11-18，Nasdaq earnings calendar写的是 2026-12-02，Nasdaq earnings calendar写的是 2026-12-03",
+      "previous": "$1.28",
+      "consensus": "$1.33",
       "tags": [],
       "priority": "中",
       "links": [
@@ -949,7 +852,7 @@
       "time_bj": "22:25",
       "category": "大事",
       "title": "美联储讲话",
-      "url": "https://www.federalreserve.gov/newsevents/2026-november.htm",
+      "url": "https://teams.microsoft.com/meet/2130457444862160?p=ynp4cqfcaAtsBBBsTM",
       "source": "Federal Reserve calendar；Federal Reserve calendar",
       "note": "Discussion - Vice Chair Philip N. Jefferson At the International Monetary Fund (IMF) and Central Bank of Brazil conference \"A Quarter Century of Inflation Targeting in Latin America: Progress, Challenges, and the Road Ahead\" (virtual) 美东 9:25 a.m.。原名：Economic Shocks",
       "previous": "",
@@ -959,7 +862,7 @@
       "links": [
         {
           "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+          "url": "https://teams.microsoft.com/meet/2130457444862160?p=ynp4cqfcaAtsBBBsTM"
         },
         {
           "source": "Federal Reserve calendar",
@@ -1353,25 +1256,6 @@
     },
     {
       "date": "2026-12-02",
-      "time_bj": "",
-      "category": "财报",
-      "title": "Snowflake Inc.（SNOW）财报",
-      "url": "https://www.nasdaq.com/market-activity/earnings",
-      "source": "Nasdaq earnings calendar",
-      "note": "美东盘后",
-      "previous": "($0.84)",
-      "consensus": "($0.32)",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "Nasdaq earnings calendar",
-          "url": "https://www.nasdaq.com/market-activity/earnings"
-        }
-      ]
-    },
-    {
-      "date": "2026-12-02",
       "time_bj": "21:30",
       "category": "宏观",
       "title": "GDP",
@@ -1386,6 +1270,44 @@
         {
           "source": "BEA Release Schedule",
           "url": "https://www.bea.gov/news/schedule"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-03",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Canadian Imperial Bank of Commerce（CM）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$1.57",
+      "consensus": "$1.77",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-03",
+      "time_bj": "",
+      "category": "财报",
+      "title": "Royal Bank Of Canada（RY）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "美东盘前",
+      "previous": "$2.76",
+      "consensus": "$2.97",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
         }
       ]
     },
@@ -1661,7 +1583,7 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "11 条"
+      "detail": "10 条"
     },
     {
       "name": "Census",
@@ -1685,13 +1607,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "7 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "5 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "20 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "18 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
