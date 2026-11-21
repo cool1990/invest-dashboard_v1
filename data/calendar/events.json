@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-20T10:47:21+08:00",
-  "today_bj": "2026-11-20",
-  "horizon_end": "2027-01-04",
+  "generated_at": "2026-11-21T10:56:42+08:00",
+  "today_bj": "2026-11-21",
+  "horizon_end": "2027-01-05",
   "events": [
     {
       "date": "2026-10-01",
@@ -734,53 +734,11 @@
       ]
     },
     {
-      "date": "2026-11-20",
-      "time_bj": "21:25",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://www.federalreserve.gov/newsevents/2026-november.htm",
-      "source": "Federal Reserve calendar；Federal Reserve calendar",
-      "note": "Speech - Governor Christopher J. Waller At the College Fed Challenge Finals 美东 8:25 a.m.。原名：Welcoming Remarks",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
-        },
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://aisymposium.finreglab.org/press"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-20",
-      "time_bj": "21:30",
-      "category": "宏观",
-      "title": "Activities of U.S. Multinational Enterprises, 2024",
-      "url": "https://www.bea.gov/news/schedule",
-      "source": "BEA Release Schedule",
-      "note": "美东 8:30 AM。原名：Activities of U.S. Multinational Enterprises, 2024",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "中",
-      "links": [
-        {
-          "source": "BEA Release Schedule",
-          "url": "https://www.bea.gov/news/schedule"
-        }
-      ]
-    },
-    {
       "date": "2026-11-21",
       "time_bj": "01:15",
       "category": "大事",
       "title": "美联储讲话",
-      "url": "https://www.federalreserve.gov/newsevents/2026-november.htm",
+      "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw",
       "source": "Federal Reserve calendar",
       "note": "Speech - Governor Lisa D. Cook At the Annual Conference of the Central Bank of Chile, Santiago, Chile 美东 12:15 p.m.。原名：The U.S. Economy in Global Context",
       "previous": "",
@@ -790,7 +748,7 @@
       "links": [
         {
           "source": "Federal Reserve calendar",
-          "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+          "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw"
         }
       ]
     },
@@ -817,12 +775,31 @@
       "date": "2026-11-24",
       "time_bj": "",
       "category": "财报",
+      "title": "BHP Group Limited（BHP）财报",
+      "url": "https://www.nasdaq.com/market-activity/earnings",
+      "source": "Nasdaq earnings calendar",
+      "note": "",
+      "previous": "N/A",
+      "consensus": "",
+      "tags": [],
+      "priority": "中",
+      "links": [
+        {
+          "source": "Nasdaq earnings calendar",
+          "url": "https://www.nasdaq.com/market-activity/earnings"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "time_bj": "",
+      "category": "财报",
       "title": "Dell Technologies Inc.（DELL）财报",
       "url": "https://www.nasdaq.com/market-activity/earnings",
       "source": "Nasdaq earnings calendar",
       "note": "美东盘后",
       "previous": "$2.35",
-      "consensus": "$6.48",
+      "consensus": "$6.55",
       "tags": [],
       "priority": "中",
       "links": [
@@ -1427,7 +1404,7 @@
       "name": "BEA",
       "url": "https://www.bea.gov/news/schedule",
       "status": "ok",
-      "detail": "9 条"
+      "detail": "8 条"
     },
     {
       "name": "Census",
@@ -1451,13 +1428,13 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "3 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "1 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
       "url": "https://api.nasdaq.com/api/calendar/earnings",
       "status": "ok",
-      "detail": "11 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
+      "detail": "12 条。接口每次大约返回 20 家，保留市值不低于 1000 亿美元的，以及半导体/AI 代码"
     },
     {
       "name": "盈利笔记财报日",
