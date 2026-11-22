@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-21T10:56:42+08:00",
-  "today_bj": "2026-11-21",
-  "horizon_end": "2027-01-05",
+  "generated_at": "2026-11-22T09:51:08+08:00",
+  "today_bj": "2026-11-22",
+  "horizon_end": "2027-01-06",
   "events": [
     {
       "date": "2026-10-01",
@@ -734,25 +734,6 @@
       ]
     },
     {
-      "date": "2026-11-21",
-      "time_bj": "01:15",
-      "category": "大事",
-      "title": "美联储讲话",
-      "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw",
-      "source": "Federal Reserve calendar",
-      "note": "Speech - Governor Lisa D. Cook At the Annual Conference of the Central Bank of Chile, Santiago, Chile 美东 12:15 p.m.。原名：The U.S. Economy in Global Context",
-      "previous": "",
-      "consensus": "",
-      "tags": [],
-      "priority": "低",
-      "links": [
-        {
-          "source": "Federal Reserve calendar",
-          "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw"
-        }
-      ]
-    },
-    {
       "date": "2026-11-24",
       "time_bj": "",
       "category": "财报",
@@ -1428,7 +1409,7 @@
       "name": "美联储讲话",
       "url": "https://www.federalreserve.gov/newsevents/calendar.htm",
       "status": "partial",
-      "detail": "1 条；2027-january: HTTP Error 404: Not Found"
+      "detail": "0 条；2027-january: HTTP Error 404: Not Found"
     },
     {
       "name": "Nasdaq 财报",
