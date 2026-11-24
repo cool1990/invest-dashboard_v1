@@ -14,3 +14,4 @@ date,text,source
 2026-11-04,"- INTEL CORP（INTC）｜TAN LIP BU｜CEO, Director｜交易日 2026-11-02｜150,000 股｜均价 $65｜金额 $9,709,680｜[Form 4](https://www.sec.gov/Archives/edgar/data/50863/000005086326000195/0000050863-26-000195-index.htm)",美港股公告 2026-11-04.md
 2026-11-16,监控失败：TimeoutError: The read operation timed out（exit=1）,美港股公告 2026-11-16.md
 2026-11-17,"监控失败：xml.etree.ElementTree.ParseError: no element found: line 1, column 0（exit=1）",美港股公告 2026-11-17.md
+2026-11-23,监控失败：2 filing parse errors; see /workspace/hermes-cron-state/insider-open-market-buys/failed_accessions.log,美港股公告 2026-11-23.md
