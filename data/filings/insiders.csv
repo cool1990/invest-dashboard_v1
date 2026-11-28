@@ -18,3 +18,4 @@ date,text,source
 2026-11-24,"监控失败：xml.etree.ElementTree.ParseError: no element found: line 1, column 0（exit=1）",美港股公告 2026-11-24.md
 2026-11-25,"监控失败：xml.etree.ElementTree.ParseError: no element found: line 1, column 0（exit=1）",美港股公告 2026-11-25.md
 2026-11-26,"监控失败：xml.etree.ElementTree.ParseError: no element found: line 1, column 0（exit=1）",美港股公告 2026-11-26.md
+2026-11-27,监控失败：TimeoutError: The read operation timed out（exit=1）,美港股公告 2026-11-27.md
